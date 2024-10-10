@@ -5,8 +5,8 @@
 1. 타입 선언:
    - type, interface 선언 시 접두사로 T, I 사용.
    - any 사용 지양
-2. 폴더 구조: FSD(기능별 분리 설계) 방식 사용 (주희 담당)
-   - 참고 링크: <https://emewjin.github.io/feature-sliced-design/>
+2. 폴더 구조: 
+   - 참고 레포: <https://github.com/prgrms-fdc-2nd-final-mosdaq/mosdaq-front>
 3. 코드 스타일:
 
 - 변수명: camelCase.
