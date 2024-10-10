@@ -7,7 +7,6 @@ import './index.css';
 
 const queryClient = new QueryClient({
   defaultOptions: {
-    // 필요한 설정
     queries: {
       refetchOnWindowFocus: false,
     },
