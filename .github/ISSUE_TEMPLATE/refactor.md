@@ -1,3 +1,11 @@
+---
+name: Refactoring Template
+about: 리팩토링 이슈 템플릿
+title: '[REFACTOR] ...'
+labels: 'Refactor'
+assignees: ''
+---
+
 ## 😁어떤 변경인가요?
 
 > 리팩토링하는 이유를 간결하게 설명해주세요
