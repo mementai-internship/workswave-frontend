@@ -32,7 +32,7 @@ export const NAVIGATION_CONTENTS = [
     content: '휴무캘린더',
   },
   {
-    path: '/setting',
+    path: '/basic-setting',
     content: '기본설정',
   },
   {
