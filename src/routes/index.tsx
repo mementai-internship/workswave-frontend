@@ -1,5 +1,5 @@
 import RootLayout from '@/layout/root';
-import HomePage from '@/pages/Home/HomePage';
+import HomePage from '@/pages/home/HomePage';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 // TODO: lazy load, preload는 나중에 하겠습니둥.
