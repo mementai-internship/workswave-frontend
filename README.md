@@ -24,9 +24,7 @@ feat: 새로운 기능 추가
 
 fix: 버그 수정 / 오류 해결
 
-style: 코드 의미에 영향을 주지 않는 코드 스타일 변경
-
-design: CSS 변경
+style: CSS 변경 / UI 변경
 
 refactor: 코드 베이스의 특정 부분을 재정렬
 
@@ -34,9 +32,9 @@ test: 테스트 코드 추가
 
 docs: 리드미 작성 등 문서화
 
-chore: 빌드 스크립트, assets image, 패키지 수정
+chore: 기타 등등 빌드 스크립트, assets image, 패키지 수정, 외에 수정
 
-예시: git commit -m “feat: 버튼 기능 추가”
+예시: git commit -m “feat: 버튼 기능 추가 #이슈번호”
 
 ## Getting started
 
