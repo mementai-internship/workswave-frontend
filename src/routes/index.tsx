@@ -7,7 +7,7 @@ import SalaryRangePage from '@/pages/basicSetting/SalaryRangePage';
 import WagePage from '@/pages/basicSetting/WagePage';
 import WorkingPage from '@/pages/basicSetting/WorkingPage';
 import HomePage from '@/pages/home/HomePage';
-import ManagementBranchPage from '@/pages/managementBranch/ManagementBranchPage';
+import ManagementOfficePage from '@/pages/officeSetting/ManagementOfficePage';
 import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 // TODO: lazy load, preload는 나중에 하겠습니둥.
@@ -61,8 +61,8 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: '/management-branch',
-        element: <ManagementBranchPage />,
+        path: '/office-setting',
+        element: <ManagementOfficePage />,
       },
     ],
   },
