@@ -34,19 +34,19 @@ const badgeTheme: {
       outline: 'bg-white border border-red text-red',
     },
     pink: {
-      solid: 'bg-pink-50 text-black',
+      solid: 'bg-pink-50 text-white',
       outline: 'bg-white border border-pink-50 text-pink-50',
     },
     orange: {
-      solid: 'bg-orange-50 text-black',
+      solid: 'bg-orange-50 text-white',
       outline: 'bg-white border border-orange-50 text-orange-50',
     },
     green: {
-      solid: 'bg-green-50 text-black',
+      solid: 'bg-green-50 text-white',
       outline: 'bg-white border border-green-50 text-green-50',
     },
     blue: {
-      solid: 'bg-sky-blue-50 text-black',
+      solid: 'bg-sky-blue-50 text-white',
       outline: 'bg-white border border-sky-blue-50 text-sky-blue-50',
     },
   },
