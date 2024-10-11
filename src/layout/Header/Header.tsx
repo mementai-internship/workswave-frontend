@@ -15,7 +15,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="px-3 flex items-center justify-between text-[#f6f6f6] bg-neutral-800">
+    <header className="px-3 flex items-center justify-between text-white bg-neutral-800">
       <div className="flex grow items-center justify-between pr-4 border-r border-neutral-700">
         <Link to="/">
           <span className="p-3">WorksWave</span>
