@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { PiCaretDoubleLeft, PiCaretDoubleRight, PiCaretLeft, PiCaretRight } from 'react-icons/pi';
 
 export interface IPaginationProps {
@@ -17,11 +16,9 @@ const Pagination = ({
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   const pageGroup = Math.ceil(currentPage / 10);
-  const pageNumbers = useMemo(() => {
-    const start = (pageGroup - 1) * 10 + 1;
-    const end = Math.min(pageGroup * 10, totalPages);
-    return Array.from({ length: end - start + 1 }, (_, i) => start + i);
-  }, [pageGroup, totalPages]);
+  const start = (pageGroup - 1) * 10 + 1;
+  const end = Math.min(pageGroup * 10, totalPages);
+  const pageNumbers = Array.from({ length: end - start + 1 }, (_, i) => start + i);
 
   return (
     <>
