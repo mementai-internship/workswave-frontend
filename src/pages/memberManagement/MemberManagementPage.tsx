@@ -1,5 +1,5 @@
-import MemberManagementFilterBar from '@/components/memberManagement/MemberManagementFilterBar';
-import MemberManagementTable from '@/components/memberManagement/MemberManagementTable';
+import MemberManagementFilterBar from '@/components/MemberManagement/MemberManagementFilterBar';
+import MemberManagementTable from '@/components/MemberManagement/MemberManagementTable';
 
 const MemberManagementPage = () => {
   return (

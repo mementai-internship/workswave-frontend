@@ -1,5 +1,5 @@
-import MemberManagementDropdown from '@/components/memberManagement/MemberManagementDropdown';
-import MemberManagementFilterButton from '@/components/memberManagement/MemberManagementFilterButton';
+import MemberManagementDropdown from '@/components/MemberManagement/MemberManagementDropdown';
+import MemberManagementFilterButton from '@/components/MemberManagement/MemberManagementFilterButton';
 
 const MemberManagementFilterBar = () => {
   return (
