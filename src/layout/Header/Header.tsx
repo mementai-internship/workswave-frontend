@@ -23,7 +23,7 @@ export default function Header() {
         <span className="text-xs p-4">웍스웨이브 가이드</span>
       </div>
       <div className="flex items-center text-xs px-4">
-        {getCurrentUser() ? (
+        {currentUser ? (
           <HeaderProfile currentUser={currentUser} />
         ) : (
           <Link to="/login">
