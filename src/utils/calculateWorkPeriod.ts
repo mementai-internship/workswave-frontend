@@ -1,42 +1,29 @@
-const calculateWorkPeriod = (startDate: string, endDate: string): string => {
-  const start = new Date(startDate);
-  const end = new Date(endDate === '-' ? new Date() : endDate);
+import dayjs from 'dayjs';
 
-  let years = 0;
+const calculateWorkPeriod = (startDate: string, endDate: string): string => {
+  const start = dayjs(startDate);
+  const end = dayjs(endDate === '-' ? dayjs() : endDate).endOf('day');
+
+  let years = end.diff(start, 'year');
   let months = 0;
   let days = 0;
 
-  let tempDate = new Date(start);
-
-  while (tempDate <= end) {
-    if (tempDate.getMonth() === start.getMonth() && tempDate.getDate() === start.getDate()) {
-      if (tempDate.getFullYear() !== start.getFullYear()) {
-        years++;
-      }
-    }
-    tempDate.setFullYear(tempDate.getFullYear() + 1);
+  let tempDate = start.add(years, 'year');
+  while (tempDate.add(1, 'month').isBefore(end) || tempDate.add(1, 'month').isSame(end, 'day')) {
+    months++;
+    tempDate = tempDate.add(1, 'month');
   }
 
-  tempDate = new Date(start);
-  tempDate.setFullYear(tempDate.getFullYear() + years);
-  while (tempDate <= end) {
-    if (tempDate.getDate() === start.getDate()) {
-      if (
-        tempDate.getMonth() !== start.getMonth() ||
-        tempDate.getFullYear() !== start.getFullYear()
-      ) {
-        months++;
-      }
-    }
-    tempDate.setMonth(tempDate.getMonth() + 1);
+  days = end.diff(tempDate, 'day') + 1; // Add 1 to include the end date
+
+  if (days > 30) {
+    months++;
+    days -= 30;
   }
 
-  tempDate = new Date(start);
-  tempDate.setFullYear(tempDate.getFullYear() + years);
-  tempDate.setMonth(tempDate.getMonth() + months);
-  while (tempDate < end) {
-    days++;
-    tempDate.setDate(tempDate.getDate() + 1);
+  if (months === 12) {
+    years++;
+    months = 0;
   }
 
   const parts = [];
@@ -44,7 +31,7 @@ const calculateWorkPeriod = (startDate: string, endDate: string): string => {
   if (months > 0) parts.push(`${months}개월`);
   if (days > 0) parts.push(`${days}일`);
 
-  return parts.join(' ');
+  return parts.join(' ') || '0일';
 };
 
 export default calculateWorkPeriod;
