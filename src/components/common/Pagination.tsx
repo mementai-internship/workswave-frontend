@@ -4,15 +4,10 @@ export interface IPaginationProps {
   totalItems: number;
   itemsPerPage: number;
   currentPage: number;
-  setCurrentPage: (page: number) => void;
+  onChangePage: (page: number) => void;
 }
 
-const Pagination = ({
-  totalItems,
-  itemsPerPage,
-  currentPage,
-  setCurrentPage,
-}: IPaginationProps) => {
+const Pagination = ({ totalItems, itemsPerPage, currentPage, onChangePage }: IPaginationProps) => {
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   const pageGroup = Math.ceil(currentPage / 10);
@@ -25,13 +20,13 @@ const Pagination = ({
       <div className="flex items-center gap-1 justify-center">
         <button
           disabled={currentPage < 11}
-          onClick={() => setCurrentPage(Math.min(totalPages, currentPage - 10))}
+          onClick={() => onChangePage(Math.min(totalPages, currentPage - 10))}
         >
           <PiCaretDoubleLeft />
         </button>
         <button
           disabled={currentPage === 1}
-          onClick={() => setCurrentPage(Math.min(totalPages, currentPage - 1))}
+          onClick={() => onChangePage(Math.min(totalPages, currentPage - 1))}
         >
           <PiCaretLeft />
         </button>
@@ -41,20 +36,20 @@ const Pagination = ({
             className={`w-8 h-8 py-1 rounded-md ${
               currentPage === number ? 'border-purple-50 border' : 'text-gray-50 hover:bg-gray-10'
             }`}
-            onClick={() => setCurrentPage(number)}
+            onClick={() => onChangePage(number)}
           >
             {number}
           </button>
         ))}
         <button
           disabled={currentPage === totalPages}
-          onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
+          onClick={() => onChangePage(Math.min(totalPages, currentPage + 1))}
         >
           <PiCaretRight />
         </button>
         <button
           disabled={pageGroup * 10 >= totalPages}
-          onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 10))}
+          onClick={() => onChangePage(Math.min(totalPages, currentPage + 10))}
         >
           <PiCaretDoubleRight />
         </button>
