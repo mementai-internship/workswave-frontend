@@ -7,7 +7,7 @@ interface IHeaderProfile {
 
 export default function HeaderProfile({ currentUser }: IHeaderProfile) {
   // Logout 함수
-  const onClickLogoutBtn = () => {};
+  const handleLogoutButtonClick = () => {};
 
   return (
     <>
@@ -18,7 +18,10 @@ export default function HeaderProfile({ currentUser }: IHeaderProfile) {
             <div className="border border-slate-300 px-4 py-1 rounded">관리자페이지 바로가기</div>
           </Link>
         )}
-        <button className="border border-slate-300 px-4 py-1 rounded" onClick={onClickLogoutBtn}>
+        <button
+          className="border border-slate-300 px-4 py-1 rounded"
+          onClick={handleLogoutButtonClick}
+        >
           로그아웃
         </button>
       </div>
