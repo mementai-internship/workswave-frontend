@@ -1,4 +1,5 @@
 import RootLayout from '@/layout/root';
+import BoardSettingPage from '@/pages/basicSetting/BoardSettingPage';
 import HomePage from '@/pages/home/HomePage';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
@@ -11,6 +12,12 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <HomePage />,
+        children: [],
+      },
+      {
+        path: '/basic-setting',
+        element: <BoardSettingPage />,
+        children: [],
       },
     ],
   },
