@@ -1,12 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@layer base {
-  html {
-    font-family: 'pretendard';
-    font-size: 16px;
-    font-weight: 400;
-    color: black;
-  }
-}

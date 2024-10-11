@@ -15,15 +15,13 @@ const queryClient = new QueryClient({
 
 function App() {
   return (
-    <>
-      <QueryClientProvider client={queryClient}>
-        <Provider>
-          <h1 className="text-purple-50">workswave</h1>
-          <Router />
-        </Provider>
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
-    </>
+    <QueryClientProvider client={queryClient}>
+      <Provider>
+        <h1 className="text-purple-50">workswave</h1>
+        <Router />
+      </Provider>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 }
 
