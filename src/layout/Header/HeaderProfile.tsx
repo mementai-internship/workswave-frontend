@@ -1,11 +1,11 @@
 import { PiBellFill } from 'react-icons/pi';
 import { Link } from 'react-router-dom';
 
-interface THeaderProfile {
+interface IHeaderProfile {
   currentUser: string | null;
 }
 
-export default function HeaderProfile({ currentUser }: THeaderProfile) {
+export default function HeaderProfile({ currentUser }: IHeaderProfile) {
   // Logout 함수
   const onClickLogoutBtn = () => {};
 
