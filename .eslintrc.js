@@ -18,6 +18,11 @@ module.exports = {
     ecmaVersion: 'latest', // 최신 ECMAScript 버전 사용
     sourceType: 'module', // 모듈 시스템 사용
   },
+  // 이 부분을 추가하세요
+  ignorePatterns: ['build/', 'dist/', 'node_modules/'],
+  // 경고를 에러로 취급하지 않도록 설정
+  noInlineConfig: true,
+  reportUnusedDisableDirectives: true,
   // 사용할 플러그인 목록
   plugins: ['react', '@typescript-eslint', 'react-hooks'],
   // 개별 규칙 설정
