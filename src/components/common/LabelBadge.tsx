@@ -26,7 +26,7 @@ const badgeTheme: {
       outline: 'bg-white border border-purple-30 text-purple-30',
     },
     gray: {
-      solid: 'bg-gray-500 border-gray-50  text-white',
+      solid: 'bg-gray-500 border border-gray-50  text-white',
       outline: 'bg-white border border-gray-50 text-gray-50',
     },
     red: {
@@ -46,7 +46,7 @@ const badgeTheme: {
       outline: 'bg-white border border-green-50 text-green-50',
     },
     blue: {
-      solid: 'bg-sky-blue-50 border-sky-blue-50 text-white',
+      solid: 'bg-sky-blue-50 border border-sky-blue-50 text-white',
       outline: 'bg-white border border-sky-blue-50 text-sky-blue-50',
     },
   },
