@@ -1,4 +1,4 @@
-import BasicSettingBoardItem from '@/components/BasicSetting/Common/BasicSettingBoard/BasicSettingBoardItem';
+import BasicSettingBoardItem from '@/components/BasicSetting/BasicSettingBoard/BasicSettingBoardItem';
 import { IBoardReponse } from '@/components/BasicSetting/types/types';
 
 export default function BasicSettingBoardList({ boardList }: { boardList: IBoardReponse[] }) {
