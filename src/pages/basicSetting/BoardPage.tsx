@@ -1,3 +1,3 @@
-export default function BoardPage() {
-  return <div>BoardPage</div>;
+export default function BoardSettingPage() {
+  return <div>BoardSettingPage</div>;
 }
