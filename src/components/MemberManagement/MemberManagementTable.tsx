@@ -106,18 +106,40 @@ const MemberManagementTable = () => {
   return (
     <Table.Root>
       <Table.Header>
-        <Table.Row className="bg-gray-10">
-          <Table.ColumnHeaderCell className="p-2 text-center">번호</Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="p-2 text-center">지점</Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="p-2 text-center">이름</Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="p-2 text-center">근무파트</Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="p-2 text-center">생년월일</Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="p-2 text-center">연락처</Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="p-2 text-center">이메일</Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="p-2 text-center">계약기간</Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="p-2 text-center">근무기간</Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="p-2 text-center">등록/작성</Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="p-2 text-center">삭제</Table.ColumnHeaderCell>
+        <Table.Row className="bg-gray-300">
+          <Table.ColumnHeaderCell className="p-2 text-center align-middle">
+            번호
+          </Table.ColumnHeaderCell>
+          <Table.ColumnHeaderCell className="p-2 text-center align-middle">
+            지점
+          </Table.ColumnHeaderCell>
+          <Table.ColumnHeaderCell className="p-2 text-center align-middle">
+            이름
+          </Table.ColumnHeaderCell>
+          <Table.ColumnHeaderCell className="p-2 text-center align-middle">
+            근무파트
+          </Table.ColumnHeaderCell>
+          <Table.ColumnHeaderCell className="p-2 text-center align-middle">
+            생년월일
+          </Table.ColumnHeaderCell>
+          <Table.ColumnHeaderCell className="p-2 text-center align-middle">
+            연락처
+          </Table.ColumnHeaderCell>
+          <Table.ColumnHeaderCell className="p-2 text-center align-middle">
+            이메일
+          </Table.ColumnHeaderCell>
+          <Table.ColumnHeaderCell className="p-2 text-center align-middle">
+            계약기간
+          </Table.ColumnHeaderCell>
+          <Table.ColumnHeaderCell className="p-2 text-center align-middle">
+            근무기간
+          </Table.ColumnHeaderCell>
+          <Table.ColumnHeaderCell className="p-2 text-center align-middle">
+            등록/작성
+          </Table.ColumnHeaderCell>
+          <Table.ColumnHeaderCell className="p-2 text-center align-middle">
+            삭제
+          </Table.ColumnHeaderCell>
         </Table.Row>
       </Table.Header>
 
@@ -135,25 +157,27 @@ const MemberManagementTable = () => {
             <Table.Cell className="text-center p-4 align-middle">{testData.birth}</Table.Cell>
             <Table.Cell className="text-center p-4 align-middle">{testData.phone}</Table.Cell>
             <Table.Cell className="text-center p-4 align-middle">{testData.email}</Table.Cell>
-            <Table.Cell className="flex flex-col justify-between gap-2 align-middle p-2">
-              <div className="flex justify-between gap-2">
-                <p>[입사일] {testData.contractPeriod.start}</p>
-                <p className="w-40">
-                  [퇴사일] <span className="text-center">{testData.contractPeriod.end}</span>
-                </p>
-                <p>[연봉] {testData.contractPeriod.annualSalary}</p>
-                <p>[월급] {testData.contractPeriod.salary}</p>
-              </div>
-              <div className="flex flex-col">
-                <p className="text-sm text-gray-50">
-                  [근로계약일] {testData.contractPeriod.workContract}
-                </p>
-                <p className="text-sm text-gray-50">
-                  [연봉계약일] {testData.contractPeriod.annualSalaryContract}
-                </p>
-                <p className="text-sm text-gray-50">
-                  [최근면담일] {testData.contractPeriod.recentContract}
-                </p>
+            <Table.Cell>
+              <div className="flex flex-col justify-between gap-2 align-middle p-1">
+                <div className="flex justify-between gap-2">
+                  <p>[입사일] {testData.contractPeriod.start}</p>
+                  <p className="w-40">
+                    [퇴사일] <span className="text-center">{testData.contractPeriod.end}</span>
+                  </p>
+                  <p>[연봉] {testData.contractPeriod.annualSalary}</p>
+                  <p>[월급] {testData.contractPeriod.salary}</p>
+                </div>
+                <div className="flex flex-col">
+                  <p className="text-xs text-gray-50">
+                    [근로계약일] {testData.contractPeriod.workContract}
+                  </p>
+                  <p className="text-xs text-gray-50">
+                    [연봉계약일] {testData.contractPeriod.annualSalaryContract}
+                  </p>
+                  <p className="text-xs text-gray-50">
+                    [최근면담일] {testData.contractPeriod.recentContract}
+                  </p>
+                </div>
               </div>
             </Table.Cell>
             <Table.Cell className="text-left p-4 align-middle">
