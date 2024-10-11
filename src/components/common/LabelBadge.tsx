@@ -3,7 +3,7 @@ type TBadgeRadius = 'small' | 'large' | 'full' | 'none';
 type TBadgeVariant = 'solid' | 'outline';
 type TBadgeSize = 1 | 2 | 3;
 
-interface Props {
+interface IProps {
   color: TBadgeColor;
   size?: TBadgeSize;
   variant?: TBadgeVariant;
@@ -18,35 +18,35 @@ const badgeTheme: {
 } = {
   colors: {
     purple: {
-      solid: 'bg-purple-50 text-white',
+      solid: 'bg-purple-50 border border-purple-50  text-white',
       outline: 'bg-white border border-purple-50 text-purple-50',
     },
     lightPurple: {
-      solid: 'bg-purple-30 text-white',
+      solid: 'bg-purple-30 border border-purple-30 text-white',
       outline: 'bg-white border border-purple-30 text-purple-30',
     },
     gray: {
-      solid: 'bg-gray-500 text-white',
+      solid: 'bg-gray-500 border-gray-50  text-white',
       outline: 'bg-white border border-gray-50 text-gray-50',
     },
     red: {
-      solid: 'bg-red text-white',
+      solid: 'bg-red border border-red  text-white',
       outline: 'bg-white border border-red text-red',
     },
     pink: {
-      solid: 'bg-pink-50 text-white',
+      solid: 'bg-pink-50 border border-pink-50 text-white',
       outline: 'bg-white border border-pink-50 text-pink-50',
     },
     orange: {
-      solid: 'bg-orange-50 text-white',
+      solid: 'bg-orange-50 border border-orange-50 text-white',
       outline: 'bg-white border border-orange-50 text-orange-50',
     },
     green: {
-      solid: 'bg-green-50 text-white',
+      solid: 'bg-green-50 border border-green-50 text-white',
       outline: 'bg-white border border-green-50 text-green-50',
     },
     blue: {
-      solid: 'bg-sky-blue-50 text-white',
+      solid: 'bg-sky-blue-50 border-sky-blue-50 text-white',
       outline: 'bg-white border border-sky-blue-50 text-sky-blue-50',
     },
   },
@@ -69,7 +69,7 @@ export default function Badge({
   size = 2,
   variant = 'solid',
   text,
-}: Props) {
+}: IProps) {
   return (
     <span
       className={`inline-block ${badgeTheme.colors[color][variant]} ${badgeTheme.radius[radius]} ${badgeTheme.size[size]}`}
