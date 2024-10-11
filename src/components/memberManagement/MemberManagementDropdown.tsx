@@ -9,7 +9,7 @@ const MemberManagementDropdown = () => {
           <DropdownMenu.TriggerIcon />
         </Button>
       </DropdownMenu.Trigger>
-      {/* pull 받고 추가 예정
+      {/* Radix 세팅 pull 받고 추가 예정
             <DropdownMenu.Content>
             <DropdownMenu.Item>Edit</DropdownMenu.Item>
             <DropdownMenu.Separator />
