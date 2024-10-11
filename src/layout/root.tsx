@@ -1,4 +1,4 @@
-import Title from '@/components/common/TItle';
+import Title from '@/components/common/Title';
 import React from 'react';
 // import styled from 'styled-components';
 import { Outlet } from 'react-router-dom';
