@@ -1,3 +1,4 @@
+import { MEMBERMANAGEMENTTABLETITLE } from '@/constants/memberManagementTableTitle';
 import calculateWorkPeriod from '@/utils/calculateWorkPeriod';
 import { Table } from '@radix-ui/themes';
 import { PiClipboardText, PiPaperclip, PiXBold } from 'react-icons/pi';
@@ -102,44 +103,16 @@ const testData: MemberManagementTableProps[] = [
   },
 ];
 
-const MemberManagementTable = () => {
+export default function MemberManagementTable() {
   return (
     <Table.Root>
       <Table.Header>
         <Table.Row className="bg-gray-300">
-          <Table.ColumnHeaderCell className="p-2 text-center align-middle">
-            번호
-          </Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="p-2 text-center align-middle">
-            지점
-          </Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="p-2 text-center align-middle">
-            이름
-          </Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="p-2 text-center align-middle">
-            근무파트
-          </Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="p-2 text-center align-middle">
-            생년월일
-          </Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="p-2 text-center align-middle">
-            연락처
-          </Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="p-2 text-center align-middle">
-            이메일
-          </Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="p-2 text-center align-middle">
-            계약기간
-          </Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="p-2 text-center align-middle">
-            근무기간
-          </Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="p-2 text-center align-middle">
-            등록/작성
-          </Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="p-2 text-center align-middle">
-            삭제
-          </Table.ColumnHeaderCell>
+          {MEMBERMANAGEMENTTABLETITLE.map((title) => (
+            <Table.ColumnHeaderCell className="p-2 text-center align-middle" key={title}>
+              {title}
+            </Table.ColumnHeaderCell>
+          ))}
         </Table.Row>
       </Table.Header>
 
@@ -204,6 +177,4 @@ const MemberManagementTable = () => {
       </Table.Body>
     </Table.Root>
   );
-};
-
-export default MemberManagementTable;
+}
