@@ -3,9 +3,13 @@
 export const content = ['./src/**/*.{js,ts,jsx,tsx}'];
 export const theme = {
   extend: {
+    fontFamily: {
+      pretendard: ['Pretendard'],
+    },
+    backgroundColor: {
+      'light-gray': '#f5f5f5',
+    },
     colors: {
-      black: '#000000',
-      white: '#f6f6f6',
       red: '#D6173A',
       gray: {
         10: '#F3F4F6',
