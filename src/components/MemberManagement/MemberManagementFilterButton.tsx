@@ -1,6 +1,6 @@
 import { CheckboxGroup } from '@radix-ui/themes';
 
-const MemberManagementFilterButton = () => {
+export default function MemberManagementFilterButton() {
   return (
     <>
       <CheckboxGroup.Root size="3" variant="surface" color="purple" className="flex flex-row gap-4">
@@ -15,6 +15,4 @@ const MemberManagementFilterButton = () => {
       </CheckboxGroup.Root>
     </>
   );
-};
-
-export default MemberManagementFilterButton;
+}

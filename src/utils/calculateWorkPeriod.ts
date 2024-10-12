@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 
-const calculateWorkPeriod = (startDate: string, endDate: string): string => {
+export default function calculateWorkPeriod(startDate: string, endDate: string): string {
   const start = dayjs(startDate);
   const end = dayjs(endDate === '-' ? dayjs() : endDate).endOf('day');
 
@@ -32,9 +32,7 @@ const calculateWorkPeriod = (startDate: string, endDate: string): string => {
   if (days > 0) parts.push(`${days}일`);
 
   return parts.join(' ') || '0일';
-};
-
-export default calculateWorkPeriod;
+}
 
 // 사용 예시
 // const workPeriod = calculateWorkPeriod('2024-01-01', '2024-10-22');
