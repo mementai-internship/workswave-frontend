@@ -9,7 +9,7 @@ export function Txt({ variant = 'body1', color, className, ...props }: Props) {
   return (
     <span
       className={`m-0 p-0 leading-normal ${TYPOGRAPHY_VARIANT[variant]} ${
-        color ? `text-[${color}]` : 'text-inherit'
+        color ? `text-${color}` : 'text-inherit'
       } ${className || ''}`}
       {...props}
     />
