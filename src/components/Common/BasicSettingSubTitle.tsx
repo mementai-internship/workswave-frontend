@@ -3,7 +3,7 @@ import { Txt } from '@/components/Common/Txt';
 interface IPropsType {
   title: string;
   content: string;
-  flexAlign?: string;
+  flexAlign?: 'row' | 'col';
   gap?: string;
   titleColor?: string;
   styles?: string;
