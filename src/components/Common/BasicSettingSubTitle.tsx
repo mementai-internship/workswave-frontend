@@ -21,7 +21,7 @@ export default function BasicSettingSubTitle({
     <div
       className={`${
         flexAlign === 'row' ? 'flex' : 'flex flex-col'
-      } ${gap} text-sm font-semibold whitespace-nowrap ${styles}`}
+      } ${gap} whitespace-nowrap ${styles}`}
     >
       <Txt color={titleColor}>{title}</Txt>
       <Txt variant="body2">{content}</Txt>
