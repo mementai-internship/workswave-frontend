@@ -7,7 +7,12 @@ export interface IPaginationProps {
   onChangePage: (page: number) => void;
 }
 
-const Pagination = ({ totalItems, itemsPerPage, currentPage, onChangePage }: IPaginationProps) => {
+export default function Pagination({
+  totalItems,
+  itemsPerPage,
+  currentPage,
+  onChangePage,
+}: IPaginationProps) {
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   const pageGroup = Math.ceil(currentPage / 10);
@@ -56,6 +61,4 @@ const Pagination = ({ totalItems, itemsPerPage, currentPage, onChangePage }: IPa
       </div>
     </>
   );
-};
-
-export default Pagination;
+}
