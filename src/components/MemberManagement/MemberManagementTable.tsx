@@ -3,7 +3,7 @@ import calculateWorkPeriod from '@/utils/calculateWorkPeriod';
 import { Table } from '@radix-ui/themes';
 import { PiClipboardText, PiPaperclip, PiXBold } from 'react-icons/pi';
 
-interface MemberManagementTableProps {
+interface IMemberManagementTableProps {
   id: number;
   branch: string;
   gender: string;
@@ -24,7 +24,7 @@ interface MemberManagementTableProps {
 }
 
 //text data 추후 삭제 예정
-const testData: MemberManagementTableProps[] = [
+const testData: IMemberManagementTableProps[] = [
   {
     id: 1,
     branch: '뮤즈의원(수원인계점)',
@@ -117,7 +117,7 @@ export default function MemberManagementTable() {
       </Table.Header>
 
       <Table.Body>
-        {testData.map((testData: MemberManagementTableProps) => (
+        {testData.map((testData: IMemberManagementTableProps) => (
           <Table.Row key={testData.id}>
             <Table.RowHeaderCell className="text-center p-4 align-middle">
               {testData.id}
