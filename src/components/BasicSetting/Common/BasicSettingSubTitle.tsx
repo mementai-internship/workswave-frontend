@@ -23,12 +23,8 @@ export default function BasicSettingSubTitle({
         flexAlign === 'row' ? 'flex' : 'flex flex-col'
       } ${gap} text-sm font-semibold whitespace-nowrap ${styles}`}
     >
-      <Txt color={titleColor} className="font-semibold">
-        {title}
-      </Txt>
-      <Txt variant="body2" className="font-semibold">
-        {content}
-      </Txt>
+      <Txt color={titleColor}>{title}</Txt>
+      <Txt variant="body2">{content}</Txt>
     </div>
   );
 }
