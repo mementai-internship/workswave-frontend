@@ -3,7 +3,7 @@ import {
   IBoardReponse,
   IHolidayResponse,
   IHumanRecordResponse,
-} from '../types/types';
+} from '@/models/basicSetting.model';
 
 export const ANNUALLEAVE_LIST: IAnnualLeaveResponse[] = [
   {
