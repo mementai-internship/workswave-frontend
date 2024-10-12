@@ -1,7 +1,10 @@
+import { Txt } from '@/components/Common/Txt';
+
 interface IPropsType {
   title: string;
   content: string;
-  flexStyle?: string;
+  flexAlign?: string;
+  gap?: string;
   titleColor?: string;
   styles?: string;
 }
@@ -9,18 +12,23 @@ interface IPropsType {
 export default function BasicSettingSubTitle({
   title,
   content,
-  flexStyle,
-  titleColor,
+  flexAlign = 'row',
+  gap,
+  titleColor = 'text-gray-600',
   styles,
 }: IPropsType) {
   return (
     <div
       className={`${
-        flexStyle ? flexStyle : 'flex gap-x-4'
-      } text-sm font-semibold whitespace-nowrap ${styles}`}
+        flexAlign === 'row' ? 'flex' : 'flex flex-col'
+      } ${gap} text-sm font-semibold whitespace-nowrap ${styles}`}
     >
-      <p className={`${titleColor ? titleColor : 'text-gray-600'}`}>{title}</p>
-      <p className="">{content}</p>
+      <Txt color={titleColor} className="font-semibold">
+        {title}
+      </Txt>
+      <Txt variant="body2" className="font-semibold">
+        {content}
+      </Txt>
     </div>
   );
 }
