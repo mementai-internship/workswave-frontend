@@ -1,7 +1,7 @@
-import { TLaborData } from '@/models/workManagement/work.model';
+import { ILaborData } from '@/models/workManagement/work.model';
 
 // Mocks 폴더 만들기 좀 그래서 우선 constants에 넣었습니다.
-export const workMockData: TLaborData[] = [
+export const workMockData: ILaborData[] = [
   {
     id: 0,
     branch: '서울 강남점',

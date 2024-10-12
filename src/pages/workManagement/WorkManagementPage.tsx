@@ -1,10 +1,11 @@
-import LaborTable from '@/components/WorkManagement/WorkTable';
+import WorkFilterLayout from '@/components/WorkManagement/WorkFilterLayout';
+import WorkTable from '@/components/WorkManagement/WorkTable';
 
 export default function LaborManagementPage() {
   return (
     <div>
-      근로관리1
-      <LaborTable />
+      <WorkFilterLayout />
+      <WorkTable />
     </div>
   );
 }

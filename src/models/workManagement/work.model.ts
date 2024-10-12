@@ -1,4 +1,4 @@
-export type TLaborData = {
+export interface ILaborData {
   id: number;
   branch: string;
   name: string;
@@ -17,4 +17,9 @@ export type TLaborData = {
   overtimeCount90min: number;
   gender: number;
   days: number;
-};
+}
+
+export interface TWorkOption {
+  id: number;
+  value: string;
+}
