@@ -62,6 +62,17 @@ export const BOARD_LIST: IBoardReponse[] = [
       { title: '댓글사용여부', content: '사용' },
     ],
   },
+  {
+    id: '6',
+    title: '외래팀 메뉴얼',
+    subTitle: [
+      { title: '열람권한', content: '전체' },
+      { title: '글쓰기권한', content: '통합관리자' },
+      { title: '공지권한', content: '통합관리자' },
+      { title: '파트구분', content: '미사용' },
+      { title: '댓글사용여부', content: '사용' },
+    ],
+  },
 ];
 
 export const HOLIDAY_LIST: IHolidayResponse[] = [

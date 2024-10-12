@@ -1,3 +1,5 @@
+import { TUserAuthority } from '@/models/user.model';
+
 export interface IBoardReponse {
   id: string;
   title: string;
@@ -24,4 +26,14 @@ export interface IAnnualLeaveResponse {
 interface ISubTitle {
   title: string;
   content: string;
+}
+
+export interface IBoardPostRequest {
+  categoryName: string;
+  categoryDesc: string;
+  readAuthority: TUserAuthority;
+  writeAuthority: TUserAuthority;
+  notifyAuthority: TUserAuthority;
+  isPartDivision: boolean;
+  isCommentDivision: boolean;
 }
