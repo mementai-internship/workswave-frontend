@@ -1,5 +1,5 @@
 import BasicSettingSubTitle from '@/components/Common/BasicSettingSubTitle';
-import { IBoardReponse } from '@/types/basicSettingtypes';
+import { IBoardReponse } from '@/models/basicSetting.model';
 import { Button } from '@radix-ui/themes';
 import { PiXBold } from 'react-icons/pi';
 
