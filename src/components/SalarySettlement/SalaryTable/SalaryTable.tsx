@@ -1,8 +1,9 @@
 import { MAX_SALARY } from '@/components/SalarySettlement/SalaryTable/const';
 import { IEmployeeSalarySettlement } from '@/models/salarySettlement.model';
 import { Checkbox, Table, TextField } from '@radix-ui/themes';
-import React, { useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 
+// 급여합계 계산로직
 const calculateTotalPay = (employee: IEmployeeSalarySettlement): number => {
   return (
     employee.basePay +
@@ -19,12 +20,13 @@ const calculateTotalPay = (employee: IEmployeeSalarySettlement): number => {
 };
 
 interface SalaryTableProps {
-  data: IEmployeeSalarySettlement[];
+  salarySettlementData: IEmployeeSalarySettlement[];
+  // TODO: 필터링을 위한 지점, 파트, 직원 값 전달 받아야 함
 }
 
-export default function SalaryTable({ data }: SalaryTableProps) {
+export default function SalaryTable({ salarySettlementData }: SalaryTableProps) {
   const [employees, setEmployees] = useState(
-    data.map((employee) => ({
+    salarySettlementData.map((employee) => ({
       ...employee,
       incentive: employee.incentive || 0,
       previousMonthUnpaid: employee.previousMonthUnpaid || 0,
@@ -37,7 +39,7 @@ export default function SalaryTable({ data }: SalaryTableProps) {
     }))
   );
 
-  const summary = useMemo(() => {
+  const calculateSummary = useMemo(() => {
     const selectedEmployees = employees.filter((emp) => emp.isSelected);
     const employeesToSum = selectedEmployees.length > 0 ? selectedEmployees : employees;
 
@@ -87,13 +89,13 @@ export default function SalaryTable({ data }: SalaryTableProps) {
     setEmployees(updatedEmployees);
   };
 
-  const handleCheckboxChange = (index: number) => {
+  const handleCheckbox = (index: number) => {
     setEmployees(
       employees.map((emp, i) => (i === index ? { ...emp, isSelected: !emp.isSelected } : emp))
     );
   };
 
-  const handleToggleAll = () => {
+  const handleAllCheckbox = () => {
     const allSelected = employees.every((emp) => emp.isSelected);
     setEmployees(employees.map((emp) => ({ ...emp, isSelected: !allSelected })));
   };
@@ -108,7 +110,7 @@ export default function SalaryTable({ data }: SalaryTableProps) {
                 size="1"
                 color="gray"
                 checked={employees.every((emp) => emp.isSelected)}
-                onCheckedChange={handleToggleAll}
+                onCheckedChange={handleAllCheckbox}
               />
             </Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell justify="center" className="w-24">
@@ -146,7 +148,7 @@ export default function SalaryTable({ data }: SalaryTableProps) {
                   size="1"
                   color="gray"
                   checked={employee.isSelected}
-                  onCheckedChange={() => handleCheckboxChange(index)}
+                  onCheckedChange={() => handleCheckbox(index)}
                 />
               </Table.Cell>
               <Table.Cell className="max-w-24">
@@ -215,12 +217,14 @@ export default function SalaryTable({ data }: SalaryTableProps) {
         <div className="flex justify-between items-center max-w-7xl mx-auto">
           <div className="flex space-x-4">
             <div className="flex flex-col items-center w-24">
-              <div className="text-white font-bold truncate">{summary.totalEmployees}명</div>
+              <div className="text-white font-bold truncate">
+                {calculateSummary.totalEmployees}명
+              </div>
               <div className="text-gray-50 text-sm">전체 인원</div>
             </div>
             <div className="flex flex-col items-center w-36">
               <div className="text-white font-bold truncate">
-                {summary.totalSalary.toLocaleString()}원
+                {calculateSummary.totalSalary.toLocaleString()}원
               </div>
               <div className="text-gray-50 text-sm">총 월급</div>
             </div>
@@ -228,8 +232,8 @@ export default function SalaryTable({ data }: SalaryTableProps) {
           <div className="flex space-x-4">
             <div className="flex flex-col items-center w-24">
               <div className="text-white font-bold truncate">
-                {summary.totalPreviousMonthUnpaid > 0
-                  ? summary.totalPreviousMonthUnpaid.toLocaleString()
+                {calculateSummary.totalPreviousMonthUnpaid > 0
+                  ? calculateSummary.totalPreviousMonthUnpaid.toLocaleString()
                   : '0'}
                 원
               </div>
@@ -237,19 +241,19 @@ export default function SalaryTable({ data }: SalaryTableProps) {
             </div>
             <div className="flex flex-col items-center w-24">
               <div className="text-white font-bold truncate">
-                {summary.totalOvertimePay.toLocaleString()}원
+                {calculateSummary.totalOvertimePay.toLocaleString()}원
               </div>
               <div className="text-gray-50 text-sm">OT수당</div>
             </div>
             <div className="flex flex-col items-center w-24">
               <div className="text-white font-bold truncate">
-                {summary.totalWeekendWorkPay.toLocaleString()}원
+                {calculateSummary.totalWeekendWorkPay.toLocaleString()}원
               </div>
               <div className="text-gray-50 text-sm">주말근로수당</div>
             </div>
             <div className="flex flex-col items-center w-52">
               <div className="text-white font-bold overflow-hidden">
-                {summary.totalPay.toLocaleString()}원
+                {calculateSummary.totalPay.toLocaleString()}원
               </div>
               <div className="text-gray-50 text-sm ">총 급여합계</div>
             </div>
