@@ -1,11 +1,11 @@
 import Title from '@/components/Common/Title';
-import UserBoardFilterBar from '@/components/UserBoard/UserBoardFilterBar/UserBoardFilterBar';
-import UserBoardTable from '@/components/UserBoard/UserBoardTable/UserBoardTable';
+import UserBoardFilterBar from '@/components/UserBoard/View/UserBoardFilterBar/UserBoardFilterBar';
+import UserBoardTable from '@/components/UserBoard/View/UserBoardTable/UserBoardTable';
 import React from 'react';
 
-export default function UserBoardPage() {
+export default function BoardViewPage() {
   return (
-    <main>
+    <main className="flex flex-col gap-4 px-10 py-10">
       <Title content="회원게시판" />
       <UserBoardFilterBar />
       <UserBoardTable data={DUMMY_DATA} />

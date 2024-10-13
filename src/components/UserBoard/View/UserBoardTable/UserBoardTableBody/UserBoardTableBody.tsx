@@ -1,4 +1,4 @@
-import { IUserBoardTableProps } from '@/components/UserBoard/UserBoardTable/UserBoardTable';
+import { IUserBoardTableProps } from '@/components/UserBoard/View/UserBoardTable/UserBoardTable';
 import { Button, Table } from '@radix-ui/themes';
 import React from 'react';
 import { PiTrashDuotone } from 'react-icons/pi';
@@ -25,8 +25,9 @@ export default function UserBoardTableBody({ data }: { data: IUserBoardTableProp
           <Table.Cell>{item.createdAt}</Table.Cell>
           <Table.Cell>{item.viewCount}</Table.Cell>
           <Table.Cell>
-            <Button variant="ghost" size="3" className="cursor-pointer">
+            <Button variant="ghost" size="2" className="cursor-pointer text-black">
               <PiTrashDuotone />
+              삭제
             </Button>
           </Table.Cell>
         </Table.Row>
