@@ -18,14 +18,14 @@ export default function SalaryRangeTableTd({
   colSpan,
   rowSpan,
   isBold = false,
-  styles,
+  styles = '',
   text,
   borderStyle = 'border-none',
 }: IProps) {
   const cellClassName = `
     ${CELL_BG_COLOR[bgColor]} p-1 ${borderStyle}
     whitespace-nowrap text-sm ${isBold ? 'font-bold' : ''} 
-    ${typeof text === 'number' ? 'text-right' : 'text-center'} ${styles ? styles : ''}`;
+    ${typeof text === 'number' ? 'text-right' : 'text-center'} ${styles}`;
 
   return (
     <td colSpan={colSpan} rowSpan={rowSpan} className={cellClassName}>

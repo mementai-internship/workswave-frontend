@@ -11,7 +11,6 @@ interface IProps {
 }
 
 export default function SalaryRangeHeader({ register, onSubmit, salaryDetails }: IProps) {
-  const headerTdCommonStyle = 'px-2';
   const borderStyleDotted = `border-b border-dotted ${SALARY_RANGE_BORDER_COLOR}`;
 
   return (
@@ -26,7 +25,7 @@ export default function SalaryRangeHeader({ register, onSubmit, salaryDetails }:
             <SalaryRangeTableTd
               bgColor="white"
               text="2024년 1개월 최저임금(기본급만)"
-              styles={`${headerTdCommonStyle} text-start`}
+              styles="px-2 text-start"
             />
             <SalaryRangeTableTd bgColor="white" text={2060740} />
           </tr>
@@ -110,7 +109,7 @@ export default function SalaryRangeHeader({ register, onSubmit, salaryDetails }:
                 borderStyle={`border-r ${SALARY_RANGE_BORDER_COLOR}`}
                 styles="min-w-32"
               />
-              <SalaryRangeTableTd bgColor="white" text="실수령액(실수령액)" styles="min-w-32" />
+              <SalaryRangeTableTd bgColor="white" text="실수령액(식대과세)" styles="min-w-32" />
             </tr>
             <tr>
               <SalaryRangeTableTd
