@@ -1,3 +1,4 @@
+import MemberManagementPage from '@/pages/memberManagement/MemberManagementPage';
 import Router from '@/routes';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
@@ -18,6 +19,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <Provider>
         <h1 className="text-purple-50">workswave</h1>
+        <MemberManagementPage />
         <Router />
       </Provider>
       <ReactQueryDevtools initialIsOpen={false} />
