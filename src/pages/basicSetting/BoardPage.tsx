@@ -17,24 +17,16 @@ const OPTIONS: { id: string; branch: string }[] = [
 // TODO: update 와 post 로직 form에 어떻게 사용할지
 export default function BoardPage() {
   const [currentBranch, setCurrentBranch] = useState(OPTIONS[0].branch);
-  // const [isEditMode, setIsEditMode] = useState(false);
-
-  // const handleEditMode = () => {
-  //   setIsEditMode((prev) => !prev);
-  // };
 
   const {
     control,
-    handleSubmit: handleBoardSubmit,
-    watch,
-    onSubmit: onSubmitBoardForm,
     isDialogOpen,
+    isFormValid,
+    handleSubmit: handleBoardSubmit,
+    onSubmit: onSubmitBoardForm,
     setIsDialogOpen,
+    setValue,
   } = useBasicSettingBoard();
-
-  const observedCategoryName = watch('categoryName');
-  const observedCategoryDesc = watch('categoryDesc');
-  const isFormValid = observedCategoryName.trim() !== '' && observedCategoryDesc.trim() !== '';
 
   const handleChangeBranch = (branch: string) => {
     setCurrentBranch(branch);
@@ -47,7 +39,7 @@ export default function BoardPage() {
   return (
     <div className="w-[80%] mx-auto flex p-5 gap-x-2 h-[calc(100vh-100px)]">
       {/* 1280px 이하 버전 */}
-      <section className="bg-white border flex-[3] overflow-y-scroll min-w-[800px]">
+      <section className="bg-white border flex-[3] overflow-y-scroll">
         <div className="flex items-center justify-between gap-x-8 px-10 py-5 sticky top-0 left-0 bg-white border-b">
           <Title content="게시판 설정" />
           {OPTIONS.length > 1 ? (
@@ -77,7 +69,6 @@ export default function BoardPage() {
           <Dialog.Root open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <Dialog.Trigger>
               <Button
-                tabIndex={0}
                 size="2"
                 radius="small"
                 variant="outline"
@@ -87,7 +78,6 @@ export default function BoardPage() {
                 게시판 카테고리 추가하기
               </Button>
             </Dialog.Trigger>
-
             <Dialog.Content maxWidth="500px" className="p-0">
               <Dialog.Title className="absolute right-5 top-5">
                 <Button
@@ -99,7 +89,7 @@ export default function BoardPage() {
                   <PiXBold size={20} />
                 </Button>
               </Dialog.Title>
-              <BasicSettingBoardForm control={control} />
+              <BasicSettingBoardForm control={control} setValue={setValue} />
               <Dialog.Description className="flex justify-center">
                 <Button
                   onClick={handleBoardSubmit(onSubmitBoardForm)}
@@ -120,7 +110,7 @@ export default function BoardPage() {
       </section>
       {/* xl (1280px) 이상 버전 */}
       <section className="hidden xl:block xl:min-w-[500px] mx-auto bg-white border flex-[1.5]">
-        <BasicSettingBoardForm control={control} />
+        <BasicSettingBoardForm control={control} setValue={setValue} />
         <div className="flex justify-center">
           <Button
             onClick={handleBoardSubmit(onSubmitBoardForm)}

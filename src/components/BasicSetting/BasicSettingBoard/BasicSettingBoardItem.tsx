@@ -30,7 +30,7 @@ export default function BoardItem({ id, title, subTitle }: IBoardReponse) {
     return id;
   };
   return (
-    <section className="w-full flex items-center justify-between border px-4 py-3 border-gray-300 bg-blue-10">
+    <section className="min-w-[700px] flex items-center justify-between border px-4 py-3 border-gray-300 bg-blue-10">
       <div className="flex flex-col">
         <Txt variant="h4">{title}</Txt>
         <div className="flex gap-x-10 my-2">
