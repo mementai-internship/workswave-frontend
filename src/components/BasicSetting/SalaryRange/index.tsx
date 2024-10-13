@@ -1,4 +1,3 @@
-import { SALARY_RANGE_BORDER_COLOR } from '@/components/BasicSetting/SalaryRange/ const';
 import SalaryRangeHeader from '@/components/BasicSetting/SalaryRange/SalaryRangeHeader';
 import SalaryRangeTable from '@/components/BasicSetting/SalaryRange/SalaryRangeTable';
 import { IBaseCalculationData, ICalculatedSalary, IInputSalary } from '@/models/salaryRange.model';
@@ -123,29 +122,28 @@ export default function Index() {
   };
 
   return (
-    <div className="p-4">
-      <div
-        className={`mx-auto bg-[#ffffff] border ${SALARY_RANGE_BORDER_COLOR} overflow-x-scroll`}
-        style={{ maxWidth: '1700px' }}
-      >
-        <SalaryRangeHeader
-          salaryDetails={calculatedSalary.salaryDetails}
-          onSubmit={handleSubmit(onSubmit)}
-          register={register}
-        />
-        <div className="flex w-full">
-          <SalaryRangeTable
-            direction="left"
-            tableHeaderTitle="O"
-            calcResult={calculatedSalary.salaryWithMealAllowance}
-            calcRange={salaryDataList}
+    <div className="w-full p-4 max-w-[1700px]">
+      <div className="max-w-[1700px] mx-auto w-full overflow-x-scroll border ${SALARY_RANGE_BORDER_COLOR}">
+        <div className={`w-[1700px] bg-[#ffffff]`}>
+          <SalaryRangeHeader
+            salaryDetails={calculatedSalary.salaryDetails}
+            onSubmit={handleSubmit(onSubmit)}
+            register={register}
           />
-          <SalaryRangeTable
-            direction="right"
-            tableHeaderTitle="X (급여 전액 과세)"
-            calcResult={calculatedSalary.salaryWithoutMealAllowance}
-            calcRange={salaryDataList2}
-          />
+          <div className="flex w-full">
+            <SalaryRangeTable
+              direction="left"
+              tableHeaderTitle="O"
+              calcResult={calculatedSalary.salaryWithMealAllowance}
+              calcRange={salaryDataList}
+            />
+            <SalaryRangeTable
+              direction="right"
+              tableHeaderTitle="X (급여 전액 과세)"
+              calcResult={calculatedSalary.salaryWithoutMealAllowance}
+              calcRange={salaryDataList2}
+            />
+          </div>
         </div>
       </div>
     </div>

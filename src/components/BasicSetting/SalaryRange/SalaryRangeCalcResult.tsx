@@ -1,5 +1,5 @@
-import { SALARY_RANGE_BORDER_COLOR } from '@/components/BasicSetting/SalaryRange/ const';
 import SalaryRangeTableTd from '@/components/BasicSetting/SalaryRange/SalaryRangeTableTd';
+import { SALARY_RANGE_BORDER_COLOR } from '@/components/BasicSetting/SalaryRange/const';
 import { ISalaryRangeValue } from '@/models/salaryRange.model';
 
 interface IProps {
@@ -21,44 +21,58 @@ export default function SalaryRangeCalcResult({ calcResult }: IProps) {
     localIncomeTax,
   } = calcResult;
 
-  const borderStyleSolid = `border-r border-b ${SALARY_RANGE_BORDER_COLOR}`;
-  const borderStylesDotted = `border-l border-dotted ${SALARY_RANGE_BORDER_COLOR}`;
   return (
-    <tbody className="border border-[#333333]">
-      <tr className={`border-b ${SALARY_RANGE_BORDER_COLOR}`}>
+    <tbody>
+      <tr>
         <SalaryRangeTableTd
           bgColor="lightGray"
           text="연봉"
-          borderStyle={`${borderStyleSolid} border-l-0`}
+          borderStyle={`border-r border-b ${SALARY_RANGE_BORDER_COLOR} border-t border-t-[#333333] border-l border-l-[#333333]`}
         />
-        <SalaryRangeTableTd bgColor="white" colSpan={2} aria-label="연봉" text={annualSalary} />
+        <SalaryRangeTableTd
+          bgColor="white"
+          colSpan={2}
+          aria-label="연봉"
+          text={annualSalary}
+          borderStyle={`border-r border-b ${SALARY_RANGE_BORDER_COLOR} border-t border-t-[#333333]`}
+        />
         <SalaryRangeTableTd
           bgColor="white"
           colSpan={2}
           aria-label="연봉에서 비과세가 빠진 금액"
           text={annualSalary - mealAllowance * 12}
-          borderStyle={borderStylesDotted}
+          borderStyle={`border-r border-b ${SALARY_RANGE_BORDER_COLOR} border-t border-t-[#333333]`}
         />
-        <SalaryRangeTableTd bgColor="white" colSpan={7} text=" " />
+        <SalaryRangeTableTd
+          bgColor="white"
+          colSpan={7}
+          text=" "
+          borderStyle={`border-b ${SALARY_RANGE_BORDER_COLOR} border-t border-t-[#333333] border-r border-r-[#333333]`}
+        />
       </tr>
       <tr>
         <SalaryRangeTableTd
           bgColor="lightGray"
           text="계산기"
-          borderStyle={`${borderStyleSolid} border-l-0 border-b-0`}
+          borderStyle={`border-r border-b ${SALARY_RANGE_BORDER_COLOR} border-l border-l-[#333333] border-b border-b-[#333333]`}
         />
-        <SalaryRangeTableTd bgColor="white" aria-label="월급" text={totalMonthlySalary} />
+        <SalaryRangeTableTd
+          bgColor="white"
+          aria-label="월급"
+          text={totalMonthlySalary}
+          borderStyle={`border-r ${SALARY_RANGE_BORDER_COLOR} border-b border-b-[#333333]`}
+        />
         <SalaryRangeTableTd
           bgColor="white"
           aria-label="월급에서 식대가 빠진 금액"
           text={totalMonthlySalary - mealAllowance}
-          borderStyle={borderStylesDotted}
+          borderStyle={`border-r ${SALARY_RANGE_BORDER_COLOR} border-b border-b-[#333333]`}
         />
         <SalaryRangeTableTd
           bgColor="white"
           aria-label="식대"
           text={mealAllowance}
-          borderStyle={borderStylesDotted}
+          borderStyle={`border-r ${SALARY_RANGE_BORDER_COLOR} border-b border-b-[#333333]`}
           styles="w-[100px]"
         />
         <SalaryRangeTableTd
@@ -66,49 +80,49 @@ export default function SalaryRangeCalcResult({ calcResult }: IProps) {
           isBold
           aria-label="실수령액"
           text={netPay}
-          borderStyle={borderStylesDotted}
+          borderStyle={`border-r ${SALARY_RANGE_BORDER_COLOR} border-b border-b-[#333333]`}
         />
         <SalaryRangeTableTd
           bgColor="white"
           aria-label="공제액계"
           text={totalDeductions}
-          borderStyle={borderStylesDotted}
+          borderStyle={`border-r ${SALARY_RANGE_BORDER_COLOR} border-b border-b-[#333333]`}
         />
         <SalaryRangeTableTd
           bgColor="white"
           aria-label="국민연금"
           text={pensionInsurance}
-          borderStyle={borderStylesDotted}
+          borderStyle={`border-r ${SALARY_RANGE_BORDER_COLOR} border-b border-b-[#333333]`}
         />
         <SalaryRangeTableTd
           bgColor="white"
           aria-label="건강보험"
           text={healthInsurance}
-          borderStyle={borderStylesDotted}
+          borderStyle={`border-r ${SALARY_RANGE_BORDER_COLOR} border-b border-b-[#333333]`}
         />
         <SalaryRangeTableTd
           bgColor="white"
           aria-label="고용보험"
           text={employmentInsurance}
-          borderStyle={borderStylesDotted}
+          borderStyle={`border-r ${SALARY_RANGE_BORDER_COLOR} border-b border-b-[#333333]`}
         />
         <SalaryRangeTableTd
           bgColor="white"
           aria-label="장기요양"
           text={longTermCareInsurance}
-          borderStyle={borderStylesDotted}
+          borderStyle={`border-r ${SALARY_RANGE_BORDER_COLOR} border-b border-b-[#333333]`}
         />
         <SalaryRangeTableTd
           bgColor="white"
           aria-label="소득세"
           text={incomeTax}
-          borderStyle={borderStylesDotted}
+          borderStyle={`border-r ${SALARY_RANGE_BORDER_COLOR} border-b border-b-[#333333]`}
         />
         <SalaryRangeTableTd
           bgColor="white"
           aria-label="지방소득세"
           text={localIncomeTax}
-          borderStyle={borderStylesDotted}
+          borderStyle={`border-r border-r-[#333333] border-b border-b-[#333333]`}
         />
       </tr>
     </tbody>

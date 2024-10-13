@@ -1,4 +1,4 @@
-import React from 'react';
+import { CELL_BG_COLOR } from '@/components/BasicSetting/SalaryRange/const';
 
 export type TBgColor = 'gray' | 'white' | 'red' | 'lightGray';
 
@@ -13,13 +13,6 @@ interface IProps {
   text: string | number;
 }
 
-const bgColorMap: Record<TBgColor, string> = {
-  gray: 'bg-[#f4f4f4]',
-  lightGray: 'bg-gray-10',
-  white: 'bg-[#ffffff]',
-  red: 'bg-[#FFF2F2]',
-};
-
 export default function SalaryRangeTableTd({
   bgColor,
   colSpan,
@@ -29,17 +22,14 @@ export default function SalaryRangeTableTd({
   text,
   borderStyle = 'border-none',
 }: IProps) {
-  const isTextNumberType = typeof text === 'number';
+  const cellClassName = `
+    ${CELL_BG_COLOR[bgColor]} p-1 ${borderStyle}
+    whitespace-nowrap text-sm ${isBold ? 'font-bold' : ''} 
+    ${typeof text === 'number' ? 'text-right' : 'text-center'} ${styles ? styles : ''}`;
+
   return (
-    <td
-      colSpan={colSpan}
-      rowSpan={rowSpan}
-      className={`
-        ${bgColorMap[bgColor]} p-1 ${borderStyle}
-        whitespace-nowrap text-sm ${isBold ? 'font-bold' : ''} 
-        ${isTextNumberType ? 'text-right' : 'text-center'} ${styles ? styles : ''}`}
-    >
-      {isTextNumberType ? text.toLocaleString() : text}
+    <td colSpan={colSpan} rowSpan={rowSpan} className={cellClassName}>
+      {typeof text === 'number' ? text.toLocaleString() : text}
     </td>
   );
 }
