@@ -1,3 +1,4 @@
+import MemberManagementPage from '@/pages/memberManagement/MemberManagementPage';
 import Router from '@/routes';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
@@ -15,15 +16,14 @@ const queryClient = new QueryClient({
 
 function App() {
   return (
-    <>
-      <QueryClientProvider client={queryClient}>
-        <Provider>
-          <h1 className="text-purple-50">workswave</h1>
-          <Router />
-        </Provider>
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
-    </>
+    <QueryClientProvider client={queryClient}>
+      <Provider>
+        <h1 className="text-purple-50">workswave</h1>
+        <MemberManagementPage />
+        <Router />
+      </Provider>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 }
 

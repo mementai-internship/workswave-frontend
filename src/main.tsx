@@ -8,7 +8,9 @@ import App from './App.tsx';
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Theme>
-      <App />
+      <div className="font-pretendard bg-light-gray min-h-screen">
+        <App />
+      </div>
     </Theme>
   </StrictMode>
 );

@@ -5,7 +5,7 @@
 1. 타입 선언:
    - type, interface 선언 시 접두사로 T, I 사용.
    - any 사용 지양
-2. 폴더 구조: 
+2. 폴더 구조:
    - 참고 레포: <https://github.com/prgrms-fdc-2nd-final-mosdaq/mosdaq-front>
 3. 코드 스타일:
 
