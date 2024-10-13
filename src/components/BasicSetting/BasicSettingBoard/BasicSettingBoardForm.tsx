@@ -2,29 +2,19 @@ import Title from '@/components/Common/Title';
 import { AUTHORITIES_WITH_OPTION } from '@/constants/authorities';
 import { IBoardPostRequest } from '@/models/basicSetting.model';
 import { Button, Select, TextArea, TextField, Tooltip } from '@radix-ui/themes';
-import { Controller, useForm } from 'react-hook-form';
+import { Control, Controller } from 'react-hook-form';
 import { PiInfo } from 'react-icons/pi';
 
-export default function BasicSettingBoardForm() {
-  const { control, handleSubmit } = useForm<IBoardPostRequest>({
-    defaultValues: {
-      categoryName: '',
-      categoryDesc: '',
-      readAuthority: '사원',
-      writeAuthority: '사원',
-      notifyAuthority: 'MSO 최고권한',
-      isPartDivision: false,
-      isCommentDivision: true,
-    },
-  });
+interface IPropsType {
+  control: Control<IBoardPostRequest>;
+}
 
-  const handleSubmitForm = (e) => {
-    console.log('called');
-    console.log(e);
-  };
-
+/**
+ * TODO: 수정 시 받을 props추가
+ */
+export default function BasicSettingBoardForm({ control }: IPropsType) {
   return (
-    <section className="min-w-[500px] bg-white border flex-[2]">
+    <>
       <div className="flex items-center gap-x-4 px-10 py-5">
         <Title content="게시판 카테고리 추가하기" />
       </div>
@@ -37,7 +27,7 @@ export default function BasicSettingBoardForm() {
             control={control}
             name="categoryName"
             rules={{ required: true }}
-            render={({ field: { onChange, onBlur, value } }) => (
+            render={({ field: { onChange, value } }) => (
               <TextField.Root
                 id="category-name"
                 placeholder="카테고리를 입력해주세요."
@@ -46,7 +36,7 @@ export default function BasicSettingBoardForm() {
                 className="w-full"
                 value={value}
                 onChange={onChange}
-                onBlur={onBlur}
+                required
               >
                 <TextField.Slot px="1"></TextField.Slot>
               </TextField.Root>
@@ -62,7 +52,7 @@ export default function BasicSettingBoardForm() {
             control={control}
             name="categoryDesc"
             rules={{ required: true }}
-            render={({ field: { onChange, onBlur, value } }) => (
+            render={({ field: { onChange, value } }) => (
               <TextArea
                 id="category-description"
                 placeholder="설명을 입력해주세요"
@@ -70,7 +60,7 @@ export default function BasicSettingBoardForm() {
                 radius="none"
                 value={value}
                 onChange={onChange}
-                onBlur={onBlur}
+                required
               />
             )}
           />
@@ -163,16 +153,16 @@ export default function BasicSettingBoardForm() {
           <div className="w-full flex gap-x-2">
             <Controller
               control={control}
-              name="isPartDivision"
+              name="partDivision"
               rules={{ required: true }}
               render={({ field: { onChange, value } }) => (
                 <div className="w-full flex gap-x-2">
                   <Button
                     variant="outline"
                     size="3"
-                    color={value ? 'purple' : 'gray'}
+                    color={value === 'use' ? 'purple' : 'gray'}
                     radius="none"
-                    onClick={() => onChange(true)}
+                    onClick={() => onChange('use')}
                     className="flex-1 h-12 cursor-pointer"
                   >
                     사용
@@ -180,9 +170,9 @@ export default function BasicSettingBoardForm() {
                   <Button
                     variant="outline"
                     size="3"
-                    color={!value ? 'purple' : 'gray'}
+                    color={value === 'no-use' ? 'purple' : 'gray'}
                     radius="none"
-                    onClick={() => onChange(false)}
+                    onClick={() => onChange('no-use')}
                     className="flex-1 h-12 cursor-pointer"
                   >
                     미사용
@@ -205,16 +195,16 @@ export default function BasicSettingBoardForm() {
           <div className="w-full flex gap-x-2">
             <Controller
               control={control}
-              name="isCommentDivision"
+              name="commentDivision"
               rules={{ required: true }}
               render={({ field: { onChange, value } }) => (
                 <div className="w-full flex gap-x-2">
                   <Button
                     variant="outline"
                     size="3"
-                    color={value ? 'purple' : 'gray'}
+                    color={value === 'use' ? 'purple' : 'gray'}
                     radius="none"
-                    onClick={() => onChange(true)}
+                    onClick={() => onChange('use')}
                     className="flex-1 h-12 cursor-pointer"
                   >
                     사용
@@ -222,9 +212,9 @@ export default function BasicSettingBoardForm() {
                   <Button
                     variant="outline"
                     size="3"
-                    color={!value ? 'purple' : 'gray'}
+                    color={value === 'no-use' ? 'purple' : 'gray'}
                     radius="none"
-                    onClick={() => onChange(false)}
+                    onClick={() => onChange('no-use')}
                     className="flex-1 h-12 cursor-pointer"
                   >
                     미사용
@@ -234,17 +224,7 @@ export default function BasicSettingBoardForm() {
             />
           </div>
         </div>
-        <Button
-          onClick={handleSubmit(handleSubmitForm)}
-          onKeyDown={(e) => e.key === 'Enter' && handleSubmit(handleSubmitForm)}
-          variant="solid"
-          size="3"
-          radius="small"
-          className="w-40 h-10 mx-auto my-10 bg-indigo-950 cursor-pointer hover:bg-opacity-90"
-        >
-          저장하기
-        </Button>
       </div>
-    </section>
+    </>
   );
 }
