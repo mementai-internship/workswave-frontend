@@ -21,10 +21,17 @@ const calculateTotalPay = (employee: IEmployeeSalarySettlement): number => {
 
 interface SalaryTableProps {
   salarySettlementData: IEmployeeSalarySettlement[];
-  // TODO: 필터링을 위한 지점, 파트, 직원 값 전달 받아야 함
+  selectedRegion: string;
+  selectedPart: string;
+  selectedJob: string;
 }
 
-export default function SalaryTable({ salarySettlementData }: SalaryTableProps) {
+export default function SalaryTable({
+  salarySettlementData,
+  selectedRegion,
+  selectedPart,
+  selectedJob,
+}: SalaryTableProps) {
   const [employees, setEmployees] = useState(
     salarySettlementData.map((employee) => ({
       ...employee,
@@ -39,9 +46,18 @@ export default function SalaryTable({ salarySettlementData }: SalaryTableProps) 
     }))
   );
 
+  const filteredEmployees = useMemo(() => {
+    return employees.filter(
+      (employee) =>
+        (!selectedRegion || employee.region === selectedRegion) &&
+        (!selectedPart || employee.department === selectedPart) &&
+        (!selectedJob || employee.job === selectedJob)
+    );
+  }, [employees, selectedRegion, selectedPart, selectedJob]);
+
   const calculateSummary = useMemo(() => {
-    const selectedEmployees = employees.filter((emp) => emp.isSelected);
-    const employeesToSum = selectedEmployees.length > 0 ? selectedEmployees : employees;
+    const selectedEmployees = filteredEmployees.filter((emp) => emp.isSelected);
+    const employeesToSum = selectedEmployees.length > 0 ? selectedEmployees : filteredEmployees;
 
     const totalEmployees = employeesToSum.length;
     const totalSalary = employeesToSum.reduce((sum, emp) => sum + emp.salary, 0);
@@ -60,7 +76,7 @@ export default function SalaryTable({ salarySettlementData }: SalaryTableProps) 
       totalOvertimePay,
       totalWeekendWorkPay,
     };
-  }, [employees]);
+  }, [filteredEmployees]);
 
   const handleInputChange = (
     index: number,
@@ -137,7 +153,7 @@ export default function SalaryTable({ salarySettlementData }: SalaryTableProps) 
         </Table.Header>
 
         <Table.Body>
-          {employees.map((employee, index) => (
+          {filteredEmployees.map((employee, index) => (
             <Table.Row
               key={index}
               align="center"
