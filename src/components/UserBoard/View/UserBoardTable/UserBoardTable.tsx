@@ -1,6 +1,6 @@
 import Pagination from '@/components/Common/Pagination';
-import UserBoardTableBody from '@/components/UserBoard/UserBoardTable/UserBoardTableBody/UserBoardTableBody';
-import UserBoardTableHeader from '@/components/UserBoard/UserBoardTable/UserBoardTableHeader/UserBoardTableHeader';
+import UserBoardTableBody from '@/components/UserBoard/View/UserBoardTable/UserBoardTableBody/UserBoardTableBody';
+import UserBoardTableHeader from '@/components/UserBoard/View/UserBoardTable/UserBoardTableHeader/UserBoardTableHeader';
 import { Table } from '@radix-ui/themes';
 import React from 'react';
 
