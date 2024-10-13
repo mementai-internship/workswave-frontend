@@ -14,7 +14,7 @@ export default function BasicSettingSubTitle({
   content,
   flexAlign = 'row',
   gap,
-  titleColor = 'text-gray-600',
+  titleColor = 'gray-50',
   styles,
 }: IPropsType) {
   return (
