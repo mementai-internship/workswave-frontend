@@ -18,7 +18,7 @@ export default function SalaryRangeSection({
 }: IProps) {
   return (
     <table
-      className={`w-50 border-separate border-spacing-0 ${direction === 'right' ? `border-l-8 ${SALARY_RANGE_BORDER_COLOR}` : ''}`}
+      className={`w-50 flex-1 border-separate border-spacing-0 ${direction === 'right' ? `border-l-8 ${SALARY_RANGE_BORDER_COLOR}` : ''}`}
     >
       <thead>
         <tr className={`p-2 bg-gray-10 text-center font-bold text-lg`}>

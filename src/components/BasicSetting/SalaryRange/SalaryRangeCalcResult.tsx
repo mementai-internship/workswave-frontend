@@ -73,7 +73,7 @@ export default function SalaryRangeCalcResult({ calcResult }: IProps) {
           aria-label="식대"
           text={mealAllowance}
           borderStyle={`border-r ${SALARY_RANGE_BORDER_COLOR} border-b border-b-[#333333]`}
-          styles="w-[100px]"
+          styles="w-[62px]"
         />
         <SalaryRangeTableTd
           bgColor="red"

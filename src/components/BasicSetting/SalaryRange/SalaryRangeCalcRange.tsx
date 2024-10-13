@@ -64,7 +64,7 @@ export default function SalaryRangeCalcRange({ calcRangeRows }: IProps) {
           colSpan={2}
           bgColor="lightGray"
           text="세금"
-          styles="w-[100px]"
+          styles="w-[62px]"
           borderStyle={`border-b ${SALARY_RANGE_BORDER_COLOR}`}
         />
       </tr>

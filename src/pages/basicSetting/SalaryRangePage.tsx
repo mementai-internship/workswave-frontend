@@ -14,8 +14,8 @@ export default function SalaryRangePage() {
 
   return (
     <div className="w-full p-4">
-      <div className="max-w-[1702px] mx-auto w-full overflow-x-scroll border ${SALARY_RANGE_BORDER_COLOR}">
-        <div className={`w-[1700px] bg-[#ffffff]`}>
+      <div className="max-w-[1722px] mx-auto w-full overflow-x-scroll border ${SALARY_RANGE_BORDER_COLOR}">
+        <div className={`w-[1720px] bg-[#ffffff]`}>
           <SalaryRangeHeader
             salaryDetails={calculatedSalary.salaryDetails}
             onSubmit={handleSubmit(onSubmit)}
