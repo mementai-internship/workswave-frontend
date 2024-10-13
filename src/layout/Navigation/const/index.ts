@@ -4,7 +4,7 @@ export const NAVIGATION_CONTENTS = [
     content: '회원관리',
   },
   {
-    path: '/board',
+    path: '/board/view',
     content: '회원게시판',
   },
   {

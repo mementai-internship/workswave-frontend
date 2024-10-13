@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 export default function UserBoardTableBody({ data }: { data: IUserBoardTableProps[] }) {
   const navigate = useNavigate();
   const handleClickPost = (postNum: number) => {
-    navigate(`/userBoard/${postNum}`);
+    navigate(`/board/view/${postNum}`);
   };
 
   return (

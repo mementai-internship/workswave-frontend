@@ -66,7 +66,7 @@ const router = createBrowserRouter([
         element: <ManagementOfficePage />,
       },
       {
-        path: '/board',
+        path: '/board/view',
         element: <UserBoardPage />,
       },
     ],
