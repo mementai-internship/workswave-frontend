@@ -6,29 +6,28 @@ import { PiXBold } from 'react-icons/pi';
 
 export default function BoardItem({ id, title, subTitle }: IBoardReponse) {
   const handleClickUpdateItem = (id: string) => {
+    return id;
     /**
      * TODO:
      * update 상태 변화
-     * 현재 id와 isModifyingId가 다르면 disable 처리
+     * 모달 띄우기 or id를 추가하기 폼에 전달하고 나머지 수정하기 값 disabled 처리
      *  */
-    console.log(id, 'update');
   };
 
   const handleEnterUpdateItem = (id: string) => {
-    console.log(id, 'update');
+    return id;
   };
 
   const handleClickDeleteItem = (id: string) => {
+    return id;
     /**
      * TODO:
      * 삭제 로직 작성 -> tanstack query
      */
-
-    console.log(id, 'delete');
   };
 
   const handleEnterDeleteItem = (id: string) => {
-    console.log(id, 'delete');
+    return id;
   };
   return (
     <section className="w-full flex items-center justify-between border px-4 py-3 border-gray-300 bg-blue-10">
@@ -36,13 +35,7 @@ export default function BoardItem({ id, title, subTitle }: IBoardReponse) {
         <Txt variant="h4">{title}</Txt>
         <div className="flex gap-x-10 my-2">
           {subTitle.map(({ title, content }, idx: number) => (
-            <BasicSettingSubTitle
-              key={idx}
-              title={title}
-              content={content}
-              flexAlign="col"
-              titleColor="gray"
-            />
+            <BasicSettingSubTitle key={idx} title={title} content={content} flexAlign="col" />
           ))}
         </div>
       </div>

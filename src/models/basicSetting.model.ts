@@ -34,6 +34,6 @@ export interface IBoardPostRequest {
   readAuthority: TUserAuthority;
   writeAuthority: TUserAuthority;
   notifyAuthority: TUserAuthority;
-  isPartDivision: boolean;
-  isCommentDivision: boolean;
+  partDivision: 'use' | 'no-use';
+  commentDivision: 'use' | 'no-use';
 }
