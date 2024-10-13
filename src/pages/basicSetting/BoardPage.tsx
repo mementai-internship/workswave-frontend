@@ -5,7 +5,8 @@ import { BOARD_LIST } from '@/constants/basicSetting.mock';
 import { Select } from '@radix-ui/themes';
 import { useState } from 'react';
 
-export default function BoardSettingPage() {
+export default function BoardPage() {
+  // TODO: API 응답 값으로 변경
   const options: { id: string; branch: string }[] = [
     { id: '1', branch: '뮤즈의원(다산점)' },
     { id: '2', branch: '뮤즈의원(강남점)' },
