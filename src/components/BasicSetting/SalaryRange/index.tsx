@@ -122,8 +122,8 @@ export default function Index() {
   };
 
   return (
-    <div className="w-full p-4 max-w-[1700px]">
-      <div className="max-w-[1700px] mx-auto w-full overflow-x-scroll border ${SALARY_RANGE_BORDER_COLOR}">
+    <div className="w-full p-4">
+      <div className="max-w-[1702px] mx-auto w-full overflow-x-scroll border ${SALARY_RANGE_BORDER_COLOR}">
         <div className={`w-[1700px] bg-[#ffffff]`}>
           <SalaryRangeHeader
             salaryDetails={calculatedSalary.salaryDetails}
