@@ -10,6 +10,7 @@ import HomePage from '@/pages/home/HomePage';
 import MemberInfoPage from '@/pages/memberManagement/MemberInfoPage';
 import MemberManagementPage from '@/pages/memberManagement/MemberManagementPage';
 import ManagementOfficePage from '@/pages/officeSetting/ManagementOfficePage';
+import BoardViewPage from '@/pages/userBoard/view/BoardViewPage';
 import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 // TODO: lazy load, preload는 나중에 하겠습니둥.
@@ -73,6 +74,10 @@ const router = createBrowserRouter([
       {
         path: '/member-management/member-info',
         element: <MemberInfoPage />,
+      },
+      {
+        path: '/board/view',
+        element: <BoardViewPage />,
       },
     ],
   },
