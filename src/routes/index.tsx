@@ -10,6 +10,7 @@ import ContractManagement from '@/pages/documentManagement/ContractManagement';
 import HolidayManagement from '@/pages/documentManagement/HolidayManagement';
 import CertificateManagement from '@/pages/documentManagement/certificationManagement/CertificateManagement';
 import HomePage from '@/pages/home/HomePage';
+import Login from '@/pages/login/Login';
 import ManagementOfficePage from '@/pages/officeSetting/ManagementOfficePage';
 import SalarySettlementPage from '@/pages/salarySettlement/SalarySettlementPage';
 import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom';
@@ -92,6 +93,10 @@ const router = createBrowserRouter([
             element: <HolidayManagement />,
           },
         ],
+      },
+      {
+        path: '/login',
+        element: <Login />,
       },
     ],
   },
