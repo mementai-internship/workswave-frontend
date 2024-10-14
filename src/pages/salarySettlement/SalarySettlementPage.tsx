@@ -1,13 +1,10 @@
+import { ChangeMonth } from '@/components/Common/ChangeMonth';
 import ContactSearchInput from '@/components/Common/ContactSearchInput';
 import Title from '@/components/Common/Title';
 import CategoryDropBox from '@/components/SalarySettlement/SalaryPage/SalaryPageHeadderDropBox';
 import SalaryTable from '@/components/SalarySettlement/SalaryTable/SalaryTable';
 import { IEmployeeSalarySettlement } from '@/models/salarySettlement.model';
-import {
-  TMonthChange,
-  calculatePaymentDate,
-  changeMonth,
-} from '@/utils/changeSalarySettlementMonth';
+import { calculatePaymentDate } from '@/utils/changeSalarySettlementMonth';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 
@@ -25,26 +22,16 @@ export default function SalarySettlementPage() {
   // TODO: API 호출하여 직원 급여정산 데이터 받아와서 저장
   // TODO: 드롭박스에서 선택한 값 전달 받은 뒤, SalaryTable에 전달
 
-  const handleChangeMonth = async (direction: TMonthChange) => {
-    const newDate = changeMonth(currentDate, direction);
+  const handleChangeMonth = (newDate: dayjs.Dayjs) => {
     setCurrentDate(newDate);
-
-    // ... 기존 API 호출 및 데이터 처리 로직 ...
+    // backend API 연결
   };
 
   return (
     <div className="flex flex-col max-w-[1720px] p-4">
       <header className="flex flex-row items-center gap-4">
         <Title content="급여정산" />
-        <div className="flex items-center h-10 border rounded-md ml-10">
-          <button onClick={() => handleChangeMonth('prev')} className="px-2 py-1">
-            &lt;
-          </button>
-          <span className="px-4 py-2 w-32 text-center">{currentDate.format('YYYY년 M월')}</span>
-          <button onClick={() => handleChangeMonth('next')} className="px-2 py-1">
-            &gt;
-          </button>
-        </div>
+        <ChangeMonth currentDate={currentDate} onChangeMonth={handleChangeMonth} />
         <div className="flex items-center h-10 gap-2 border rounded-md">
           <span className="text-sm bg-gray-10 h-full flex items-center px-2">급여지급일</span>
           <span className="px-2 w-40 text-center">{paymentDate.format('YYYY년 MM월 DD일')}</span>
