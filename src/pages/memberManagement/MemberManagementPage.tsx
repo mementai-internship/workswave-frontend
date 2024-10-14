@@ -9,7 +9,7 @@ export default function MemberManagementPage() {
   const itemsPerPage = 10;
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 h-full w-full">
       <Title content="회원관리" />
       <hr className="w-min-screen h-0.5 bg-gray-300" />
       <MemberManagementFilterBar />

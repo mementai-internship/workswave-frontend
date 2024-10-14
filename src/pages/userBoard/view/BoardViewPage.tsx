@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 export default function BoardViewPage() {
   return (
-    <main className="flex flex-col gap-4">
+    <main className="flex flex-col gap-4 h-full w-full">
       <div className="flex items-center justify-between">
         <Title content="회원게시판" />
         <Button className="bg-purple-50 text-white">

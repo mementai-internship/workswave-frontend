@@ -4,7 +4,7 @@ import React from 'react';
 
 export default function BoardWritePage() {
   return (
-    <main className="flex flex-col gap-4">
+    <main className="flex flex-col gap-4 h-full w-full">
       <Title content="게시글 작성" />
       <BoardEditor />
     </main>
