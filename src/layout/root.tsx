@@ -9,7 +9,7 @@ export default function RootLayout() {
     <>
       <Header />
       <Navigation />
-      <main>
+      <main className="p-8">
         <Outlet />
       </main>
     </>
