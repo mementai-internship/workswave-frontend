@@ -1,3 +1,4 @@
+import MemberBasicInfoDatePicker from '@/components/MemberInfo/MemberBasicInfoDatePicker';
 import MemberInfoButton from '@/components/MemberInfo/MemberInfoButton';
 import MemberInfoDropdown from '@/components/MemberInfo/MemberInfoDropdownMenu';
 import MemberInfoInput from '@/components/MemberInfo/MemberInfoInput';
@@ -67,9 +68,9 @@ export default function MemberBasicInfoTable() {
                   case 4:
                     return <MemberInfoButton text="학력입력" />;
                   case 5:
-                    return <MemberInfoInput date={new Date()} />;
+                    return <MemberBasicInfoDatePicker />;
                   case 6:
-                    return <MemberInfoInput date={new Date()} />;
+                    return <MemberBasicInfoDatePicker />;
                   case 7:
                     return <MemberInfoButton text="OT신청" />;
                   default:
@@ -118,7 +119,7 @@ export default function MemberBasicInfoTable() {
                           <MemberInfoDropdown title="근무파트 선택" menu={memberInfoDropdownMenu} />
                         );
                       case 6:
-                        return <MemberInfoInput date={new Date()} />;
+                        return <MemberBasicInfoDatePicker />;
                       case 7:
                         return <MemberInfoButton text="연차신청" />;
                       default:

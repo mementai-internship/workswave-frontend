@@ -12,7 +12,7 @@ interface IMemberInfoDropdownMenu {
   link: string;
 }
 
-function MemberInfoDropdown({ title, menu }: IMemberInfoDropdownProps) {
+export default function MemberInfoDropdown({ title, menu }: IMemberInfoDropdownProps) {
   const [selectedItem, setSelectedItem] = useState(title);
 
   function handleItemClick(item: string) {
@@ -40,5 +40,3 @@ function MemberInfoDropdown({ title, menu }: IMemberInfoDropdownProps) {
     </DropdownMenu.Root>
   );
 }
-
-export default MemberInfoDropdown;
