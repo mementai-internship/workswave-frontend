@@ -81,7 +81,7 @@ const router = createBrowserRouter([
         element: <BoardViewPage />,
       },
       {
-        path: '/userBoard/write',
+        path: '/board/write',
         element: <BoardWritePage />,
       },
     ],
