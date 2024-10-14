@@ -61,7 +61,7 @@ export default function SelectBox<T>({
   );
 }
 
-//사용 예시
+// 사용 예시
 // const memberInfoDropdownMenu = [
 //   {
 //     id: 1,
