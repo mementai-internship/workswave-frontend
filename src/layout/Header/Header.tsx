@@ -11,7 +11,7 @@ export type TUser = {
 // 임시 user mock data
 const mockUser: TUser = {
   name: '김테스트',
-  auth: 'STAFF',
+  auth: 'MSO',
 };
 
 // 현재 유저 정보를 반환하는 함수
