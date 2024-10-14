@@ -100,7 +100,7 @@ export default function BoardPage() {
                   variant="solid"
                   size="3"
                   radius="small"
-                  disabled={!isFormValid}
+                  disabled={!isFormValid()}
                   className="flex w-40 h-10 justify-items-center my-10 bg-indigo-950 cursor-pointer hover:bg-opacity-90 disabled:bg-gray-10 disabled:text-gray-30 disabled:cursor-default"
                 >
                   저장하기
@@ -121,7 +121,7 @@ export default function BoardPage() {
             variant="solid"
             size="3"
             radius="small"
-            disabled={!isFormValid}
+            disabled={!isFormValid()}
             className="flex w-40 h-10 justify-items-center my-10 bg-indigo-950 cursor-pointer hover:bg-opacity-90 disabled:bg-gray-10 disabled:text-gray-30 disabled:cursor-default"
           >
             저장하기
