@@ -32,10 +32,9 @@ export default function Header() {
         <Link to="/">
           <span className="p-3">WorksWave</span>
         </Link>
-        {currentUser?.auth === 'MSO' ||
-          (currentUser?.auth === 'SUPER_MANAGER' && (
-            <span className="text-xs p-4">웍스웨이브 가이드</span>
-          ))}
+        {(currentUser?.auth === 'MSO' || currentUser?.auth === 'SUPER_MANAGER') && (
+          <span className="text-xs p-4">웍스웨이브 가이드</span>
+        )}
       </div>
       <div className="flex items-center text-xs px-4">
         {currentUser ? (

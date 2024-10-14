@@ -23,7 +23,7 @@ export default function Navigation() {
 
   return (
     <>
-      <nav className="flex mt-2 px-5 border-b border-gray-10">
+      <nav className="flex mt-2 px-5 border-b border-slate-200">
         {NAVIGATION_CONTENTS[currentUserAuth].map(({ path, content }: TNavigation) => (
           <Fragment key={path}>
             <Link
@@ -39,10 +39,7 @@ export default function Navigation() {
       {NAVIGATION_CONTENTS[currentUserAuth].map(({ path, children }: TNavigation) => (
         <Fragment key={path}>
           {children && (
-            <div
-              key={path}
-              className="pl-6 gap-4 flex bg-slate-200 left-0 w-full border-y border-gray-10"
-            >
+            <div key={path} className="pl-6 gap-4 flex bg-slate-200 left-0 w-full">
               {children?.map(({ childPath, childContent }) => (
                 <Fragment key={childPath}>
                   {path === `/${currentPath}` && (
