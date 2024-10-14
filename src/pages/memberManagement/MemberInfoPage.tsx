@@ -4,7 +4,7 @@ import { Button } from '@radix-ui/themes';
 
 export default function MemberInfoPage() {
   return (
-    <div className="flex flex-col gap- h-full w-full">
+    <div className="flex flex-col gap-2 w-full">
       <Title content="회원관리" />
       <hr className="w-min-screen h-0.5 bg-gray-300" />
       <div className="flex items-center justify-end gap-2">
