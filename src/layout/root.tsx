@@ -6,12 +6,12 @@ import { Outlet } from 'react-router-dom';
 
 export default function RootLayout() {
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <Header />
       <Navigation />
-      <main className="p-8">
+      <main className="p-8 flex grow">
         <Outlet />
       </main>
-    </>
+    </div>
   );
 }
