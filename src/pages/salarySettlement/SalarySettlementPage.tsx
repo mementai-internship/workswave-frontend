@@ -1,8 +1,12 @@
 import Title from '@/components/Common/Title';
 import CategoryDropBox from '@/components/SalarySettlement/SalaryPage/SalaryPageHadderDropBox';
 import SalaryTable from '@/components/SalarySettlement/SalaryTable/SalaryTable';
-import { TMonthSelect } from '@/components/SalarySettlement/SalaryTable/const';
 import { IEmployeeSalarySettlement } from '@/models/salarySettlement.model';
+import {
+  TMonthChange,
+  calculatePaymentDate,
+  changeMonth,
+} from '@/utils/changeSalarySettlementMonth';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 
@@ -14,34 +18,17 @@ export default function SalarySettlementPage() {
   const [selectedJob, setSelectedJob] = useState<string | null>(null);
 
   useEffect(() => {
-    const calculatePaymentDate = (date: dayjs.Dayjs) => {
-      let payDate = date.date(10);
-      while (payDate.day() === 0 || payDate.day() === 6) {
-        payDate = payDate.subtract(1, 'day');
-      }
-      return payDate;
-    };
-
     setPaymentDate(calculatePaymentDate(currentDate));
   }, [currentDate]);
 
   // TODO: API 호출하여 직원 급여정산 데이터 받아와서 저장
   // TODO: 드롭박스에서 선택한 값 전달 받은 뒤, SalaryTable에 전달
 
-  const changeMonth = async (direction: TMonthSelect) => {
-    const newDate =
-      direction === 'prev' ? currentDate.subtract(1, 'month') : currentDate.add(1, 'month');
+  const handleChangeMonth = async (direction: TMonthChange) => {
+    const newDate = changeMonth(currentDate, direction);
     setCurrentDate(newDate);
 
-    // try {
-    //   await axios.post('/api/salary-data', {
-    //     year: newDate.year(),
-    //     month: newDate.month() + 1
-    //   });
-    //  // TODO : 직원 급여데이터 전처리
-    // } catch (error) {
-    //   console.error('API 호출 중 오류 발생:', error);
-    // }
+    // ... 기존 API 호출 및 데이터 처리 로직 ...
   };
 
   return (
@@ -49,11 +36,11 @@ export default function SalarySettlementPage() {
       <header className="flex flex-row items-center gap-4">
         <Title content="급여정산" />
         <div className="flex items-center h-10 border rounded-md ml-10">
-          <button onClick={() => changeMonth('prev')} className="px-2 py-1">
+          <button onClick={() => handleChangeMonth('prev')} className="px-2 py-1">
             &lt;
           </button>
           <span className="px-4 py-2 w-32 text-center">{currentDate.format('YYYY년 M월')}</span>
-          <button onClick={() => changeMonth('next')} className="px-2 py-1">
+          <button onClick={() => handleChangeMonth('next')} className="px-2 py-1">
             &gt;
           </button>
         </div>

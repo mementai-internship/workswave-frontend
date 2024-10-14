@@ -1,4 +1,4 @@
-import { MAX_SALARY } from '@/components/SalarySettlement/SalaryTable/const';
+import { MAX_SALARY } from '@/constants/SalarySettlementPage';
 import { IEmployeeSalarySettlement } from '@/models/salarySettlement.model';
 import { Checkbox, Table, TextField } from '@radix-ui/themes';
 import { useMemo, useState } from 'react';
