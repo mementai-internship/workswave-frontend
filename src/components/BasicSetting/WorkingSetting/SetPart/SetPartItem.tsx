@@ -1,39 +1,43 @@
 import BasicSettingSubTitle from '@/components/Common/BasicSettingSubTitle';
 import Badge from '@/components/Common/LabelBadge';
 import { IWorkingSettingPartResponse } from '@/models/workingSetting.model';
+import { adaptTaskToColor } from '@/utils/adaptTaskToColor';
 import { Button } from '@radix-ui/themes';
 import { PiXBold } from 'react-icons/pi';
 
 export default function WorkingSettingSetPartItem({ id, ...data }: IWorkingSettingPartResponse) {
-  const handleClickUpdateItem = (id: string) => {
+  const handleClickUpdateItem = (id: number) => {
     return id;
   };
-  const handleClickDeleteItem = (id: string) => {
+  const handleClickDeleteItem = (id: number) => {
     return id;
   };
 
+  const taskColor = adaptTaskToColor(data.task);
+
   return (
-    <div className="flex justify-between items-center border-2 p-6 bg-gray-10">
+    <div className="flex justify-between items-center border-2 p-6 bg-gray-10 min-w-[800px]">
       <Badge
-        color={data.positionColor}
+        color={taskColor}
         radius="full"
         size={1}
         variant="solid"
-        text={data.position}
+        text={data.name.slice(0, 2)}
       />
-      <BasicSettingSubTitle title="직책" content={data.position} gap="gap-x-4" />
-      <BasicSettingSubTitle title="업무" content={data.tasks} gap="gap-x-4" />
-      <BasicSettingSubTitle title="구분" content={data.division} gap="gap-x-4" />
+      <BasicSettingSubTitle title="직책" content={data.name} gap="gap-x-4" />
+      <BasicSettingSubTitle title="업무" content={data.task} gap="gap-x-4" />
+      <BasicSettingSubTitle title="구분" content={data.is_doctor ? '의사' : '일반'} gap="gap-x-4" />
       <BasicSettingSubTitle
         title="자격증 필수"
-        content={data.isCertificated ? 'Y' : 'N'}
+        content={data.required_certification ? 'Y' : 'N'}
         gap="gap-x-4"
       />
       <BasicSettingSubTitle
-        title="자격증 필수"
-        content={data.isCertificated ? 'Y' : 'N'}
+        title="연차"
+        content={data.leave_granting_authority ? '수동 부여' : '자동 부여'}
         gap="gap-x-4"
       />
+
       <div className="flex items-center gap-x-4 ml-4">
         <Button
           tabIndex={0}

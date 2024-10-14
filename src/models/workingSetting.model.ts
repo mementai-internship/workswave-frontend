@@ -1,8 +1,16 @@
 export interface IWorkingSettingPartResponse {
-  id: string;
-  position: string;
-  positionColor: 'gray' | 'pink' | 'orange' | 'green' | 'blue';
-  tasks: string;
-  division: '의사' | '일반';
-  isCertificated: boolean;
+  id: number;
+  name: string;
+  task: string;
+  is_doctor: boolean;
+  required_certification: boolean;
+  leave_granting_authority: boolean;
+}
+
+export interface IWorkingSettingPartForm {
+  id: number;
+  name: string;
+  task: string;
+  is_doctor: boolean;
+  required_certification: boolean;
 }

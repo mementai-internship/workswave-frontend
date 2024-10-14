@@ -27,7 +27,7 @@ export default function WorkingSettingPage() {
     <main className="w-full mx-auto flex p-5 gap-x-2">
       {/* 1280px 이하 버전 */}
       <section className="w-full bg-white border">
-        <div className="flex items-center justify-between gap-x-8 px-10 py-5 sticky top-0 left-0 bg-white border-b">
+        <div className="flex items-center justify-between gap-x-8 px-10 py-5 sticky top-0 left-0 z-[2] bg-white border-b">
           <Title content="지점명" />
 
           {OPTIONS.length > 1 ? (
@@ -54,7 +54,7 @@ export default function WorkingSettingPage() {
               <Txt variant="h5">{currentBranch}</Txt>
             </div>
           )}
-          <Button variant="outline" color="gray" className="px-6">
+          <Button variant="outline" color="gray" className="px-6 cursor-pointer">
             <PiCheckBold />
             <Txt variant="button">기본세팅적용</Txt>
           </Button>

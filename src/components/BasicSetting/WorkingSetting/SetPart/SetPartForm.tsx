@@ -1,28 +1,32 @@
+import Badge from '@/components/Common/LabelBadge';
 import Title from '@/components/Common/Title';
 import { Txt } from '@/components/Common/Txt';
-import { PICK_COLORS } from '@/constants/pickColors';
-import { Button, RadioGroup, Select, TextField } from '@radix-ui/themes';
-import { useEffect } from 'react';
+import { IWorkingSettingPartForm } from '@/models/workingSetting.model';
+import { adaptTaskToColor } from '@/utils/adaptTaskToColor';
+import { Button, RadioGroup, TextField, Tooltip } from '@radix-ui/themes';
+import { useCallback } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { PiInfo } from 'react-icons/pi';
 
 export default function WorkingSettingPartForm() {
-  const { control, formState, handleSubmit, watch } = useForm({
+  const { control, formState, handleSubmit } = useForm<IWorkingSettingPartForm>({
     defaultValues: {
-      position: '',
-      positionColor: PICK_COLORS[0].color,
-      tasks: '',
-      division: '의사',
-      isCertificated: false,
+      id: 0,
+      name: '',
+      task: '',
+      is_doctor: false,
+      required_certification: false,
     },
   });
 
-  const onSubmitSettingPart = () => {
-    console.log('onSubmitSettingPart');
+  const onSubmitSettingPart = (data: IWorkingSettingPartForm) => {
+    // 요청 보내기
+    return data;
   };
 
-  useEffect(() => {
-    const position = watch('isCertificated');
-    console.log(position);
+  const isFormValid = useCallback(() => {
+    const { name, task } = formState.dirtyFields;
+    return name && task;
   }, [formState]);
 
   return (
@@ -38,16 +42,24 @@ export default function WorkingSettingPartForm() {
       </div>
       <div className="flex flex-col gap-5">
         <div className="flex items-center relative">
-          <label htmlFor="position" className="w-28 text-gray-500 whitespace-nowrap">
+          <label
+            htmlFor="name"
+            className="w-28 text-gray-500 whitespace-nowrap flex items-center gap-x-1"
+          >
             직책
+            <Tooltip content="직책 작성 시 색상이 자동으로 적용됩니다.">
+              <button type="button" aria-label="직책 색상 안내">
+                <PiInfo size="20" aria-hidden="true" />
+              </button>
+            </Tooltip>
           </label>
           <Controller
             control={control}
-            name="position"
+            name="name"
             rules={{ required: true }}
             render={({ field: { onChange, value } }) => (
               <TextField.Root
-                id="position"
+                id="name"
                 placeholder="직책을 입력해주세요."
                 size="3"
                 radius="none"
@@ -58,50 +70,24 @@ export default function WorkingSettingPartForm() {
                 maxLength={10}
               >
                 <TextField.Slot px="1"></TextField.Slot>
-              </TextField.Root>
-            )}
-          />
-          <Controller
-            control={control}
-            name="positionColor"
-            rules={{ required: true }}
-            render={({ field: { onChange, value } }) => (
-              <Select.Root value={value} onValueChange={onChange} size="3">
-                <div className="inline absolute right-3 border pt-1 px-1">
-                  <Select.Trigger
-                    radius="none"
-                    className="w-[50px] h-[20px] outline-none none-rt"
-                    style={{ backgroundColor: value }}
-                  />
-                  <Select.Content style={{ color: value }}>
-                    {PICK_COLORS.map(({ title, color }) => (
-                      <Select.Item key={color} value={color}>
-                        <div className="flex items-center gap-2" style={{ color: color }}>
-                          <p>{title}</p>
-                          <div
-                            className={`${color}`}
-                            style={{ width: 50, height: 20, backgroundColor: color }}
-                          ></div>
-                        </div>
-                      </Select.Item>
-                    ))}
-                  </Select.Content>
+                <div className="absolute right-2 top-[50%] translate-y-[-40%]">
+                  {value && <Badge color={adaptTaskToColor(value)} text="" size={3} />}
                 </div>
-              </Select.Root>
+              </TextField.Root>
             )}
           />
         </div>
         <div className="flex items-center">
-          <label htmlFor="tasks" className="w-28 text-gray-500 whitespace-nowrap">
+          <label htmlFor="task" className="w-28 text-gray-500 whitespace-nowrap">
             업무
           </label>
           <Controller
             control={control}
-            name="tasks"
+            name="task"
             rules={{ required: true }}
             render={({ field: { onChange, value } }) => (
               <TextField.Root
-                id="tasks"
+                id="task"
                 placeholder="업무를 입력해주세요."
                 size="3"
                 radius="none"
@@ -116,42 +102,40 @@ export default function WorkingSettingPartForm() {
           />
         </div>
         <div className="flex items-center">
-          <label htmlFor="division" className="w-20 text-gray-500 whitespace-nowrap">
+          <label htmlFor="isDoctor" className="w-20 text-gray-500 whitespace-nowrap">
             구분
           </label>
           <Controller
             control={control}
-            name="division"
-            rules={{ required: true }}
-            render={({ field: { onChange, value } }) => (
+            name="is_doctor"
+            render={({ field: { value, onChange } }) => (
               <RadioGroup.Root
-                defaultValue={value}
-                onValueChange={onChange}
-                name="division"
+                value={value ? 'true' : 'false'}
+                name="isDoctor"
                 color="violet"
+                onValueChange={(newValue) => onChange(newValue === 'true')}
               >
                 <div className="flex justify-start gap-4">
-                  <RadioGroup.Item value="의사">의사</RadioGroup.Item>
-                  <RadioGroup.Item value="일반">일반</RadioGroup.Item>
+                  <RadioGroup.Item value="true">의사</RadioGroup.Item>
+                  <RadioGroup.Item value="false">일반</RadioGroup.Item>
                 </div>
               </RadioGroup.Root>
             )}
           />
         </div>
         <div className="flex items-center">
-          <label htmlFor="isCertificated" className="w-20 text-gray-500 whitespace-nowrap">
-            구분
+          <label htmlFor="requiredCertification" className="w-20 text-gray-500 whitespace-nowrap">
+            자격증 필수
           </label>
           <Controller
             control={control}
-            name="isCertificated"
-            rules={{ required: true }}
-            render={({ field: { onChange, value } }) => (
+            name="required_certification"
+            render={({ field: { value, onChange } }) => (
               <RadioGroup.Root
-                defaultValue={value ? 'true' : 'false'}
-                onValueChange={(newValue) => onChange(newValue === 'true')}
-                name="isCertificated"
+                value={value ? 'true' : 'false'}
+                name="requiredCertification"
                 color="violet"
+                onValueChange={(newValue) => onChange(newValue === 'true')}
               >
                 <div className="flex justify-start gap-8">
                   <RadioGroup.Item value="true">Y</RadioGroup.Item>
@@ -168,8 +152,8 @@ export default function WorkingSettingPartForm() {
           variant="solid"
           size="3"
           radius="small"
-          // disabled={!isFormValid()}
-          className="flex w-40 h-10 justify-items-center mt-40 mb-10 bg-indigo-950 cursor-pointer hover:bg-opacity-90 disabled:bg-gray-10 disabled:text-gray-30 disabled:cursor-default"
+          disabled={!isFormValid()}
+          className="flex w-40 h-10 justify-items-center mt-40 mb-10 bg-indigo-950 cursor-pointer hover:bg-opacity-90 disabled:bg-gray-200 disabled:text-gray-30 disabled:cursor-default"
         >
           저장하기
         </Button>
