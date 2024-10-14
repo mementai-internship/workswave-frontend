@@ -96,7 +96,6 @@ export default function BoardPage() {
               <Dialog.Description className="flex justify-center">
                 <Button
                   onClick={handleBoardSubmit(onSubmitBoardForm)}
-                  onKeyDown={(e) => e.key === 'Enter' && handleBoardSubmit(onSubmitBoardForm)}
                   variant="solid"
                   size="3"
                   radius="small"
