@@ -9,7 +9,7 @@ export default function WorkManagementPage() {
   const [isPartTime, isSetPartTime] = useState(false);
 
   return (
-    <div className="w-full max-w-[1720px]">
+    <div className="w-full">
       <WorkHeader isPartTime={isPartTime} isSetPartTime={isSetPartTime} />
       <WorkFilterLayout />
       {isPartTime ? <Commute /> : <PartTime />}
