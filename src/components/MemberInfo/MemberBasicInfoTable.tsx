@@ -24,6 +24,20 @@ export const MEMBERBASICINFOTITLE2 = [
   '연차관리',
 ];
 
+//test data API 연결 후 삭제
+const memberInfoDropdownMenu = [
+  {
+    id: 1,
+    name: '뮤즈의원(강남점)',
+    link: '/member-info/gangnam',
+  },
+  {
+    id: 2,
+    name: '뮤즈의원(수원인계점)',
+    link: '/member-info/suwon',
+  },
+];
+
 export default function MemberBasicInfoTable() {
   return (
     <Table.Root>
@@ -43,7 +57,7 @@ export default function MemberBasicInfoTable() {
               {(() => {
                 switch (index) {
                   case 0:
-                    return <MemberInfoDropdown title="지점 선택" />;
+                    return <MemberInfoDropdown title="지점 선택" menu={memberInfoDropdownMenu} />;
                   case 1:
                     return <MemberInfoInput />;
                   case 2:
@@ -80,7 +94,7 @@ export default function MemberBasicInfoTable() {
                       case 0:
                         return (
                           <>
-                            <MemberInfoDropdown title="권한 선택" />
+                            <MemberInfoDropdown title="권한 선택" menu={memberInfoDropdownMenu} />
                             <Button
                               variant="surface"
                               color="gray"
@@ -92,13 +106,17 @@ export default function MemberBasicInfoTable() {
                           </>
                         );
                       case 1:
-                        return <MemberInfoDropdown title="성별 선택" />;
+                        return (
+                          <MemberInfoDropdown title="성별 선택" menu={memberInfoDropdownMenu} />
+                        );
                       case 2:
                         return <MemberInfoInput />;
                       case 4:
                         return <MemberInfoButton text="경력입력" />;
                       case 5:
-                        return <MemberInfoDropdown title="근무파트 선택" />;
+                        return (
+                          <MemberInfoDropdown title="근무파트 선택" menu={memberInfoDropdownMenu} />
+                        );
                       case 6:
                         return <MemberInfoInput date={new Date()} />;
                       case 7:
