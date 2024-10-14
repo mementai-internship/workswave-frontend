@@ -5,17 +5,29 @@ import { useMemo, useState } from 'react';
 
 // 급여합계 계산로직
 const calculateTotalPay = (employee: IEmployeeSalarySettlement): number => {
+  const {
+    basePay,
+    comprehensiveOvertimePay,
+    annualLeavePay,
+    holidayPay,
+    jobAllowance,
+    incentive,
+    attendanceDeduction,
+    previousMonthUnpaid,
+    overtimePay,
+    weekendWorkPay,
+  } = employee;
   return (
-    employee.basePay +
-    employee.comprehensiveOvertimePay +
-    employee.annualLeavePay +
-    employee.holidayPay +
-    employee.jobAllowance +
-    employee.incentive -
-    employee.attendanceDeduction +
-    employee.previousMonthUnpaid +
-    employee.overtimePay +
-    employee.weekendWorkPay
+    basePay +
+    comprehensiveOvertimePay +
+    annualLeavePay +
+    holidayPay +
+    jobAllowance +
+    incentive -
+    attendanceDeduction +
+    previousMonthUnpaid +
+    overtimePay +
+    weekendWorkPay
   );
 };
 
