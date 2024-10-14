@@ -27,7 +27,7 @@ export default function SalaryRangePage() {
   }, [inputSalary, setValue]);
 
   return (
-    <div className="w-full p-4">
+    <div className="w-full">
       <div
         className={`max-w-[1722px] mx-auto w-full overflow-x-scroll border ${SALARY_RANGE_BORDER_COLOR}`}
       >
