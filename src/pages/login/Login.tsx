@@ -18,8 +18,8 @@ export default function Login() {
   };
 
   return (
-    <div className="flex h-screen translate-y-[-18%] items-center justify-center">
-      <div className="flex flex-col w-80 gap-8">
+    <div className="flex-grow flex items-center justify-center">
+      <div className="flex flex-col w-full max-w-md gap-8 translate-y-[-18%]">
         <div className="flex flex-col">
           <Txt className="flex items-center justify-center" variant="h1">
             WorksWave

@@ -6,11 +6,15 @@ import HourlyRangePage from '@/pages/basicSetting/HourlyRangePage';
 import SalaryRangePage from '@/pages/basicSetting/SalaryRangePage';
 import WagePage from '@/pages/basicSetting/WagePage';
 import WorkingPage from '@/pages/basicSetting/WorkingPage';
+import ContractManagement from '@/pages/documentManagement/ContractManagement';
+import HolidayManagement from '@/pages/documentManagement/HolidayManagement';
+import CertificateManagement from '@/pages/documentManagement/certificationManagement/CertificateManagement';
 import HolidayCalendarPage from '@/pages/holidayCalendar/HolidayCalendarPage';
 import HomePage from '@/pages/home/HomePage';
 import Login from '@/pages/login/Login';
 import ManagementOfficePage from '@/pages/officeSetting/ManagementOfficePage';
 import SalarySettlementPage from '@/pages/salarySettlement/SalarySettlementPage';
+import WorkManagementPage from '@/pages/workManagement/WorkManagementPage';
 import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 // TODO: lazy load, preload는 나중에 하겠습니둥.
@@ -74,6 +78,31 @@ const router = createBrowserRouter([
       {
         path: '/office-setting',
         element: <ManagementOfficePage />,
+      },
+      {
+        path: '/work-management',
+        element: <WorkManagementPage />,
+      },
+      {
+        path: '/document-management',
+        children: [
+          {
+            index: true,
+            element: <Navigate to="/document-management/certificate-management" replace />,
+          },
+          {
+            path: 'certificate-management',
+            element: <CertificateManagement />,
+          },
+          {
+            path: 'contract-management',
+            element: <ContractManagement />,
+          },
+          {
+            path: 'holiday-management',
+            element: <HolidayManagement />,
+          },
+        ],
       },
       {
         path: '/login',
