@@ -45,7 +45,7 @@ export default function SelectBox<T>({
       <Select.Trigger
         {...registerOption}
         placeholder={title}
-        className={`${SelectBoxSize[size]} relative flex items-center justify-center h-10 ${border ? 'border border-gray-50 border-solid' : 'border-none'} text-black px-4 py-4`}
+        className={`${SelectBoxSize[size]} relative flex items-center justify-between h-10 ${border ? 'border border-gray-50 border-solid' : 'border-none'} text-black px-4 py-4`}
       />
       <Select.Content className={`${SelectBoxSize[size]} top-0 left-4 absolute`}>
         {options.map((option) => (
