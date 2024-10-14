@@ -4,7 +4,7 @@ const SUPREME_AUTH_NAVIGATION = [
     content: '회원관리',
   },
   {
-    path: '/board',
+    path: '/board/view',
     content: '회원게시판',
   },
   {
@@ -111,7 +111,7 @@ const PART_MANAGER_AUTH_NAVIGATION = [
     content: '회원관리',
   },
   {
-    path: '/board',
+    path: 'board',
     content: '회원게시판',
   },
   {
@@ -196,7 +196,7 @@ const STAFF_AUTH_NAVIGATION = [
     content: '회원관리',
   },
   {
-    path: '/board',
+    path: '/board/view',
     content: '회원게시판',
   },
   {
