@@ -58,7 +58,6 @@ export default function BasicSettingBoardItem({ id, categoryName, ...data }: IBo
       </div>
       <div className="flex items-center gap-x-4 ml-4">
         <Button
-          tabIndex={0}
           onClick={() => handleClickUpdateItem(id)}
           size="2"
           radius="full"
@@ -80,7 +79,6 @@ export default function BasicSettingBoardItem({ id, categoryName, ...data }: IBo
           <Dialog.Content maxWidth="500px" className="p-0">
             <Dialog.Title className="absolute right-5 top-5">
               <Button
-                tabIndex={0}
                 variant="ghost"
                 color="gray"
                 onClick={() => {

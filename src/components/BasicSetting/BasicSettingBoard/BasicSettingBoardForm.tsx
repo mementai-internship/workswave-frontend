@@ -19,13 +19,9 @@ export default function BasicSettingBoardForm({ control, isEditingMode, setValue
           content={`${isEditingMode ? '게시판 카테고리 수정하기' : '게시판 카테고리 추가하기'}`}
         />
       </div>
-      <div className="border-t p-10 flex flex-col gap-y-3">
+      <form className="border-t p-10 flex flex-col gap-y-3">
         <div className="flex items-center">
-          <label
-            htmlFor="category-name"
-            aria-label="카테고리 이름"
-            className="w-40 text-gray-500 whitespace-nowrap"
-          >
+          <label htmlFor="category-name" className="w-40 text-gray-500 whitespace-nowrap">
             카테고리 이름
           </label>
           <Controller
@@ -50,11 +46,7 @@ export default function BasicSettingBoardForm({ control, isEditingMode, setValue
         </div>
 
         <div className="flex items-center">
-          <label
-            htmlFor="category-description"
-            aria-label="카테고리 설명"
-            className="w-40 text-gray-500 whitespace-nowrap"
-          >
+          <label htmlFor="category-description" className="w-40 text-gray-500 whitespace-nowrap">
             카테고리 설명
           </label>
           <Controller
@@ -76,9 +68,7 @@ export default function BasicSettingBoardForm({ control, isEditingMode, setValue
           />
         </div>
         <div className="flex items-center">
-          <label aria-label="열람 권한" className="w-40 text-gray-500 whitespace-nowrap">
-            열람권한
-          </label>
+          <label className="w-40 text-gray-500 whitespace-nowrap">열람권한</label>
           <div className="w-full">
             <Controller
               control={control}
@@ -101,9 +91,7 @@ export default function BasicSettingBoardForm({ control, isEditingMode, setValue
           </div>
         </div>
         <div className="flex items-center">
-          <label aria-label="글쓰기 권한" className="w-40 text-gray-500 whitespace-nowrap">
-            글쓰기권한
-          </label>
+          <label className="w-40 text-gray-500 whitespace-nowrap">글쓰기권한</label>
           <div className="w-full">
             <Controller
               control={control}
@@ -235,7 +223,7 @@ export default function BasicSettingBoardForm({ control, isEditingMode, setValue
             />
           </div>
         </div>
-      </div>
+      </form>
     </>
   );
 }
