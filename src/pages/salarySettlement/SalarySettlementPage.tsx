@@ -1,3 +1,4 @@
+import ContactSearchInput from '@/components/Common/ContactSearchInput';
 import Title from '@/components/Common/Title';
 import CategoryDropBox from '@/components/SalarySettlement/SalaryPage/SalaryPageHadderDropBox';
 import SalaryTable from '@/components/SalarySettlement/SalaryTable/SalaryTable';
@@ -71,7 +72,7 @@ export default function SalarySettlementPage() {
             onSelect={(value) => setSelectedJob(value === '전체' ? null : value)}
           />
         </div>
-        <>검색 컴포넌트 공간</>
+        <ContactSearchInput />
       </section>
 
       <SalaryTable
