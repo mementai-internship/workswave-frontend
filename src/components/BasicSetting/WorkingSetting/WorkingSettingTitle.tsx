@@ -1,7 +1,8 @@
 // 타이틀과 설명 flex-col / 드롭다운 버튼
 import { Txt } from '@/components/Common/Txt';
 import * as Accordion from '@radix-ui/react-accordion';
-import { PiArrowDownBold } from 'react-icons/pi';
+import { useState } from 'react';
+import { PiArrowDownBold, PiArrowUpBold } from 'react-icons/pi';
 
 interface IPropsType {
   title: string;
@@ -10,6 +11,7 @@ interface IPropsType {
 }
 
 export default function WorkingSettingTitle({ title, content, children }: IPropsType) {
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <>
       <Accordion.Root className="w-full" type="single" defaultValue={title} collapsible>
@@ -24,8 +26,11 @@ export default function WorkingSettingTitle({ title, content, children }: IProps
                   {content}
                 </Txt>
               </div>
-              <Accordion.Trigger className="rounded-full bg-purple-50 p-2">
-                <PiArrowDownBold color="white" />
+              <Accordion.Trigger
+                className="rounded-full bg-purple-50 p-2"
+                onClick={() => setIsOpen(!isOpen)}
+              >
+                {isOpen ? <PiArrowDownBold color="white" /> : <PiArrowUpBold color="white" />}
               </Accordion.Trigger>
             </div>
           </Accordion.Header>

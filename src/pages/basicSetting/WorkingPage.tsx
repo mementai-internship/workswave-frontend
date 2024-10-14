@@ -69,7 +69,9 @@ export default function WorkingSettingPage() {
           title="출퇴근설정"
           content="출퇴근 가능 아이피 및 사용여부를 설정하실 수 있습니다."
         >
-          <WorkingSettingIP />
+          <div className="h-[200px]">
+            <WorkingSettingIP />
+          </div>
         </WorkingSettingTitle>
         <WorkingSettingTitle
           title="영업시간"
