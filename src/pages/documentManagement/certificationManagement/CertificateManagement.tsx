@@ -1,8 +1,21 @@
 import Title from '@/components/Common/Title';
-import { DATA } from '@/pages/documentManagement/certificationManagement/constants';
+import {
+  TABLE_DATA,
+  TABLE_HEAD,
+} from '@/pages/documentManagement/certificationManagement/constants';
 import { Button, Table } from '@radix-ui/themes';
+import { PiArrowUUpRightFill, PiCheck } from 'react-icons/pi';
 
 export default function CertificateManagement() {
+  // 승인 함수
+  const handleApproveButtonClick = () => {};
+
+  // 반려 함수
+  const handleRejectButtonClick = () => {};
+
+  // 증명서 발급 함수
+  const handleCertificateIssuanceButtonClick = () => {};
+
   return (
     <div>
       <div className="flex items-center justify-between">
@@ -12,42 +25,44 @@ export default function CertificateManagement() {
             승인 후 '저장되었습니다'가 뜰때까지 기다려주세요
           </span>
         </div>
-        <Button variant="outline" color="gray" className="bg-gray-10 p-4 text-black">
+        <Button variant="surface" color="gray" className="bg-gray-10 text-black">
           삭제 리스트 관리
         </Button>
       </div>
       <div>
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between py-5">
           <div className="flex gap-1">
             <span>지점</span>
             <div>셀렉트1</div>
             <div>셀렉트2</div>
           </div>
-          <div>검색바</div>
+          <div className="flex items-center justify-center gap-1">
+            <div>검색바</div>
+            <Button
+              variant="surface"
+              size="3"
+              radius="none"
+              color="gray"
+              onClick={handleCertificateIssuanceButtonClick}
+            >
+              증명서 발급
+            </Button>
+          </div>
         </div>
-        <div>
-          <Table.Root>
-            <Table.Header className="bg-gray-10">
-              <Table.Row>
-                <Table.ColumnHeaderCell>번호</Table.ColumnHeaderCell>
-                <Table.ColumnHeaderCell>지점</Table.ColumnHeaderCell>
-                <Table.ColumnHeaderCell>이름</Table.ColumnHeaderCell>
-                <Table.ColumnHeaderCell>근무파트</Table.ColumnHeaderCell>
-                <Table.ColumnHeaderCell>신청날짜</Table.ColumnHeaderCell>
-                <Table.ColumnHeaderCell>신청증명서</Table.ColumnHeaderCell>
-                <Table.ColumnHeaderCell>상태</Table.ColumnHeaderCell>
-                <Table.ColumnHeaderCell>용도</Table.ColumnHeaderCell>
-                <Table.ColumnHeaderCell>관리자메모</Table.ColumnHeaderCell>
-                <Table.ColumnHeaderCell>처리날짜</Table.ColumnHeaderCell>
-                <Table.ColumnHeaderCell>담당자</Table.ColumnHeaderCell>
-                <Table.ColumnHeaderCell>신청자</Table.ColumnHeaderCell>
-                <Table.ColumnHeaderCell></Table.ColumnHeaderCell>
-                <Table.ColumnHeaderCell></Table.ColumnHeaderCell>
+        <div className="flex justify-center min-h-full">
+          <Table.Root className="w-full text-sm">
+            <Table.Header className="bg-gray-10 text-sm whitespace-nowrap">
+              <Table.Row align="center">
+                {TABLE_HEAD.map((data, index) => (
+                  <Table.ColumnHeaderCell justify="center" key={index}>
+                    {data}
+                  </Table.ColumnHeaderCell>
+                ))}
               </Table.Row>
             </Table.Header>
 
-            <Table.Body>
-              {DATA.map(
+            <Table.Body className="text-xs">
+              {TABLE_DATA.map(
                 ({
                   number,
                   office,
@@ -59,23 +74,55 @@ export default function CertificateManagement() {
                   use,
                   memo,
                   treat_date,
+                  manager,
                   applicant,
                 }) => (
                   <Table.Row key={number}>
                     <Table.RowHeaderCell>{number}</Table.RowHeaderCell>
-                    <Table.Cell>{office}</Table.Cell>
-                    <Table.Cell>{name}</Table.Cell>
-                    <Table.Cell>{part}</Table.Cell>
-                    <Table.Cell>{enroll_date}</Table.Cell>
-                    <Table.Cell>{type}</Table.Cell>
-                    <Table.Cell>{status}</Table.Cell>
-                    <Table.Cell>{use}</Table.Cell>
-                    <Table.Cell>{memo}</Table.Cell>
-                    <Table.Cell>{treat_date}</Table.Cell>
-                    <Table.Cell>{applicant}</Table.Cell>
-                    <Table.Cell>
-                      <Button>승인</Button>
-                      <Button>반려</Button>
+                    <Table.Cell justify="center" align="center">
+                      {office}
+                    </Table.Cell>
+                    <Table.Cell justify="center" align="center">
+                      {name}
+                    </Table.Cell>
+                    <Table.Cell justify="center" align="center">
+                      {part}
+                    </Table.Cell>
+                    <Table.Cell justify="center" align="center">
+                      {enroll_date}
+                    </Table.Cell>
+                    <Table.Cell justify="center" align="center">
+                      {type}
+                    </Table.Cell>
+                    <Table.Cell justify="center" align="center">
+                      {status}
+                    </Table.Cell>
+                    <Table.Cell justify="center" align="center">
+                      {use}
+                    </Table.Cell>
+                    <Table.Cell justify="center" align="center">
+                      {memo}
+                    </Table.Cell>
+                    <Table.Cell justify="center" align="center">
+                      {treat_date}
+                    </Table.Cell>
+                    <Table.Cell justify="center" align="center">
+                      {manager}
+                    </Table.Cell>
+                    <Table.Cell justify="center" align="center">
+                      {applicant}
+                    </Table.Cell>
+                    <Table.Cell justify="center" align="center">
+                      <div className="flex gap-2">
+                        <Button variant="soft" color="gray" onClick={handleApproveButtonClick}>
+                          <PiCheck />
+                          승인
+                        </Button>
+                        <Button variant="soft" color="gray" onClick={handleRejectButtonClick}>
+                          <PiArrowUUpRightFill />
+                          반려
+                        </Button>
+                      </div>
                     </Table.Cell>
                   </Table.Row>
                 )
