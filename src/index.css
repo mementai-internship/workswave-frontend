@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.rt-TooltipArrow {
+  fill: #760dde;
+}
+
+.rt-TooltipContent {
+  padding: 10px;
+  background-color: #760dde;
+}
