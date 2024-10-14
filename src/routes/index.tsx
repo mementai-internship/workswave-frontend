@@ -7,7 +7,9 @@ import SalaryRangePage from '@/pages/basicSetting/SalaryRangePage';
 import WagePage from '@/pages/basicSetting/WagePage';
 import WorkingPage from '@/pages/basicSetting/WorkingPage';
 import HomePage from '@/pages/home/HomePage';
+import Login from '@/pages/login/Login';
 import ManagementOfficePage from '@/pages/officeSetting/ManagementOfficePage';
+import SalarySettlementPage from '@/pages/salarySettlement/SalarySettlementPage';
 import LaborManagementPage from '@/pages/workManagement/WorkManagementPage';
 import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom';
 
@@ -21,6 +23,10 @@ const router = createBrowserRouter([
         path: '/',
         element: <HomePage />,
         children: [],
+      },
+      {
+        path: '/salary-settlement',
+        element: <SalarySettlementPage />,
       },
       {
         path: '/basic-setting',
@@ -68,6 +74,10 @@ const router = createBrowserRouter([
       {
         path: '/work-management',
         element: <LaborManagementPage />,
+      },
+      {
+        path: '/login',
+        element: <Login />,
       },
     ],
   },
