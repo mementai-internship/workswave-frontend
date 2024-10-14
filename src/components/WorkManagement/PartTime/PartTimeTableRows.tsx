@@ -32,7 +32,15 @@ export default function PartTimeTableRows({ data }: { data: IPartTimeData }) {
         </div>
       ),
     },
-    { key: 'department', render: (value: number | string) => `${value} 주 ${data.days}일` },
+    {
+      key: 'department',
+      render: (value: number | string) => (
+        <div className="flex gap-1">
+          {value}
+          <span className="border text-xs px-1 pt-0.5">{` 주 ${data.days}일`}</span>
+        </div>
+      ),
+    },
     { key: 'workDate' },
     { key: 'workFromHome', unit: '일' },
     { key: 'holidayWork', unit: '일' },

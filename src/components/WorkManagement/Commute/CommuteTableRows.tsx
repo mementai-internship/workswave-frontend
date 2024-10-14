@@ -19,7 +19,7 @@ const CellWithUnit = ({ value, unit }: { value: number | string; unit: string })
   );
 };
 
-export default function WorkTableRows({ data }: { data: ICommuteData }) {
+export default function CommuteTableRows({ data }: { data: ICommuteData }) {
   const workDatas = [
     { key: 'id', isHeader: true },
     { key: 'branch' },
