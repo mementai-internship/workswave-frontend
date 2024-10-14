@@ -7,6 +7,7 @@ import SalaryRangePage from '@/pages/basicSetting/SalaryRangePage';
 import WagePage from '@/pages/basicSetting/WagePage';
 import WorkingPage from '@/pages/basicSetting/WorkingPage';
 import HomePage from '@/pages/home/HomePage';
+import Login from '@/pages/login/Login';
 import ManagementOfficePage from '@/pages/officeSetting/ManagementOfficePage';
 import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom';
 
@@ -63,6 +64,10 @@ const router = createBrowserRouter([
       {
         path: '/office-setting',
         element: <ManagementOfficePage />,
+      },
+      {
+        path: '/login',
+        element: <Login />,
       },
     ],
   },
