@@ -5,7 +5,7 @@ import { Txt } from '@/components/Common/Txt';
 import { BOARD_LIST } from '@/constants/basicSetting.mock';
 import { useBasicSettingBoard } from '@/hooks/useBasicSettingBoard';
 import { Button, Dialog, Select } from '@radix-ui/themes';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { PiXBold } from 'react-icons/pi';
 
 // TODO: API 응답 값으로 변경
@@ -14,14 +14,13 @@ const OPTIONS: { id: string; branch: string }[] = [
   { id: '2', branch: '뮤즈의원(강남점)' },
 ];
 
-// TODO: update 와 post 로직 form에 어떻게 사용할지
 export default function BoardPage() {
   const [currentBranch, setCurrentBranch] = useState(OPTIONS[0].branch);
 
   const {
     control,
     isDialogOpen,
-    isFormValid,
+    formState,
     handleSubmit: handleBoardSubmit,
     onSubmit: onSubmitBoardForm,
     setIsDialogOpen,
@@ -32,6 +31,10 @@ export default function BoardPage() {
     setCurrentBranch(branch);
   };
 
+  const isFormValid = useCallback(() => {
+    const { categoryName, categoryDesc } = formState.dirtyFields;
+    return categoryName && categoryDesc && formState.isValid;
+  }, [formState]);
   /**
    * TODO: 무한 스크롤 구현 시 함수 및 ref 객체 추가
    */

@@ -1,27 +1,24 @@
-import { IBoardPostRequest } from '@/models/basicSetting.model';
-import { useCallback, useState } from 'react';
+import { IBoardReponse } from '@/models/basicSetting.model';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 export const useBasicSettingBoard = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const { control, handleSubmit, reset, setValue, formState } = useForm<IBoardPostRequest>({
+  const { control, handleSubmit, reset, setValue, formState } = useForm<IBoardReponse>({
     defaultValues: {
+      id: '',
       categoryName: '',
       categoryDesc: '',
       readAuthority: '사원',
       writeAuthority: '사원',
       notifyAuthority: 'MSO 최고권한',
-      partDivision: 'use',
-      commentDivision: 'use',
+      partDivision: true,
+      commentDivision: false,
     },
   });
 
-  const isFormValid = useCallback(() => {
-    const { categoryName, categoryDesc } = formState.dirtyFields;
-    return categoryName && categoryDesc && formState.isValid;
-  }, [formState]);
-
-  const onSubmit = (/*data: IBoardPostRequest*/) => {
+  const onSubmit = (data: IBoardReponse) => {
+    console.log(data);
     // TODO: POST 로직
 
     if (isDialogOpen) {
@@ -34,10 +31,11 @@ export const useBasicSettingBoard = () => {
   return {
     control,
     isDialogOpen,
-    isFormValid: isFormValid(),
+    formState,
     handleSubmit,
     onSubmit,
     setIsDialogOpen,
     setValue,
+    reset,
   };
 };

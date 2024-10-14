@@ -1,23 +1,23 @@
 import Title from '@/components/Common/Title';
 import { AUTHORITIES_WITH_OPTION } from '@/constants/authorities';
-import { IBoardPostRequest } from '@/models/basicSetting.model';
+import { IBoardReponse } from '@/models/basicSetting.model';
 import { Button, Select, TextArea, TextField, Tooltip } from '@radix-ui/themes';
 import { Control, Controller, UseFormSetValue } from 'react-hook-form';
 import { PiInfo } from 'react-icons/pi';
 
 interface IPropsType {
-  control: Control<IBoardPostRequest>;
-  setValue: UseFormSetValue<IBoardPostRequest>;
+  control: Control<IBoardReponse>;
+  isEditingMode?: boolean;
+  setValue: UseFormSetValue<IBoardReponse>;
 }
 
-/**
- * TODO: 수정 시 받을 props추가
- */
-export default function BasicSettingBoardForm({ control, setValue }: IPropsType) {
+export default function BasicSettingBoardForm({ control, isEditingMode, setValue }: IPropsType) {
   return (
     <>
       <div className="flex items-center gap-x-4 px-10 py-5">
-        <Title content="게시판 카테고리 추가하기" />
+        <Title
+          content={`${isEditingMode ? '게시판 카테고리 수정하기' : '게시판 카테고리 추가하기'}`}
+        />
       </div>
       <div className="border-t p-10 flex flex-col gap-y-3">
         <div className="flex items-center">
@@ -172,9 +172,9 @@ export default function BasicSettingBoardForm({ control, setValue }: IPropsType)
                   <Button
                     variant="outline"
                     size="3"
-                    color={value === 'use' ? 'purple' : 'gray'}
+                    color={value ? 'purple' : 'gray'}
                     radius="none"
-                    onClick={() => setValue('partDivision', 'use')}
+                    onClick={() => setValue('partDivision', true)}
                     className="flex-1 h-12 cursor-pointer"
                   >
                     사용
@@ -182,9 +182,9 @@ export default function BasicSettingBoardForm({ control, setValue }: IPropsType)
                   <Button
                     variant="outline"
                     size="3"
-                    color={value === 'no-use' ? 'purple' : 'gray'}
+                    color={!value ? 'purple' : 'gray'}
                     radius="none"
-                    onClick={() => setValue('partDivision', 'no-use')}
+                    onClick={() => setValue('partDivision', false)}
                     className="flex-1 h-12 cursor-pointer"
                   >
                     미사용
@@ -213,9 +213,9 @@ export default function BasicSettingBoardForm({ control, setValue }: IPropsType)
                   <Button
                     variant="outline"
                     size="3"
-                    color={value === 'use' ? 'purple' : 'gray'}
+                    color={value ? 'purple' : 'gray'}
                     radius="none"
-                    onClick={() => setValue('commentDivision', 'use')}
+                    onClick={() => setValue('commentDivision', true)}
                     className="flex-1 h-12 cursor-pointer"
                   >
                     사용
@@ -223,9 +223,9 @@ export default function BasicSettingBoardForm({ control, setValue }: IPropsType)
                   <Button
                     variant="outline"
                     size="3"
-                    color={value === 'no-use' ? 'purple' : 'gray'}
+                    color={!value ? 'purple' : 'gray'}
                     radius="none"
-                    onClick={() => setValue('commentDivision', 'no-use')}
+                    onClick={() => setValue('commentDivision', false)}
                     className="flex-1 h-12 cursor-pointer"
                   >
                     미사용
