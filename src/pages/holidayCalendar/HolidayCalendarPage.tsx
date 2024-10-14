@@ -1,6 +1,6 @@
 import { ChangeMonth } from '@/components/Common/ChangeMonth';
-import { ChangeWeek } from '@/components/DayOffCalendar/ChangeWeek';
-import DayOffCalendar from '@/components/DayOffCalendar/DayOffCalendar';
+import { ChangeWeek } from '@/components/HolidayCalendar/ChangeWeek';
+import DayOffCalendar from '@/components/HolidayCalendar/HolidayCalendar';
 import { Button } from '@radix-ui/themes';
 import dayjs from 'dayjs';
 import { useState } from 'react';

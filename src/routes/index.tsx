@@ -6,7 +6,7 @@ import HourlyRangePage from '@/pages/basicSetting/HourlyRangePage';
 import SalaryRangePage from '@/pages/basicSetting/SalaryRangePage';
 import WagePage from '@/pages/basicSetting/WagePage';
 import WorkingPage from '@/pages/basicSetting/WorkingPage';
-import DayOffCalendarPage from '@/pages/dayoffCalendar/DayOffCalendarPage';
+import HolidayCalendarPage from '@/pages/holidayCalendar/HolidayCalendarPage';
 import HomePage from '@/pages/home/HomePage';
 import Login from '@/pages/login/Login';
 import ManagementOfficePage from '@/pages/officeSetting/ManagementOfficePage';
@@ -29,8 +29,8 @@ const router = createBrowserRouter([
         element: <SalarySettlementPage />,
       },
       {
-        path: '/dayoff-calander',
-        element: <DayOffCalendarPage />,
+        path: '/holiday-calander',
+        element: <HolidayCalendarPage />,
       },
       {
         path: '/basic-setting',
