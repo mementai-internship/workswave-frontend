@@ -1,5 +1,4 @@
 import RootLayout from '@/layout/root';
-import BoardPage from '@/pages/basicSetting/BoardPage';
 import CalendarPage from '@/pages/basicSetting/CalendarPage';
 import HolidayPage from '@/pages/basicSetting/HolidayPage';
 import HourlyRangePage from '@/pages/basicSetting/HourlyRangePage';
@@ -12,8 +11,12 @@ import CertificateManagement from '@/pages/documentManagement/certificationManag
 import HolidayCalendarPage from '@/pages/holidayCalendar/HolidayCalendarPage';
 import HomePage from '@/pages/home/HomePage';
 import Login from '@/pages/login/Login';
+import MemberInfoPage from '@/pages/memberManagement/MemberInfoPage';
+import MemberManagementPage from '@/pages/memberManagement/MemberManagementPage';
 import ManagementOfficePage from '@/pages/officeSetting/ManagementOfficePage';
 import SalarySettlementPage from '@/pages/salarySettlement/SalarySettlementPage';
+import BoardViewPage from '@/pages/userBoard/view/BoardViewPage';
+import BoardWritePage from '@/pages/userBoard/write/BoardWritePage';
 import WorkManagementPage from '@/pages/workManagement/WorkManagementPage';
 import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom';
 
@@ -66,8 +69,8 @@ const router = createBrowserRouter([
             element: <CalendarPage />,
           },
           {
-            path: 'board',
-            element: <BoardPage />,
+            path: 'board/view',
+            element: <BoardViewPage />,
           },
           {
             path: 'salary-range',
@@ -107,6 +110,22 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <Login />,
+      },
+      {
+        path: '/member-management',
+        element: <MemberManagementPage />,
+      },
+      {
+        path: '/member-management/member-info',
+        element: <MemberInfoPage />,
+      },
+      {
+        path: '/board/view',
+        element: <BoardViewPage />,
+      },
+      {
+        path: '/board/write',
+        element: <BoardWritePage />,
       },
     ],
   },
