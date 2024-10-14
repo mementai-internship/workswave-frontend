@@ -143,7 +143,7 @@ export default function BasicSettingBoardForm({ control, isEditingMode, setValue
           <label className="w-40 text-gray-500 whitespace-nowrap flex items-center gap-x-1">
             파트구분
             <Tooltip
-              content="선택 된 파트에게만 게시물이 공개됩니다. (게시물 작성시 선택)"
+              content="선택된 파트에게만 게시물이 공개됩니다. (게시물 작성시 선택)"
               className="bg-purple-50"
             >
               <button type="button" aria-label="파트 구분 정보">
