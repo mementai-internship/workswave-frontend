@@ -7,7 +7,11 @@ import SalaryRangePage from '@/pages/basicSetting/SalaryRangePage';
 import WagePage from '@/pages/basicSetting/WagePage';
 import WorkingPage from '@/pages/basicSetting/WorkingPage';
 import HomePage from '@/pages/home/HomePage';
+import MemberInfoPage from '@/pages/memberManagement/MemberInfoPage';
+import MemberManagementPage from '@/pages/memberManagement/MemberManagementPage';
 import ManagementOfficePage from '@/pages/officeSetting/ManagementOfficePage';
+import BoardViewPage from '@/pages/userBoard/view/BoardViewPage';
+import BoardWritePage from '@/pages/userBoard/write/BoardWritePage';
 import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 // TODO: lazy load, preload는 나중에 하겠습니둥.
@@ -63,6 +67,22 @@ const router = createBrowserRouter([
       {
         path: '/office-setting',
         element: <ManagementOfficePage />,
+      },
+      {
+        path: '/member-management',
+        element: <MemberManagementPage />,
+      },
+      {
+        path: '/member-management/member-info',
+        element: <MemberInfoPage />,
+      },
+      {
+        path: '/board/view',
+        element: <BoardViewPage />,
+      },
+      {
+        path: '/board/write',
+        element: <BoardWritePage />,
       },
     ],
   },
