@@ -1,4 +1,5 @@
-export const LABORHEADTABLE = [
+export const COMMUTEHEADTABLE = [
+  '번호',
   '지점',
   '이름',
   '근무파트',
@@ -14,4 +15,19 @@ export const LABORHEADTABLE = [
   'O.T 30분 횟수',
   'O.T 60분 횟수',
   'O.T 90분 횟수',
+  'O.T 총 금액',
+] as const;
+
+export const PARTTIMEHEADTABLE = [
+  '번호',
+  '지점',
+  '이름',
+  '근무파트',
+  '근무일자',
+  '재택 근무',
+  '휴일 근무',
+  'O.T 30분 횟수',
+  'O.T 60분 횟수',
+  'O.T 90분 횟수',
+  'O.T 총 금액',
 ] as const;

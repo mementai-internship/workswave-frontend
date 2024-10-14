@@ -1,4 +1,4 @@
-import { TLaborData } from '@/models/workManagement/work.model';
+import { ICommuteData } from '@/models/workManagement/work.model';
 import { Table } from '@radix-ui/themes';
 import { PiGenderFemaleBold, PiGenderMaleBold } from 'react-icons/pi';
 
@@ -19,7 +19,7 @@ const CellWithUnit = ({ value, unit }: { value: number | string; unit: string })
   );
 };
 
-export default function WorkTableRows({ data }: { data: TLaborData }) {
+export default function WorkTableRows({ data }: { data: ICommuteData }) {
   const workDatas = [
     { key: 'id', isHeader: true },
     { key: 'branch' },
@@ -36,23 +36,31 @@ export default function WorkTableRows({ data }: { data: TLaborData }) {
     { key: 'workDate' },
     { key: 'leaveDate' },
     { key: 'regularDaysOff' },
-    { key: 'unpaidLeaveUsed', unit: '일' },
+    { key: 'unpaidLeaveUsed' },
+    { key: 'annualLeaveUsed' },
     { key: 'workFromHome', unit: '일' },
-    { key: 'holidayWork', unit: '시간' },
-    { key: 'weekendWorkHours' },
+    { key: 'holidayWork', unit: '일' },
+    { key: 'weekendWorkHours', unit: '시간' },
     { key: 'weekendWorkPay' },
     { key: 'overtimeCount30min' },
     { key: 'overtimeCount60min' },
     { key: 'overtimeCount90min' },
+    { key: 'totalOvertime' },
   ];
   return (
     <Table.Row>
       {workDatas.map(({ key, isHeader, render, unit }) => {
         const CellComponent = isHeader ? Table.RowHeaderCell : Table.Cell;
-        const value = data[key as keyof TLaborData];
+        const value = data[key as keyof ICommuteData];
         return (
           <CellComponent key={key} align="center">
-            {render ? render(value) : unit ? <CellWithUnit value={value} unit={unit} /> : value}
+            {render ? (
+              render(value)
+            ) : unit ? (
+              <CellWithUnit value={value} unit={unit} />
+            ) : (
+              value.toLocaleString()
+            )}
           </CellComponent>
         );
       })}
