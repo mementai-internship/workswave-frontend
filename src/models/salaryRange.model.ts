@@ -1,12 +1,28 @@
-// backend에서 받아올 데이터 (변경 예정)
-export interface IBaseCalculationData {
-  minimumWage: number;
-  minimumWagePerMonth: number;
-  healthInsuranceRate: number;
-  pensionInsuranceRate: number;
-  employmentInsuranceRate: number;
-  longTermCareRate: number;
-  localIncomeTaxRate: number;
+export interface ISalaryCalcStandardsResponse {
+  id: number;
+  year: number;
+  minimum_hourly_rate: number;
+  minimum_monthly_rate: number;
+  national_pension: number;
+  health_insurance: number;
+  employment_insurance: number;
+  long_term_care_insurance: number;
+  minimum_pension_income: number;
+  maximum_pension_income: number;
+  maximum_national_pension: number;
+  minimum_health_insurance: number;
+  maximum_health_insurance: number;
+  local_income_tax_rate: number;
+  tax_brackets: ITaxBracket[];
+}
+
+export interface ITaxBracket {
+  id: number;
+  salary_bracket_id: number;
+  lower_limit: number;
+  upper_limit: number;
+  tax_rate: number;
+  deduction: number;
 }
 
 export interface ISalaryRangeValue {
@@ -16,7 +32,7 @@ export interface ISalaryRangeValue {
   mealAllowance: number;
   netPay: number;
   totalDeductions: number;
-  pensionInsurance: number;
+  nationalPension: number;
   healthInsurance: number;
   employmentInsurance: number;
   longTermCareInsurance: number;
@@ -25,8 +41,8 @@ export interface ISalaryRangeValue {
 }
 
 export interface ICalculatedSalary {
-  salaryWithMealAllowance;
-  salaryWithoutMealAllowance;
+  salaryWithMealAllowance: ISalaryRangeValue;
+  salaryWithoutMealAllowance: ISalaryRangeValue;
   salaryDetails: {
     annualSalary: number;
     netPayWithMealAllowance: number;

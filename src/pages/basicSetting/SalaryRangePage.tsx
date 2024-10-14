@@ -7,16 +7,8 @@ import { useSalaryRange } from '@/hooks/useSalaryRange';
 import { useEffect } from 'react';
 
 export default function SalaryRangePage() {
-  const {
-    calculatedSalary,
-    onSubmit,
-    register,
-    setValue,
-    handleSubmit,
-    watch,
-    DUMMY_DATA_SALARY_RANGE_WITH_MEAL_ALLOWANCE,
-    DUMMY_DATA_SALARY_RANGE_WITHOUT_MEAL_ALLOWANCE,
-  } = useSalaryRange();
+  const { calculatedSalary, onSubmit, register, setValue, handleSubmit, watch, salaries } =
+    useSalaryRange();
 
   const inputSalary = watch('inputSalary');
 
@@ -29,9 +21,9 @@ export default function SalaryRangePage() {
   return (
     <div className="w-full">
       <div
-        className={`max-w-[1722px] mx-auto w-full overflow-x-scroll border ${SALARY_RANGE_BORDER_COLOR}`}
+        className={`min-w-[1700px] mx-auto w-full overflow-x-scroll border ${SALARY_RANGE_BORDER_COLOR}`}
       >
-        <div className={`w-[1720px] bg-[#ffffff]`}>
+        <div className={`bg-[#ffffff]`}>
           <div className="flex items-center gap-6 title px-10 py-2">
             <Title content="급여구간표" />
             <Txt variant="h4" color="text-black font-normal">
@@ -49,13 +41,13 @@ export default function SalaryRangePage() {
               direction="left"
               tableHeaderTitle="O"
               calcResult={calculatedSalary.salaryWithMealAllowance}
-              calcRange={DUMMY_DATA_SALARY_RANGE_WITH_MEAL_ALLOWANCE}
+              calcRange={salaries.salaryRangeWithMealAllowance}
             />
             <SalaryRangeTable
               direction="right"
               tableHeaderTitle="X (급여 전액 과세)"
               calcResult={calculatedSalary.salaryWithoutMealAllowance}
-              calcRange={DUMMY_DATA_SALARY_RANGE_WITHOUT_MEAL_ALLOWANCE}
+              calcRange={salaries.salaryRangeWithoutMealAllowance}
             />
           </div>
         </div>

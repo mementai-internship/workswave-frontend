@@ -13,7 +13,7 @@ export default function SalaryRangeCalcResult({ calcResult }: IProps) {
     mealAllowance,
     netPay,
     totalDeductions,
-    pensionInsurance,
+    nationalPension,
     healthInsurance,
     employmentInsurance,
     longTermCareInsurance,
@@ -91,7 +91,7 @@ export default function SalaryRangeCalcResult({ calcResult }: IProps) {
         <SalaryRangeTableTd
           bgColor="white"
           aria-label="국민연금"
-          text={pensionInsurance}
+          text={nationalPension}
           borderStyle={`border-r ${SALARY_RANGE_BORDER_COLOR} border-b border-b-[#333333]`}
         />
         <SalaryRangeTableTd
