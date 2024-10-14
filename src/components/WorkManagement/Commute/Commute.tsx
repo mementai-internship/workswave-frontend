@@ -7,7 +7,7 @@ import CommuteTableRows from './CommuteTableRows';
 export default function Commute() {
   return (
     <Table.Root className="mb-5">
-      <Table.Header>
+      <Table.Header className="bg-gray-200 text-xs text-gray-700 whitespace-nowrap border-t border-gray-300">
         <Table.Row>
           {COMMUTEHEADTABLE.map((head) => {
             return (

@@ -8,10 +8,11 @@ import { Select } from '@radix-ui/themes';
 export default function WorkSelect() {
   return (
     <div className="flex gap-3">
-      <Select.Root defaultValue="0">
-        <Select.Trigger radius="none" />
+      <Select.Root>
+        <Select.Trigger radius="none" placeholder="지점 선택" />
         <Select.Content>
           <Select.Group>
+            <Select.Label>지점 선택</Select.Label>
             {branchMockData.map((branch: TWorkOption) => (
               <Select.Item key={branch.id} value={branch.id.toString()}>
                 {branch.value}
@@ -20,9 +21,8 @@ export default function WorkSelect() {
           </Select.Group>
         </Select.Content>
       </Select.Root>
-
-      <Select.Root defaultValue="0">
-        <Select.Trigger radius="none" />
+      <Select.Root>
+        <Select.Trigger radius="none" placeholder="부서 선택" />
         <Select.Content>
           <Select.Group>
             {departmentMockData.map((department: TWorkOption) => (

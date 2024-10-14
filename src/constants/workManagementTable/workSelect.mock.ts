@@ -2,7 +2,7 @@ import { TWorkOption } from '@/models/workManagement/work.model';
 
 // 지점 선택을 위한 간단한 mock 데이터
 export const branchMockData: TWorkOption[] = [
-  { id: 0, value: '지점 선택' },
+  { id: 0, value: '전체' },
   { id: 1, value: '서울 강남점' },
   { id: 2, value: '서울 종로점' },
   { id: 3, value: '부산 해운대점' },
@@ -17,7 +17,7 @@ export const branchMockData: TWorkOption[] = [
 
 // 파트(부서) 선택을 위한 간단한 mock 데이터
 export const departmentMockData: TWorkOption[] = [
-  { id: 0, value: '부서 선택' },
+  { id: 0, value: '전체' },
   { id: 1, value: '영업팀' },
   { id: 2, value: '마케팅팀' },
   { id: 3, value: '고객서비스팀' },
