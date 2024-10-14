@@ -27,7 +27,7 @@ export function ChangeWeek({ currentDate, onChangeWeek }: ChangeWeekProps) {
   };
 
   return (
-    <div className="flex w-60 items-center h-10 border rounded-md">
+    <div className="flex w-60 items-center h-10 border rounded-md bg-white">
       <button onClick={goToPreviousWeek} className="px-2 py-1">
         &lt;
       </button>

@@ -15,12 +15,12 @@ export function ChangeMonth({ currentDate, onChangeMonth }: IChangeSalarySettlem
   };
 
   return (
-    <div className="flex w-48 items-center h-10 border rounded-md">
-      <button onClick={() => handleMonthChange('prev')} className="px-2 py-1">
+    <div className="flex w-48 items-center justify-center h-10 border bg-white rounded-md">
+      <button onClick={() => handleMonthChange('prev')} className="p-2">
         &lt;
       </button>
       <span className="px-4 py-2 w-32 text-center">{currentDate.format('YYYY년 M월')}</span>
-      <button onClick={() => handleMonthChange('next')} className="px-2 py-1">
+      <button onClick={() => handleMonthChange('next')} className="p-2">
         &gt;
       </button>
     </div>
