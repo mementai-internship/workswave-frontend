@@ -38,6 +38,7 @@ export default function SelectBox<T>({
   function handleOptionClick(option: ISelectOption) {
     setSelectedItem(option.name);
     option.action();
+    console.log(selectedItem);
   }
 
   return (
