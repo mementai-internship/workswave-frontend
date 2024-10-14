@@ -5,11 +5,11 @@ import WorkFilterLayout from '@/components/WorkManagement/WorkFilterLayout';
 import WorkHeader from '@/components/WorkManagement/WorkHeader';
 import { useState } from 'react';
 
-export default function LaborManagementPage() {
+export default function WorkManagementPage() {
   const [isPartTime, isSetPartTime] = useState(false);
 
   return (
-    <div>
+    <div className="w-full">
       <WorkHeader isPartTime={isPartTime} isSetPartTime={isSetPartTime} />
       <WorkFilterLayout />
       {isPartTime ? <Commute /> : <PartTime />}
