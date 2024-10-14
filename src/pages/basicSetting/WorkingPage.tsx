@@ -3,7 +3,10 @@ import WorkingSettingHoliday from '@/components/BasicSetting/WorkingSetting/SetH
 import WorkingSettingIP from '@/components/BasicSetting/WorkingSetting/SetIP';
 import WorkingSettingOT from '@/components/BasicSetting/WorkingSetting/SetOT';
 import WorkingSettingSetPart from '@/components/BasicSetting/WorkingSetting/SetPart/SetPart';
+import WorkingSettingWeekendSalary from '@/components/BasicSetting/WorkingSetting/SetWeekendSalary';
 import WorkingSettingTitle from '@/components/BasicSetting/WorkingSetting/WorkingSettingTitle';
+import WorkingSettingBasicSalary from '@/components/BasicSetting/WorkingSetting/setBasicSalary';
+import WorkingSettingBasicWork from '@/components/BasicSetting/WorkingSetting/setBasicWork';
 import Title from '@/components/Common/Title';
 import { Txt } from '@/components/Common/Txt';
 import { Button, Select } from '@radix-ui/themes';
@@ -74,22 +77,35 @@ export default function WorkingSettingPage() {
           </div>
         </WorkingSettingTitle>
         <WorkingSettingTitle
-          title="영업시간"
-          content="직원들의 파트를 세부적으로 설정 하실 수 있습니다."
+          title="O.T 설정"
+          content="의사 및 직원의 연장근무 설정하실 수 있습니다."
         >
           <WorkingSettingOT />
         </WorkingSettingTitle>
         <WorkingSettingTitle
-          title="영업시간"
-          content="직원들의 파트를 세부적으로 설정 하실 수 있습니다."
+          title="O.T 자동승인 설정"
+          content="의사 및 직원의 연장근무신청 여부를 수동 및 자동으로 설정하실 수 있습니다."
         >
           <WorkingSettingAutoOT />
         </WorkingSettingTitle>
-        <WorkingSettingTitle
-          title="영업시간"
-          content="직원들의 파트를 세부적으로 설정 하실 수 있습니다."
-        >
+        <WorkingSettingTitle title="휴일근무 설정" content="휴일근무 사용 여부를 설정합니다.">
           <WorkingSettingHoliday />
+        </WorkingSettingTitle>
+
+        <WorkingSettingTitle
+          title="주말근무수당 설정"
+          content="의사 및 직원의 주말근무수당을 설정하실 수 있습니다."
+        >
+          <WorkingSettingWeekendSalary />
+        </WorkingSettingTitle>
+        <WorkingSettingTitle title="근로기본 설정" content="휴일근무 사용 여부를 설정합니다.">
+          <WorkingSettingBasicWork />
+        </WorkingSettingTitle>
+        <WorkingSettingTitle
+          title="임금 기본설정"
+          content="수당 별 사용 여부를 설정하실 수 있습니다."
+        >
+          <WorkingSettingBasicSalary />
         </WorkingSettingTitle>
       </section>
     </main>
