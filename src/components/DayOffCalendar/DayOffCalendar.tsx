@@ -6,7 +6,7 @@ import React from 'react';
 
 interface DayOffCalendarProps {
   currentDate: dayjs.Dayjs;
-  view: 'dayGridMonth' | 'timeGridWeek' | 'timeGridDay';
+  view: 'dayGridMonth' | 'dayGridWeek';
 }
 
 export default function DayOffCalendar({ currentDate, view }: DayOffCalendarProps) {
@@ -16,16 +16,18 @@ export default function DayOffCalendar({ currentDate, view }: DayOffCalendarProp
 
   return (
     <FullCalendar
-      key={currentDate.unix()}
+      key={`${currentDate.unix()}-${view}`}
       plugins={[dayGridPlugin, interactionPlugin]}
       initialDate={currentDate.toDate()}
-      dateClick={handleDateClick}
       initialView={view}
+      dateClick={handleDateClick}
       headerToolbar={{
         left: '',
         center: '',
         right: '',
       }}
+      locale="ko"
+      contentHeight={800}
     />
   );
 }

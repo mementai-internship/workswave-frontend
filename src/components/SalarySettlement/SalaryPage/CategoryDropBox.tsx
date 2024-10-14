@@ -7,7 +7,7 @@ interface ISalaryPageHadderDropBoxProps {
   onSelect: (value: string) => void;
 }
 
-export default function SalaryPageHeadderDropBox({
+export default function CategoryDropBox({
   title,
   contents,
   selectedValue,

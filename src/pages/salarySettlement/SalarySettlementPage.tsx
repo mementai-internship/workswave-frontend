@@ -1,7 +1,7 @@
 import { ChangeMonth } from '@/components/Common/ChangeMonth';
 import ContactSearchInput from '@/components/Common/ContactSearchInput';
 import Title from '@/components/Common/Title';
-import CategoryDropBox from '@/components/SalarySettlement/SalaryPage/SalaryPageHeadderDropBox';
+import CategoryDropBox from '@/components/SalarySettlement/SalaryPage/CategoryDropBox';
 import SalaryTable from '@/components/SalarySettlement/SalaryTable/SalaryTable';
 import { IEmployeeSalarySettlement } from '@/models/salarySettlement.model';
 import { calculatePaymentDate } from '@/utils/changeSalarySettlementMonth';
