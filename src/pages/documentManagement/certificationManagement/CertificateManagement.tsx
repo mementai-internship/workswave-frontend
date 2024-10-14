@@ -1,4 +1,5 @@
 import Title from '@/components/Common/Title';
+import { DATA } from '@/pages/documentManagement/certificationManagement/constants';
 import { Button, Table } from '@radix-ui/themes';
 
 export default function CertificateManagement() {
@@ -28,30 +29,57 @@ export default function CertificateManagement() {
           <Table.Root>
             <Table.Header className="bg-gray-10">
               <Table.Row>
-                <Table.ColumnHeaderCell>Full name</Table.ColumnHeaderCell>
-                <Table.ColumnHeaderCell>Email</Table.ColumnHeaderCell>
-                <Table.ColumnHeaderCell>Group</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell>번호</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell>지점</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell>이름</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell>근무파트</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell>신청날짜</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell>신청증명서</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell>상태</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell>용도</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell>관리자메모</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell>처리날짜</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell>담당자</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell>신청자</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell></Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell></Table.ColumnHeaderCell>
               </Table.Row>
             </Table.Header>
 
             <Table.Body>
-              <Table.Row>
-                <Table.RowHeaderCell>Danilo Sousa</Table.RowHeaderCell>
-                <Table.Cell>danilo@example.com</Table.Cell>
-                <Table.Cell>Developer</Table.Cell>
-              </Table.Row>
-
-              <Table.Row>
-                <Table.RowHeaderCell>Zahra Ambessa</Table.RowHeaderCell>
-                <Table.Cell>zahra@example.com</Table.Cell>
-                <Table.Cell>Admin</Table.Cell>
-              </Table.Row>
-
-              <Table.Row>
-                <Table.RowHeaderCell>Jasper Eriksson</Table.RowHeaderCell>
-                <Table.Cell>jasper@example.com</Table.Cell>
-                <Table.Cell>Developer</Table.Cell>
-              </Table.Row>
+              {DATA.map(
+                ({
+                  number,
+                  office,
+                  name,
+                  part,
+                  enroll_date,
+                  type,
+                  status,
+                  use,
+                  memo,
+                  treat_date,
+                  applicant,
+                }) => (
+                  <Table.Row key={number}>
+                    <Table.RowHeaderCell>{number}</Table.RowHeaderCell>
+                    <Table.Cell>{office}</Table.Cell>
+                    <Table.Cell>{name}</Table.Cell>
+                    <Table.Cell>{part}</Table.Cell>
+                    <Table.Cell>{enroll_date}</Table.Cell>
+                    <Table.Cell>{type}</Table.Cell>
+                    <Table.Cell>{status}</Table.Cell>
+                    <Table.Cell>{use}</Table.Cell>
+                    <Table.Cell>{memo}</Table.Cell>
+                    <Table.Cell>{treat_date}</Table.Cell>
+                    <Table.Cell>{applicant}</Table.Cell>
+                    <Table.Cell>
+                      <Button>승인</Button>
+                      <Button>반려</Button>
+                    </Table.Cell>
+                  </Table.Row>
+                )
+              )}
             </Table.Body>
           </Table.Root>
         </div>
