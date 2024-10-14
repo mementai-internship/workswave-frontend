@@ -9,6 +9,7 @@ import WorkingPage from '@/pages/basicSetting/WorkingPage';
 import ContractManagement from '@/pages/documentManagement/ContractManagement';
 import HolidayManagement from '@/pages/documentManagement/HolidayManagement';
 import CertificateManagement from '@/pages/documentManagement/certificationManagement/CertificateManagement';
+import HolidayCalendarPage from '@/pages/holidayCalendar/HolidayCalendarPage';
 import HomePage from '@/pages/home/HomePage';
 import Login from '@/pages/login/Login';
 import ManagementOfficePage from '@/pages/officeSetting/ManagementOfficePage';
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: '/salary-settlement',
         element: <SalarySettlementPage />,
+      },
+      {
+        path: '/holiday-calander',
+        element: <HolidayCalendarPage />,
       },
       {
         path: '/basic-setting',

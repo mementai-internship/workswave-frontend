@@ -1,7 +1,8 @@
 import { ChangeMonth } from '@/components/Common/ChangeMonth';
 import ContactSearchInput from '@/components/Common/ContactSearchInput';
-import Title from '@/components/Common/Title';
-import CategoryDropBox from '@/components/SalarySettlement/SalaryPage/SalaryPageHeadderDropBox';
+// import Title from '@/components/Common/Title';
+import TitleContainer from '@/components/Common/TitleContainer';
+import CategoryDropBox from '@/components/SalarySettlement/SalaryPage/CategoryDropBox';
 import SalaryTable from '@/components/SalarySettlement/SalaryTable/SalaryTable';
 import { IEmployeeSalarySettlement } from '@/models/salarySettlement.model';
 import { calculatePaymentDate } from '@/utils/changeSalarySettlementMonth';
@@ -28,17 +29,25 @@ export default function SalarySettlementPage() {
   };
 
   return (
-    <div className="flex flex-col max-w-[1720px] p-4">
-      <header className="flex flex-row items-center gap-4">
-        <Title content="급여정산" />
-        <ChangeMonth currentDate={currentDate} onChangeMonth={handleChangeMonth} />
-        <div className="flex items-center h-10 gap-2 border rounded-md">
-          <span className="text-sm bg-gray-10 h-full flex items-center px-2">급여지급일</span>
-          <span className="px-2 w-40 text-center">{paymentDate.format('YYYY년 MM월 DD일')}</span>
-        </div>
-      </header>
+    <div className="flex flex-col w-full">
+      <TitleContainer
+        content="급여정산"
+        children={
+          <header className="flex ml-8 gap-4">
+            <ChangeMonth currentDate={currentDate} onChangeMonth={handleChangeMonth} />
+            <div className="flex items-center h-10 gap-2 border rounded-md bg-white">
+              <span className="text-sm h-full flex items-center px-2 border-r border-gray-200">
+                급여지급일
+              </span>
+              <span className="px-2 w-40 text-center">
+                {paymentDate.format('YYYY년 MM월 DD일')}
+              </span>
+            </div>
+          </header>
+        }
+      />
 
-      <section className="flex items-center justify-between py-6">
+      <section className="flex items-center justify-between py-4">
         <div className="flex items-center gap-4">
           <CategoryDropBox
             title="지점 선택"
@@ -95,6 +104,7 @@ const DUMMY_DATA: IEmployeeSalarySettlement[] = [
     previousMonthUnpaid: 0,
     overtimePay: 0,
     weekendWorkPay: 0,
+    isSelected: false,
   },
   {
     region: '경기',
@@ -113,6 +123,7 @@ const DUMMY_DATA: IEmployeeSalarySettlement[] = [
     previousMonthUnpaid: 0,
     overtimePay: 0,
     weekendWorkPay: 0,
+    isSelected: false,
   },
   {
     region: '인천',
@@ -131,6 +142,7 @@ const DUMMY_DATA: IEmployeeSalarySettlement[] = [
     previousMonthUnpaid: 0,
     overtimePay: 0,
     weekendWorkPay: 0,
+    isSelected: false,
   },
   {
     region: '서울',
@@ -149,6 +161,7 @@ const DUMMY_DATA: IEmployeeSalarySettlement[] = [
     previousMonthUnpaid: 0,
     overtimePay: 0,
     weekendWorkPay: 0,
+    isSelected: false,
   },
   {
     region: '경기',
@@ -167,6 +180,7 @@ const DUMMY_DATA: IEmployeeSalarySettlement[] = [
     previousMonthUnpaid: 0,
     overtimePay: 0,
     weekendWorkPay: 0,
+    isSelected: false,
   },
   {
     region: '인천',
@@ -185,6 +199,7 @@ const DUMMY_DATA: IEmployeeSalarySettlement[] = [
     previousMonthUnpaid: 0,
     overtimePay: 0,
     weekendWorkPay: 0,
+    isSelected: false,
   },
   {
     region: '서울',
@@ -203,6 +218,7 @@ const DUMMY_DATA: IEmployeeSalarySettlement[] = [
     previousMonthUnpaid: 0,
     overtimePay: 0,
     weekendWorkPay: 0,
+    isSelected: false,
   },
   {
     region: '경기',
@@ -221,6 +237,7 @@ const DUMMY_DATA: IEmployeeSalarySettlement[] = [
     previousMonthUnpaid: 0,
     overtimePay: 0,
     weekendWorkPay: 0,
+    isSelected: false,
   },
   {
     region: '인천',
@@ -239,6 +256,7 @@ const DUMMY_DATA: IEmployeeSalarySettlement[] = [
     previousMonthUnpaid: 0,
     overtimePay: 0,
     weekendWorkPay: 0,
+    isSelected: false,
   },
   {
     region: '서울',
@@ -257,6 +275,7 @@ const DUMMY_DATA: IEmployeeSalarySettlement[] = [
     previousMonthUnpaid: 0,
     overtimePay: 0,
     weekendWorkPay: 0,
+    isSelected: false,
   },
   // ... 더 많은 다양한 데이터 추가 ...
 ];
