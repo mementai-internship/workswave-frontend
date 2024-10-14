@@ -1,8 +1,23 @@
 import { Button, DropdownMenu } from '@radix-ui/themes';
+import { Link } from 'react-router-dom';
 
 interface IMemberInfoDropdownProps {
   title: string;
 }
+
+//test data API 연결 후 삭제
+const memberInfoDropdownMenu = [
+  {
+    id: 1,
+    name: '뮤즈의원(강남점)',
+    link: '/member-info/gangnam',
+  },
+  {
+    id: 2,
+    name: '뮤즈의원(수원인계점)',
+    link: '/member-info/suwon',
+  },
+];
 
 function MemberInfoDropdown({ title }: IMemberInfoDropdownProps) {
   return (
@@ -14,9 +29,12 @@ function MemberInfoDropdown({ title }: IMemberInfoDropdownProps) {
         </Button>
       </DropdownMenu.Trigger>
       <DropdownMenu.Content className="w-44">
-        <DropdownMenu.Item>뮤즈의원(강남점)</DropdownMenu.Item>
-        <DropdownMenu.Separator />
-        <DropdownMenu.Item>뮤즈의원(수원인계점)</DropdownMenu.Item>
+        {memberInfoDropdownMenu.map((item) => (
+          <Link to={item.link} key={item.id}>
+            <DropdownMenu.Item>{item.name}</DropdownMenu.Item>
+            {item.id === memberInfoDropdownMenu.length - 1 && <DropdownMenu.Separator />}
+          </Link>
+        ))}
       </DropdownMenu.Content>
     </DropdownMenu.Root>
   );
