@@ -1,5 +1,4 @@
 import RootLayout from '@/layout/root';
-import BoardPage from '@/pages/basicSetting/BoardPage';
 import CalendarPage from '@/pages/basicSetting/CalendarPage';
 import HolidayPage from '@/pages/basicSetting/HolidayPage';
 import HourlyRangePage from '@/pages/basicSetting/HourlyRangePage';
@@ -55,8 +54,8 @@ const router = createBrowserRouter([
             element: <CalendarPage />,
           },
           {
-            path: 'board',
-            element: <BoardPage />,
+            path: 'board/view',
+            element: <BoardViewPage />,
           },
           {
             path: 'salary-range',
