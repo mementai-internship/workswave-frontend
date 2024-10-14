@@ -9,6 +9,7 @@ import WorkingPage from '@/pages/basicSetting/WorkingPage';
 import HomePage from '@/pages/home/HomePage';
 import ManagementOfficePage from '@/pages/officeSetting/ManagementOfficePage';
 import BoardViewPage from '@/pages/userBoard/view/BoardViewPage';
+import BoardWritePage from '@/pages/userBoard/write/BoardWritePage';
 import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 // TODO: lazy load, preload는 나중에 하겠습니둥.
@@ -69,6 +70,11 @@ const router = createBrowserRouter([
         path: '/board/view',
         element: <BoardViewPage />,
       },
+      {
+        path: '/board/write',
+        element: <BoardWritePage />,
+      },
+
     ],
   },
 ]);
