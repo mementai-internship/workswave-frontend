@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.none-rt.rt-SelectTrigger:where(.rt-variant-surface) {
+  box-shadow: none;
+}
+.none-rt .rt-SelectIcon {
+  display: none;
+}
