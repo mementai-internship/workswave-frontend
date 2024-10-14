@@ -69,7 +69,6 @@ export default function WorkingSettingPartForm() {
                 required
                 maxLength={10}
               >
-                <TextField.Slot px="1"></TextField.Slot>
                 <div className="absolute right-2 top-[50%] translate-y-[-40%]">
                   {value && <Badge color={adaptTaskToColor(value)} text="" size={3} />}
                 </div>
@@ -95,9 +94,7 @@ export default function WorkingSettingPartForm() {
                 value={value}
                 onChange={onChange}
                 required
-              >
-                <TextField.Slot px="1"></TextField.Slot>
-              </TextField.Root>
+              />
             )}
           />
         </div>

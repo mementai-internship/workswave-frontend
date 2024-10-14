@@ -11,9 +11,9 @@ import { useState } from 'react';
 import { PiCheckBold } from 'react-icons/pi';
 
 // TODO: API 응답 값으로 변경
-const OPTIONS: { id: string; branch: string }[] = [
-  { id: '1', branch: '뮤즈의원(다산점)' },
-  { id: '2', branch: '뮤즈의원(강남점)' },
+const OPTIONS: { id: number; branch: string }[] = [
+  { id: 1, branch: '뮤즈의원(다산점)' },
+  { id: 2, branch: '뮤즈의원(강남점)' },
 ];
 
 export default function WorkingSettingPage() {
@@ -66,11 +66,11 @@ export default function WorkingSettingPage() {
           <WorkingSettingSetPart />
         </WorkingSettingTitle>
         <WorkingSettingTitle
-          title="영업시간"
-          content="직원들의 파트를 세부적으로 설정 하실 수 있습니다."
+          title="출퇴근설정"
+          content="출퇴근 가능 아이피 및 사용여부를 설정하실 수 있습니다."
         >
           <WorkingSettingIP />
-        </WorkingSettingTitle>{' '}
+        </WorkingSettingTitle>
         <WorkingSettingTitle
           title="영업시간"
           content="직원들의 파트를 세부적으로 설정 하실 수 있습니다."

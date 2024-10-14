@@ -4,7 +4,7 @@ import { Fragment } from 'react/jsx-runtime';
 
 // 현재 로그인한 유저의 권한을 얻는 함수
 const getCurrentUserAuth = () => {
-  return 'STAFF';
+  return 'MSO';
 };
 
 type TNavigation = {
