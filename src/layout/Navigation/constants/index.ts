@@ -26,6 +26,20 @@ const SUPREME_AUTH_NAVIGATION = [
   {
     path: '/document-management',
     content: '문서관리',
+    children: [
+      {
+        childPath: '/document-management/certificate-management',
+        childContent: '증명서 관리',
+      },
+      {
+        childPath: '/document-management/contract-management',
+        childContent: '계약서 관리',
+      },
+      {
+        childPath: '/document-management/holiday-management',
+        childContent: '휴무 관리',
+      },
+    ],
   },
   {
     path: '/salary-settlement',
@@ -127,6 +141,52 @@ const PART_MANAGER_AUTH_NAVIGATION = [
   {
     path: '/basic-setting',
     content: '기본설정',
+    children: [
+      {
+        childPath: '/basic-setting/working',
+        childContent: '근무 설정',
+      },
+      {
+        childPath: '/basic-setting/contract',
+        childContent: '계약서 설정',
+      },
+      {
+        childPath: '/basic-setting/document',
+        childContent: '문서 설정',
+      },
+      {
+        childPath: '/basic-setting/certificate',
+        childContent: '증명서 설정',
+      },
+      {
+        childPath: '/basic-setting/wage',
+        childContent: '임금 설정',
+      },
+      {
+        childPath: '/basic-setting/hourly-range',
+        childContent: '시급 설정',
+      },
+      {
+        childPath: '/basic-setting/holiday',
+        childContent: '연차 설정',
+      },
+      {
+        childPath: '/basic-setting/calendar',
+        childContent: '캘린더 설정',
+      },
+      {
+        childPath: '/basic-setting/hr',
+        childContent: '인사기록 설정',
+      },
+      {
+        childPath: '/basic-setting/board',
+        childContent: '게시판 설정',
+      },
+      {
+        childPath: '/basic-setting/salary-range',
+        childContent: '급여구간표 설정',
+      },
+    ],
   },
 ];
 
