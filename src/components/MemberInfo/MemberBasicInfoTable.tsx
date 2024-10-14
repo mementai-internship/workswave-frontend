@@ -2,6 +2,7 @@ import MemberBasicInfoDatePicker from '@/components/MemberInfo/MemberBasicInfoDa
 import MemberInfoButton from '@/components/MemberInfo/MemberInfoButton';
 import MemberInfoDropdown from '@/components/MemberInfo/MemberInfoDropdownMenu';
 import MemberInfoInput from '@/components/MemberInfo/MemberInfoInput';
+import { infoTestData } from '@/components/MemberManagement/MemberManagementTable';
 import { Button, Table } from '@radix-ui/themes';
 
 export const MEMBERBASICINFOTITLE1 = [
@@ -47,7 +48,6 @@ export default function MemberBasicInfoTable() {
           <Table.ColumnHeaderCell colSpan={4}>기본정보</Table.ColumnHeaderCell>
         </Table.Row>
       </Table.Header>
-
       <Table.Body>
         {MEMBERBASICINFOTITLE1.map((title, index) => (
           <Table.Row className="h-12">
@@ -60,11 +60,16 @@ export default function MemberBasicInfoTable() {
                   case 0:
                     return <MemberInfoDropdown title="지점 선택" menu={memberInfoDropdownMenu} />;
                   case 1:
-                    return <MemberInfoInput />;
+                    return <MemberInfoInput defaultValue={infoTestData[0].name} />;
                   case 2:
-                    return <MemberInfoInput />;
+                    return <MemberInfoInput defaultValue={infoTestData[0].phone} />;
                   case 3:
-                    return <MemberInfoButton text="주소입력" />;
+                    return (
+                      <div className="flex items-center gap-2">
+                        <MemberInfoButton text="주소입력" />
+                        <MemberInfoInput size="small" defaultValue={'서울특별시 강남구'} />
+                      </div>
+                    );
                   case 4:
                     return <MemberInfoButton text="학력입력" />;
                   case 5:
@@ -111,7 +116,9 @@ export default function MemberBasicInfoTable() {
                           <MemberInfoDropdown title="성별 선택" menu={memberInfoDropdownMenu} />
                         );
                       case 2:
-                        return <MemberInfoInput />;
+                        return (
+                          <MemberInfoInput size="large" defaultValue={infoTestData[0].email} />
+                        );
                       case 4:
                         return <MemberInfoButton text="경력입력" />;
                       case 5:
