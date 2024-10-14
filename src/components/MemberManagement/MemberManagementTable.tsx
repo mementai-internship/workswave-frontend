@@ -2,6 +2,7 @@ import { MEMBERMANAGEMENTTABLETITLE } from '@/constants/memberManagementTableTit
 import calculateWorkPeriod from '@/utils/calculateWorkPeriod';
 import { Table } from '@radix-ui/themes';
 import { PiClipboardText, PiPaperclip, PiXBold } from 'react-icons/pi';
+import { Link } from 'react-router-dom';
 
 interface IMemberManagementTableProps {
   id: number;
@@ -24,7 +25,7 @@ interface IMemberManagementTableProps {
 }
 
 //text data 추후 삭제 예정
-const testData: IMemberManagementTableProps[] = [
+export const infoTestData: IMemberManagementTableProps[] = [
   {
     id: 1,
     branch: '뮤즈의원(수원인계점)',
@@ -101,6 +102,25 @@ const testData: IMemberManagementTableProps[] = [
       salary: '4,000,000',
     },
   },
+  {
+    id: 5,
+    branch: '뮤즈의원(수원인계점)',
+    gender: '남',
+    name: '최원준',
+    workPart: 'Developer',
+    birth: '2024-01-01',
+    phone: '010-1234-5678',
+    email: 'test@test.com',
+    contractPeriod: {
+      start: '2024-01-01',
+      end: '-',
+      workContract: '2024-01-01 ~ 2024-10-01',
+      annualSalaryContract: '2024-01-01 ~ 2024-10-01',
+      recentContract: '-',
+      annualSalary: '40,000,000',
+      salary: '4,000,000',
+    },
+  },
 ];
 
 export default function MemberManagementTable() {
@@ -117,14 +137,16 @@ export default function MemberManagementTable() {
       </Table.Header>
 
       <Table.Body>
-        {testData.map((testData: IMemberManagementTableProps) => (
+        {infoTestData.map((testData: IMemberManagementTableProps) => (
           <Table.Row key={testData.id}>
             <Table.RowHeaderCell className="text-center p-4 align-middle">
               {testData.id}
             </Table.RowHeaderCell>
             <Table.Cell className="text-center p-4 align-middle">{testData.branch}</Table.Cell>
             <Table.Cell className="text-center p-4 align-middle">
-              {testData.gender} {testData.name}
+              <Link to={`/member-management/member-info`}>
+                {testData.gender} {testData.name}
+              </Link>
             </Table.Cell>
             <Table.Cell className="p-4 align-middle">{testData.workPart}</Table.Cell>
             <Table.Cell className="text-center p-4 align-middle">{testData.birth}</Table.Cell>

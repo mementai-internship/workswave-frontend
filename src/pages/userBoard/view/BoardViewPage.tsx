@@ -1,12 +1,19 @@
 import Title from '@/components/Common/Title';
 import UserBoardFilterBar from '@/components/UserBoard/View/UserBoardFilterBar/UserBoardFilterBar';
 import UserBoardTable from '@/components/UserBoard/View/UserBoardTable/UserBoardTable';
+import { Button } from '@radix-ui/themes';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function BoardViewPage() {
   return (
-    <main className="flex flex-col gap-4 px-10 py-10">
-      <Title content="회원게시판" />
+    <main className="flex flex-col gap-4">
+      <div className="flex items-center justify-between">
+        <Title content="회원게시판" />
+        <Button className="bg-purple-50 text-white">
+          <Link to="/board/write">게시글 작성</Link>
+        </Button>
+      </div>
       <UserBoardFilterBar />
       <UserBoardTable data={DUMMY_DATA} />
     </main>
