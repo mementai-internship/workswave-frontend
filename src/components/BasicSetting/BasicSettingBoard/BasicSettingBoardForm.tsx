@@ -38,9 +38,7 @@ export default function BasicSettingBoardForm({ control, isEditingMode, setValue
                 value={value}
                 onChange={onChange}
                 required
-              >
-                <TextField.Slot px="1"></TextField.Slot>
-              </TextField.Root>
+              />
             )}
           />
         </div>
