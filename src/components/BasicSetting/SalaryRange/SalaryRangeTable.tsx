@@ -1,6 +1,6 @@
 import SalaryRangeCalcRange from '@/components/BasicSetting/SalaryRange/SalaryRangeCalcRange';
 import SalaryRangeCalcResult from '@/components/BasicSetting/SalaryRange/SalaryRangeCalcResult';
-import { SALARY_RANGE_BORDER_COLOR } from '@/components/BasicSetting/SalaryRange/const';
+import { SALARY_RANGE_BORDER_COLOR } from '@/constants/salaryRange';
 import { ISalaryRangeValue } from '@/models/salaryRange.model';
 
 interface IProps {

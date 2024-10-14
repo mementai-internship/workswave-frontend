@@ -1,4 +1,4 @@
-import { CELL_BG_COLOR } from '@/components/BasicSetting/SalaryRange/const';
+import { CELL_BG_COLOR } from '@/constants/salaryRange';
 
 export type TBgColor = 'gray' | 'white' | 'red' | 'lightGray';
 

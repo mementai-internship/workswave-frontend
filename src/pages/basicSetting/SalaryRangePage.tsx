@@ -1,8 +1,8 @@
 import SalaryRangeHeader from '@/components/BasicSetting/SalaryRange/SalaryRangeHeader';
 import SalaryRangeTable from '@/components/BasicSetting/SalaryRange/SalaryRangeTable';
-import { SALARY_RANGE_BORDER_COLOR } from '@/components/BasicSetting/SalaryRange/const';
 import Title from '@/components/Common/Title';
 import { Txt } from '@/components/Common/Txt';
+import { SALARY_RANGE_BORDER_COLOR } from '@/constants/salaryRange';
 import { useSalaryRange } from '@/hooks/useSalaryRange';
 import { useEffect } from 'react';
 

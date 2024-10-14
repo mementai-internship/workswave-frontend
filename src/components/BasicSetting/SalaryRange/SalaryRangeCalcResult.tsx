@@ -1,5 +1,5 @@
 import SalaryRangeTableTd from '@/components/BasicSetting/SalaryRange/SalaryRangeTableTd';
-import { SALARY_RANGE_BORDER_COLOR } from '@/components/BasicSetting/SalaryRange/const';
+import { SALARY_RANGE_BORDER_COLOR } from '@/constants/salaryRange';
 import { ISalaryRangeValue } from '@/models/salaryRange.model';
 
 interface IProps {
