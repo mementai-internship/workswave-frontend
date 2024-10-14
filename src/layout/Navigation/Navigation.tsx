@@ -1,4 +1,4 @@
-import { NAVIGATION_CONTENTS } from '@/layout/Navigation/const';
+import { NAVIGATION_CONTENTS } from '@/layout/Navigation/constants';
 import { Link, useLocation } from 'react-router-dom';
 
 export default function Navigation() {
