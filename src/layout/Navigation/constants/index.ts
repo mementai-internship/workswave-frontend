@@ -111,7 +111,7 @@ const PART_MANAGER_AUTH_NAVIGATION = [
     content: '회원관리',
   },
   {
-    path: 'board',
+    path: '/board',
     content: '회원게시판',
   },
   {

@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.none-rt.rt-SelectTrigger:where(.rt-variant-surface) {
+  box-shadow: none;
+}
+.none-rt .rt-SelectIcon {
+  display: none;
+}
+.rt-TooltipArrow {
+  fill: #760dde;
+}
+
+.rt-TooltipContent {
+  padding: 10px;
+  background-color: #760dde;
+}
