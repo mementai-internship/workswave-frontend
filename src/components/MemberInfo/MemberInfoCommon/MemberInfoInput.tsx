@@ -45,7 +45,7 @@ export default function MemberInfoInput({
         </Button>
       ) : filterButton ? (
         <Select.Root defaultValue="자동설정">
-          <Select.Trigger variant="ghost" />
+          <Select.Trigger variant="ghost" className="mr-2" />
           <Select.Content>
             <Select.Group>
               <Select.Label>설정</Select.Label>
