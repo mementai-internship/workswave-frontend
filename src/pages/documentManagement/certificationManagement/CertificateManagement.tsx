@@ -1,7 +1,10 @@
+import ContactSearchInput from '@/components/Common/ContactSearchInput';
+import SelectBox from '@/components/Common/Select';
 import Title from '@/components/Common/Title';
 import {
   TABLE_DATA,
   TABLE_HEAD,
+  memberInfoDropdownMenu,
 } from '@/pages/documentManagement/certificationManagement/constants';
 import { Button, Table } from '@radix-ui/themes';
 import { PiArrowUUpRightFill, PiCheck } from 'react-icons/pi';
@@ -17,7 +20,7 @@ export default function CertificateManagement() {
   const handleCertificateIssuanceButtonClick = () => {};
 
   return (
-    <div>
+    <div className="flex flex-col w-full">
       <div className="flex items-center justify-between">
         <div className="flex items-center justify-center">
           <Title content="증명서관리" />
@@ -31,13 +34,34 @@ export default function CertificateManagement() {
       </div>
       <div>
         <div className="flex items-center justify-between py-5">
-          <div className="flex gap-1">
-            <span>지점</span>
-            <div>셀렉트1</div>
-            <div>셀렉트2</div>
+          <div className="flex gap-2">
+            <SelectBox
+              title="지점"
+              name="office"
+              options={memberInfoDropdownMenu}
+              size="small"
+              border={false}
+            />
+            <SelectBox
+              title="전체 선택"
+              name="지점"
+              options={memberInfoDropdownMenu}
+              size="small"
+              border={false}
+            />
+            <SelectBox
+              title="상태 선택"
+              name="지점"
+              options={memberInfoDropdownMenu}
+              size="small"
+              border={false}
+            />
           </div>
           <div className="flex items-center justify-center gap-1">
-            <div>검색바</div>
+            <div className="flex items-center justify-center gap-3">
+              <span className="text-sm">검색</span>
+              <ContactSearchInput />
+            </div>
             <Button
               variant="surface"
               size="3"
@@ -77,7 +101,7 @@ export default function CertificateManagement() {
                   manager,
                   applicant,
                 }) => (
-                  <Table.Row key={number}>
+                  <Table.Row align="center" key={number}>
                     <Table.RowHeaderCell>{number}</Table.RowHeaderCell>
                     <Table.Cell justify="center" align="center">
                       {office}
