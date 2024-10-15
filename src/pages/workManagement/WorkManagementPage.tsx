@@ -17,7 +17,7 @@ export default function WorkManagementPage() {
         totalItems={10}
         itemsPerPage={1}
         currentPage={1}
-        onChangePage={function (page: number): void {
+        onChangePage={(page: number): void => {
           console.log(page);
         }}
       />
