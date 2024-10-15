@@ -7,6 +7,7 @@ export default function HomePage() {
   return (
     <div>
       <Title content="Home" />
+      <Title content="Home" />
       <Button>Click me</Button>
     </div>
   );
