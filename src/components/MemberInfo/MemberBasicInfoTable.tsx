@@ -25,7 +25,7 @@ const memberInfoDropdownMenu = [
 
 export default function MemberBasicInfoTable() {
   return (
-    <Table.Root>
+    <Table.Root className="table-fixed h-full">
       <Table.Header>
         <Table.Row className="bg-gray-200">
           <Table.ColumnHeaderCell colSpan={4}>기본정보</Table.ColumnHeaderCell>
