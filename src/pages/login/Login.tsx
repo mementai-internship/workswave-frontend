@@ -1,4 +1,7 @@
+import { postLogin } from '@/apis/login.api';
 import { Txt } from '@/components/Common/Txt';
+import { TLoginResBody } from '@/models/login.model';
+import { setTokens } from '@/utils/tokenUtils';
 import { Button, TextField } from '@radix-ui/themes';
 import { useForm } from 'react-hook-form';
 import { AiOutlineMail } from 'react-icons/ai';
@@ -13,8 +16,16 @@ export default function Login() {
   const { handleSubmit, register } = useForm<TFormValues>();
 
   // 로그인 함수
-  const handleLoginButtonClick = (data: TFormValues) => {
-    console.log(data);
+  const handleLoginButtonClick = async (data: TFormValues) => {
+    try {
+      const { access_token }: TLoginResBody = await postLogin(data);
+
+      // 로그인 성공시 토큰값 로컬스토리지에 저장
+      setTokens(access_token, access_token);
+    } catch (error) {
+      // 로그인 실패
+      console.log(error, '로그인에 실패했습니다.');
+    }
   };
 
   return (
@@ -30,7 +41,6 @@ export default function Login() {
         </div>
         <form onSubmit={handleSubmit(handleLoginButtonClick)} className="flex flex-col gap-3">
           <TextField.Root
-            type="email"
             className="flex-row-reverse items-center justify-center h-11 text-xs rounded-lg"
             placeholder="이메일 주소"
             {...register('email', {

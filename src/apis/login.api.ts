@@ -1,7 +1,7 @@
 import axiosInstance from '@/apis/axiosInstance';
-import { LoginReqBody } from '@/models/login.model';
+import { TLoginReqBody } from '@/models/login.model';
 
-export const postLogin = async ({ email, password }: LoginReqBody) => {
+export const postLogin = async ({ email, password }: TLoginReqBody) => {
   const { data } = await axiosInstance.post('/auth/login', { email, password });
   return data;
 };
