@@ -40,7 +40,7 @@ export default function BoardPage() {
    */
 
   return (
-    <div className="w-[80%] mx-auto flex p-5 gap-x-2 h-[calc(100vh-100px)]">
+    <div className="w-[80%] mx-auto flex p-5 gap-x-2 min-h-[800px] max-h-[calc(100vh-100px)]">
       {/* 1280px 이하 버전 */}
       <section className="bg-white border flex-[3] overflow-y-scroll">
         <div className="flex items-center justify-between gap-x-8 px-10 py-5 sticky top-0 left-0 bg-white border-b">
