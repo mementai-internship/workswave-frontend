@@ -1,12 +1,12 @@
 import WorkingSettingAutoOT from '@/components/BasicSetting/WorkingSetting/SetAutoOT';
+import WorkingSettingBasicSalary from '@/components/BasicSetting/WorkingSetting/SetBasicSalary';
+import WorkingSettingBasicWork from '@/components/BasicSetting/WorkingSetting/SetBasicWork';
 import WorkingSettingHoliday from '@/components/BasicSetting/WorkingSetting/SetHoliday';
 import WorkingSettingIP from '@/components/BasicSetting/WorkingSetting/SetIP';
 import WorkingSettingOT from '@/components/BasicSetting/WorkingSetting/SetOT';
 import WorkingSettingSetPart from '@/components/BasicSetting/WorkingSetting/SetPart/SetPart';
 import WorkingSettingWeekendSalary from '@/components/BasicSetting/WorkingSetting/SetWeekendSalary';
 import WorkingSettingTitle from '@/components/BasicSetting/WorkingSetting/WorkingSettingTitle';
-import WorkingSettingBasicSalary from '@/components/BasicSetting/WorkingSetting/setBasicSalary';
-import WorkingSettingBasicWork from '@/components/BasicSetting/WorkingSetting/setBasicWork';
 import Title from '@/components/Common/Title';
 import { Txt } from '@/components/Common/Txt';
 import { Button, Select } from '@radix-ui/themes';
