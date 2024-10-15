@@ -1,44 +1,26 @@
 import HeaderProfile from '@/layout/Header/HeaderProfile';
-import { useEffect, useState } from 'react';
+import { TUserAuthority } from '@/models/user.model';
 import { Link } from 'react-router-dom';
 
-// user type
-export type TUser = {
+export interface IHeader {
   name: string;
-  auth: 'MSO' | 'SUPER_MANAGER' | 'PART_MANAGER' | 'STAFF';
-};
+  role: TUserAuthority;
+}
 
-// 임시 user mock data
-const mockUser: TUser = {
-  name: '김테스트',
-  auth: 'MSO',
-};
-
-// 현재 유저 정보를 반환하는 함수
-const getCurrentUser = (): TUser | null => {
-  return mockUser;
-};
-
-export default function Header() {
-  const [currentUser, setCurrentUser] = useState<TUser | null>(null);
-
-  useEffect(() => {
-    setCurrentUser(getCurrentUser());
-  }, []);
-
+export default function Header({ name, role }: IHeader) {
   return (
     <header className="px-3 flex items-center justify-between text-white bg-gray-80">
       <div className="flex grow items-center justify-between pr-4 border-r border-gray-50">
         <Link to="/">
           <span className="p-3">WorksWave</span>
         </Link>
-        {(currentUser?.auth === 'MSO' || currentUser?.auth === 'SUPER_MANAGER') && (
+        {(role === 'MSO 최고권한' || role === '최고관리자') && (
           <span className="text-xs p-4">웍스웨이브 가이드</span>
         )}
       </div>
       <div className="flex items-center text-xs px-4">
-        {currentUser ? (
-          <HeaderProfile currentUser={currentUser} />
+        {name && role ? (
+          <HeaderProfile name={name} role={role} />
         ) : (
           <Link to="/login">
             <button className="border border-gray-10 px-4 py-1 rounded mr-4">로그인</button>
