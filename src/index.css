@@ -16,12 +16,3 @@
   padding: 10px;
   background-color: #760dde;
 }
-
-.container {
-  overflow-y: scroll;
-}
-
-.container::-webkit-scrollbar {
-  width: 0; /* 스크롤바 너비를 0으로 설정하여 공간 차지 방지 */
-  background: transparent; /* 스크롤바 배경을 투명으로 설정 */
-}
