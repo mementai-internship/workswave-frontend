@@ -1,4 +1,5 @@
 import SelectBox from '@/components/Common/Select';
+import ContractInfoCheckbox from '@/components/MemberInfo/MemberInfoCommon/ContractInfoCheckbox';
 import MemberBasicInfoDatePicker from '@/components/MemberInfo/MemberInfoCommon/MemberBasicInfoDatePicker';
 import MemberInfoInput from '@/components/MemberInfo/MemberInfoCommon/MemberInfoInput';
 import { infoTestData } from '@/components/MemberManagement/MemberManagementTable';
@@ -32,9 +33,25 @@ export default function SalaryContractTable() {
         <Table.Body>
           {SALARY_CONTRACT_TITLE1.map((title, index) => (
             <Table.Row className="h-12">
-              <Table.RowHeaderCell key={title} className="align-middle bg-gray-200 font-bold h-12">
-                {title}
-              </Table.RowHeaderCell>
+              {index === 0 ? (
+                <Table.RowHeaderCell className="align-middle bg-gray-200 font-bold h-12">
+                  <div className="flex flex-row items-center justify-start gap-4">
+                    <p>{title}</p>
+                    <SelectBox title="템플릿 선택" options={[]} border={false} size="xSmall" />
+                  </div>
+                </Table.RowHeaderCell>
+              ) : index === 4 || index === 5 ? (
+                <Table.RowHeaderCell className="align-middle bg-gray-200 font-bold h-12">
+                  <div className="flex flex-row items-center justify-between gap-4">
+                    <p>{title}</p>
+                    <ContractInfoCheckbox text="사용" />
+                  </div>
+                </Table.RowHeaderCell>
+              ) : (
+                <Table.RowHeaderCell className="align-middle bg-gray-200 font-bold h-12">
+                  {title}
+                </Table.RowHeaderCell>
+              )}
               <Table.Cell key={title} className="flex items-center py-8 gap-2 h-12">
                 {(() => {
                   switch (index) {
@@ -85,7 +102,12 @@ export default function SalaryContractTable() {
                       switch (index) {
                         case 0:
                           return (
-                            <MemberInfoInput defaultValue={infoTestData[0].contractPeriod.salary} />
+                            <>
+                              <MemberInfoInput
+                                defaultValue={infoTestData[0].contractPeriod.salary}
+                              />
+                              <ContractInfoCheckbox text="직접입력" />
+                            </>
                           );
                         case 1:
                           return (
