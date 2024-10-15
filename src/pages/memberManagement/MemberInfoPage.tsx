@@ -2,6 +2,7 @@ import Title from '@/components/Common/Title';
 import MemberInfoBasicTable from '@/components/MemberInfo/MemberBasicInfoTable';
 import ContractInfoBar from '@/components/MemberInfo/MemberInfoCommon/ContractInfoBar';
 import MemberInfoButtonBar from '@/components/MemberInfo/MemberInfoCommon/MemberInfoButtonBar';
+import SalaryContractTable from '@/components/MemberInfo/SalaryContractTable';
 import WorkContractTable from '@/components/MemberInfo/WorkContractTable';
 
 export default function MemberInfoPage() {
@@ -20,6 +21,7 @@ export default function MemberInfoPage() {
       />
       <ContractInfoBar />
       <WorkContractTable />
+      <SalaryContractTable />
     </div>
   );
 }
