@@ -4,7 +4,8 @@ import MemberBasicInfoDatePicker from '@/components/MemberInfo/MemberInfoCommon/
 import MemberInfoInput from '@/components/MemberInfo/MemberInfoCommon/MemberInfoInput';
 import { infoTestData } from '@/components/MemberManagement/MemberManagementTable';
 import { SALARY_CONTRACT_TITLE1, SALARY_CONTRACT_TITLE2 } from '@/constants/memberInfoTable';
-import { Table } from '@radix-ui/themes';
+import { Button, Table } from '@radix-ui/themes';
+import { Link } from 'react-router-dom';
 
 export default function SalaryContractTable() {
   return (
@@ -88,12 +89,26 @@ export default function SalaryContractTable() {
               </Table.Cell>
               {index !== 5 ? (
                 <>
-                  <Table.RowHeaderCell
-                    key={SALARY_CONTRACT_TITLE2[index]}
-                    className="align-middle bg-gray-200 font-bold h-12"
-                  >
-                    {SALARY_CONTRACT_TITLE2[index]}
-                  </Table.RowHeaderCell>
+                  {index === 0 ? (
+                    <Table.RowHeaderCell
+                      key={SALARY_CONTRACT_TITLE2[index]}
+                      className="align-middle bg-gray-200 font-bold h-12"
+                    >
+                      <div className="flex flex-row items-center justify-start gap-4">
+                        <p>{SALARY_CONTRACT_TITLE2[index]}</p>
+                        <Button variant="surface" size="1" color="gray">
+                          <Link to="/basic-setting/salary-range">급여구간표</Link>
+                        </Button>
+                      </div>
+                    </Table.RowHeaderCell>
+                  ) : (
+                    <Table.RowHeaderCell
+                      key={SALARY_CONTRACT_TITLE2[index]}
+                      className="align-middle bg-gray-200 font-bold h-12"
+                    >
+                      {SALARY_CONTRACT_TITLE2[index]}
+                    </Table.RowHeaderCell>
+                  )}
                   <Table.Cell
                     key={SALARY_CONTRACT_TITLE2[index]}
                     className="flex items-center py-8 gap-2 h-12"
@@ -117,19 +132,22 @@ export default function SalaryContractTable() {
                               />
                               <MemberInfoInput
                                 defaultValue={infoTestData[0].contractPeriod.salary}
+                                directInputButton
                               />
                             </>
                           );
                         case 2:
-                          return <MemberInfoInput defaultValue="0" />;
+                          return <MemberInfoInput defaultValue="0" filterButton />;
                         case 3:
                           return (
                             <>
                               <MemberInfoInput
                                 defaultValue={infoTestData[0].contractPeriod.salary}
+                                directInputButton
                               />
                               <MemberInfoInput
                                 defaultValue={infoTestData[0].contractPeriod.salary}
+                                directInputButton
                               />
                             </>
                           );
