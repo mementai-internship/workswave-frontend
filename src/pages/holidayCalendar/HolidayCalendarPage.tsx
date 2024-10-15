@@ -29,7 +29,7 @@ export default function DayOffCalendarPage() {
           title="지점 선택"
           name="지점 선택"
           options={DUMMY_DROP_DOWN_MENU}
-          size="small"
+          size="large"
           border={false}
         />
         {view === 'dayGridMonth' ? (
@@ -42,19 +42,19 @@ export default function DayOffCalendarPage() {
           </div>
         )}
         <div className="flex gap-2">
-          <Button variant="surface" color="gray">
+          <Button variant="surface" color="gray" size="2">
             다중 휴무등록
           </Button>
-          <Button variant="surface" color="gray">
+          <Button variant="surface" color="gray" size="2">
             파트타임
           </Button>
-          <Button variant="surface" color="gray" onClick={handleCalendarView}>
+          <Button variant="surface" color="gray" size="2" onClick={handleCalendarView}>
             {view === 'dayGridMonth' ? '주간' : '월간'}
           </Button>
         </div>
       </header>
 
-      <div className="flex-grow overflow-y-auto bg-white">
+      <div className="flex-grow overflow-y-auto px-3 pb-6 bg-white rounded-md">
         <DayOffCalendar currentDate={currentDate} view={view} />
       </div>
     </div>

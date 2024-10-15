@@ -1,6 +1,5 @@
 import { ChangeMonth } from '@/components/Common/ChangeMonth';
 import ContactSearchInput from '@/components/Common/ContactSearchInput';
-// import Title from '@/components/Common/Title';
 import TitleContainer from '@/components/Common/TitleContainer';
 import CategoryDropBox from '@/components/SalarySettlement/SalaryPage/CategoryDropBox';
 import SalaryTable from '@/components/SalarySettlement/SalaryTable/SalaryTable';
@@ -277,5 +276,4 @@ const DUMMY_DATA: IEmployeeSalarySettlement[] = [
     weekendWorkPay: 0,
     isSelected: false,
   },
-  // ... 더 많은 다양한 데이터 추가 ...
 ];

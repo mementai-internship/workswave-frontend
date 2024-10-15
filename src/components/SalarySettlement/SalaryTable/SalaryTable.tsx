@@ -29,8 +29,8 @@ export default function SalaryTable({
   const calculateSummary = useSalarySummary(filteredEmployees);
 
   return (
-    <div className="justify-center items-start min-h-full pb-10">
-      <Table.Root className="w-full text-sm text-gray-500">
+    <div className="justify-center items-start pb-7">
+      <Table.Root variant="surface">
         <SalaryTableHeader employees={employees} handleAllCheckbox={handleAllCheckbox} />
 
         <Table.Body>
