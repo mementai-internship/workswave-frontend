@@ -20,7 +20,7 @@ export default function BasicSettingSubTitle({
   return (
     <div
       className={`${
-        flexAlign === 'row' ? 'flex' : 'flex flex-col'
+        flexAlign === 'row' ? 'flex items-center' : 'flex flex-col'
       } ${gap} whitespace-nowrap ${styles}`}
     >
       <Txt color={titleColor}>{title}</Txt>
