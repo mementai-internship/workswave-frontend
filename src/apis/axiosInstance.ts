@@ -1,9 +1,8 @@
-import { BASE_URL } from '@/constants/url';
 import { getAccessToken, getRefreshToken, removeTokens, setTokens } from '@/utils/tokenUtils';
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: BASE_URL,
+  baseURL: import.meta.env.VITE_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
