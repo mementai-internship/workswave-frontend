@@ -1,11 +1,12 @@
 import { postLogin } from '@/apis/login.api';
 import { Txt } from '@/components/Common/Txt';
-import { TLoginResBody } from '@/models/login.model';
-import { setTokens } from '@/utils/tokenUtils';
+import { userTokenAtom } from '@/store/authAtoms';
 import { Button, TextField } from '@radix-ui/themes';
+import { useAtom } from 'jotai';
 import { useForm } from 'react-hook-form';
 import { AiOutlineMail } from 'react-icons/ai';
 import { PiKey } from 'react-icons/pi';
+import { useNavigate } from 'react-router-dom';
 
 type TFormValues = {
   email: string;
@@ -14,17 +15,19 @@ type TFormValues = {
 
 export default function Login() {
   const { handleSubmit, register } = useForm<TFormValues>();
+  const [, setToken] = useAtom(userTokenAtom);
+  const navigate = useNavigate();
 
   // 로그인 함수
   const handleLoginButtonClick = async (data: TFormValues) => {
     try {
-      const { access_token }: TLoginResBody = await postLogin(data);
-
-      // 로그인 성공시 토큰값 로컬스토리지에 저장
-      setTokens(access_token, access_token);
+      const { access_token } = await postLogin(data);
+      // 로그인 성공시 토큰값 저장
+      setToken(access_token);
+      navigate('/');
     } catch (error) {
       // 로그인 실패
-      console.log(error, '로그인에 실패했습니다.');
+      console.error(error, '로그인에 실패했습니다.');
     }
   };
 
