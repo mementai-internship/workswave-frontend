@@ -17,6 +17,7 @@ import MemberManagementPage from '@/pages/memberManagement/MemberManagementPage'
 import ManagementOfficePage from '@/pages/officeSetting/ManagementOfficePage';
 import SalarySettlementPage from '@/pages/salarySettlement/SalarySettlementPage';
 import BoardViewPage from '@/pages/userBoard/view/BoardViewPage';
+import BoardViewPostPage from '@/pages/userBoard/view/postNum/BoardViewPostPage';
 import BoardWritePage from '@/pages/userBoard/write/BoardWritePage';
 import WorkManagementPage from '@/pages/workManagement/WorkManagementPage';
 import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom';
@@ -123,6 +124,10 @@ const router = createBrowserRouter([
       {
         path: '/board/view',
         element: <BoardViewPage />,
+      },
+      {
+        path: '/board/view/:postNum',
+        element: <BoardViewPostPage />,
       },
       {
         path: '/board/write',
