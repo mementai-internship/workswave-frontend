@@ -26,7 +26,7 @@ export default function MemberBasicInfoDatePicker() {
           <PiCalendarCheck className="w-6 h-6" />
         </button>
         {showDatePicker && (
-          <div className="absolute z-10 top-full left-0 bg-gray-10 shadow-lg">
+          <div className="absolute z-10 top--1 left-48 bg-gray-10 shadow-lg">
             <DayPicker selected={dayjs().toDate()} onSelect={handleDaySelect} mode="single" />
           </div>
         )}
