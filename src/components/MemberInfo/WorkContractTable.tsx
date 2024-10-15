@@ -21,7 +21,7 @@ export default function WorkContractTable() {
               계약일
               <SelectBox title="일수 선택" options={[]} size="xSmall" />
             </Table.ColumnHeaderCell>
-            <Table.Cell className="align-middle">
+            <Table.Cell className="align-middle w-[37.5%]">
               <div className="flex items-center gap-4">
                 <MemberBasicInfoDatePicker />
                 <MemberBasicInfoDatePicker />
@@ -34,8 +34,8 @@ export default function WorkContractTable() {
                 </div>
               </div>
             </Table.Cell>
-            <Table.Cell></Table.Cell>
-            <Table.Cell>
+            <Table.Cell className="w-[12.5%]"></Table.Cell>
+            <Table.Cell className="w-[37.5%]">
               <div className="flex flex-col gap-2">
                 <div className="flex items-center justify-end gap-2">
                   <p className="font-bold text-[14px]">고정휴무일</p>
@@ -63,9 +63,10 @@ export default function WorkContractTable() {
             </Table.Cell>
           </Table.Row>
         </Table.Header>
+
         <Table.Body>
           <Table.Row>
-            <Table.ColumnHeaderCell className="bg-gray-200 font-bold align-middle">
+            <Table.ColumnHeaderCell className="bg-gray-200 font-bold align-middle w-1/8">
               <div className="flex flex-row items-center justify-between">
                 근로기본설정[평일]
                 <ContractInfoCheckbox text="휴일" />
@@ -81,14 +82,14 @@ export default function WorkContractTable() {
             <WorkContractTableCell />
           </Table.Row>
           <Table.Row>
-            <Table.ColumnHeaderCell className="bg-gray-200 font-bold align-middle h-28">
+            <Table.ColumnHeaderCell className="bg-gray-200 font-bold align-middle h-28 w-1/8">
               <div className="flex flex-row items-center justify-between">
                 근로기본설정[일요일]
                 <ContractInfoCheckbox text="휴일" />
               </div>
             </Table.ColumnHeaderCell>
             <WorkContractTableCell height="h-28" />
-            <Table.ColumnHeaderCell className="bg-gray-200 font-bold align-middle">
+            <Table.ColumnHeaderCell className="bg-gray-200 font-bold align-middle w-1/8">
               휴게시간
             </Table.ColumnHeaderCell>
             <Table.Cell>

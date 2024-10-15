@@ -34,7 +34,10 @@ export default function MemberBasicInfoTable() {
       <Table.Body>
         {MEMBER_BASIC_INFO_TITLE1.map((title, index) => (
           <Table.Row className="h-12">
-            <Table.RowHeaderCell key={title} className="align-middle bg-gray-200 font-bold h-12">
+            <Table.RowHeaderCell
+              key={title}
+              className="align-middle bg-gray-200 font-bold h-12 w-[12.5%]"
+            >
               {title}
             </Table.RowHeaderCell>
             <Table.Cell key={title} className="flex items-center py-8 gap-2 h-12">
@@ -70,7 +73,7 @@ export default function MemberBasicInfoTable() {
               <>
                 <Table.RowHeaderCell
                   key={MEMBER_BASIC_INFO_TITLE2[index]}
-                  className="align-middle bg-gray-200 font-bold h-12"
+                  className="align-middle bg-gray-200 font-bold h-12 w-[12.5%]"
                 >
                   {MEMBER_BASIC_INFO_TITLE2[index]}
                 </Table.RowHeaderCell>
@@ -120,8 +123,8 @@ export default function MemberBasicInfoTable() {
               </>
             ) : (
               <>
-                <Table.RowHeaderCell></Table.RowHeaderCell>
-                <Table.Cell></Table.Cell>
+                <Table.RowHeaderCell className="w-[12.5%]"></Table.RowHeaderCell>
+                <Table.Cell className="w-[37.5%]"></Table.Cell>
               </>
             )}
           </Table.Row>

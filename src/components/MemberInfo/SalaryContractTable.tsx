@@ -20,14 +20,17 @@ export default function SalaryContractTable() {
               className="bg-gray-200 flex items-center gap-4 h-24 py-8"
             >
               연봉계약일
+              <SelectBox title="일수 선택" options={[]} size="xSmall" />
             </Table.ColumnHeaderCell>
-            <Table.Cell className="align-middle">
+            <Table.Cell className="align-middle w-[37.5%]">
               <div className="flex items-center gap-4">
                 <MemberBasicInfoDatePicker />
                 <MemberBasicInfoDatePicker />
                 <SelectBox title="필터" options={[]} border={false} size="xSmall" />
               </div>
             </Table.Cell>
+            <Table.Cell className="w-[12.5%]"></Table.Cell>
+            <Table.Cell className="w-[37.5%]"></Table.Cell>
           </Table.Row>
         </Table.Header>
 
@@ -35,23 +38,23 @@ export default function SalaryContractTable() {
           {SALARY_CONTRACT_TITLE1.map((title, index) => (
             <Table.Row className="h-12">
               {index === 0 ? (
-                <Table.RowHeaderCell className="align-middle bg-gray-200 font-bold h-12">
+                <Table.ColumnHeaderCell className="align-middle bg-gray-200 font-bold h-12">
                   <div className="flex flex-row items-center justify-start gap-4">
                     <p>{title}</p>
                     <SelectBox title="템플릿 선택" options={[]} border={false} size="xSmall" />
                   </div>
-                </Table.RowHeaderCell>
+                </Table.ColumnHeaderCell>
               ) : index === 4 || index === 5 ? (
-                <Table.RowHeaderCell className="align-middle bg-gray-200 font-bold h-12">
+                <Table.ColumnHeaderCell className="align-middle bg-gray-200 font-bold h-12 w-[12.5%]">
                   <div className="flex flex-row items-center justify-between gap-4">
                     <p>{title}</p>
                     <ContractInfoCheckbox text="사용" />
                   </div>
-                </Table.RowHeaderCell>
+                </Table.ColumnHeaderCell>
               ) : (
-                <Table.RowHeaderCell className="align-middle bg-gray-200 font-bold h-12">
+                <Table.ColumnHeaderCell className="align-middle bg-gray-200 font-bold h-12 w-[12.5%]">
                   {title}
-                </Table.RowHeaderCell>
+                </Table.ColumnHeaderCell>
               )}
               <Table.Cell key={title} className="flex items-center py-8 gap-2 h-12">
                 {(() => {
@@ -90,9 +93,9 @@ export default function SalaryContractTable() {
               {index !== 5 ? (
                 <>
                   {index === 0 ? (
-                    <Table.RowHeaderCell
+                    <Table.ColumnHeaderCell
                       key={SALARY_CONTRACT_TITLE2[index]}
-                      className="align-middle bg-gray-200 font-bold h-12"
+                      className="align-middle bg-gray-200 font-bold h-12 w-[12.5%]"
                     >
                       <div className="flex flex-row items-center justify-start gap-4">
                         <p>{SALARY_CONTRACT_TITLE2[index]}</p>
@@ -100,18 +103,18 @@ export default function SalaryContractTable() {
                           <Link to="/basic-setting/salary-range">급여구간표</Link>
                         </Button>
                       </div>
-                    </Table.RowHeaderCell>
+                    </Table.ColumnHeaderCell>
                   ) : (
-                    <Table.RowHeaderCell
+                    <Table.ColumnHeaderCell
                       key={SALARY_CONTRACT_TITLE2[index]}
                       className="align-middle bg-gray-200 font-bold h-12"
                     >
                       {SALARY_CONTRACT_TITLE2[index]}
-                    </Table.RowHeaderCell>
+                    </Table.ColumnHeaderCell>
                   )}
                   <Table.Cell
                     key={SALARY_CONTRACT_TITLE2[index]}
-                    className="flex items-center py-8 gap-2 h-12"
+                    className="flex items-center py-8 gap-2 h-12 w-3/8"
                   >
                     {(() => {
                       switch (index) {
