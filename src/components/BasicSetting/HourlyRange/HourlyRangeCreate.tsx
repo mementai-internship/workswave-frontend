@@ -11,7 +11,7 @@ export default function HourlyRangeCreate() {
 
   return (
     <HourlyRangeContainer title="시급입력" width="w-[30%]">
-      <form onSubmit={onSubmit} className="px-4 py-6 w-full h-full">
+      <form onSubmit={onSubmit} className="px-4 py-6 w-full h-4/6">
         <div className="flex flex-col gap-2 w-full mb-4">
           <fieldset className="flex gap-2 items-center">
             <label className="w-28 text-sm font-bold">템플릿명</label>
