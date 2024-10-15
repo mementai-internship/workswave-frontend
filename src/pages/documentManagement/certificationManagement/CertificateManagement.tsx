@@ -101,7 +101,7 @@ export default function CertificateManagement() {
                   manager,
                   applicant,
                 }) => (
-                  <Table.Row key={number}>
+                  <Table.Row align="center" key={number}>
                     <Table.RowHeaderCell>{number}</Table.RowHeaderCell>
                     <Table.Cell justify="center" align="center">
                       {office}
