@@ -1,7 +1,7 @@
-import MemberBasicInfoDatePicker from '@/components/MemberInfo/MemberBasicInfoDatePicker';
-import MemberInfoButton from '@/components/MemberInfo/MemberInfoButton';
-import MemberInfoDropdown from '@/components/MemberInfo/MemberInfoDropdownMenu';
-import MemberInfoInput from '@/components/MemberInfo/MemberInfoInput';
+import MemberBasicInfoDatePicker from '@/components/MemberInfo/MemberInfoCommon/MemberBasicInfoDatePicker';
+import MemberInfoButton from '@/components/MemberInfo/MemberInfoCommon/MemberInfoButton';
+import MemberInfoDropdown from '@/components/MemberInfo/MemberInfoCommon/MemberInfoDropdownMenu';
+import MemberInfoInput from '@/components/MemberInfo/MemberInfoCommon/MemberInfoInput';
 import { infoTestData } from '@/components/MemberManagement/MemberManagementTable';
 import { Button, Table } from '@radix-ui/themes';
 

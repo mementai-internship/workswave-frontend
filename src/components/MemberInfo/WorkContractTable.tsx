@@ -1,6 +1,6 @@
 import SelectBox from '@/components/Common/Select';
-import MemberBasicInfoDatePicker from '@/components/MemberInfo/MemberBasicInfoDatePicker';
-import MemberInfoInput from '@/components/MemberInfo/MemberInfoInput';
+import MemberBasicInfoDatePicker from '@/components/MemberInfo/MemberInfoCommon/MemberBasicInfoDatePicker';
+import MemberInfoInput from '@/components/MemberInfo/MemberInfoCommon/MemberInfoInput';
 import WorkContractTableCell from '@/components/MemberInfo/WorkContractTableCell';
 import { WEEK_DAY } from '@/constants/memberInfoTable';
 import { CheckboxGroup, RadioCards, Switch, Table } from '@radix-ui/themes';
