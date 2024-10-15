@@ -1,5 +1,4 @@
 import { Select } from '@radix-ui/themes';
-import { useState } from 'react';
 import { FieldValues, Path, UseFormRegister } from 'react-hook-form';
 
 interface ISelectProps<T extends FieldValues> {
@@ -7,7 +6,7 @@ interface ISelectProps<T extends FieldValues> {
   title: string;
   register?: UseFormRegister<T>;
   options: ISelectOption[];
-  size?: 'small' | 'medium' | 'large';
+  size?: 'xSmall' | 'small' | 'medium' | 'large';
   border?: boolean;
 }
 
@@ -25,9 +24,8 @@ export default function SelectBox<T>({
   size = 'medium',
   border = true,
 }: ISelectProps<T>) {
-  const [selectedItem, setSelectedItem] = useState(title);
-
   const SelectBoxSize = {
+    xSmall: 'w-24',
     small: 'w-36',
     medium: 'w-44',
     large: 'w-48',
@@ -35,27 +33,26 @@ export default function SelectBox<T>({
 
   const registerOption = register && name ? register(name) : {};
 
-  function handleOptionClick(option: ISelectOption) {
-    setSelectedItem(option.name);
-    option.action();
-    console.log(selectedItem);
+  function handleSelectChange(value: string) {
+    const selectedOption = options.find((option) => option.name === value);
+    if (selectedOption) {
+      selectedOption.action();
+    }
   }
 
   return (
-    <Select.Root>
+    <Select.Root onValueChange={handleSelectChange}>
       <Select.Trigger
         {...registerOption}
         placeholder={title}
-        className={`${SelectBoxSize[size]} relative flex items-center justify-between h-10 ${border ? 'border border-gray-50 border-solid' : 'border-none'} text-black px-4 py-4`}
+        className={`${SelectBoxSize[size]} relative justify-between text-black`}
+        variant={border ? 'surface' : 'ghost'}
       />
-      <Select.Content className={`${SelectBoxSize[size]} top-0 left-4 absolute`}>
+      <Select.Content>
         {options.map((option) => (
-          <Select.Group key={option.id}>
-            <Select.Item value={option.name} onSelect={() => handleOptionClick(option)}>
-              {option.name}
-            </Select.Item>
-            {option.id === options.length - 1 && <Select.Separator />}
-          </Select.Group>
+          <Select.Item key={option.id} value={option.name}>
+            {option.name}
+          </Select.Item>
         ))}
       </Select.Content>
     </Select.Root>
