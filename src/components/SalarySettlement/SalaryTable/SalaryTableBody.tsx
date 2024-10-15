@@ -1,3 +1,4 @@
+import { MAX_SALARY } from '@/constants/salarySettlement';
 import { IEmployeeSalarySettlement } from '@/models/salarySettlement.model';
 import { Checkbox, Table, TextField } from '@radix-ui/themes';
 
@@ -58,7 +59,7 @@ export function SalaryTableBody({
               value={employee.incentive === 0 ? '' : employee.incentive.toString()}
               onChange={(e) => handleAllowance(employee.id, 'incentive', e.target.value)}
               placeholder="0"
-              maxLength={9}
+              max={MAX_SALARY}
             />
           </Table.Cell>
           <Table.Cell align="center">{employee.attendanceDeduction.toLocaleString()}</Table.Cell>
@@ -72,12 +73,15 @@ export function SalaryTableBody({
               }
               onChange={(e) => handleAllowance(employee.id, 'previousMonthUnpaid', e.target.value)}
               placeholder="0"
-              maxLength={9}
+              max={MAX_SALARY}
             />
           </Table.Cell>
           <Table.Cell align="center">{employee.overtimePay.toLocaleString()}</Table.Cell>
           <Table.Cell align="center">{employee.weekendWorkPay.toLocaleString()}</Table.Cell>
-          <Table.Cell align="center" className="whitespace-nowrap overflow-hidden text-ellipsis">
+          <Table.Cell
+            align="center"
+            className="min-w-32 max-w-32 overflow-hidden text-ellipsis whitespace-nowrap"
+          >
             {employee.totalPay?.toLocaleString()}
           </Table.Cell>
         </Table.Row>

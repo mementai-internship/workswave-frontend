@@ -1,3 +1,4 @@
+import { MAX_SALARY } from '@/constants/salarySettlement';
 import { IEmployeeSalarySettlement } from '@/models/salarySettlement.model';
 import { calculateTotalPay } from '@/utils/calculateSettlementTotal';
 import { useCallback, useMemo, useState } from 'react';
@@ -15,7 +16,7 @@ export const useEmployees = (initialEmployees: IEmployeeSalarySettlement[]) => {
     setEmployees((prevEmployees) =>
       prevEmployees.map((employee) => {
         if (employee.id === id) {
-          const verifyValue = value === '' ? 0 : parseInt(value, 10);
+          const verifyValue = value === '' ? 0 : Math.min(parseInt(value, 10), MAX_SALARY);
           const updatedEmployee = {
             ...employee,
             [field]: verifyValue,
