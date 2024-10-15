@@ -1,14 +1,14 @@
 import { IEmployeeSalarySettlement } from '@/models/salarySettlement.model';
 import { Checkbox, Table } from '@radix-ui/themes';
 
-interface SalaryTableHeaderProps {
+interface ISalaryTableHeaderProps {
   employees: IEmployeeSalarySettlement[];
   handleAllCheckbox: () => void;
 }
 
-export function SalaryTableHeader({ employees, handleAllCheckbox }: SalaryTableHeaderProps) {
+export function SalaryTableHeader({ employees, handleAllCheckbox }: ISalaryTableHeaderProps) {
   return (
-    <Table.Header className="text-xs text-gray-700 uppercase bg-gray-10 whitespace-nowrap">
+    <Table.Header className="whitespace-nowrap">
       <Table.Row align="center">
         <Table.ColumnHeaderCell>
           <Checkbox
