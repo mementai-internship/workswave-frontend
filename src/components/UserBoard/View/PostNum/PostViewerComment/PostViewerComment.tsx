@@ -2,7 +2,7 @@ import { Button, Table, TextField } from '@radix-ui/themes';
 import React from 'react';
 
 // 댓글 타입 정의
-interface Comment {
+interface IComment {
   id: number;
   author: string;
   content: string;
@@ -10,14 +10,14 @@ interface Comment {
 }
 
 // 임시 댓글 데이터
-const initialComments: Comment[] = [
+const initialComments: IComment[] = [
   { id: 1, author: '홍길동', content: '좋은 글이네요!', createdAt: '2023-04-15' },
   { id: 2, author: '김철수', content: '감사합니다.', createdAt: '2023-04-15' },
 ];
 
 export default function PostViewerComment() {
   return (
-    <div>
+    <section>
       <Table.Root className="w-full mb-4 bg-white">
         <Table.Header>
           <Table.Row>
@@ -44,6 +44,6 @@ export default function PostViewerComment() {
           댓글 작성
         </Button>
       </form>
-    </div>
+    </section>
   );
 }
