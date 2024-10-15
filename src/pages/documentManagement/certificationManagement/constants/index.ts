@@ -1,3 +1,16 @@
+export const memberInfoDropdownMenu = [
+  {
+    id: 1,
+    name: '뮤즈의원(강남점)',
+    action: () => {},
+  },
+  {
+    id: 2,
+    name: '뮤즈의원(수원인계점)',
+    action: () => {},
+  },
+];
+
 export const TABLE_HEAD = [
   '번호',
   '지점',
