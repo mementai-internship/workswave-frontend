@@ -1,4 +1,4 @@
-import { axiosInstance } from '@/apis/axiosInstance';
+import axiosInstance from '@/apis/axiosInstance';
 import { ISalaryCalcStandardsResponse } from '@/models/salaryRange.model';
 
 export const getSalaryCalcStandards = async () => {

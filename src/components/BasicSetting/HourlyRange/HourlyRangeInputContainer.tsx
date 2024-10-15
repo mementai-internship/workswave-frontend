@@ -11,7 +11,7 @@ export default function HourlyRangeInputContainer({ width = '', title, children 
   return (
     <Box className="w-full flex gap-1 items-center">
       <label className={`shrink-0 text-gray-50 text-xs ${width}`}>{title}</label>
-      <Box className="w-full flex gap-1">{children}</Box>
+      <Box className="w-full flex gap-1 ">{children}</Box>
     </Box>
   );
 }

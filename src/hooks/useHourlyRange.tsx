@@ -1,4 +1,5 @@
 import { IHourlyRangeItem, IHourlyRangeItemSplitTime } from '@/models/hourlyRange.model';
+import dayjs from 'dayjs';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSearchParams } from 'react-router-dom';
@@ -37,6 +38,7 @@ export const useHourlyRange = () => {
       endTimeHour: endHour,
       endTimeMinute: endMinute,
       hourlyWage: item.hourlyWage,
+      remoteHourlyWage: item.remoteHourlyWage,
       positionId: position ? position.id : DUMMY_DATA_POSITION[0].id,
       positionName: position ? position.name : DUMMY_DATA_POSITION[0].name,
     };
@@ -69,6 +71,25 @@ export const useHourlyRange = () => {
   }, [itemId, data, setValue]);
 
   const onSubmit = handleSubmit((data: IHourlyRangeItemSplitTime) => {
+    if (data.templateName === '') {
+      alert('템플릿명을 입력해주세요');
+      return;
+    }
+
+    const startTime = dayjs()
+      .hour(Number(data.startTimeHour))
+      .minute(Number(data.startTimeMinute))
+      .second(0);
+    const endTime = dayjs()
+      .hour(Number(data.endTimeHour))
+      .minute(Number(data.endTimeMinute))
+      .second(0);
+
+    if (endTime.isBefore(startTime)) {
+      alert('종업시간이 시업시간보다 이를 수는 없습니다.');
+      return;
+    }
+
     const positionName = DUMMY_DATA_POSITION.find((pos) => pos.id === data.positionId)?.name;
     console.log({ ...data, positionName });
   });

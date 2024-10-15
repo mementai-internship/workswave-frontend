@@ -3,10 +3,7 @@ import HourlyRangeList from '@/components/BasicSetting/HourlyRange/HourlyRangeLi
 
 export default function HourlyRangePage() {
   return (
-    <div
-      className="flex items-start gap-1 min-w-[1160px] max-w-[1500px] mx-auto overflow-x-scroll"
-      style={{ height: 'calc(100vh - 106px - 8rem)' }}
-    >
+    <div className="flex items-start gap-1 min-w-[1120px] h-[calc(100vh-160px)] mx-auto ">
       <HourlyRangeList />
       <HourlyRangeCreate />
     </div>
