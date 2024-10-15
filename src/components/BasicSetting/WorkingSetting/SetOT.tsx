@@ -11,8 +11,8 @@ export default function WorkingSettingOT() {
   //   },
   // });
   return (
-    <div className="p-10 flex flex-col gap-y-10">
-      <div className="flex gap-x-24 bg-gray-10 border p-4">
+    <div className="p-10 flex flex-col gap-y-4">
+      <div className="flex items-center gap-x-24 bg-gray-10 border p-4">
         <Txt variant="subtitle1" color="gray-50">
           의사
         </Txt>
@@ -35,7 +35,7 @@ export default function WorkingSettingOT() {
         </Button>
       </div>
 
-      <div className="flex gap-x-24 bg-gray-10 border p-4">
+      <div className="flex items-center gap-x-24 bg-gray-10 border p-4">
         <Txt variant="subtitle1" color="gray-50">
           일반
         </Txt>
