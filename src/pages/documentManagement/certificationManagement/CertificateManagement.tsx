@@ -20,7 +20,7 @@ export default function CertificateManagement() {
   const handleCertificateIssuanceButtonClick = () => {};
 
   return (
-    <div>
+    <div className="flex flex-col w-full">
       <div className="flex items-center justify-between">
         <div className="flex items-center justify-center">
           <Title content="증명서관리" />
