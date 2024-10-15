@@ -1,9 +1,10 @@
 export interface IEmployeeSalarySettlement {
   // Backend에 맞춰서 수정 필요
+  id: string;
   name: string;
   region: string;
   department: string;
-  isSelected: boolean;
+  isSelected?: boolean;
   job: '의사' | '간호사' | '기타';
   hireDate: string;
   resignDate?: string;

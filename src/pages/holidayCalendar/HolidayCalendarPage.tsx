@@ -25,20 +25,14 @@ export default function DayOffCalendarPage() {
   return (
     <div className="flex flex-col gap-4 h-full w-full">
       <header className="relative flex justify-between items-center">
-        <SelectBox
-          title="지점 선택"
-          name="지점 선택"
-          options={DUMMY_DROP_DOWN_MENU}
-          size="large"
-          border={false}
-        />
+        <SelectBox title="지점 선택" name="지점 선택" options={DUMMY_DROP_DOWN_MENU} />
         {view === 'dayGridMonth' ? (
           <div className="absolute left-1/2 transform -translate-x-1/2">
-            <ChangeMonth currentDate={currentDate} onChangeMonth={handleChangeMonth} />
+            <ChangeMonth currMonth={currentDate} onChangeMonth={handleChangeMonth} />
           </div>
         ) : (
           <div className="absolute left-1/2 transform -translate-x-1/2">
-            <ChangeWeek currentDate={currentDate} onChangeWeek={handleChangeWeek} />
+            <ChangeWeek currWeek={currentDate} onChangeWeek={handleChangeWeek} />
           </div>
         )}
         <div className="flex gap-2">

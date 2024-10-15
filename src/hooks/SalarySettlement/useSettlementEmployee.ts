@@ -1,60 +1,70 @@
-import { MAX_SALARY } from '@/constants/salarySettlementPage';
+import { MAX_SALARY } from '@/constants/salarySettlement';
 import { IEmployeeSalarySettlement } from '@/models/salarySettlement.model';
 import { calculateTotalPay } from '@/utils/calculateSettlementTotal';
-import { useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
-export const useEmployees = (initialData: IEmployeeSalarySettlement[]) => {
-  const [employees, setEmployees] = useState(
-    initialData.map((employee) => ({
+export const useEmployees = (initialEmployees: IEmployeeSalarySettlement[]) => {
+  const [employees, setEmployees] = useState<IEmployeeSalarySettlement[]>(
+    initialEmployees.map((employee) => ({
       ...employee,
-      incentive: employee.incentive || 0,
-      previousMonthUnpaid: employee.previousMonthUnpaid || 0,
-      totalPay: calculateTotalPay({
-        ...employee,
-        incentive: employee.incentive || 0,
-        previousMonthUnpaid: employee.previousMonthUnpaid || 0,
-      }),
       isSelected: false,
+      totalPay: calculateTotalPay(employee),
     }))
   );
 
-  const handleAllowance = (
-    index: number,
-    field: 'incentive' | 'previousMonthUnpaid',
-    value: string
-  ) => {
-    const numericValue = value === '' ? 0 : parseInt(value) || 0;
-
-    if (numericValue > MAX_SALARY) {
-      return;
-    }
-
-    const updatedEmployees = employees.map((employee, i) => {
-      if (i === index) {
-        const updatedEmployee = {
-          ...employee,
-          [field]: numericValue,
-        };
-        return {
-          ...updatedEmployee,
-          totalPay: calculateTotalPay(updatedEmployee),
-        };
-      }
-      return employee;
-    });
-    setEmployees(updatedEmployees);
-  };
-
-  const handleCheckbox = (index: number) => {
-    setEmployees(
-      employees.map((emp, i) => (i === index ? { ...emp, isSelected: !emp.isSelected } : emp))
+  const handleAllowance = useCallback((id: string, field: string, value: string) => {
+    setEmployees((prevEmployees) =>
+      prevEmployees.map((employee) => {
+        if (employee.id === id) {
+          const verifyValue = value === '' ? 0 : Math.min(parseInt(value, 10), MAX_SALARY);
+          const updatedEmployee = {
+            ...employee,
+            [field]: verifyValue,
+          };
+          updatedEmployee.totalPay = calculateTotalPay(updatedEmployee);
+          return updatedEmployee;
+        }
+        return employee;
+      })
     );
-  };
+  }, []);
+
+  const employeesWithTotalPay = useMemo(() => {
+    return employees.map((employee) => ({
+      ...employee,
+      totalPay: calculateTotalPay(employee),
+    }));
+  }, [employees]);
+
+  const handleCheckbox = useCallback((id: string) => {
+    setEmployees((prevEmployees) =>
+      prevEmployees.map((employee) =>
+        employee.id === id ? { ...employee, isSelected: !employee.isSelected } : employee
+      )
+    );
+  }, []);
 
   const handleAllCheckbox = () => {
     const allSelected = employees.every((emp) => emp.isSelected);
     setEmployees(employees.map((emp) => ({ ...emp, isSelected: !allSelected })));
   };
 
-  return { employees, handleAllowance, handleCheckbox, handleAllCheckbox };
+  const resetEmployees = useCallback(() => {
+    setEmployees(
+      initialEmployees.map((emp) => ({
+        ...emp,
+        isSelected: false,
+        incentive: 0,
+        previousMonthUnpaid: 0,
+      }))
+    );
+  }, [initialEmployees]);
+
+  return {
+    employees: employeesWithTotalPay,
+    handleAllowance,
+    handleCheckbox,
+    handleAllCheckbox,
+    resetEmployees,
+  };
 };
