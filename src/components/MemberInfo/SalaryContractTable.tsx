@@ -20,7 +20,7 @@ export default function SalaryContractTable() {
               className="bg-gray-200 flex items-center gap-4 h-24 py-8"
             >
               연봉계약일
-              <SelectBox title="일수 선택" options={[]} size="xSmall" />
+              <SelectBox title="일수 선택" border={false} options={[]} size="xSmall" />
             </Table.ColumnHeaderCell>
             <Table.Cell className="align-middle w-[37.5%]">
               <div className="flex items-center gap-4">
