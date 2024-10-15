@@ -10,7 +10,7 @@ export function SalaryTableHeader({ employees, handleAllCheckbox }: ISalaryTable
   return (
     <Table.Header className="whitespace-nowrap">
       <Table.Row align="center">
-        <Table.ColumnHeaderCell>
+        <Table.ColumnHeaderCell className="w-10">
           <Checkbox
             size="1"
             color="gray"
@@ -23,18 +23,42 @@ export function SalaryTableHeader({ employees, handleAllCheckbox }: ISalaryTable
           <br />
           근무파트
         </Table.ColumnHeaderCell>
-        <Table.ColumnHeaderCell justify="center">입사일/퇴사일</Table.ColumnHeaderCell>
-        <Table.ColumnHeaderCell justify="center">월급</Table.ColumnHeaderCell>
-        <Table.ColumnHeaderCell justify="center">기본급</Table.ColumnHeaderCell>
-        <Table.ColumnHeaderCell justify="center">포괄연장수당</Table.ColumnHeaderCell>
-        <Table.ColumnHeaderCell justify="center">연차수당</Table.ColumnHeaderCell>
-        <Table.ColumnHeaderCell justify="center">휴일수당</Table.ColumnHeaderCell>
-        <Table.ColumnHeaderCell justify="center">직무수당</Table.ColumnHeaderCell>
-        <Table.ColumnHeaderCell justify="center">인센티브</Table.ColumnHeaderCell>
-        <Table.ColumnHeaderCell justify="center">근태공제</Table.ColumnHeaderCell>
-        <Table.ColumnHeaderCell justify="center">전월미지급</Table.ColumnHeaderCell>
-        <Table.ColumnHeaderCell justify="center">O.T 수당</Table.ColumnHeaderCell>
-        <Table.ColumnHeaderCell justify="center">주말근로수당</Table.ColumnHeaderCell>
+        <Table.ColumnHeaderCell justify="center" className="w-32">
+          입사일/퇴사일
+        </Table.ColumnHeaderCell>
+        <Table.ColumnHeaderCell justify="center" className="w-24">
+          월급
+        </Table.ColumnHeaderCell>
+        <Table.ColumnHeaderCell justify="center" className="w-24">
+          기본급
+        </Table.ColumnHeaderCell>
+        <Table.ColumnHeaderCell justify="center" className="w-32">
+          포괄연장수당
+        </Table.ColumnHeaderCell>
+        <Table.ColumnHeaderCell justify="center" className="w-24">
+          연차수당
+        </Table.ColumnHeaderCell>
+        <Table.ColumnHeaderCell justify="center" className="w-24">
+          휴일수당
+        </Table.ColumnHeaderCell>
+        <Table.ColumnHeaderCell justify="center" className="w-24">
+          직무수당
+        </Table.ColumnHeaderCell>
+        <Table.ColumnHeaderCell justify="center" className="w-24">
+          인센티브
+        </Table.ColumnHeaderCell>
+        <Table.ColumnHeaderCell justify="center" className="w-24">
+          근태공제
+        </Table.ColumnHeaderCell>
+        <Table.ColumnHeaderCell justify="center" className="w-28">
+          전월미지급
+        </Table.ColumnHeaderCell>
+        <Table.ColumnHeaderCell justify="center" className="w-24">
+          O.T 수당
+        </Table.ColumnHeaderCell>
+        <Table.ColumnHeaderCell justify="center" className="w-28">
+          주말근로수당
+        </Table.ColumnHeaderCell>
         <Table.ColumnHeaderCell justify="center" className="w-32">
           급여합계
         </Table.ColumnHeaderCell>

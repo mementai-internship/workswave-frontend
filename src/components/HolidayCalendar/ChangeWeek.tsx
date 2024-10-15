@@ -2,28 +2,27 @@ import { Dayjs } from 'dayjs';
 import { useEffect, useState } from 'react';
 
 interface ChangeWeekProps {
-  currentDate: Dayjs;
+  currWeek: Dayjs;
   onChangeWeek: (newDate: Dayjs) => void;
 }
 
-export function ChangeWeek({ currentDate, onChangeWeek }: ChangeWeekProps) {
+export function ChangeWeek({ currWeek, onChangeWeek }: ChangeWeekProps) {
   const [weekRange, setWeekRange] = useState('');
 
   useEffect(() => {
-    // 주간 범위 계산
-    const startOfWeek = currentDate.startOf('week');
-    const endOfWeek = currentDate.endOf('week');
+    const startOfWeek = currWeek.startOf('week');
+    const endOfWeek = currWeek.endOf('week');
     const formattedStart = startOfWeek.format('M월 D일');
     const formattedEnd = endOfWeek.format('M월 D일');
     setWeekRange(`${formattedStart} - ${formattedEnd}`);
-  }, [currentDate]);
+  }, [currWeek]);
 
   const goToPreviousWeek = () => {
-    onChangeWeek(currentDate.subtract(1, 'week'));
+    onChangeWeek(currWeek.subtract(1, 'week'));
   };
 
   const goToNextWeek = () => {
-    onChangeWeek(currentDate.add(1, 'week'));
+    onChangeWeek(currWeek.add(1, 'week'));
   };
 
   return (
