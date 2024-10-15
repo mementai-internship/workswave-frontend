@@ -24,8 +24,8 @@ export default function SalaryContractTable() {
             </Table.ColumnHeaderCell>
             <Table.Cell className="align-middle w-[37.5%]">
               <div className="flex items-center gap-4">
-                <MemberBasicInfoDatePicker />
-                <MemberBasicInfoDatePicker />
+                <MemberBasicInfoDatePicker style="bottom" />
+                <MemberBasicInfoDatePicker style="bottom" />
                 <SelectBox title="필터" options={[]} border={false} size="xSmall" />
               </div>
             </Table.Cell>

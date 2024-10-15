@@ -11,7 +11,7 @@ export default function WorkContractTable() {
     <>
       <h2 className="px-4 py-2 text-purple-50 font-bold">1) 근로계약</h2>
       <hr className="border-gray-200 w-full border-2" />
-      <Table.Root>
+      <Table.Root className="table-fixed h-72">
         <Table.Header>
           <Table.Row>
             <Table.ColumnHeaderCell
@@ -23,8 +23,8 @@ export default function WorkContractTable() {
             </Table.ColumnHeaderCell>
             <Table.Cell className="align-middle w-[37.5%]">
               <div className="flex items-center gap-4">
-                <MemberBasicInfoDatePicker />
-                <MemberBasicInfoDatePicker />
+                <MemberBasicInfoDatePicker style="rightTop" />
+                <MemberBasicInfoDatePicker style="rightTop" />
                 <div className="flex flex-row items-center justify-center">
                   <div className="flex gap-2 justify-center items-center">
                     <ContractInfoCheckbox text="기한없음" />
