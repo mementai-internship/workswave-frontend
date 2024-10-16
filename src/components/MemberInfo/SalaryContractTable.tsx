@@ -17,16 +17,15 @@ export default function SalaryContractTable() {
           <Table.Row>
             <Table.ColumnHeaderCell
               colSpan={4}
-              className="bg-gray-200 flex items-center gap-4 h-24 py-8"
+              className="bg-gray-200 flex items-center gap-1 h-24 py-8"
             >
               연봉계약일
-              <SelectBox title="일수 선택" border={false} options={[]} size="xSmall" />
             </Table.ColumnHeaderCell>
             <Table.Cell className="align-middle w-[37.5%]">
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-1">
                 <MemberBasicInfoDatePicker style="bottom" />
                 <MemberBasicInfoDatePicker style="bottom" />
-                <SelectBox title="필터" options={[]} border={false} size="xSmall" />
+                <SelectBox title="필터" options={[]} border={false} size="2xSmall" />
               </div>
             </Table.Cell>
             <Table.Cell className="w-[12.5%]"></Table.Cell>
@@ -39,7 +38,7 @@ export default function SalaryContractTable() {
             <Table.Row className="h-12">
               {index === 0 ? (
                 <Table.ColumnHeaderCell className="align-middle bg-gray-200 font-bold h-12">
-                  <div className="flex flex-row items-center justify-start gap-4">
+                  <div className="flex flex-row items-center justify-start gap-4 whitespace-nowrap">
                     <p>{title}</p>
                     <SelectBox title="템플릿 선택" options={[]} border={false} size="xSmall" />
                   </div>
@@ -107,7 +106,7 @@ export default function SalaryContractTable() {
                   ) : (
                     <Table.ColumnHeaderCell
                       key={SALARY_CONTRACT_TITLE2[index]}
-                      className="align-middle bg-gray-200 font-bold h-12"
+                      className="align-middle bg-gray-200 font-bold h-12 whitespace-nowrap"
                     >
                       {SALARY_CONTRACT_TITLE2[index]}
                     </Table.ColumnHeaderCell>
