@@ -1,4 +1,4 @@
-export const MEMBERMANAGEMENTTABLETITLE = [
+export const MEMBER_MANAGEMENT_TABLE_TITLE = [
   '번호',
   '지점',
   '이름',
@@ -6,8 +6,10 @@ export const MEMBERMANAGEMENTTABLETITLE = [
   '생년월일',
   '연락처',
   '이메일',
-  '계약기간',
+  '입사일',
+  '월급',
+  '연봉',
   '근무기간',
-  '등록/작성',
+  '만료',
   '삭제',
 ];
