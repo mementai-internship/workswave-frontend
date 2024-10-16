@@ -90,3 +90,35 @@ export default function SelectBox<T>({
 //     <button type="submit">Submit</button>
 //   </form>
 // );
+
+// 사용 예시
+// const memberInfoDropdownMenu = [
+//   {
+//     id: 1,
+//     name: '뮤즈의원(강남점)',
+//     action: () => {},
+//   },
+//   {
+//     id: 2,
+//     name: '뮤즈의원(수원인계점)',
+//     action: () => {},
+//   },
+// ];
+
+// const { register, handleSubmit } = useForm();
+// const selectOptions = [
+//   { id: 1, name: "Option 1", action: () => {} },
+//   { id: 2, name: "Option 2", action: () => {} },
+//   { id: 3, name: "Option 3", action: () => {} },
+// ];
+
+// const onSubmit = (data) => {
+//   console.log(data);
+// };
+
+// return (
+//   <form onSubmit={handleSubmit(onSubmit)}>
+//     <SelectBox title="test" name="test" register={register} options={memberInfoDropdownMenu} size="small" border={false} />
+//     <button type="submit">Submit</button>
+//   </form>
+// );

@@ -1,11 +1,12 @@
+import ContactSearchInput from '@/components/Common/ContactSearchInput';
 import SelectBox from '@/components/Common/Select';
-import MemberManagementFilterButton from '@/components/MemberManagement/MemberManagementFilterButton';
 
 export default function MemberManagementFilterBar() {
   return (
     <div className="flex gap-4">
       <SelectBox
-        title="회원 검색"
+        title="지점"
+        size="small"
         options={[
           {
             id: 1,
@@ -19,7 +20,7 @@ export default function MemberManagementFilterBar() {
           },
         ]}
       />
-      <MemberManagementFilterButton />
+      <ContactSearchInput />
     </div>
   );
 }
