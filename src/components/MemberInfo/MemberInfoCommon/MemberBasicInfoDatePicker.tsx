@@ -31,7 +31,7 @@ export default function MemberBasicInfoDatePicker({ style }: IDatePickerProps) {
         </button>
         {showDatePicker && (
           <div
-            className={`absolute z-10 bg-gray-10 shadow-lg ${style === 'bottom' ? 'top-full ' : style === 'rightTop' ? 'left-48 top-[-40px]' : 'top--1 left-48'}`}
+            className={`absolute z-10 bg-gray-10 shadow-lg ${style === 'bottom' ? 'top-full ' : style === 'rightTop' ? 'left-48 top-[-40px]' : 'left-48'}`}
           >
             <DayPicker selected={selectedDate} onSelect={handleDaySelect} mode="single" />
           </div>
