@@ -81,9 +81,10 @@ export default function WorkingSettingPage() {
     },
   });
 
-  const handleChangeBranch = (branch: { id: number; name: string }) => {
-    setCurrentBranch(branch);
-    setSearchParams({ ...searchParams, branch_id: branch.id.toString() });
+  const handleChangeBranch = (branchId: string) => {
+    const selectedBranch = OPTIONS.find((branch) => branch.id.toString() === branchId);
+    setCurrentBranch(selectedBranch);
+    setSearchParams({ ...searchParams, branch_id: branchId.toString() });
   };
 
   return (
@@ -97,7 +98,7 @@ export default function WorkingSettingPage() {
             <div className="flex-1">
               <Select.Root
                 defaultValue={currentBranch.name}
-                onValueChange={(branch) => handleChangeBranch(branch)}
+                onValueChange={(val) => handleChangeBranch(val)}
                 size="3"
               >
                 <Select.Trigger variant="ghost" className="text-xl font-bold" />
