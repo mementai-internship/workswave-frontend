@@ -1,6 +1,4 @@
-import MemberManagementTableCell, {
-  userId,
-} from '@/components/MemberManagement/MembermanagementTableCell';
+import MemberManagementTableCell from '@/components/MemberManagement/MemberManagementTableCell';
 import { MEMBER_MANAGEMENT_TABLE_TITLE } from '@/constants/memberManagementTableTitle';
 import { Table } from '@radix-ui/themes';
 import React from 'react';
@@ -123,6 +121,9 @@ export const infoTestData: IMemberManagementTableProps[] = [
     },
   },
 ];
+
+//API 연결 후 삭제
+export const userId = 2;
 
 export default function MemberManagementTable() {
   return (

@@ -3,10 +3,7 @@ import { Table } from '@radix-ui/themes';
 import { PiGenderFemale, PiGenderMale, PiStarFill, PiXBold } from 'react-icons/pi';
 import { Link } from 'react-router-dom';
 
-import { IMemberManagementTableProps } from './MemberManagementTable';
-
-//API 연결 후 삭제
-export const userId = 2;
+import { IMemberManagementTableProps, userId } from './MemberManagementTable';
 
 export default function MemberManagementTableCell({ data }: { data: IMemberManagementTableProps }) {
   return (
