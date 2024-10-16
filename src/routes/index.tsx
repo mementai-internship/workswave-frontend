@@ -121,12 +121,21 @@ const router = createBrowserRouter([
         element: <MemberInfoPage />,
       },
       {
-        path: '/board/view',
-        element: <BoardViewPage />,
-      },
-      {
-        path: '/board/write',
-        element: <BoardWritePage />,
+        path: '/board',
+        children: [
+          {
+            index: true,
+            element: <Navigate to="/board/view" replace />,
+          },
+          {
+            path: '/board/view',
+            element: <BoardViewPage />,
+          },
+          {
+            path: '/board/write',
+            element: <BoardWritePage />,
+          },
+        ],
       },
     ],
   },
