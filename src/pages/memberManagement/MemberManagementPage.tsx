@@ -7,7 +7,6 @@ import { useState } from 'react';
 import { PiGear } from 'react-icons/pi';
 
 export default function MemberManagementPage() {
-  const [listPage, setListPage] = useState<number>(1);
   const itemsPerPage = 10;
   const [selectedTab, setSelectedTab] = useState<string>('info');
   function handleTabClick(tab: string) {
@@ -75,12 +74,7 @@ export default function MemberManagementPage() {
         <MemberManagementFilterBar />
       </div>
       <MemberManagementTable />
-      <Pagination
-        totalItems={500}
-        itemsPerPage={itemsPerPage}
-        currentPage={listPage}
-        onChangePage={setListPage}
-      />
+      <Pagination totalItems={500} itemsPerPage={itemsPerPage} />
     </div>
   );
 }
