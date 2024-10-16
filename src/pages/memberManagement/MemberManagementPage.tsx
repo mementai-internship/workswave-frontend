@@ -35,18 +35,20 @@ export default function MemberManagementPage() {
     <div className="flex flex-col gap-2 w-full">
       <Title content="회원관리" />
       <hr className="w-min-screen h-0.5 bg-gray-300" />
-      <div className="flex gap-2 border-b-2 border-gray-300">
-        {tabList.map((tab) => (
-          <button
-            key={tab.value}
-            className={`${selectedTab === tab.value ? 'font-bold border-b-2 border-black' : 'text-gray-50'} text-xl px-2 py-4 h-16`}
-            onClick={() => handleTabClick(tab.value)}
-          >
-            {tab.name}
-          </button>
-        ))}
+      <div className="flex gap-2 border-b-2 border-gray-300 justify-between items-center">
+        <div className="flex gap-2">
+          {tabList.map((tab) => (
+            <button
+              key={tab.value}
+              className={`${selectedTab === tab.value ? 'font-bold border-b-2 border-black' : 'text-gray-50'} text-xl px-2 py-4 h-16`}
+              onClick={() => handleTabClick(tab.value)}
+            >
+              {tab.name}
+            </button>
+          ))}
+        </div>
+        <MemberManagementFilterBar />
       </div>
-      <MemberManagementFilterBar />
       <MemberManagementTable />
       <Pagination
         totalItems={500}
