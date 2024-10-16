@@ -1,7 +1,7 @@
 import axiosInstance from '@/apis/axiosInstance';
 import { useQuery } from '@tanstack/react-query';
 
-const workingSettingPart = 'workingSettingPart';
+const WORKING_SETTING_PART_QUERY_KEY = 'workingSettingPart';
 
 const getWorkingSettingPart = async (branchId: number) => {
   const response = await axiosInstance(`branches/${branchId}/parts`);
@@ -10,7 +10,7 @@ const getWorkingSettingPart = async (branchId: number) => {
 
 export const useGetWorkingSettingPart = (id: number) => {
   const { data = [], isFetching } = useQuery({
-    queryKey: [workingSettingPart],
+    queryKey: [WORKING_SETTING_PART_QUERY_KEY],
     queryFn: () => getWorkingSettingPart(id),
     throwOnError: true,
   });
