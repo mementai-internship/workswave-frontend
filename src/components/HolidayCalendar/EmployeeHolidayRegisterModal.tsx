@@ -4,11 +4,8 @@ import * as Tooltip from '@radix-ui/react-tooltip';
 import { Button } from '@radix-ui/themes';
 import { ko } from 'date-fns/locale';
 import dayjs from 'dayjs';
-import 'dayjs/locale/ko';
 import { useState } from 'react';
 import { DayPicker, getDefaultClassNames } from 'react-day-picker';
-
-dayjs.locale('ko');
 
 interface IHolidayRegisterModalProps {
   isOpen: boolean;
@@ -99,7 +96,7 @@ export default function HolidayRegisterModal({
         <Dialog.Content className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg w-5/6 h-3/4 flex flex-col">
           <Dialog.Title asChild>
             <Txt variant="h4" color="black" className="border-b-2 pb-2 mb-4">
-              휴무 등록
+              다중 휴무 등록
             </Txt>
           </Dialog.Title>
           <Dialog.Description className="sr-only">

@@ -9,26 +9,26 @@ import dayjs from 'dayjs';
 interface IDayOffCalendarProps {
   currDate: dayjs.Dayjs;
   view: 'dayGridMonth' | 'dayGridWeek';
-  onDateClick: (date: Date) => void;
-  onEventClick: (date: Date) => void;
+  onDateAndEventClick: (date: Date) => void;
   events: EventInput[];
   isSundayOff: boolean;
+  holidays: Date[];
 }
 
 export default function HolidayCalendar({
   currDate,
   view,
-  onDateClick,
-  onEventClick,
+  onDateAndEventClick,
   events,
   isSundayOff,
+  holidays,
 }: IDayOffCalendarProps) {
   const handleDateClick = (arg: DateClickArg) => {
-    onDateClick(arg.date);
+    onDateAndEventClick(arg.date);
   };
 
   const handleEventClick = (arg: EventClickArg) => {
-    onEventClick(arg.event.start || new Date());
+    onDateAndEventClick(arg.event.start || new Date());
   };
 
   const renderEventContent = (eventInfo: {
@@ -57,8 +57,11 @@ export default function HolidayCalendar({
     isToday: boolean;
   }) => {
     const classes = ['overflow-hidden'];
-    if (isSundayOff && arg.date.getDay() === 0) {
-      classes.push('text-red font-bold');
+    if (
+      (isSundayOff && arg.date.getDay() === 0) ||
+      holidays.some((holiday) => dayjs(holiday).isSame(arg.date, 'day'))
+    ) {
+      classes.push('text-red font-bold bg-[#FDE8EC]');
     }
     return classes;
   };
@@ -80,7 +83,7 @@ export default function HolidayCalendar({
       }}
       contentHeight="88vh"
       events={events}
-      eventClassNames={() => 'bg-transparent p-0 border-0'}
+      eventClassNames={() => 'bg-transparent border-0 p-0 font-bold'}
       dayCellClassNames={dayCellClassNames}
       dayMaxEventRows={true}
       moreLinkClassNames="text-purple-50 font-bold"
