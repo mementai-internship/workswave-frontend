@@ -16,6 +16,7 @@ import MemberInfoPage from '@/pages/memberManagement/MemberInfoPage';
 import MemberManagementPage from '@/pages/memberManagement/MemberManagementPage';
 import ManagementOfficePage from '@/pages/officeSetting/ManagementOfficePage';
 import SalarySettlementPage from '@/pages/salarySettlement/SalarySettlementPage';
+import SimpleMenu from '@/pages/simpleMenu/SimpleMenu';
 import BoardViewPage from '@/pages/userBoard/view/BoardViewPage';
 import BoardWritePage from '@/pages/userBoard/write/BoardWritePage';
 import WorkManagementPage from '@/pages/workManagement/WorkManagementPage';
@@ -136,6 +137,10 @@ const router = createBrowserRouter([
             element: <BoardWritePage />,
           },
         ],
+      },
+      {
+        path: 'simple-menu',
+        element: <SimpleMenu />,
       },
     ],
   },
