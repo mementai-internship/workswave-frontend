@@ -1,5 +1,7 @@
 //"MSO 최고권한", "통합관리자", "파트관리자", "사원"
-export type TUserAuthority = 'MSO 최고권한' | '최고관리자' | '관리자' | '사원' | '퇴사자';
+export type TUserAuthority = 'MSO 최고권한' | '통합관리자' | '파트관리자' | '사원';
+
+export type TUserRole = 'MSO 최고권한' | '최고관리자' | '관리자' | '사원' | '퇴사자';
 
 export type TUserResBody = {
   message: string;
@@ -21,7 +23,7 @@ export type TUser = {
   hire_date: Date;
   last_position: string;
   resignation_date: Date;
-  role: TUserAuthority;
+  role: TUserRole;
   last_career_start_date: Date;
   email: string;
   name: string;
