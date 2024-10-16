@@ -27,7 +27,7 @@ export default function Pagination({ totalItems, itemsPerPage }: IPaginationProp
 
   return (
     <>
-      <div className="flex items-center gap-1 justify-center">
+      <div className="flex items-center gap-1 justify-center p-2">
         <button
           disabled={currentPage < 11}
           onClick={() => handleChangePage(Math.min(totalPages, currentPage - 10))}
@@ -44,7 +44,9 @@ export default function Pagination({ totalItems, itemsPerPage }: IPaginationProp
           <button
             key={number}
             className={`w-8 h-8 py-1 rounded-md align-middle ${
-              currentPage === number ? 'border-purple-50 border' : 'text-gray-50 hover:bg-gray-10'
+              currentPage === number
+                ? 'border-purple-50 border'
+                : 'text-gray-50 border border-gray-10 hover:bg-gray-10'
             }`}
             onClick={() => handleChangePage(number)}
           >
