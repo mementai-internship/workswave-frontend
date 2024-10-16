@@ -5,9 +5,15 @@ import { Link } from 'react-router-dom';
 
 import { IMemberManagementTableProps } from './MemberManagementTable';
 
+//API 연결 후 삭제
+export const userId = 2;
+
 export default function MemberManagementTableCell({ data }: { data: IMemberManagementTableProps }) {
   return (
-    <Table.Row key={data.id} className={`${data.id === 2 ? 'border-b-8 border-gray-300' : ''}`}>
+    <Table.Row
+      key={data.id}
+      className={`${data.id === userId ? 'border-b-8 border-gray-300' : ''}`}
+    >
       <Table.RowHeaderCell className="text-center p-4 align-middle w-[3%]">
         {data.id}
       </Table.RowHeaderCell>
@@ -15,10 +21,10 @@ export default function MemberManagementTableCell({ data }: { data: IMemberManag
       <Table.Cell className="p-4 align-middle w-[10%]">
         <Link to={`/member-management/member-info`}>
           <div
-            className={`${data.id === 2 ? 'font-bold' : ''} flex flex-row gap-1 justify-center items-center`}
+            className={`${data.id === userId ? 'font-bold' : ''} flex flex-row gap-1 justify-center items-center`}
           >
             {data.gender === '남' ? <PiGenderMale /> : <PiGenderFemale />} {data.name}
-            {data.id === 2 ? <PiStarFill /> : null}
+            {data.id === userId ? <PiStarFill /> : null}
           </div>
         </Link>
       </Table.Cell>

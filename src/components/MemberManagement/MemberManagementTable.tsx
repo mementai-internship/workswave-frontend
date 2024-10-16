@@ -1,4 +1,6 @@
-import MemberManagementTableCell from '@/components/MemberManagement/MembermanagementTableCell';
+import MemberManagementTableCell, {
+  userId,
+} from '@/components/MemberManagement/MembermanagementTableCell';
 import { MEMBER_MANAGEMENT_TABLE_TITLE } from '@/constants/memberManagementTableTitle';
 import { Table } from '@radix-ui/themes';
 import React from 'react';
@@ -136,14 +138,14 @@ export default function MemberManagementTable() {
       </Table.Header>
       <Table.Body>
         {infoTestData
-          .filter((data) => data.id === 2)
+          .filter((data) => data.id === userId)
           .map((data: IMemberManagementTableProps) => (
             <React.Fragment key={data.id}>
               <MemberManagementTableCell data={data} />
             </React.Fragment>
           ))}
         {infoTestData
-          .filter((data) => data.id !== 2)
+          .filter((data) => data.id !== userId)
           .map((data: IMemberManagementTableProps) => (
             <React.Fragment key={data.id}>
               <MemberManagementTableCell data={data} />
