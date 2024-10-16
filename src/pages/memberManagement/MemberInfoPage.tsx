@@ -22,19 +22,19 @@ export default function MemberInfoPage() {
       <div>
         <div className="flex gap-2">
           <button
-            className={`${selectedTab === 'info' ? 'font-bold border-b-2 border-black' : 'border-b-2 border-gray-10 text-light-gray'} text-xl px-2 py-1`}
+            className={`${selectedTab === 'info' ? 'font-bold border-b-2 border-black' : 'border-b-2 border-gray-10 text-gray-50'} text-xl px-2 py-1`}
             onClick={() => handleTabClick('info')}
           >
             정보
           </button>
           <button
-            className={`${selectedTab === 'contract' ? 'font-bold border-b-2 border-black' : 'border-b-2 border-gray-10 text-light-gray'} text-xl px-2 py-1`}
+            className={`${selectedTab === 'contract' ? 'font-bold border-b-2 border-black' : 'border-b-2 border-gray-10 text-gray-50'} text-xl px-2 py-1`}
             onClick={() => handleTabClick('contract')}
           >
             계약
           </button>
           <button
-            className={`${selectedTab === 'document' ? 'font-bold border-b-2 border-black' : 'border-b-2 border-gray-10 text-light-gray'} text-xl px-2 py-1`}
+            className={`${selectedTab === 'document' ? 'font-bold border-b-2 border-black' : 'border-b-2 border-gray-10 text-gray-50'} text-xl px-2 py-1`}
             onClick={() => handleTabClick('document')}
           >
             문서·증명서
