@@ -22,7 +22,7 @@ export default function UserBoardTable({ data }: { data: IUserBoardTableProps[] 
         <UserBoardTableHeader />
         <UserBoardTableBody data={data} />
       </Table.Root>
-      <Pagination totalItems={100} itemsPerPage={10} currentPage={1} onChangePage={() => {}} />
+      <Pagination totalItems={100} itemsPerPage={10} />
     </>
   );
 }
