@@ -1,34 +1,32 @@
-import HolidaySettingForm from '@/components/BasicSetting/holidaySetting/HolidaySettingForm';
 import BasicSettingSubTitle from '@/components/Common/BasicSettingSubTitle';
 import { Txt } from '@/components/Common/Txt';
 // import { useGetParts } from '@/hooks/apis/useParts';
-import { useHolidaySetting } from '@/hooks/useHolidaySetting';
 import { IHolidaySetting } from '@/models/holidaySetting.model';
-import { Button, Dialog } from '@radix-ui/themes';
-import { useState } from 'react';
+import { Button } from '@radix-ui/themes';
+import { UseFormSetValue } from 'react-hook-form';
 import { PiXBold } from 'react-icons/pi';
 
 // TODO: user 브랜치 아이디로 변경될 것
 // const branchId = 1;
 
-export default function HolidaySettingItem({ id, name, ...data }: IHolidaySetting) {
+interface IPropsType extends IHolidaySetting {
+  onChangeEditMode: (boolean: boolean) => void;
+  setValue: UseFormSetValue<IHolidaySetting>;
+}
+
+export default function HolidaySettingItem({
+  id,
+  name,
+  onChangeEditMode,
+  setValue,
+
+  ...data
+}: IPropsType) {
   // const { data: parts, isFetching } = useGetParts(branchId);
 
-  const {
-    isDialogOpen,
-    handleChangeDialogOpen,
-    setValue,
-    handleSubmit,
-    onSubmit,
-    reset,
-    register,
-  } = useHolidaySetting();
-
-  const [isEditingMode, setIsEditingMode] = useState(false);
   const { leave_count, is_paid } = data;
   const handleClickUpdateItem = (id: number) => {
-    handleChangeDialogOpen(true);
-    setIsEditingMode(true);
+    onChangeEditMode(true);
     setValue('id', id);
     setValue('name', name);
     Object.entries(data).forEach(([key, value]) => setValue(key as keyof typeof data, value));
@@ -80,38 +78,6 @@ export default function HolidaySettingItem({ id, name, ...data }: IHolidaySettin
           onClick={() => handleClickDeleteItem(id)}
         />
       </div>
-      {isEditingMode && (
-        <Dialog.Root open={isDialogOpen} onOpenChange={(val) => handleChangeDialogOpen(val)}>
-          <Dialog.Content maxWidth="800px" className="p-0">
-            <Dialog.Title className="absolute right-5 top-5">
-              <Button
-                variant="ghost"
-                color="gray"
-                onClick={() => {
-                  handleChangeDialogOpen(false);
-                  setIsEditingMode(false);
-                  reset();
-                }}
-                className="cursor-pointer"
-              >
-                <PiXBold size={20} />
-              </Button>
-            </Dialog.Title>
-            <HolidaySettingForm isEditingMode={isEditingMode} register={register} />
-            <Dialog.Description className="flex justify-center">
-              <Button
-                onClick={handleSubmit(onSubmit)}
-                variant="solid"
-                size="3"
-                radius="small"
-                className="flex w-40 h-10 justify-items-center my-10 bg-indigo-950 cursor-pointer hover:bg-opacity-90 disabled:bg-gray-10 disabled:text-gray-30 disabled:cursor-default"
-              >
-                수정하기
-              </Button>
-            </Dialog.Description>
-          </Dialog.Content>
-        </Dialog.Root>
-      )}
     </section>
   );
 }
