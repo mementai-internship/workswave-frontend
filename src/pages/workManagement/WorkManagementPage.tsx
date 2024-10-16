@@ -13,14 +13,7 @@ export default function WorkManagementPage() {
       <WorkHeader isPartTime={isPartTime} isSetPartTime={isSetPartTime} />
       <WorkFilterLayout />
       {isPartTime ? <Commute /> : <PartTime />}
-      <Pagination
-        totalItems={10}
-        itemsPerPage={1}
-        currentPage={1}
-        onChangePage={function (page: number): void {
-          console.log(page);
-        }}
-      />
+      <Pagination totalItems={10} itemsPerPage={1} />
     </div>
   );
 }

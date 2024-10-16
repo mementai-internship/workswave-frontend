@@ -1,30 +1,16 @@
 import HeaderProfile from '@/layout/Header/HeaderProfile';
-import { useEffect, useState } from 'react';
+import { TUserAuthority } from '@/models/user.model';
+import { currentUserAtom } from '@/store/authAtoms';
+import { useAtom } from 'jotai';
 import { Link } from 'react-router-dom';
 
-// user type
-export type TUser = {
-  name: string;
-  auth: 'MSO' | 'SUPER_MANAGER' | 'PART_MANAGER' | 'STAFF';
-};
-
-// 임시 user mock data
-const mockUser: TUser = {
-  name: '김테스트',
-  auth: 'MSO',
-};
-
-// 현재 유저 정보를 반환하는 함수
-const getCurrentUser = (): TUser | null => {
-  return mockUser;
-};
+export interface IHeader {
+  name?: string;
+  role?: TUserAuthority;
+}
 
 export default function Header() {
-  const [currentUser, setCurrentUser] = useState<TUser | null>(null);
-
-  useEffect(() => {
-    setCurrentUser(getCurrentUser());
-  }, []);
+  const [{ data }] = useAtom(currentUserAtom);
 
   return (
     <header className="px-3 flex items-center justify-between text-white bg-gray-80">
@@ -32,13 +18,13 @@ export default function Header() {
         <Link to="/">
           <span className="p-3">WorksWave</span>
         </Link>
-        {(currentUser?.auth === 'MSO' || currentUser?.auth === 'SUPER_MANAGER') && (
+        {(data?.role === 'MSO 최고권한' || data?.role === '최고관리자') && (
           <span className="text-xs p-4">웍스웨이브 가이드</span>
         )}
       </div>
       <div className="flex items-center text-xs px-4">
-        {currentUser ? (
-          <HeaderProfile currentUser={currentUser} />
+        {data ? (
+          <HeaderProfile name={data.name} role={data?.role} />
         ) : (
           <Link to="/login">
             <button className="border border-gray-10 px-4 py-1 rounded mr-4">로그인</button>

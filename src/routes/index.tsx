@@ -14,6 +14,7 @@ import HomePage from '@/pages/home/HomePage';
 import Login from '@/pages/login/Login';
 import MemberInfoPage from '@/pages/memberManagement/MemberInfoPage';
 import MemberManagementPage from '@/pages/memberManagement/MemberManagementPage';
+import SuperManagerSetting from '@/pages/memberManagement/SuperManagerSetting';
 import ManagementOfficePage from '@/pages/officeSetting/ManagementOfficePage';
 import SalarySettlementPage from '@/pages/salarySettlement/SalarySettlementPage';
 import BoardViewPage from '@/pages/userBoard/view/BoardViewPage';
@@ -119,6 +120,10 @@ const router = createBrowserRouter([
       {
         path: '/member-management/member-info',
         element: <MemberInfoPage />,
+      },
+      {
+        path: '/member-management/supermanager-setting',
+        element: <SuperManagerSetting />,
       },
       {
         path: '/board',
