@@ -1,12 +1,17 @@
 import WorkingSettingPartForm from '@/components/BasicSetting/WorkingSetting/SetPart/SetPartForm';
 import WorkingSettingSetPartItem from '@/components/BasicSetting/WorkingSetting/SetPart/SetPartItem';
 import { WORKING_SETTING_PART_RESPONSE } from '@/constants/workingSetting.mock';
+// import { useGetWorkingSettingPart } from '@/hooks/apis/useWorkingSettingPart';
 import { IWorkingSettingPartResponse } from '@/models/workingSetting.model';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 export default function WorkingSettingSetPart() {
   const [isEditingMode, setIsEditingMode] = useState<boolean>(false);
+
+  // const { data, isFetching } = useGetWorkingSettingPart(1);
+  // console.log(data, isFetching);
+
   const {
     setValue: setPartValue,
     control: partControl,
@@ -19,10 +24,10 @@ export default function WorkingSettingSetPart() {
       task: '',
       is_doctor: false,
       required_certification: false,
+      leave_granting_authority: false,
     },
   });
 
-  // handleChange? onChange?
   const handleClickEditMode = (boolean: boolean) => {
     setIsEditingMode(boolean);
   };

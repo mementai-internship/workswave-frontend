@@ -29,7 +29,7 @@ export default function WorkingSettingPage() {
 
   //MSO 일 때 branch 변경하는 로직 및 브랜치 변경했을 때 새로운 요청 보내는 로직
 
-  const currentTime = dayjs().toDate();
+  const currentTime = dayjs().format('HH:mm');
 
   const {
     register: branchRegister,

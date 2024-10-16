@@ -1,9 +1,11 @@
-export interface IWorkingSettingPartResponse {
-  id: number;
+export interface IWorkingSettingPartForm {
   name: string;
   task: string;
   is_doctor: boolean;
   required_certification: boolean;
+}
+export interface IWorkingSettingPartResponse extends IWorkingSettingPartForm {
+  id: number;
   leave_granting_authority?: boolean;
 }
 
