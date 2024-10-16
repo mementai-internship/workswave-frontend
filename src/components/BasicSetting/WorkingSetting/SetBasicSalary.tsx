@@ -1,23 +1,18 @@
+import { IWorkingSettingBranchResponse } from '@/models/workingSetting.model';
 import { RadioGroup } from '@radix-ui/themes';
-import { Controller, useForm } from 'react-hook-form';
+import { Control, Controller } from 'react-hook-form';
 
-export default function WorkingSettingBasicSalary() {
-  const { control } = useForm({
-    defaultValues: {
-      overtime_pay: false,
-      anuual_pay: false,
-      holiday_pay: false,
-      work_part_pay: false,
-      meal_pay: false,
-    },
-  });
+interface IPropsType {
+  control: Control<IWorkingSettingBranchResponse>;
+}
+export default function WorkingSettingBasicSalary({ control }: IPropsType) {
   return (
     <div className="p-20 flex flex-col gap-y-10">
       <div className="flex items-center gap-x-10">
         <label className="text-gray-400 w-36">포괄산정 연장근로수당</label>
         <Controller
           control={control}
-          name="overtime_pay"
+          name="comprehensive_overtime"
           render={({ field: { value, onChange } }) => (
             <RadioGroup.Root
               value={value ? 'true' : 'false'}
@@ -36,7 +31,7 @@ export default function WorkingSettingBasicSalary() {
         <label className="text-gray-400 w-44">연차수당</label>
         <Controller
           control={control}
-          name="anuual_pay"
+          name="annual_leave"
           render={({ field: { value, onChange } }) => (
             <RadioGroup.Root
               value={value ? 'true' : 'false'}
@@ -55,7 +50,7 @@ export default function WorkingSettingBasicSalary() {
         <label className="text-gray-400 w-44">휴일수당</label>
         <Controller
           control={control}
-          name="holiday_pay"
+          name="holiday_work"
           render={({ field: { value, onChange } }) => (
             <RadioGroup.Root
               value={value ? 'true' : 'false'}
@@ -74,7 +69,7 @@ export default function WorkingSettingBasicSalary() {
         <label className="text-gray-400 w-44">직무수당</label>
         <Controller
           control={control}
-          name="work_part_pay"
+          name="job_duty"
           render={({ field: { value, onChange } }) => (
             <RadioGroup.Root
               value={value ? 'true' : 'false'}
@@ -93,7 +88,7 @@ export default function WorkingSettingBasicSalary() {
         <label className="text-gray-400 w-44">식대</label>
         <Controller
           control={control}
-          name="meal_pay"
+          name="meal"
           render={({ field: { value, onChange } }) => (
             <RadioGroup.Root
               value={value ? 'true' : 'false'}
