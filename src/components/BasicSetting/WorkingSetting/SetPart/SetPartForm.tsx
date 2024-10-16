@@ -1,27 +1,48 @@
 import Badge from '@/components/Common/LabelBadge';
 import Title from '@/components/Common/Title';
 import { Txt } from '@/components/Common/Txt';
-import { IWorkingSettingPartForm } from '@/models/workingSetting.model';
+import { IWorkingSettingPartResponse } from '@/models/workingSetting.model';
 import { adaptTaskToColor } from '@/utils/adaptTaskToColor';
 import { Button, RadioGroup, TextField, Tooltip } from '@radix-ui/themes';
 import { useCallback } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import {
+  Control,
+  Controller,
+  FormState,
+  UseFormHandleSubmit,
+  UseFormSetValue,
+} from 'react-hook-form';
 import { PiInfo } from 'react-icons/pi';
 
-export default function WorkingSettingPartForm() {
-  const { control, formState, handleSubmit } = useForm<IWorkingSettingPartForm>({
-    defaultValues: {
-      id: 0,
-      name: '',
-      task: '',
-      is_doctor: false,
-      required_certification: false,
-    },
-  });
+interface IPropsType {
+  handleSubmit: UseFormHandleSubmit<IWorkingSettingPartResponse>;
+  onChangeEditMode: (boolean: boolean) => void;
+  setValue: UseFormSetValue<IWorkingSettingPartResponse>;
+  control: Control<IWorkingSettingPartResponse>;
+  formState: FormState<IWorkingSettingPartResponse>;
+  isEditingMode: boolean;
+}
 
-  const onSubmitSettingPart = (data: IWorkingSettingPartForm) => {
+export default function WorkingSettingPartForm({
+  control,
+  formState,
+  isEditingMode,
+  handleSubmit,
+  onChangeEditMode,
+  setValue,
+}: IPropsType) {
+  const onSubmitSettingPart = (data: IWorkingSettingPartResponse) => {
     // 요청 보내기
     return data;
+  };
+
+  const handleClickCancel = () => {
+    onChangeEditMode(false);
+    setValue('id', 0);
+    setValue('name', '');
+    setValue('task', '');
+    setValue('is_doctor', false);
+    setValue('required_certification', false);
   };
 
   const isFormValid = useCallback(() => {
@@ -143,16 +164,27 @@ export default function WorkingSettingPartForm() {
           />
         </div>
       </div>
-      <div className="flex justify-center">
+      <div className="flex justify-center gap-x-8 w-full">
+        {isEditingMode && (
+          <Button
+            onClick={handleClickCancel}
+            variant="solid"
+            size="3"
+            radius="small"
+            className="flex w-[40%] h-10 justify-items-center mt-40 mb-10 bg-gray-500 cursor-pointer hover:bg-opacity-90 disabled:bg-gray-200 disabled:text-gray-30 disabled:cursor-default"
+          >
+            취소
+          </Button>
+        )}
         <Button
           onClick={handleSubmit(onSubmitSettingPart)}
           variant="solid"
           size="3"
           radius="small"
-          disabled={!isFormValid()}
-          className="flex w-40 h-10 justify-items-center mt-40 mb-10 bg-indigo-950 cursor-pointer hover:bg-opacity-90 disabled:bg-gray-200 disabled:text-gray-30 disabled:cursor-default"
+          disabled={!isEditingMode && !isFormValid()}
+          className="flex w-[40%] h-10 justify-items-center mt-40 mb-10 bg-indigo-950 cursor-pointer hover:bg-opacity-90 disabled:bg-gray-200 disabled:text-gray-30 disabled:cursor-default"
         >
-          저장하기
+          {isEditingMode ? '수정하기' : '추가하기'}
         </Button>
       </div>
     </div>

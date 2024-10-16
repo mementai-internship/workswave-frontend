@@ -25,3 +25,5 @@ dist-ssr
 
 # Add the following line
 tsconfig.tsbuildinfo
+
+.env
