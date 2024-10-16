@@ -25,7 +25,7 @@ export interface IMemberManagementTableProps {
   };
 }
 
-//text data 추후 삭제 예정
+//test data 추후 삭제 예정
 export const infoTestData: IMemberManagementTableProps[] = [
   {
     id: 1,
