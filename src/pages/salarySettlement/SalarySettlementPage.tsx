@@ -1,30 +1,34 @@
 import { ChangeMonth } from '@/components/Common/ChangeMonth';
 import ContactSearchInput from '@/components/Common/ContactSearchInput';
 import TitleContainer from '@/components/Common/TitleContainer';
-import CategoryDropBox from '@/components/SalarySettlement/SalaryPage/CategoryDropBox';
+import CategorySelect from '@/components/SalarySettlement/SalaryPage/CategorySelect';
 import SalaryTable from '@/components/SalarySettlement/SalaryTable/SalaryTable';
 import { IEmployeeSalarySettlement } from '@/models/salarySettlement.model';
-import { calculatePaymentDate } from '@/utils/changeSalarySettlementMonth';
+import { calculatePaymentDate } from '@/utils/calculatePaymentDate';
+import { Button, Tooltip } from '@radix-ui/themes';
 import dayjs from 'dayjs';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export default function SalarySettlementPage() {
-  const [currentDate, setCurrentDate] = useState(dayjs());
-  const [paymentDate, setPaymentDate] = useState(dayjs());
-  const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
-  const [selectedPart, setSelectedPart] = useState<string | null>(null);
-  const [selectedJob, setSelectedJob] = useState<string | null>(null);
-
-  useEffect(() => {
-    setPaymentDate(calculatePaymentDate(currentDate));
-  }, [currentDate]);
-
-  // TODO: API 호출하여 직원 급여정산 데이터 받아와서 저장
-  // TODO: 드롭박스에서 선택한 값 전달 받은 뒤, SalaryTable에 전달
+  const [month, setMonth] = useState(dayjs());
+  const [paymentDate, setPaymentDate] = useState(calculatePaymentDate(dayjs()));
+  const [selectedRegion, setSelectedRegion] = useState<string | undefined>(undefined);
+  const [selectedPart, setSelectedPart] = useState<string>();
+  const [selectedJob, setSelectedJob] = useState<string>();
+  const [resetTrigger, setResetTrigger] = useState(false);
 
   const handleChangeMonth = (newDate: dayjs.Dayjs) => {
-    setCurrentDate(newDate);
-    // backend API 연결
+    setMonth(newDate);
+    setPaymentDate(calculatePaymentDate(newDate));
+    // TODO:backend API 연결
+    // 데이터를 가져오되, 해당 월에 대한 데이터만 가져오기
+  };
+
+  const resetFilters = () => {
+    setSelectedRegion(undefined);
+    setSelectedPart(undefined);
+    setSelectedJob(undefined);
+    setResetTrigger((prev) => !prev);
   };
 
   return (
@@ -33,8 +37,8 @@ export default function SalarySettlementPage() {
         content="급여정산"
         children={
           <header className="flex ml-8 gap-4">
-            <ChangeMonth currentDate={currentDate} onChangeMonth={handleChangeMonth} />
-            <div className="flex items-center h-10 gap-2 border rounded-md bg-white">
+            <ChangeMonth currMonth={month} onChangeMonth={handleChangeMonth} />
+            <div className="flex items-center h-10 gap-2 bg-white border rounded-md">
               <span className="text-sm h-full flex items-center px-2 border-r border-gray-200">
                 급여지급일
               </span>
@@ -48,24 +52,35 @@ export default function SalarySettlementPage() {
 
       <section className="flex items-center justify-between py-4">
         <div className="flex items-center gap-4">
-          <CategoryDropBox
-            title="지점 선택"
-            contents={['전체', ...DUMMY_REGION]}
-            selectedValue={selectedRegion || '전체'}
-            onSelect={(value) => setSelectedRegion(value === '전체' ? null : value)}
+          <CategorySelect
+            options={DUMMY_REGION}
+            value={selectedRegion}
+            onChange={(value: string) => {
+              setSelectedRegion(value);
+            }}
+            placeholder="지점 선택"
           />
-          <CategoryDropBox
-            title="파트 선택"
-            contents={['전체', ...DUMMY_PART]}
-            selectedValue={selectedPart || '전체'}
-            onSelect={(value) => setSelectedPart(value === '전체' ? null : value)}
+          <CategorySelect
+            options={DUMMY_PART}
+            value={selectedPart}
+            onChange={(value: string) => {
+              setSelectedPart(value);
+            }}
+            placeholder="직무 선택"
           />
-          <CategoryDropBox
-            title="직원"
-            contents={['전체', ...DUMMY_JOB]}
-            selectedValue={selectedJob || '전체'}
-            onSelect={(value) => setSelectedJob(value === '전체' ? null : value)}
+          <CategorySelect
+            options={DUMMY_JOB}
+            value={selectedJob}
+            onChange={(value: string) => {
+              setSelectedJob(value);
+            }}
+            placeholder="직무 선택"
           />
+          <Tooltip content="모든 입력값과 선택이 초기화됩니다.">
+            <Button color="gray" variant="surface" size="2" onClick={resetFilters}>
+              초기화
+            </Button>
+          </Tooltip>
         </div>
         <ContactSearchInput />
       </section>
@@ -75,18 +90,21 @@ export default function SalarySettlementPage() {
         selectedRegion={selectedRegion}
         selectedPart={selectedPart}
         selectedJob={selectedJob}
+        resetTrigger={resetTrigger}
       />
     </div>
   );
 }
 
 // 더미 데이터
+
 const DUMMY_REGION = ['서울', '경기', '인천'];
 const DUMMY_PART = ['피부과', '내과', '총무'];
 const DUMMY_JOB = ['의사', '간호사', '기타'];
 
 const DUMMY_DATA: IEmployeeSalarySettlement[] = [
   {
+    id: '1',
     region: '서울',
     job: '의사',
     name: '김예린',
@@ -106,6 +124,7 @@ const DUMMY_DATA: IEmployeeSalarySettlement[] = [
     isSelected: false,
   },
   {
+    id: '2',
     region: '경기',
     job: '간호사',
     name: '이지원',
@@ -125,6 +144,7 @@ const DUMMY_DATA: IEmployeeSalarySettlement[] = [
     isSelected: false,
   },
   {
+    id: '3',
     region: '인천',
     job: '기타',
     name: '박민수',
@@ -144,6 +164,7 @@ const DUMMY_DATA: IEmployeeSalarySettlement[] = [
     isSelected: false,
   },
   {
+    id: '4',
     region: '서울',
     job: '간호사',
     name: '최수진',
@@ -163,6 +184,7 @@ const DUMMY_DATA: IEmployeeSalarySettlement[] = [
     isSelected: false,
   },
   {
+    id: '5',
     region: '경기',
     job: '의사',
     name: '정태훈',
@@ -182,6 +204,7 @@ const DUMMY_DATA: IEmployeeSalarySettlement[] = [
     isSelected: false,
   },
   {
+    id: '6',
     region: '인천',
     job: '의사',
     name: '송미란',
@@ -201,6 +224,7 @@ const DUMMY_DATA: IEmployeeSalarySettlement[] = [
     isSelected: false,
   },
   {
+    id: '7',
     region: '서울',
     job: '기타',
     name: '강동훈',
@@ -220,6 +244,7 @@ const DUMMY_DATA: IEmployeeSalarySettlement[] = [
     isSelected: false,
   },
   {
+    id: '8',
     region: '경기',
     job: '간호사',
     name: '이수연',
@@ -239,6 +264,7 @@ const DUMMY_DATA: IEmployeeSalarySettlement[] = [
     isSelected: false,
   },
   {
+    id: '9',
     region: '인천',
     job: '간호사',
     name: '박준호',
@@ -258,6 +284,7 @@ const DUMMY_DATA: IEmployeeSalarySettlement[] = [
     isSelected: false,
   },
   {
+    id: '10',
     region: '서울',
     job: '의사',
     name: '정혜원',

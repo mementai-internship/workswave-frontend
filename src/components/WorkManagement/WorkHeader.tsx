@@ -63,7 +63,7 @@ export default function WorkHeader({ isPartTime, isSetPartTime }: IProps) {
           <span className="font-bold text-black">{date.workingDays}</span>일 (데이터기준
           {date.period})
         </p>
-        <ChangeMonth currentDate={currentDate} onChangeMonth={handleChangeMonth} />
+        <ChangeMonth currMonth={currentDate} onChangeMonth={handleChangeMonth} />
       </div>
     </div>
   );

@@ -1,30 +1,13 @@
-import MemberBasicInfoDatePicker from '@/components/MemberInfo/MemberBasicInfoDatePicker';
-import MemberInfoButton from '@/components/MemberInfo/MemberInfoButton';
-import MemberInfoDropdown from '@/components/MemberInfo/MemberInfoDropdownMenu';
-import MemberInfoInput from '@/components/MemberInfo/MemberInfoInput';
+import MemberBasicInfoDatePicker from '@/components/MemberInfo/MemberInfoCommon/MemberBasicInfoDatePicker';
+import MemberInfoButton from '@/components/MemberInfo/MemberInfoCommon/MemberInfoButton';
+import MemberInfoDropdown from '@/components/MemberInfo/MemberInfoCommon/MemberInfoDropdownMenu';
+import MemberInfoInput from '@/components/MemberInfo/MemberInfoCommon/MemberInfoInput';
 import { infoTestData } from '@/components/MemberManagement/MemberManagementTable';
+import {
+  MEMBER_BASIC_INFO_TITLE1,
+  MEMBER_BASIC_INFO_TITLE2,
+} from '@/constants/memberManagementTableTitle';
 import { Button, Table } from '@radix-ui/themes';
-
-export const MEMBERBASICINFOTITLE1 = [
-  '지점',
-  '이름',
-  '전화번호',
-  '주소',
-  '학력',
-  '생년월일',
-  '입사일',
-  'O.T관리',
-];
-export const MEMBERBASICINFOTITLE2 = [
-  '권한',
-  '성별',
-  '메일',
-  '',
-  '경력',
-  '근무파트',
-  '퇴사일',
-  '연차관리',
-];
 
 //test data API 연결 후 삭제
 const memberInfoDropdownMenu = [
@@ -42,16 +25,19 @@ const memberInfoDropdownMenu = [
 
 export default function MemberBasicInfoTable() {
   return (
-    <Table.Root>
+    <Table.Root className="table-fixed h-full">
       <Table.Header>
         <Table.Row className="bg-gray-200">
           <Table.ColumnHeaderCell colSpan={4}>기본정보</Table.ColumnHeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {MEMBERBASICINFOTITLE1.map((title, index) => (
+        {MEMBER_BASIC_INFO_TITLE1.map((title, index) => (
           <Table.Row className="h-12">
-            <Table.RowHeaderCell key={title} className="align-middle bg-gray-200 font-bold h-12">
+            <Table.RowHeaderCell
+              key={title}
+              className="align-middle bg-gray-200 font-bold h-12 w-[12.5%]"
+            >
               {title}
             </Table.RowHeaderCell>
             <Table.Cell key={title} className="flex items-center py-8 gap-2 h-12">
@@ -86,13 +72,13 @@ export default function MemberBasicInfoTable() {
             {index !== 3 ? (
               <>
                 <Table.RowHeaderCell
-                  key={MEMBERBASICINFOTITLE2[index]}
-                  className="align-middle bg-gray-200 font-bold h-12"
+                  key={MEMBER_BASIC_INFO_TITLE2[index]}
+                  className="align-middle bg-gray-200 font-bold h-12 w-[12.5%]"
                 >
-                  {MEMBERBASICINFOTITLE2[index]}
+                  {MEMBER_BASIC_INFO_TITLE2[index]}
                 </Table.RowHeaderCell>
                 <Table.Cell
-                  key={MEMBERBASICINFOTITLE2[index]}
+                  key={MEMBER_BASIC_INFO_TITLE2[index]}
                   className="flex items-center py-8 gap-2 h-12"
                 >
                   {(() => {
@@ -137,8 +123,8 @@ export default function MemberBasicInfoTable() {
               </>
             ) : (
               <>
-                <Table.RowHeaderCell></Table.RowHeaderCell>
-                <Table.Cell></Table.Cell>
+                <Table.RowHeaderCell className="w-[12.5%]"></Table.RowHeaderCell>
+                <Table.Cell className="w-[37.5%]"></Table.Cell>
               </>
             )}
           </Table.Row>
