@@ -1,9 +1,13 @@
 import Title from '@/components/Common/Title';
+import DocsDraftTable from '@/components/MemberInfo/DocsDraftTable';
+import DocsRegisterTable from '@/components/MemberInfo/DocsRegisterTable';
+import DocsTable from '@/components/MemberInfo/DocsTable';
 import MemberInfoBasicTable from '@/components/MemberInfo/MemberBasicInfoTable';
 import ContractInfoBar from '@/components/MemberInfo/MemberInfoCommon/ContractInfoBar';
 import MemberInfoButtonBar from '@/components/MemberInfo/MemberInfoCommon/MemberInfoButtonBar';
 import SalaryContractTable from '@/components/MemberInfo/SalaryContractTable';
 import WorkContractTable from '@/components/MemberInfo/WorkContractTable';
+import WrittenContract from '@/components/MemberInfo/WrittenContractTable';
 import { useState } from 'react';
 
 export default function MemberInfoPage() {
@@ -57,7 +61,12 @@ export default function MemberInfoPage() {
           <SalaryContractTable />
         </>
       ) : (
-        <></>
+        <>
+          <DocsRegisterTable />
+          <WrittenContract />
+          <DocsTable />
+          <DocsDraftTable />
+        </>
       )}
     </div>
   );
