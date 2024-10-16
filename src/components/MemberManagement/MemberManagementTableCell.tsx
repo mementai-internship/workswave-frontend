@@ -1,6 +1,6 @@
 import calculateWorkPeriod from '@/utils/calculateWorkPeriod';
 import { Table } from '@radix-ui/themes';
-import { PiGenderFemale, PiGenderMale, PiXBold } from 'react-icons/pi';
+import { PiGenderFemale, PiGenderMale, PiStarFill, PiXBold } from 'react-icons/pi';
 import { Link } from 'react-router-dom';
 
 import { IMemberManagementTableProps } from './MemberManagementTable';
@@ -12,14 +12,17 @@ export default function MemberManagementTableCell({ data }: { data: IMemberManag
         {data.id}
       </Table.RowHeaderCell>
       <Table.Cell className="text-center p-4 align-middle w-[12%]">{data.branch}</Table.Cell>
-      <Table.Cell className="text-center p-4 align-middle w-[10%]">
+      <Table.Cell className="p-4 align-middle w-[10%]">
         <Link to={`/member-management/member-info`}>
-          <p className="flex flex-row gap-1 justify-center">
+          <div
+            className={`${data.id === 2 ? 'font-bold' : ''} flex flex-row gap-1 justify-center items-center`}
+          >
             {data.gender === '남' ? <PiGenderMale /> : <PiGenderFemale />} {data.name}
-          </p>
+            {data.id === 2 ? <PiStarFill /> : null}
+          </div>
         </Link>
       </Table.Cell>
-      <Table.Cell className="p-4 align-middle w-[5%]">{data.workPart}</Table.Cell>
+      <Table.Cell className="p-4 align-middle w-[3%]">{data.workPart}</Table.Cell>
       <Table.Cell className="text-center p-4 align-middle w-[8%]">{data.birth}</Table.Cell>
       <Table.Cell className="text-center p-4 align-middle w-[8%]">{data.phone}</Table.Cell>
       <Table.Cell className="text-center p-4 align-middle w-[8%]">{data.email}</Table.Cell>
