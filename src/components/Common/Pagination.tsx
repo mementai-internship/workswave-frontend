@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { PiCaretDoubleLeft, PiCaretDoubleRight, PiCaretLeft, PiCaretRight } from 'react-icons/pi';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -12,8 +11,7 @@ export default function Pagination({ totalItems, itemsPerPage }: IPaginationProp
   const location = useLocation();
 
   const queryParams = new URLSearchParams(location.search);
-  const initialPage = parseInt(queryParams.get('page') || '1', 10);
-  const [currentPage, setCurrentPage] = useState(initialPage);
+  const currentPage = parseInt(queryParams.get('page') || '1', 10);
 
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
@@ -23,7 +21,6 @@ export default function Pagination({ totalItems, itemsPerPage }: IPaginationProp
   const pageNumbers = Array.from({ length: end - start + 1 }, (_, i) => start + i);
 
   function handleChangePage(page: number) {
-    setCurrentPage(page);
     queryParams.set('page', page.toString());
     navigate(`${location.pathname}?${queryParams.toString()}`);
   }
@@ -61,8 +58,8 @@ export default function Pagination({ totalItems, itemsPerPage }: IPaginationProp
           <PiCaretRight />
         </button>
         <button
-          disabled={pageGroup * 10 >= totalPages}
-          onClick={() => handleChangePage(Math.min(totalPages, currentPage + 10))}
+          disabled={end >= totalPages}
+          onClick={() => handleChangePage(Math.min(totalPages, start + 10))}
         >
           <PiCaretDoubleRight />
         </button>
