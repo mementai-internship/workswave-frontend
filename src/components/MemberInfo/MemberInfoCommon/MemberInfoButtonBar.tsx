@@ -1,6 +1,6 @@
 import { Button } from '@radix-ui/themes';
 
-interface MemberInfoButtonBarProps {
+interface IMemberInfoButtonBarProps {
   leftButton: {
     text: string;
     onClick?: () => void;
@@ -15,7 +15,10 @@ interface MemberInfoButtonBarProps {
   };
 }
 
-export default function MemberInfoButtonBar({ leftButton, rightButton }: MemberInfoButtonBarProps) {
+export default function MemberInfoButtonBar({
+  leftButton,
+  rightButton,
+}: IMemberInfoButtonBarProps) {
   return (
     <div className="flex items-center justify-end gap-2">
       <Button
