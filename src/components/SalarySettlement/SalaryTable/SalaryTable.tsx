@@ -37,7 +37,7 @@ export default function SalaryTable({
   );
 
   return (
-    <div className="justify-center items-start pb-7">
+    <div className="justify-center items-start pb-10">
       <Table.Root variant="surface">
         <SalaryTableHeader employees={employees} handleAllCheckbox={handleAllCheckbox} />
         <SalaryTableBody

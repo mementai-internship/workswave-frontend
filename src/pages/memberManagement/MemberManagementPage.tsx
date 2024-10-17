@@ -5,6 +5,7 @@ import MemberManagementTable from '@/components/MemberManagement/MemberManagemen
 import { Button } from '@radix-ui/themes';
 import { useState } from 'react';
 import { PiGear } from 'react-icons/pi';
+import { Link } from 'react-router-dom';
 
 export default function MemberManagementPage() {
   const itemsPerPage = 10;
@@ -37,10 +38,12 @@ export default function MemberManagementPage() {
       <div className="flex flex-row items-center justify-between w-full">
         <div className="flex items-center gap-2">
           <TitleContainer content="회원관리" />
-          <Button color="gray" variant="soft" radius="full" onClick={() => {}}>
-            <PiGear />
-            최고관리자 설정
-          </Button>
+          <Link to="/member-management/supermanager-setting">
+            <Button color="gray" variant="soft" radius="full" onClick={() => {}}>
+              <PiGear />
+              최고관리자 설정
+            </Button>
+          </Link>
           <Button color="gray" variant="soft" radius="full" onClick={() => {}}>
             <PiGear />
             파트/통합관리자 설정
