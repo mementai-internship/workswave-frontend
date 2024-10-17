@@ -21,7 +21,7 @@ export default function MemberInfoDropdown({ title, menu }: IMemberInfoDropdownP
 
   return (
     <DropdownMenu.Root>
-      <DropdownMenu.Trigger className="flex items-center justify-center w-44 h-10 justify-between bg-light-gray border border-gray-50 border-solid text-black rounded-sm px-4 py-4">
+      <DropdownMenu.Trigger className="flex items-center w-44 h-10 justify-between bg-light-gray border border-gray-50 border-solid text-black rounded-sm px-4 py-4">
         <Button variant="soft">
           {selectedItem}
           <DropdownMenu.TriggerIcon />

@@ -5,6 +5,11 @@ import MemberManagementTableCell from '@/components/MemberManagement/MemberManag
 import { MEMBER_MANAGEMENT_TABLE_TITLE } from '@/constants/memberManagementTableTitle';
 
 export interface IMemberManagementTableProps {
+  data: IMemberManagementTableData[];
+  tab: string;
+}
+
+export interface IMemberManagementTableData {
   id: number;
   name: string;
   birth_date: string | null;
@@ -16,13 +21,12 @@ export interface IMemberManagementTableProps {
   part: string;
   branch: string;
 }
-
 //API 연결 후 삭제
-export const userId = 2;
+export const userId = 142;
 
 export const infoTestData: IMemberManagementTableProps[] = [];
 
-export default function MemberManagementTable({ data }: { data: IMemberManagementTableProps[] }) {
+export default function MemberManagementTable({ data, tab }: IMemberManagementTableProps) {
   console.log(data);
   if (!data) {
     return <div>데이터가 없습니다.</div>;
@@ -32,7 +36,10 @@ export default function MemberManagementTable({ data }: { data: IMemberManagemen
       <Table.Header>
         <Table.Row className="bg-gray-300">
           {MEMBER_MANAGEMENT_TABLE_TITLE.map((title) => (
-            <Table.ColumnHeaderCell className="p-2 text-center align-middle" key={title}>
+            <Table.ColumnHeaderCell
+              className="p-2 text-center align-middle whitespace-nowrap"
+              key={title}
+            >
               {title}
             </Table.ColumnHeaderCell>
           ))}
@@ -41,16 +48,16 @@ export default function MemberManagementTable({ data }: { data: IMemberManagemen
       <Table.Body>
         {data
           ?.filter((data) => data.id === userId)
-          .map((data: IMemberManagementTableProps) => (
+          .map((data) => (
             <React.Fragment key={data.id}>
-              <MemberManagementTableCell data={data} />
+              <MemberManagementTableCell data={data} tab={tab} />
             </React.Fragment>
           ))}
         {data
           .filter((data) => data.id !== userId)
-          .map((data: IMemberManagementTableProps) => (
+          .map((data: IMemberManagementTableData) => (
             <React.Fragment key={data.id}>
-              <MemberManagementTableCell data={data} />
+              <MemberManagementTableCell data={data} tab={tab} />
             </React.Fragment>
           ))}
       </Table.Body>
