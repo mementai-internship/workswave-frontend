@@ -1,4 +1,4 @@
-import { TWorkOption } from '@/models/work.model';
+import { IWorkStatistics, TWorkOption } from '@/models/work.model';
 
 // 지점 선택을 위한 간단한 mock 데이터
 export const branchMockData: TWorkOption[] = [
@@ -29,3 +29,12 @@ export const departmentMockData: TWorkOption[] = [
   { id: 9, value: '법무팀' },
   { id: 10, value: '연구개발팀' },
 ];
+
+export const mockStatistics: IWorkStatistics = {
+  totalWorkers: 100,
+  overtimeWorkers: 5,
+  lateWorkers: 2,
+  holidayWorkers: 3,
+  dayOffWorkers: 10,
+  remoteWorkers: 15,
+};

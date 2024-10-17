@@ -37,3 +37,12 @@ export interface ICommuteData {
     };
   };
 }
+
+export interface IWorkStatistics {
+  totalWorkers: number;
+  overtimeWorkers: number;
+  lateWorkers: number;
+  holidayWorkers: number;
+  dayOffWorkers: number;
+  remoteWorkers: number;
+}

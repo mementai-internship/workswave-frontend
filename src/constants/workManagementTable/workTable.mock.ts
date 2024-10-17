@@ -119,8 +119,7 @@ export const commuteMockData: ICommuteData[] = [
     position: '간호조무사 주5일',
     schedule: {
       '1': { startTime: '09:47', endTime: '20:30' },
-      '2': { startTime: '10:31', endTime: '21:00' },
-      '3': { startTime: '09:25', endTime: '20:30' },
+
       '4': { startTime: '휴무', endTime: '휴무' },
       '5': { startTime: '10:01', endTime: '16:30' },
       '6': { startTime: '휴무', endTime: '휴무' },
