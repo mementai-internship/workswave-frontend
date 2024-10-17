@@ -1,5 +1,5 @@
 import { Txt } from '@/components/Common/Txt';
-import { IWorkingSettingBranchResponse } from '@/models/workingSetting.model';
+import { IWorkPolicies } from '@/models/work-policies';
 import { Checkbox } from '@radix-ui/themes';
 import { UseFormRegister } from 'react-hook-form';
 
@@ -7,7 +7,7 @@ interface IPropsType {
   title: string;
   name: string;
   defaultChecked: boolean;
-  register: UseFormRegister<IWorkingSettingBranchResponse>;
+  register: UseFormRegister<IWorkPolicies>;
 }
 
 export default function SetBasicWorkItem({ title, name, defaultChecked, register }: IPropsType) {
@@ -22,7 +22,7 @@ export default function SetBasicWorkItem({ title, name, defaultChecked, register
         variant="soft"
         color="gray"
         defaultChecked={defaultChecked}
-        {...register(`${name}_is_holiday` as keyof IWorkingSettingBranchResponse)}
+        {...register(`work_policies.${name}_is_holiday` as keyof IWorkPolicies)}
       />
       <label>휴일</label>
     </div>

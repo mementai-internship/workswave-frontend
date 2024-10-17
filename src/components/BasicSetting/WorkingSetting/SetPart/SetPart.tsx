@@ -1,27 +1,29 @@
 import WorkingSettingPartForm from '@/components/BasicSetting/WorkingSetting/SetPart/SetPartForm';
 import WorkingSettingSetPartItem from '@/components/BasicSetting/WorkingSetting/SetPart/SetPartItem';
-import { WORKING_SETTING_PART_RESPONSE } from '@/constants/workingSetting.mock';
-// import { useGetWorkingSettingPart } from '@/hooks/apis/useWorkingSettingPart';
-import { IWorkingSettingPartResponse } from '@/models/workingSetting.model';
+import { useGetParts, usePatchParts, usePostParts } from '@/hooks/apis/useParts';
+import { IPartsResponse } from '@/models/parts';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-export default function WorkingSettingSetPart() {
+export default function WorkingSettingSetPart({ branchId }: { branchId: number }) {
   const [isEditingMode, setIsEditingMode] = useState<boolean>(false);
 
-  // const { data, isFetching } = useGetWorkingSettingPart(1);
-  // console.log(data, isFetching);
+  const { data: parts } = useGetParts(branchId);
 
   const {
-    setValue: setPartValue,
     control: partControl,
     formState: partFormState,
-    handleSubmit: partHandleSubmit,
-  } = useForm<IWorkingSettingPartResponse>({
+    setValue: setPartValue,
+    handleSubmit: handlePartSubmit,
+    register: partRegister,
+    watch: partWatch,
+    reset: partReset,
+  } = useForm<IPartsResponse>({
     defaultValues: {
       id: 0,
       name: '',
       task: '',
+      color: '',
       is_doctor: false,
       required_certification: false,
       leave_granting_authority: false,
@@ -32,23 +34,43 @@ export default function WorkingSettingSetPart() {
     setIsEditingMode(boolean);
   };
 
+  const { mutate: postParts } = usePostParts(branchId);
+  const { mutate: patchParts } = usePatchParts(branchId);
+  const onSubmitSettingPart = async (data: IPartsResponse) => {
+    if (isEditingMode) {
+      patchParts(data);
+
+      partReset();
+      setIsEditingMode(false);
+    } else {
+      postParts(data);
+      partReset();
+    }
+    return data;
+  };
+
   return (
     <div className="w-full flex border-b min-h-[600px] max-h-[calc(100vh-300px)]">
       <div className="flex flex-col gap-y-4 p-10 flex-1 overflow-y-scroll ">
-        {WORKING_SETTING_PART_RESPONSE.map(({ id, ...data }) => (
-          <WorkingSettingSetPartItem
-            key={id}
-            id={id}
-            setValue={setPartValue}
-            {...data}
-            onChangeEditMode={handleClickEditMode}
-          />
-        ))}
+        {parts &&
+          !!parts.length &&
+          parts.map((part) => (
+            <WorkingSettingSetPartItem
+              key={part.id}
+              branchId={branchId}
+              setValue={setPartValue}
+              onChangeEditMode={handleClickEditMode}
+              {...part}
+            />
+          ))}
       </div>
       <WorkingSettingPartForm
-        handleSubmit={partHandleSubmit}
+        handleSubmit={handlePartSubmit}
         onChangeEditMode={handleClickEditMode}
         setValue={setPartValue}
+        register={partRegister}
+        watch={partWatch}
+        onSubmit={onSubmitSettingPart}
         control={partControl}
         formState={partFormState}
         isEditingMode={isEditingMode}

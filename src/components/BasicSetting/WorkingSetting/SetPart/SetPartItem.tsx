@@ -1,38 +1,47 @@
 import BasicSettingSubTitle from '@/components/Common/BasicSettingSubTitle';
-import Badge from '@/components/Common/LabelBadge';
-import { IWorkingSettingPartResponse } from '@/models/workingSetting.model';
-import { adaptTaskToColor } from '@/utils/adaptTaskToColor';
+import { useDeleteParts } from '@/hooks/apis/useParts';
+import { IPartsResponse } from '@/models/parts';
 import { Button } from '@radix-ui/themes';
 import { UseFormSetValue } from 'react-hook-form';
 import { PiXBold } from 'react-icons/pi';
 
-type TPropsType = Omit<IWorkingSettingPartResponse, 'id'> & {
+interface IPropsType extends Omit<IPartsResponse, 'id'> {
   id: number;
-  // TODO: API response type으로 변경
-  setValue: UseFormSetValue<IWorkingSettingPartResponse>;
+  branchId: number;
+  setValue: UseFormSetValue<IPartsResponse>;
   onChangeEditMode: (boolean: boolean) => void;
-};
+}
 export default function WorkingSettingSetPartItem({
   id,
+  branchId,
   setValue,
   onChangeEditMode,
   ...data
-}: TPropsType) {
-  const { name, task, is_doctor, required_certification, leave_granting_authority } = data;
+}: IPropsType) {
+  const { name, task, is_doctor, required_certification, leave_granting_authority /*color*/ } =
+    data;
+
+  const { mutate: deleteParts } = useDeleteParts(branchId);
+
   const handleClickUpdateItem = (id: number) => {
     onChangeEditMode(true);
     setValue('id', id);
     Object.entries(data).forEach(([key, value]) => setValue(key as keyof typeof data, value));
   };
   const handleClickDeleteItem = (id: number) => {
+    deleteParts(id);
     return id;
   };
 
-  const taskColor = adaptTaskToColor(data.task);
+  // 백엔드업데이트 이후에는 색상 부분에 color 입력
+  const bgColor = `bg-[#1beeee]`;
 
   return (
     <div className="flex justify-between items-center border-2 p-6 bg-gray-10 min-w-[800px]">
-      <Badge color={taskColor} radius="full" size={1} variant="solid" text={name.slice(0, 2)} />
+      <span className={`w-10 h-6 rounded-full text-black text-center  ${bgColor}`}>
+        {name.slice(0, 2)}
+      </span>
+
       <BasicSettingSubTitle title="직책" content={name} gap="gap-x-4" />
       <BasicSettingSubTitle title="업무" content={task} gap="gap-x-4" />
       <BasicSettingSubTitle title="구분" content={is_doctor ? '의사' : '일반'} gap="gap-x-4" />
