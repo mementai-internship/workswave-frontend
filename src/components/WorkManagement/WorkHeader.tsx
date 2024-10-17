@@ -1,16 +1,23 @@
 import { ChangeMonth } from '@/components/Common/ChangeMonth';
+import { ItabItem } from '@/pages/workManagement/WorkManagementPage';
 import { Button } from '@radix-ui/themes';
 import dayjs from 'dayjs';
 import { useMemo, useState } from 'react';
 import { PiGear } from 'react-icons/pi';
 
-interface IProps {
-  isPartTime: boolean;
-  isSetPartTime: React.Dispatch<React.SetStateAction<boolean>>;
+export interface IProps {
+  selectTab: ItabItem;
+  setSelectTab: React.Dispatch<React.SetStateAction<ItabItem>>;
 }
 
-export default function WorkHeader({ isPartTime, isSetPartTime }: IProps) {
+export default function WorkHeader({ selectTab, setSelectTab }: IProps) {
   const [currentDate, setCurrentDate] = useState(dayjs());
+
+  const tabItems: ItabItem[] = [
+    { id: 0, title: '근로 관리' },
+    { id: 1, title: '파트타이머 관리' },
+    { id: 2, title: '출퇴근 관리' },
+  ];
 
   const handleChangeMonth = (newDate: dayjs.Dayjs) => {
     setCurrentDate(newDate);
@@ -46,16 +53,19 @@ export default function WorkHeader({ isPartTime, isSetPartTime }: IProps) {
   return (
     <div className="flex justify-between content-center py-4">
       <div className="text-2xl font-medium flex gap-3">
-        근로관리
-        <Button
-          color="gray"
-          variant="soft"
-          radius="full"
-          onClick={() => isSetPartTime(!isPartTime)}
-        >
-          <PiGear />
-          {isPartTime ? '파트타임관리' : '출퇴근 기록 관리'}
-        </Button>
+        {selectTab.title}
+        <div className="flex gap-3">
+          {tabItems
+            .filter((item) => item.id !== selectTab.id)
+            .map((item) => (
+              <Button color="gray" variant="soft" radius="full" onClick={() => setSelectTab(item)}>
+                <PiGear />
+                <span key={item.id} className="-mb-px mr-1">
+                  {item.title}
+                </span>
+              </Button>
+            ))}
+        </div>
       </div>
       <div className="flex items-center	gap-2">
         <p className="text-sm text-gray-50">
