@@ -1,3 +1,8 @@
+import { Button, Checkbox, TextField } from '@radix-ui/themes';
+import { useState } from 'react';
+import { Control, Controller, UseFormReset } from 'react-hook-form';
+import { PiCaretDown, PiCaretUp, PiDeviceRotate } from 'react-icons/pi';
+
 import WageAutoSettingRow from '@/components/BasicSetting/Wage/WageAutoSettingRow';
 import WageContainer from '@/components/BasicSetting/Wage/WageContainer';
 import WageFieldset from '@/components/BasicSetting/Wage/WageFieldset';
@@ -6,10 +11,6 @@ import { Txt } from '@/components/Common/Txt';
 import { IWageSettingEditMode } from '@/hooks/useWageSetting';
 import { IWageSetting } from '@/models/wageSetting.model';
 import { validateOnBlurForInputNumber } from '@/utils/validateOnBlurForInputNumber';
-import { Button, Checkbox, TextField } from '@radix-ui/themes';
-import { useState } from 'react';
-import { Control, Controller, UseFormReset } from 'react-hook-form';
-import { PiCaretDown, PiCaretUp, PiDeviceRotate } from 'react-icons/pi';
 
 type TOptionType = {
   id: number;

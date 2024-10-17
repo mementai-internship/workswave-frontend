@@ -1,8 +1,9 @@
+import { Button } from '@radix-ui/themes';
+import { PiX } from 'react-icons/pi';
+
 import { Txt } from '@/components/Common/Txt';
 import { IWageSettingEditMode } from '@/hooks/useWageSetting';
 import { IWageSetting } from '@/models/wageSetting.model';
-import { Button } from '@radix-ui/themes';
-import { PiX } from 'react-icons/pi';
 
 interface IProps {
   item: IWageSetting;

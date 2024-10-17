@@ -1,11 +1,12 @@
+import React from 'react';
+import { Control, Controller } from 'react-hook-form';
+
 import { Txt } from '@/components/Common/Txt';
 import { IWageSetting } from '@/models/wageSetting.model';
 import {
   TValidateOnBlurForInputNumberType,
   validateOnBlurForInputNumber,
 } from '@/utils/validateOnBlurForInputNumber';
-import React from 'react';
-import { Control, Controller } from 'react-hook-form';
 
 interface IProps {
   leftChild: React.ReactNode;

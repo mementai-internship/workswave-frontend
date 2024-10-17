@@ -1,7 +1,7 @@
-import axiosInstance from '@/apis/axiosInstance';
+import authAxiosInstance from '@/apis/authAxiosInstance';
 
 export const getCurrentUser = async (token: string) => {
-  const { data } = await axiosInstance.get('/users/me', {
+  const { data } = await authAxiosInstance.get('/users/me', {
     headers: {
       Authorization: `Bearer ${token}`,
     },

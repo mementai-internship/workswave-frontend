@@ -1,8 +1,9 @@
-import { IHourlyRangeItem, IHourlyRangeItemSplitTime } from '@/models/hourlyRange.model';
 import dayjs from 'dayjs';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSearchParams } from 'react-router-dom';
+
+import { IHourlyRangeItem, IHourlyRangeItemSplitTime } from '@/models/hourlyRange.model';
 
 export const useHourlyRange = () => {
   const { register, handleSubmit, setValue, getValues, control } =

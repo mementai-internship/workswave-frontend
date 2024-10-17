@@ -1,7 +1,8 @@
-import { IWageSetting } from '@/models/wageSetting.model';
 import { Select } from '@radix-ui/themes';
 import React, { forwardRef } from 'react';
 import { Control, Controller } from 'react-hook-form';
+
+import { IWageSetting } from '@/models/wageSetting.model';
 
 interface IProps {
   name?: keyof IWageSetting;

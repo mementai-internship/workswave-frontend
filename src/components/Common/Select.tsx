@@ -6,7 +6,7 @@ interface ISelectProps<T extends FieldValues> {
   title: string;
   register?: UseFormRegister<T>;
   options: ISelectOption[];
-  size?: 'xSmall' | 'small' | 'medium' | 'large';
+  size?: '2xSmall' | 'xSmall' | 'small' | 'medium' | 'large';
   border?: boolean;
 }
 
@@ -25,6 +25,7 @@ export default function SelectBox<T>({
   border = true,
 }: ISelectProps<T>) {
   const SelectBoxSize = {
+    '2xSmall': 'w-12',
     xSmall: 'w-24',
     small: 'w-36',
     medium: 'w-44',

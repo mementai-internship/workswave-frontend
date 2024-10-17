@@ -1,5 +1,6 @@
-import Title from '@/components/Common/Title';
 import React from 'react';
+
+import Title from '@/components/Common/Title';
 
 interface IProps {
   title: string;

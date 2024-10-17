@@ -1,7 +1,8 @@
-import { IWageSetting } from '@/models/wageSetting.model';
 import dayjs from 'dayjs';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+
+import { IWageSetting } from '@/models/wageSetting.model';
 
 export interface IWageSettingEditMode {
   isEdit: boolean;

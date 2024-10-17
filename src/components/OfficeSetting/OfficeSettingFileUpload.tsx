@@ -1,12 +1,12 @@
-import { IOfficeItemResponse } from '@/models/officeSetting.model';
+import { IBranchesRequest } from '@/models/branches.model';
 import { Button } from '@radix-ui/themes';
 import React, { useRef, useState } from 'react';
 import { UseFormSetValue } from 'react-hook-form';
 
 interface IProps {
   title: string;
-  setValue: UseFormSetValue<IOfficeItemResponse>;
-  name: keyof IOfficeItemResponse;
+  setValue: UseFormSetValue<IBranchesRequest>;
+  name: keyof IBranchesRequest;
 }
 
 export default function OfficeSettingFileUpload({ title, setValue, name }: IProps) {
@@ -29,16 +29,14 @@ export default function OfficeSettingFileUpload({ title, setValue, name }: IProp
   return (
     <div className="flex flex-1">
       <input
-        name={name}
         type="file"
         ref={fileInputRef}
         className="hidden" // 기본 파일 입력 숨김
         onChange={handleChange}
         required={title === '직인등록'}
-        id={name}
       />
-      <label htmlFor={name}></label>
       <Button
+        type="button"
         variant={isUpload ? 'solid' : 'outline'}
         color={isUpload ? 'blue' : 'gray'}
         className="flex-1"
