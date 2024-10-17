@@ -1,6 +1,3 @@
-import Title from '@/components/Common/Title';
-import { Txt } from '@/components/Common/Txt';
-import { IPartsResponse } from '@/models/parts';
 import { Button, RadioGroup, TextField, Tooltip } from '@radix-ui/themes';
 import { useCallback } from 'react';
 import {
@@ -12,6 +9,10 @@ import {
   UseFormWatch,
 } from 'react-hook-form';
 import { PiInfo } from 'react-icons/pi';
+
+import Title from '@/components/Common/Title';
+import { Txt } from '@/components/Common/Txt';
+import { IPartsResponse } from '@/models/parts';
 
 interface IPropsType {
   handleSubmit: UseFormHandleSubmit<IPartsResponse>;

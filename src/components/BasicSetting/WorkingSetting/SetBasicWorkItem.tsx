@@ -1,7 +1,8 @@
-import { Txt } from '@/components/Common/Txt';
-import { IWorkPolicies } from '@/models/work-policies';
 import { Checkbox } from '@radix-ui/themes';
 import { UseFormRegister } from 'react-hook-form';
+
+import { Txt } from '@/components/Common/Txt';
+import { IWorkPolicies } from '@/models/work-policies';
 
 interface IPropsType {
   title: string;

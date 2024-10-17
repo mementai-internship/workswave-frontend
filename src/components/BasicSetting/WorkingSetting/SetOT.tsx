@@ -1,8 +1,9 @@
-import { Txt } from '@/components/Common/Txt';
-import { IWorkPolicies } from '@/models/work-policies';
 import { TextField } from '@radix-ui/themes';
 import React from 'react';
 import { FieldPath, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
+
+import { Txt } from '@/components/Common/Txt';
+import { IWorkPolicies } from '@/models/work-policies';
 
 interface IPropsType {
   register: UseFormRegister<IWorkPolicies>;

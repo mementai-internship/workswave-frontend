@@ -1,6 +1,7 @@
+import { isAxiosError } from 'axios';
+
 import axiosInstance from '@/apis/axiosInstance';
 import { IWorkPolicies } from '@/models/work-policies';
-import { isAxiosError } from 'axios';
 
 export const getWorkPolicies = async (branchId: number): Promise<IWorkPolicies> => {
   try {

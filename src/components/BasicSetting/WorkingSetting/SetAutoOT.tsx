@@ -1,6 +1,7 @@
-import { IWorkPolicies } from '@/models/work-policies';
 import { RadioGroup } from '@radix-ui/themes';
 import { FieldPath, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
+
+import { IWorkPolicies } from '@/models/work-policies';
 
 const radioOptions: { label: string; field: keyof IWorkPolicies['auto_overtime_policies'] }[] = [
   { label: '최고관리자', field: 'top_manager_auto_applied' },

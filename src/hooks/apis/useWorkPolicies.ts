@@ -1,5 +1,3 @@
-import { getWorkPolicies, patchWorkPolicies } from '@/apis/work-policies';
-import { IWorkPolicies } from '@/models/work-policies';
 import {
   UseMutationResult,
   UseQueryResult,
@@ -7,6 +5,9 @@ import {
   useQuery,
   useQueryClient,
 } from '@tanstack/react-query';
+
+import { getWorkPolicies, patchWorkPolicies } from '@/apis/work-policies';
+import { IWorkPolicies } from '@/models/work-policies';
 
 const WORK_POLICIES_QUERY_KEY = 'work-policies';
 

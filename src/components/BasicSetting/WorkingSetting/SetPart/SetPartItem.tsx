@@ -1,9 +1,10 @@
-import BasicSettingSubTitle from '@/components/Common/BasicSettingSubTitle';
-import { useDeleteParts } from '@/hooks/apis/useParts';
-import { IPartsResponse } from '@/models/parts';
 import { Button } from '@radix-ui/themes';
 import { UseFormSetValue } from 'react-hook-form';
 import { PiXBold } from 'react-icons/pi';
+
+import BasicSettingSubTitle from '@/components/Common/BasicSettingSubTitle';
+import { useDeleteParts } from '@/hooks/apis/useParts';
+import { IPartsResponse } from '@/models/parts';
 
 interface IPropsType extends Omit<IPartsResponse, 'id'> {
   id: number;

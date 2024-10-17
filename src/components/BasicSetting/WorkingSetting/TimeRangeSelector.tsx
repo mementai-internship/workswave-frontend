@@ -1,10 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Txt } from '@/components/Common/Txt';
-import { getHours, getMinutes } from '@/utils/getTimes';
 import { Select } from '@radix-ui/themes';
 import dayjs, { Dayjs } from 'dayjs';
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
 import { useEffect, useState } from 'react';
+
+import { Txt } from '@/components/Common/Txt';
+import { getHours, getMinutes } from '@/utils/getTimes';
 
 dayjs.extend(isSameOrAfter);
 interface IPropsType {

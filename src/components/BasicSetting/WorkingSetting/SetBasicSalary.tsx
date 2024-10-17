@@ -1,6 +1,7 @@
-import { IWorkPolicies } from '@/models/work-policies';
 import { RadioGroup } from '@radix-ui/themes';
 import { UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
+
+import { IWorkPolicies } from '@/models/work-policies';
 
 interface IPropsType {
   register: UseFormRegister<IWorkPolicies>;

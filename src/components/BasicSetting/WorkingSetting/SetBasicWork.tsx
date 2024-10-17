@@ -1,9 +1,10 @@
+import { Select } from '@radix-ui/themes';
+import { Control, Controller, UseFormRegister, UseFormSetValue, useWatch } from 'react-hook-form';
+
 import SetBasicWorkItem from '@/components/BasicSetting/WorkingSetting/SetBasicWorkItem';
 import TimeRangeSelector from '@/components/BasicSetting/WorkingSetting/TimeRangeSelector';
 import { Txt } from '@/components/Common/Txt';
 import { IWorkPolicies } from '@/models/work-policies';
-import { Select } from '@radix-ui/themes';
-import { Control, Controller, UseFormRegister, UseFormSetValue, useWatch } from 'react-hook-form';
 
 interface IPropsType {
   register: UseFormRegister<IWorkPolicies>;
