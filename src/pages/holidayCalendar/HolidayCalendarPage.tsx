@@ -180,7 +180,7 @@ export default function DayOffCalendarPage() {
           onClose={handleEmployeeModalClose}
           employees={DUMMY_EMPLOYEES}
           onRegisterHoliday={handleEmployeeHolidayRegister}
-          currentDate={currentDate.toDate()}
+          currDate={currentDate}
         />
       </header>
 

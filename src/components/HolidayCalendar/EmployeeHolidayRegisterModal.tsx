@@ -12,7 +12,7 @@ interface IHolidayRegisterModalProps {
   onClose: () => void;
   employees: { id: string; name: string }[];
   onRegisterHoliday: (holidays: { employee: string; dates: Date[] }[]) => void;
-  currentDate: Date; // 새로운 prop 추가
+  currDate: dayjs.Dayjs;
 }
 
 export default function HolidayRegisterModal({
@@ -20,7 +20,7 @@ export default function HolidayRegisterModal({
   onClose,
   employees,
   onRegisterHoliday,
-  currentDate,
+  currDate,
 }: IHolidayRegisterModalProps) {
   const defaultClassNames = getDefaultClassNames(); // react-day-picker 에서 tailwind 사용을 위한 선언
   const [selectedDates, setSelectedDates] = useState<{ [employeeId: string]: Date[] }>({});
@@ -146,7 +146,7 @@ export default function HolidayRegisterModal({
                           selected={currentEmployee ? selectedDates[currentEmployee] || [] : []}
                           onSelect={handleDateSelect}
                           locale={ko}
-                          defaultMonth={currentDate}
+                          defaultMonth={currDate.toDate()}
                           formatters={{
                             formatCaption: (date: Date) => dayjs(date).format('YYYY년 MM월'),
                           }}
