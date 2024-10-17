@@ -13,7 +13,7 @@ export default function WorkingSettingHoliday({ register, setValue, watch }: IPr
   return (
     <div className="p-16 pb-32 flex flex-col gap-y-10">
       <div className="flex items-center gap-x-8">
-        <label htmlFor="is_use" className="text-gray-400">
+        <label htmlFor="" className="text-gray-400">
           사용여부
         </label>
 
@@ -23,7 +23,7 @@ export default function WorkingSettingHoliday({ register, setValue, watch }: IPr
           {...register('holiday_work_policies.do_holiday_work')}
           onValueChange={(newValue) =>
             setValue(
-              'default_allowance_policies.do_holiday_work' as keyof IWorkPolicies,
+              'holiday_work_policies.do_holiday_work' as keyof IWorkPolicies,
               newValue === 'true'
             )
           }
