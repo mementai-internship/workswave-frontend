@@ -1,4 +1,5 @@
 import { getCurrentUser } from '@/apis/auth.api';
+import { TUser } from '@/models/user.model';
 import { atom } from 'jotai';
 import { atomWithQuery } from 'jotai-tanstack-query';
 import { atomWithStorage } from 'jotai/utils';
@@ -7,7 +8,7 @@ export const userTokenAtom = atomWithStorage<string | null>('accessToken', null)
 
 export const isLoggedInAtom = atom((get) => get(userTokenAtom) !== null);
 
-export const currentUserAtom = atomWithQuery((get) => ({
+export const currentUserAtom = atomWithQuery<TUser>((get) => ({
   queryKey: ['currentUser', get(userTokenAtom)],
   queryFn: async () => {
     const token = get(userTokenAtom);
@@ -16,3 +17,14 @@ export const currentUserAtom = atomWithQuery((get) => ({
     return response.data;
   },
 }));
+
+export const userAtom = atom(
+  (get) => {
+    const queryResult = get(currentUserAtom);
+    return queryResult.data ?? null;
+  },
+  (_, set) => {
+    set(userTokenAtom, null);
+    set(currentUserAtom);
+  }
+);

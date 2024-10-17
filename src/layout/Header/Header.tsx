@@ -1,12 +1,12 @@
 import HeaderProfile from '@/layout/Header/HeaderProfile';
-import { TUserAuthority } from '@/models/user.model';
+import { TUserRole } from '@/models/user.model';
 import { currentUserAtom } from '@/store/authAtoms';
 import { useAtom } from 'jotai';
 import { Link } from 'react-router-dom';
 
 export interface IHeader {
   name?: string;
-  role?: TUserAuthority;
+  role?: TUserRole;
 }
 
 export default function Header() {
@@ -31,7 +31,9 @@ export default function Header() {
           </Link>
         )}
         <div className="px-4 py-3.5 text-sm border-x border-gray-50 hover:cursor-pointer">
-          {/* 간편메뉴를 누르면 어떤일이 발생?? */}간편메뉴
+          <Link to="/simple-menu">
+            <div>간편메뉴</div>
+          </Link>
         </div>
       </div>
     </header>
