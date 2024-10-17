@@ -22,15 +22,5 @@ export const MEMBER_BASIC_INFO_TITLE1 = [
   '학력',
   '생년월일',
   '입사일',
-  'O.T관리',
 ];
-export const MEMBER_BASIC_INFO_TITLE2 = [
-  '권한',
-  '성별',
-  '메일',
-  '',
-  '경력',
-  '근무파트',
-  '퇴사일',
-  '연차관리',
-];
+export const MEMBER_BASIC_INFO_TITLE2 = ['권한', '성별', '메일', '', '경력', '근무파트', '퇴사일'];
