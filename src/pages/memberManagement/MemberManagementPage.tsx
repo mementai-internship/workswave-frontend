@@ -39,11 +39,7 @@ export default function MemberManagementPage() {
           <TitleContainer content="회원관리" />
           <Button color="gray" variant="soft" radius="full" onClick={() => {}}>
             <PiGear />
-            최고관리자 설정
-          </Button>
-          <Button color="gray" variant="soft" radius="full" onClick={() => {}}>
-            <PiGear />
-            파트/통합관리자 설정
+            최고/지점관리자 설정
           </Button>
         </div>
         <div className="flex justify-end">

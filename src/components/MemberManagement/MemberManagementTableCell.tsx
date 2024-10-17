@@ -14,8 +14,8 @@ export default function MemberManagementTableCell({ data }: { data: IMemberManag
       <Table.RowHeaderCell className="text-center p-4 align-middle w-[3%]">
         {data.id}
       </Table.RowHeaderCell>
-      <Table.Cell className="text-center p-4 align-middle w-[12%]">{data.branch}</Table.Cell>
-      <Table.Cell className="p-4 align-middle w-[10%]">
+      <Table.Cell className="text-center p-4 align-middle w-[14%]">{data.branch}</Table.Cell>
+      <Table.Cell className="p-4 align-middle w-[8%]">
         <Link to={`/member-management/member-info`}>
           <div
             className={`${data.id === userId ? 'font-bold' : ''} flex flex-row gap-1 justify-center items-center`}
@@ -25,14 +25,14 @@ export default function MemberManagementTableCell({ data }: { data: IMemberManag
           </div>
         </Link>
       </Table.Cell>
-      <Table.Cell className="p-4 align-middle w-[3%]">{data.workPart}</Table.Cell>
+      <Table.Cell className="p-4 align-middle w-[2%] whitespace-nowrap">{data.workPart}</Table.Cell>
       <Table.Cell className="text-center p-4 align-middle w-[8%]">{data.birth}</Table.Cell>
-      <Table.Cell className="text-center p-4 align-middle w-[8%]">{data.phone}</Table.Cell>
+      <Table.Cell className="text-center p-4 align-middle w-[10%]">{data.phone}</Table.Cell>
       <Table.Cell className="text-center p-4 align-middle w-[8%]">{data.email}</Table.Cell>
       <Table.Cell className="text-center p-4 align-middle w-[8%]">
         {data.contractPeriod.start}
       </Table.Cell>
-      <Table.Cell className="text-center p-4 align-middle w-[8%]">
+      <Table.Cell className="text-center p-4 align-middle w-[7%]">
         {data.contractPeriod.salary}
       </Table.Cell>
       <Table.Cell className="text-center p-4 align-middle w-[8%]">
@@ -44,23 +44,23 @@ export default function MemberManagementTableCell({ data }: { data: IMemberManag
           data.contractPeriod.end.toString()
         )}
       </Table.Cell>
-      <Table.Cell className="flex flex-row h-full gap-1 justify-center items-center">
-        <div className="flex flex-col gap-1">
-          <div className="bg-gray-200 rounded-md px-1.5 align-middle text-center">-30</div>
-          <div className="bg-gray-200 rounded-md px-1.5 bg-gray-500 text-white align-middle text-center">
+      <Table.Cell className="flex flex-row h-full gap-0.5 justify-center items-center">
+        <div className="flex flex-col gap-0.5">
+          <div className="bg-gray-200 rounded-md px-1 text-xs align-middle text-center">-30</div>
+          <div className="bg-gray-200 rounded-md px-1 text-xs bg-gray-500 text-white align-middle text-center">
             근로
           </div>
         </div>
-        <div className="flex flex-col gap-1">
-          <div className="bg-gray-200 rounded-md px-1.5 bg-gray-500 text-white align-middle text-center">
+        <div className="flex flex-col gap-0.5">
+          <div className="bg-gray-200 rounded-md px-1 text-xs bg-gray-500 text-white align-middle text-center">
             임금
           </div>
-          <div className="bg-gray-200 rounded-md px-1.5 bg-gray-500 text-white align-middle text-center">
+          <div className="bg-gray-200 rounded-md px-1 text-xs bg-gray-500 text-white align-middle text-center">
             기본
           </div>
         </div>
       </Table.Cell>
-      <Table.Cell className="text-center p-4 align-middle">
+      <Table.Cell className="text-center p-4 align-middle w-[2%]">
         <button>
           <PiXBold />
         </button>
