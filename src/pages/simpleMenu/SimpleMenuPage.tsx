@@ -1,3 +1,4 @@
+import { Txt } from '@/components/Common/Txt';
 import {
   PiCalendarDotsLight,
   PiClockLight,
@@ -18,7 +19,7 @@ export default function SimpleMenuPage() {
           <div>
             <PiCalendarDotsLight size={24} />
           </div>
-          <div className="text-x">연차신청</div>
+          <Txt variant="h6">연차신청</Txt>
         </Link>
       </div>
       <div
@@ -29,7 +30,7 @@ export default function SimpleMenuPage() {
           <div>
             <PiClockLight size={24} />
           </div>
-          <div className="text-x">O.T/휴일근무 신청</div>
+          <Txt variant="h6">O.T/휴일근무 신청</Txt>
         </Link>
       </div>
       <div
@@ -40,7 +41,7 @@ export default function SimpleMenuPage() {
           <div>
             <PiFileTextThin size={24} />
           </div>
-          <div className="text-x">증명서신청</div>
+          <Txt variant="h6">증명서신청</Txt>
         </Link>
       </div>
       <div
@@ -51,7 +52,7 @@ export default function SimpleMenuPage() {
           <div>
             <PiUserCircleThin size={24} />
           </div>
-          <div className="text-x">마이페이지</div>
+          <Txt variant="h6">마이페이지</Txt>
         </Link>
       </div>
       <div
@@ -62,7 +63,7 @@ export default function SimpleMenuPage() {
           <div>
             <PiMapPinArea size={24} />
           </div>
-          <div className="text-x">출/퇴근</div>
+          <Txt variant="h6">출/퇴근</Txt>
         </Link>
       </div>
     </div>
