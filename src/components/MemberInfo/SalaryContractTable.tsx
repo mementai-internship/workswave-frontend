@@ -2,7 +2,6 @@ import SelectBox from '@/components/Common/Select';
 import ContractInfoCheckbox from '@/components/MemberInfo/MemberInfoCommon/ContractInfoCheckbox';
 import MemberBasicInfoDatePicker from '@/components/MemberInfo/MemberInfoCommon/MemberBasicInfoDatePicker';
 import MemberInfoInput from '@/components/MemberInfo/MemberInfoCommon/MemberInfoInput';
-import { infoTestData } from '@/components/MemberManagement/MemberManagementTable';
 import { SALARY_CONTRACT_TITLE1, SALARY_CONTRACT_TITLE2 } from '@/constants/memberInfoTable';
 import { Button, Table } from '@radix-ui/themes';
 import { Link } from 'react-router-dom';
@@ -59,31 +58,17 @@ export default function SalaryContractTable() {
                 {(() => {
                   switch (index) {
                     case 0:
-                      return (
-                        <MemberInfoInput
-                          defaultValue={infoTestData[0].contractPeriod.annualSalary}
-                        />
-                      );
+                      return <MemberInfoInput defaultValue={'1'} />;
                     case 1:
-                      return (
-                        <MemberInfoInput defaultValue={infoTestData[0].contractPeriod.salary} />
-                      );
+                      return <MemberInfoInput defaultValue={'1'} />;
                     case 2:
                       return <MemberInfoInput defaultValue="0" />;
                     case 3:
-                      return (
-                        <MemberInfoInput
-                          defaultValue={infoTestData[0].contractPeriod.annualSalary}
-                        />
-                      );
+                      return <MemberInfoInput defaultValue={'1'} />;
                     case 4:
-                      return (
-                        <MemberInfoInput defaultValue={infoTestData[0].contractPeriod.salary} />
-                      );
+                      return <MemberInfoInput defaultValue={'1'} />;
                     case 5:
-                      return (
-                        <MemberInfoInput defaultValue={infoTestData[0].contractPeriod.salary} />
-                      );
+                      return <MemberInfoInput defaultValue={'1'} />;
                     default:
                       return null;
                   }
@@ -120,22 +105,15 @@ export default function SalaryContractTable() {
                         case 0:
                           return (
                             <>
-                              <MemberInfoInput
-                                defaultValue={infoTestData[0].contractPeriod.salary}
-                              />
+                              <MemberInfoInput defaultValue={'1'} />
                               <ContractInfoCheckbox text="직접입력" />
                             </>
                           );
                         case 1:
                           return (
                             <>
-                              <MemberInfoInput
-                                defaultValue={infoTestData[0].contractPeriod.salary}
-                              />
-                              <MemberInfoInput
-                                defaultValue={infoTestData[0].contractPeriod.salary}
-                                directInputButton
-                              />
+                              <MemberInfoInput defaultValue={'1'} />
+                              <MemberInfoInput defaultValue={'1'} directInputButton />
                             </>
                           );
                         case 2:
@@ -143,20 +121,12 @@ export default function SalaryContractTable() {
                         case 3:
                           return (
                             <>
-                              <MemberInfoInput
-                                defaultValue={infoTestData[0].contractPeriod.salary}
-                                directInputButton
-                              />
-                              <MemberInfoInput
-                                defaultValue={infoTestData[0].contractPeriod.salary}
-                                directInputButton
-                              />
+                              <MemberInfoInput defaultValue={'1'} directInputButton />
+                              <MemberInfoInput defaultValue={'1'} directInputButton />
                             </>
                           );
                         case 4:
-                          return (
-                            <MemberInfoInput defaultValue={infoTestData[0].contractPeriod.salary} />
-                          );
+                          return <MemberInfoInput defaultValue={'1'} />;
                         default:
                           return null;
                       }

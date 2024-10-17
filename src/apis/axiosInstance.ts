@@ -1,8 +1,8 @@
-import { getAccessToken, getRefreshToken, removeTokens, setTokens } from '@/utils/tokenUtils';
+import { getAccessToken, removeTokens } from '@/utils/tokenUtils';
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_BASE_URL,
+  baseURL: '/api',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -11,46 +11,33 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    const accessToken = getAccessToken();
+    const accessToken = getAccessToken().slice(1, getAccessToken().length - 1);
+
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
+
     return config;
   },
-  (error) => Promise.reject(error)
-);
-
-axiosInstance.interceptors.response.use(
-  (response) => response,
-  async (error) => {
-    const status = error.response?.status;
-
-    if (status === 401) {
-      const refreshToken = getRefreshToken();
-      if (refreshToken) {
-        try {
-          const response = await axiosInstance.post('/refresh-token', {
-            refreshToken,
-          });
-
-          setTokens(response.data.accessToken, response.data.refreshToken);
-
-          // 실패한 요청에 대해 Authorization 헤더 업데이트
-          error.config.headers['Authorization'] = `Bearer ${response.data.accessToken}`;
-
-          return axiosInstance.request(error.config);
-        } catch (refreshError) {
-          removeTokens();
-          window.location.href = '/';
-          return Promise.reject(refreshError);
+  (error) => {
+    switch (error.response.status) {
+      case 400:
+        break;
+      case 401:
+        console.log('error', '로그인이 필요합니다.');
+        removeTokens();
+        break;
+      case 404:
+        console.log('error', '페이지를 찾을 수 없습니다.');
+        break;
+      default:
+        if (error.response.status.toString().startsWith('5')) {
+          console.error(error.response);
+        } else {
+          console.error(error.response);
         }
-      }
-    } else if (status === 403) {
-      removeTokens();
-      window.location.href = '/login';
-      return Promise.reject(error);
+        break;
     }
-
     return Promise.reject(error);
   }
 );
