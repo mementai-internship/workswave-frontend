@@ -4,15 +4,15 @@ import { PiGear } from 'react-icons/pi';
 
 import TitleContainer from '@/components/Common/TitleContainer';
 
-export default function DayoffManagementHeader() {
+export default function OtManagementHeader() {
   return (
     <div>
-      <div className="flex  justify-between items-center">
-        <TitleContainer content="연차관리">
+      <div className="flex flex-row justify-between items-center">
+        <TitleContainer content="O.T관리">
           <div className="flex flex-row gap-2 items-center">
             <Button color="gray" variant="soft" radius="full" onClick={() => {}}>
               <PiGear />
-              최고관리자설정
+              전체O.T내역
             </Button>
           </div>
         </TitleContainer>
@@ -24,7 +24,7 @@ export default function DayoffManagementHeader() {
             className="font-bold text-black text-sm p-4 bg-gray-200 border-gray-10"
             onClick={() => {}}
           >
-            연차신청
+            O.T신청
           </Button>
         </div>
       </div>
