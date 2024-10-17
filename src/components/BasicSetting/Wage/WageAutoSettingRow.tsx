@@ -46,7 +46,7 @@ export default function WageAutoSettingRow({
                 }}
                 value={typeof value === 'boolean' ? '' : value}
                 disabled={readonly}
-                className={`${readonly ? 'bg-transparent focus:outline-0' : 'bg-white'} w-12 text-end text-gray-50 text-sm px-1 `}
+                className={`${readonly ? 'bg-transparent focus:outline-0' : 'bg-white'} ${name === 'annualAllowance' ? 'w-20' : 'w-12'} text-end text-gray-50 text-sm px-1 `}
               />
             )}
           />

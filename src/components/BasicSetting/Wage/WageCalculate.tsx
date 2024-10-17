@@ -39,11 +39,10 @@ export default function WageCalculate({
   handleCloseEditMode,
 }: IProps) {
   // 휴일수당 포함여부, 직무수당이 체크되었을 때 어떤 기능이 나오는지 알 수 없어서 사용하지는 않았음
-  // const [includeHolidayAllowanceChecked, setIncludeHolidayAllowanceChecked] =
+  // const [includeHolidayAllowanceChecked, setIncludeHolidayAllowanceChecked] =  useState<boolean>(false); // 휴일수당 포함여부
   // const [includeDutyAllowanceChecked, setIncludeDutyAllowanceChecked] = useState<boolean>(false); // 직무수당 체크여부
   const [isOpen, setIsOpen] = useState<boolean>(true);
   const [isHolidayWorkingHourChecked, setIsHolidayWorkingHourChecked] = useState<boolean>(false); // 주휴일(시간) 체크여부
-  useState<boolean>(false); // 휴일수당 포함여부
   const [isCustomOvertimeAllowanceDaysChecked, setIsCustomOvertimeAllowanceDaysChecked] =
     useState<boolean>(false); // 연차수당 일수 체크여부
   const [isCustomOvertimeHoursChecked, setIsCustomOvertimeHoursChecked] = useState<boolean>(false); // 연차시간 체크여부
