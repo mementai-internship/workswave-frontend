@@ -1,6 +1,8 @@
-import { IBranchResponse } from '@/models/branches.model';
 import { Button, Table } from '@radix-ui/themes';
 import React from 'react';
+import { useSearchParams } from 'react-router-dom';
+
+import { IBranchResponse } from '@/models/branches.model';
 
 interface IProps {
   data: IBranchResponse;
@@ -11,9 +13,12 @@ interface IProps {
 
 export default function OfficeSettingTableCell({ action, data, idx, buttonText }: IProps) {
   const isNotEmpty = (file: string) => (file !== 'None' ? 'Y' : 'N');
+  const [searchParams] = useSearchParams();
+  const currentPage = searchParams.get('page') ?? 1;
+  const startIdx = (Number(currentPage) - 1) * 10;
   return (
     <Table.Row className="text-center">
-      <Table.RowHeaderCell className="w-[5%]">{idx + 1}</Table.RowHeaderCell>
+      <Table.RowHeaderCell className="w-[5%]">{startIdx + idx + 1}</Table.RowHeaderCell>
       <Table.Cell className="w-[15%]">{data.name}</Table.Cell>
       <Table.Cell className="w-[10%]">{data.code}</Table.Cell>
       <Table.Cell className="w-[10%]">{data.representative_name}</Table.Cell>
