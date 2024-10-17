@@ -1,8 +1,3 @@
-import { ChangeMonth } from '@/components/Common/ChangeMonth';
-import SelectBox from '@/components/Common/Select';
-import { ChangeWeek } from '@/components/HolidayCalendar/ChangeWeek';
-import EmployeeHolidayRegisterModal from '@/components/HolidayCalendar/EmployeeHolidayRegisterModal';
-import HolidayCalendar from '@/components/HolidayCalendar/HolidayCalendar';
 import { EventInput } from '@fullcalendar/core';
 import { Button, Popover, Switch } from '@radix-ui/themes';
 import { ko } from 'date-fns/locale';
@@ -10,6 +5,12 @@ import dayjs from 'dayjs';
 import { useState } from 'react';
 import { DayPicker, getDefaultClassNames } from 'react-day-picker';
 import { PiGear } from 'react-icons/pi';
+
+import { ChangeMonth } from '@/components/Common/ChangeMonth';
+import SelectBox from '@/components/Common/Select';
+import { ChangeWeek } from '@/components/HolidayCalendar/ChangeWeek';
+import EmployeeHolidayRegisterModal from '@/components/HolidayCalendar/EmployeeHolidayRegisterModal';
+import HolidayCalendar from '@/components/HolidayCalendar/HolidayCalendar';
 
 export default function DayOffCalendarPage() {
   const defaultClassNames = getDefaultClassNames(); // react-day-picker 에서 tailwind 사용을 위한 선언

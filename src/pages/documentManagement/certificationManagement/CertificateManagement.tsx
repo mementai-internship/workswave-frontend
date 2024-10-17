@@ -1,3 +1,6 @@
+import { Button, Table } from '@radix-ui/themes';
+import { PiArrowUUpRightFill, PiCheck } from 'react-icons/pi';
+
 import ContactSearchInput from '@/components/Common/ContactSearchInput';
 import SelectBox from '@/components/Common/Select';
 import Title from '@/components/Common/Title';
@@ -6,8 +9,6 @@ import {
   TABLE_HEAD,
   memberInfoDropdownMenu,
 } from '@/pages/documentManagement/certificationManagement/constants';
-import { Button, Table } from '@radix-ui/themes';
-import { PiArrowUUpRightFill, PiCheck } from 'react-icons/pi';
 
 export default function CertificateManagement() {
   // 승인 함수
@@ -16,7 +17,7 @@ export default function CertificateManagement() {
   // 반려 함수
   const handleRejectButtonClick = () => {};
 
-  // 증명서 발급 함수
+  //  함수
   const handleCertificateIssuanceButtonClick = () => {};
 
   return (

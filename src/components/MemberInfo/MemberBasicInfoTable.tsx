@@ -1,13 +1,13 @@
+import { Button, Table } from '@radix-ui/themes';
+
 import MemberBasicInfoDatePicker from '@/components/MemberInfo/MemberInfoCommon/MemberBasicInfoDatePicker';
 import MemberInfoButton from '@/components/MemberInfo/MemberInfoCommon/MemberInfoButton';
 import MemberInfoDropdown from '@/components/MemberInfo/MemberInfoCommon/MemberInfoDropdownMenu';
 import MemberInfoInput from '@/components/MemberInfo/MemberInfoCommon/MemberInfoInput';
-import { infoTestData } from '@/components/MemberManagement/MemberManagementTable';
 import {
   MEMBER_BASIC_INFO_TITLE1,
   MEMBER_BASIC_INFO_TITLE2,
 } from '@/constants/memberManagementTableTitle';
-import { Button, Table } from '@radix-ui/themes';
 
 //test data API 연결 후 삭제
 const memberInfoDropdownMenu = [
@@ -46,9 +46,9 @@ export default function MemberBasicInfoTable() {
                   case 0:
                     return <MemberInfoDropdown title="지점 선택" menu={memberInfoDropdownMenu} />;
                   case 1:
-                    return <MemberInfoInput defaultValue={infoTestData[0].name} />;
+                    return <MemberInfoInput defaultValue={'이서인'} />;
                   case 2:
-                    return <MemberInfoInput defaultValue={infoTestData[0].phone} />;
+                    return <MemberInfoInput defaultValue={'01036270286'} />;
                   case 3:
                     return (
                       <div className="flex items-center gap-2">
@@ -102,9 +102,7 @@ export default function MemberBasicInfoTable() {
                           <MemberInfoDropdown title="성별 선택" menu={memberInfoDropdownMenu} />
                         );
                       case 2:
-                        return (
-                          <MemberInfoInput size="large" defaultValue={infoTestData[0].email} />
-                        );
+                        return <MemberInfoInput size="large" defaultValue={'seoin@test.com'} />;
                       case 4:
                         return <MemberInfoButton text="경력입력" />;
                       case 5:

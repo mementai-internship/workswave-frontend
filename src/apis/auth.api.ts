@@ -1,10 +1,6 @@
 import axiosInstance from '@/apis/axiosInstance';
 
-export const getCurrentUser = async (token: string) => {
-  const { data } = await axiosInstance.get('/users/me', {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+export const getCurrentUser = async () => {
+  const { data } = await axiosInstance.get('/users/me');
   return data;
 };

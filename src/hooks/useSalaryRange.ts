@@ -1,7 +1,8 @@
-import useFetchSalaryRange from '@/hooks/apis/useFetchSalaryRange';
-import { ICalculatedSalary, IInputSalary } from '@/models/salaryRange.model';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+
+import useFetchSalaryRange from '@/hooks/apis/useFetchSalaryRange';
+import { ICalculatedSalary, IInputSalary } from '@/models/salaryRange.model';
 
 export const useSalaryRange = () => {
   const { data } = useFetchSalaryRange();
