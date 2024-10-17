@@ -10,7 +10,7 @@ export const MEMBER_MANAGEMENT_TABLE_TITLE = [
   '월급',
   '연봉',
   '근무기간',
-  '만료',
+  '계약 상태',
   '삭제',
 ];
 
