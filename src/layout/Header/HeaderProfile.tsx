@@ -1,6 +1,6 @@
 import { postLogout } from '@/apis/logout.api';
 import { IHeader } from '@/layout/Header/Header';
-import { userTokenAtom } from '@/store/authAtoms';
+import { userAtom, userTokenAtom } from '@/store/authAtoms';
 import { removeTokens } from '@/utils/tokenUtils';
 import { useAtom } from 'jotai';
 import { PiBellFill } from 'react-icons/pi';
@@ -8,11 +8,13 @@ import { Link } from 'react-router-dom';
 
 export default function HeaderProfile({ name, role }: IHeader) {
   const token = useAtom(userTokenAtom)[0];
+  const [, setUser] = useAtom(userAtom);
 
   // Logout 함수
   const handleLogoutButtonClick = async () => {
     await postLogout(token);
     removeTokens();
+    setUser();
   };
 
   return (
