@@ -7,7 +7,7 @@ import TitleContainer from '@/components/Common/TitleContainer';
 export default function DayoffManagementHeader() {
   return (
     <div>
-      <div className="flex flex-row justify-between items-center">
+      <div className="flex  justify-between items-center">
         <TitleContainer content="연차관리">
           <div className="flex flex-row gap-2 items-center">
             <Button color="gray" variant="soft" radius="full" onClick={() => {}}>
