@@ -1,26 +1,30 @@
+import { Button, Table } from '@radix-ui/themes';
+import { PiGear } from 'react-icons/pi';
+import { Link } from 'react-router-dom';
+
 import ContactSearchInput from '@/components/Common/ContactSearchInput';
 import SelectBox from '@/components/Common/Select';
 import TitleContainer from '@/components/Common/TitleContainer';
-import { Button, Table } from '@radix-ui/themes';
-import { PiGear } from 'react-icons/pi';
 
 export default function SuperManagerSetting() {
   // 회원관리 버튼 클릭 시
   const handleMemberManagementButtonClick = () => {};
 
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col gap-2 w-full">
       <div className="flex gap-2 items-center w-full">
         <TitleContainer content="파트/통합관리자 관리" />
-        <Button
-          color="gray"
-          variant="soft"
-          radius="full"
-          onClick={handleMemberManagementButtonClick}
-        >
-          <PiGear />
-          회원 관리
-        </Button>
+        <Link to="/member-management">
+          <Button
+            color="gray"
+            variant="soft"
+            radius="full"
+            onClick={handleMemberManagementButtonClick}
+          >
+            <PiGear />
+            회원관리
+          </Button>
+        </Link>
       </div>
       <hr className="w-min-screen h-0.5 bg-gray-300" />
       <div className="flex items-center justify-between py-4">
