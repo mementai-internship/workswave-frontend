@@ -2,8 +2,10 @@ import { ChangeMonth } from '@/components/Common/ChangeMonth';
 import { ItabItem } from '@/pages/workManagement/WorkManagementPage';
 import { Button } from '@radix-ui/themes';
 import dayjs, { Dayjs } from 'dayjs';
+import React from 'react';
 import { useMemo } from 'react';
 import { PiGear } from 'react-icons/pi';
+import { useNavigate } from 'react-router-dom';
 
 export interface IProps {
   selectTab: ItabItem;
@@ -18,15 +20,22 @@ export default function WorkHeader({
   currentDate,
   setCurrentDate,
 }: IProps) {
+  const navigate = useNavigate();
+
   const tabItems: ItabItem[] = [
-    { id: 0, title: '근로 관리' },
-    { id: 1, title: '파트타이머 관리' },
-    { id: 2, title: '출퇴근 관리' },
+    { id: 0, title: '근로 관리', path: '/work-management/working' },
+    { id: 1, title: '파트타이머 관리', path: '/work-management/partTime' },
+    { id: 2, title: '출퇴근 관리', path: '/work-management/commute' },
   ];
 
   const handleChangeMonth = (newDate: dayjs.Dayjs) => {
     setCurrentDate(newDate);
     // backend API 연결
+  };
+
+  const handleTabChange = (item: ItabItem) => {
+    setSelectTab(item);
+    navigate(item.path);
   };
 
   const date = useMemo(() => {
@@ -68,12 +77,10 @@ export default function WorkHeader({
                 color="gray"
                 variant="soft"
                 radius="full"
-                onClick={() => setSelectTab(item)}
+                onClick={() => handleTabChange(item)}
               >
                 <PiGear />
-                <span key={item.id} className="-mb-px mr-1">
-                  {item.title}
-                </span>
+                <span className="-mb-px mr-1">{item.title}</span>
               </Button>
             ))}
         </div>

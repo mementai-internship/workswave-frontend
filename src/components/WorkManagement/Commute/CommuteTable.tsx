@@ -1,16 +1,15 @@
-import DetailCommuteRecord from '@/components/WorkManagement/Commute/DetailCommuteRecord';
 import { GenderIcon } from '@/components/WorkManagement/Work/WorkTableRows';
-import { mockStatistics } from '@/constants/workManagementTable/workSelect.mock';
 import { commuteMockData } from '@/constants/workManagementTable/workTable.mock';
 import { ICommuteData } from '@/models/work.model';
 import { Table } from '@radix-ui/themes';
-import React, { useState } from 'react';
+import React from 'react';
 import { useMemo } from 'react';
 
-export default function Commute() {
-  const [showAllStatus, setShowAllStatus] = useState(true);
-
-  const [selectedEmployee, setSelectedEmployee] = useState<ICommuteData | null>(null);
+export default function CommuteTable({
+  handleShowAllStatus,
+}: {
+  handleShowAllStatus: (employee: ICommuteData) => void;
+}) {
   const generateCommuteHeadTable = useMemo(() => {
     const lastDay = Math.max(
       ...commuteMockData.flatMap((employee) => Object.keys(employee.schedule).map(Number))
@@ -21,18 +20,8 @@ export default function Commute() {
     return { baseHeaders, dayHeaders };
   }, []);
 
-  const handleShowAllStatus = (employee: ICommuteData) => {
-    setShowAllStatus(false);
-    setSelectedEmployee(employee);
-  };
   return (
     <>
-      <DetailCommuteRecord
-        statistics={mockStatistics}
-        selectedEmployee={selectedEmployee}
-        showAllStatus={showAllStatus}
-        setShowAllStatus={setShowAllStatus}
-      />
       <Table.Root className="mb-5 table-fixed w-full">
         <Table.Header className="bg-gray-200 text-xs text-gray-700 whitespace-nowrap border-gray-10">
           <Table.Row>

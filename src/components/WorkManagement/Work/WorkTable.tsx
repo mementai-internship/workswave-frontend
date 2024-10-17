@@ -3,7 +3,7 @@ import { WORKTABLE } from '@/constants/workManagementTable/workTable';
 import { workMockData } from '@/constants/workManagementTable/workTable.mock';
 import { Table } from '@radix-ui/themes';
 
-export default function Work() {
+export default function WorkTable() {
   return (
     <Table.Root className="mb-5">
       <Table.Header className="bg-gray-200 text-xs text-gray-700 whitespace-nowrap border-t border-gray-300">
