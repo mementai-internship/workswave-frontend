@@ -1,18 +1,23 @@
 import { ChangeMonth } from '@/components/Common/ChangeMonth';
 import { ItabItem } from '@/pages/workManagement/WorkManagementPage';
 import { Button } from '@radix-ui/themes';
-import dayjs from 'dayjs';
-import { useMemo, useState } from 'react';
+import dayjs, { Dayjs } from 'dayjs';
+import { useMemo } from 'react';
 import { PiGear } from 'react-icons/pi';
 
 export interface IProps {
   selectTab: ItabItem;
   setSelectTab: React.Dispatch<React.SetStateAction<ItabItem>>;
+  currentDate: Dayjs;
+  setCurrentDate: React.Dispatch<React.SetStateAction<Dayjs>>;
 }
 
-export default function WorkHeader({ selectTab, setSelectTab }: IProps) {
-  const [currentDate, setCurrentDate] = useState(dayjs());
-
+export default function WorkHeader({
+  selectTab,
+  setSelectTab,
+  currentDate,
+  setCurrentDate,
+}: IProps) {
   const tabItems: ItabItem[] = [
     { id: 0, title: '근로 관리' },
     { id: 1, title: '파트타이머 관리' },

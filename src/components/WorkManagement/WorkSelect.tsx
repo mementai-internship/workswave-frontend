@@ -2,7 +2,7 @@ import {
   branchMockData,
   departmentMockData,
 } from '@/constants/workManagementTable/workSelect.mock';
-import { TWorkOption } from '@/models/workManagement/work.model';
+import { TWorkOption } from '@/models/work.model';
 import { Select } from '@radix-ui/themes';
 
 export default function WorkSelect() {

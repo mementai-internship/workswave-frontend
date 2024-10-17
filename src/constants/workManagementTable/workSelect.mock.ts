@@ -1,4 +1,4 @@
-import { TWorkOption } from '@/models/workManagement/work.model';
+import { TWorkOption } from '@/models/work.model';
 
 // 지점 선택을 위한 간단한 mock 데이터
 export const branchMockData: TWorkOption[] = [
