@@ -7,7 +7,7 @@ import {
 } from 'react-icons/pi';
 import { Link } from 'react-router-dom';
 
-export default function SimpleMenu() {
+export default function SimpleMenuPage() {
   return (
     <div className="flex w-full gap-2">
       <div
