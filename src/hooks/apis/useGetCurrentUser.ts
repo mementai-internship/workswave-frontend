@@ -1,16 +1,20 @@
+import { useQuery } from '@tanstack/react-query';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { getCurrentUser } from '@/apis/auth.api';
 import { TUserResBody } from '@/models/user.model';
 import { removeTokens } from '@/utils/tokenUtils';
-import { useQuery } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
 
 export const useValidate = (token: string) => {
+  const navigate = useNavigate();
   return useQuery({
     queryKey: ['validateToken', token],
     queryFn: async () => {
-      const response = await getCurrentUser(token);
+      const response = await getCurrentUser();
       if (!response) {
         removeTokens();
+        navigate('/login');
       }
       return response;
     },

@@ -42,7 +42,7 @@ export default function MemberManagementPage() {
         <div className="flex items-center gap-2">
           <TitleContainer content="회원관리" />
           <Link to="/member-management/supermanager-setting">
-            <Button color="gray" variant="soft" radius="full" onClick={() => {}}>
+            <Button color="gray" variant="soft" radius="full">
               <PiGear />
               최고/지점관리자 설정
             </Button>
@@ -66,7 +66,7 @@ export default function MemberManagementPage() {
           {tabList.map((tab) => (
             <button
               key={tab.value}
-              className={`${selectedTab === tab.value ? 'font-bold border-b-2 border-black' : 'text-gray-50'} text-xl px-2 py-4 h-16`}
+              className={`${selectedTab === tab.value ? 'font-bold border-black' : 'text-gray-50 border-transparent'} border-b-2 text-xl px-2 py-4 h-16`}
               onClick={() => handleTabClick(tab.value)}
             >
               {tab.name}
