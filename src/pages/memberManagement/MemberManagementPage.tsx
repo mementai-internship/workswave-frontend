@@ -1,12 +1,13 @@
+import { Button } from '@radix-ui/themes';
+import { useState } from 'react';
+import { PiGear } from 'react-icons/pi';
+import { Link } from 'react-router-dom';
+
 import Pagination from '@/components/Common/Pagination';
 import TitleContainer from '@/components/Common/TitleContainer';
 import MemberManagementFilterBar from '@/components/MemberManagement/MemberManagementFilterBar';
 import MemberManagementTable from '@/components/MemberManagement/MemberManagementTable';
 import { useGetUsers } from '@/hooks/apis/useUserManagement';
-import { Button } from '@radix-ui/themes';
-import { useState } from 'react';
-import { PiGear } from 'react-icons/pi';
-import { Link } from 'react-router-dom';
 
 export default function MemberManagementPage() {
   const [selectedTab, setSelectedTab] = useState<string>('info');
@@ -46,7 +47,6 @@ export default function MemberManagementPage() {
               최고/지점관리자 설정
             </Button>
           </Link>
-          </Button>
         </div>
         <div className="flex justify-end">
           <Button

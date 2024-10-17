@@ -27,7 +27,7 @@ export default function MemberManagementTableCell({ data }: { data: IMemberManag
         </Link>
       </Table.Cell>
       <Table.Cell className="p-4 align-middle w-[8%] whitespace-nowrap">{data.part}</Table.Cell>
-      <Table.Cell className="text-center p-4 align-middle w-[8%]">{data.birth_date}</Table.Cell>
+      <Table.Cell className="text-center p-4 align-middle w-[9%]">{data.birth_date}</Table.Cell>
       <Table.Cell className="text-center p-4 align-middle w-[10%]">{data.phone_number}</Table.Cell>
       <Table.Cell className="text-center p-4 align-middle w-[12%]">{data.email}</Table.Cell>
       <Table.Cell className="text-center p-4 align-middle w-[9%]">{data.hire_date}</Table.Cell>
