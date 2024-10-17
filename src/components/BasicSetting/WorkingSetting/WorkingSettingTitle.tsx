@@ -1,8 +1,9 @@
 // 타이틀과 설명 flex-col / 드롭다운 버튼
-import { Txt } from '@/components/Common/Txt';
 import * as Accordion from '@radix-ui/react-accordion';
 import { useEffect, useState } from 'react';
 import { PiArrowDownBold, PiArrowUpBold } from 'react-icons/pi';
+
+import { Txt } from '@/components/Common/Txt';
 
 interface IPropsType {
   title: string;
@@ -18,19 +19,14 @@ export default function WorkingSettingTitle({
   isBranchSelected,
 }: IPropsType) {
   const [isOpen, setIsOpen] = useState(!isBranchSelected ? false : true);
-
+  console.log(isOpen);
   useEffect(() => {
-    setIsOpen(isBranchSelected ? false : true);
+    setIsOpen(!isBranchSelected);
   }, [isBranchSelected]);
 
   return (
     <>
-      <Accordion.Root
-        className="w-full"
-        type="single"
-        value={isOpen ? title : undefined}
-        collapsible
-      >
+      <Accordion.Root className="w-full" type="single" value={isOpen ? title : ''} collapsible>
         <Accordion.Item value={title}>
           <Accordion.Header>
             <div className="w-full flex justify-between items-center border-b p-10 bg-white">
