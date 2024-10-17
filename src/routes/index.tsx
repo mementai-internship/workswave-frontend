@@ -1,3 +1,5 @@
+import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom';
+
 import RootLayout from '@/layout/root';
 import BoardPage from '@/pages/basicSetting/BoardPage';
 import CalendarPage from '@/pages/basicSetting/CalendarPage';
@@ -6,6 +8,7 @@ import HourlyRangePage from '@/pages/basicSetting/HourlyRangePage';
 import SalaryRangePage from '@/pages/basicSetting/SalaryRangePage';
 import WagePage from '@/pages/basicSetting/WagePage';
 import WorkingPage from '@/pages/basicSetting/WorkingPage';
+import DayoffManagementPage from '@/pages/dayoffManagement/DayoffManagement';
 import ContractManagement from '@/pages/documentManagement/ContractManagement';
 import HolidayManagement from '@/pages/documentManagement/HolidayManagement';
 import CertificateManagement from '@/pages/documentManagement/certificationManagement/CertificateManagement';
@@ -14,13 +17,14 @@ import HomePage from '@/pages/home/HomePage';
 import Login from '@/pages/login/Login';
 import MemberInfoPage from '@/pages/memberManagement/MemberInfoPage';
 import MemberManagementPage from '@/pages/memberManagement/MemberManagementPage';
+import SuperManagerSetting from '@/pages/memberManagement/SuperManagerSetting';
 import ManagementDeleteOfficePage from '@/pages/officeSetting/ManagementDeleteOfficePage';
 import ManagementOfficePage from '@/pages/officeSetting/ManagementOfficePage';
 import SalarySettlementPage from '@/pages/salarySettlement/SalarySettlementPage';
+import SimpleMenuPage from '@/pages/simpleMenu/SimpleMenuPage';
 import BoardViewPage from '@/pages/userBoard/view/BoardViewPage';
 import BoardWritePage from '@/pages/userBoard/write/BoardWritePage';
 import WorkManagementPage from '@/pages/workManagement/WorkManagementPage';
-import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 // TODO: lazy load, preload는 나중에 하겠습니둥.
 const router = createBrowserRouter([
@@ -135,6 +139,14 @@ const router = createBrowserRouter([
         element: <MemberInfoPage />,
       },
       {
+        path: '/dayoff-management',
+        element: <DayoffManagementPage />,
+      },
+      {
+        path: '/member-management/supermanager-setting',
+        element: <SuperManagerSetting />,
+      },
+      {
         path: '/board',
         children: [
           {
@@ -150,6 +162,10 @@ const router = createBrowserRouter([
             element: <BoardWritePage />,
           },
         ],
+      },
+      {
+        path: 'simple-menu',
+        element: <SimpleMenuPage />,
       },
     ],
   },
