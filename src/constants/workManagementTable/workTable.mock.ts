@@ -107,6 +107,9 @@ export const commuteMockData: ICommuteData[] = [
       '4': { startTime: '20:30', endTime: '10:38' },
       '5': { startTime: '17:00', endTime: '휴무' },
       '6': { startTime: '휴무', endTime: '휴무' },
+      '7': { startTime: '20:30', endTime: '10:38' },
+      '8': { startTime: '17:00', endTime: '휴무' },
+      '9': { startTime: '휴무', endTime: '휴무' },
     },
   },
   {
@@ -121,6 +124,9 @@ export const commuteMockData: ICommuteData[] = [
       '4': { startTime: '휴무', endTime: '휴무' },
       '5': { startTime: '10:01', endTime: '16:30' },
       '6': { startTime: '휴무', endTime: '휴무' },
+      '7': { startTime: '20:30', endTime: '10:38' },
+      '8': { startTime: '17:00', endTime: '휴무' },
+      '9': { startTime: '휴무', endTime: '휴무' },
     },
   },
   {
@@ -135,6 +141,9 @@ export const commuteMockData: ICommuteData[] = [
       '4': { startTime: '10:32', endTime: '21:00' },
       '5': { startTime: '10:28', endTime: '17:00' },
       '6': { startTime: '휴무', endTime: '휴무' },
+      '7': { startTime: '20:30', endTime: '10:38' },
+      '8': { startTime: '17:00', endTime: '휴무' },
+      '9': { startTime: '휴무', endTime: '휴무' },
     },
   },
   {
@@ -149,6 +158,9 @@ export const commuteMockData: ICommuteData[] = [
       '4': { startTime: '휴무', endTime: '휴무' },
       '5': { startTime: '10:35', endTime: '17:00' },
       '6': { startTime: '휴무', endTime: '휴무' },
+      '7': { startTime: '20:30', endTime: '10:38' },
+      '8': { startTime: '17:00', endTime: '휴무' },
+      '9': { startTime: '휴무', endTime: '휴무' },
     },
   },
   {
@@ -163,6 +175,9 @@ export const commuteMockData: ICommuteData[] = [
       '4': { startTime: '10:35', endTime: '21:00' },
       '5': { startTime: '10:39', endTime: '17:00' },
       '6': { startTime: '휴무', endTime: '휴무' },
+      '7': { startTime: '20:30', endTime: '10:38' },
+      '8': { startTime: '17:00', endTime: '휴무' },
+      '9': { startTime: '휴무', endTime: '휴무' },
     },
   },
   {
@@ -177,6 +192,9 @@ export const commuteMockData: ICommuteData[] = [
       '4': { startTime: '09:57', endTime: '휴무' },
       '5': { startTime: '09:49', endTime: '16:34' },
       '6': { startTime: '휴무', endTime: '휴무' },
+      '7': { startTime: '20:30', endTime: '10:38' },
+      '8': { startTime: '17:00', endTime: '휴무' },
+      '9': { startTime: '휴무', endTime: '휴무' },
     },
   },
 ];
