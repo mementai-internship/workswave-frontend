@@ -1,79 +1,41 @@
+import {
+  IWorkingSettingAutoOTForm,
+  IWorkingSettingBranchResponse,
+} from '@/models/workingSetting.model';
 import { RadioGroup } from '@radix-ui/themes';
-import { Controller, useForm } from 'react-hook-form';
+import { UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 
-export default function WorkingSettingAutoOT() {
-  const { control } = useForm({
-    defaultValues: {
-      is_MSO: false,
-      is_all: false,
-      is_part: false,
-    },
-  });
+const radioOptions: { label: string; field: keyof IWorkingSettingAutoOTForm }[] = [
+  { label: '최고관리자', field: 'top_manager_auto_applied' },
+  { label: '통합관리자', field: 'manager_auto_applied' },
+  { label: '파트관리자', field: 'employee_auto_applied' },
+];
+interface IPropsType {
+  register: UseFormRegister<IWorkingSettingBranchResponse>;
+  setValue: UseFormSetValue<IWorkingSettingBranchResponse>;
+  watch: UseFormWatch<IWorkingSettingBranchResponse>;
+}
+export default function WorkingSettingAutoOT({ register, setValue, watch }: IPropsType) {
   return (
     <div className="p-20 flex flex-col gap-y-10">
-      <div className="flex items-center gap-x-8">
-        <label htmlFor="is_MSO" className="text-gray-400">
-          최고관리자
-        </label>
-        <Controller
-          control={control}
-          name="is_MSO"
-          render={({ field: { value, onChange } }) => (
-            <RadioGroup.Root
-              value={value ? 'true' : 'false'}
-              color="violet"
-              onValueChange={(newValue) => onChange(newValue === 'true')}
-            >
-              <div className="flex gap-4">
-                <RadioGroup.Item value="true">자동</RadioGroup.Item>
-                <RadioGroup.Item value="false">수동</RadioGroup.Item>
-              </div>
-            </RadioGroup.Root>
-          )}
-        />
-      </div>
-      <div className="flex items-center gap-x-8">
-        <label htmlFor="is_all" className="text-gray-400">
-          통합관리자
-        </label>
-        <Controller
-          control={control}
-          name="is_all"
-          render={({ field: { value, onChange } }) => (
-            <RadioGroup.Root
-              value={value ? 'true' : 'false'}
-              color="violet"
-              onValueChange={(newValue) => onChange(newValue === 'true')}
-            >
-              <div className="flex gap-4">
-                <RadioGroup.Item value="true">자동</RadioGroup.Item>
-                <RadioGroup.Item value="false">수동</RadioGroup.Item>
-              </div>
-            </RadioGroup.Root>
-          )}
-        />
-      </div>
-      <div className="flex items-center gap-x-8">
-        <label htmlFor="is_part" className="text-gray-400">
-          파트관리자
-        </label>
-        <Controller
-          control={control}
-          name="is_part"
-          render={({ field: { value, onChange } }) => (
-            <RadioGroup.Root
-              value={value ? 'true' : 'false'}
-              color="violet"
-              onValueChange={(newValue) => onChange(newValue === 'true')}
-            >
-              <div className="flex gap-4">
-                <RadioGroup.Item value="true">자동</RadioGroup.Item>
-                <RadioGroup.Item value="false">수동</RadioGroup.Item>
-              </div>
-            </RadioGroup.Root>
-          )}
-        />
-      </div>
+      {radioOptions.map((option) => (
+        <div key={option.field} className="flex items-center gap-x-8">
+          <label htmlFor={option.field} className="text-gray-400">
+            {option.label}
+          </label>
+          <RadioGroup.Root
+            value={watch(`auto_ot.${option.field}`) ? 'true' : 'false'}
+            color="violet"
+            {...register(`auto_ot.${option.field}`)}
+            onValueChange={(newValue) => setValue(`auto_ot.${option.field}`, newValue === 'true')}
+          >
+            <div className="flex gap-4">
+              <RadioGroup.Item value="true">자동</RadioGroup.Item>
+              <RadioGroup.Item value="false">수동</RadioGroup.Item>
+            </div>
+          </RadioGroup.Root>
+        </div>
+      ))}
     </div>
   );
 }
