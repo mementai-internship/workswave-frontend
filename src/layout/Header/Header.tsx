@@ -1,12 +1,12 @@
 import HeaderProfile from '@/layout/Header/HeaderProfile';
-import { TUserAuthority } from '@/models/user.model';
+import { TUserRole } from '@/models/user.model';
 import { currentUserAtom } from '@/store/authAtoms';
 import { useAtom } from 'jotai';
 import { Link } from 'react-router-dom';
 
 export interface IHeader {
   name?: string;
-  role?: TUserAuthority;
+  role?: TUserRole;
 }
 
 export default function Header() {
