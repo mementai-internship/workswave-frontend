@@ -1,3 +1,8 @@
+import { Button, Select } from '@radix-ui/themes';
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { PiCheckBold } from 'react-icons/pi';
+
 import WorkingSettingAutoOT from '@/components/BasicSetting/WorkingSetting/SetAutoOT';
 import WorkingSettingBasicSalary from '@/components/BasicSetting/WorkingSetting/SetBasicSalary';
 import WorkingSettingBasicWork from '@/components/BasicSetting/WorkingSetting/SetBasicWork';
@@ -8,16 +13,12 @@ import WorkingSettingWeekendSalary from '@/components/BasicSetting/WorkingSettin
 import WorkingSettingTitle from '@/components/BasicSetting/WorkingSetting/WorkingSettingTitle';
 import Title from '@/components/Common/Title';
 import { Txt } from '@/components/Common/Txt';
-import { useGetBranches } from '@/hooks/apis/useBranch';
+import { useGetAllBranches } from '@/hooks/apis/useBranches';
 import { useGetWorkPolicies, usePatchWorkPolicies } from '@/hooks/apis/useWorkPolicies';
 import { IWorkPolicies } from '@/models/work-policies';
-import { Button, Select } from '@radix-ui/themes';
-import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { PiCheckBold } from 'react-icons/pi';
 
 export default function WorkingSettingPage() {
-  const { data: branches } = useGetBranches();
+  const { data: branches } = useGetAllBranches();
 
   const [currentBranch, setCurrentBranch] = useState({ id: null, name: '' });
 

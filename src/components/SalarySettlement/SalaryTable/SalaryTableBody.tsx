@@ -1,6 +1,7 @@
+import { Checkbox, Table, TextField } from '@radix-ui/themes';
+
 import { MAX_SALARY } from '@/constants/salarySettlement';
 import { IEmployeeSalarySettlement } from '@/models/salarySettlement.model';
-import { Checkbox, Table, TextField } from '@radix-ui/themes';
 
 interface ISalaryTableBodyProps {
   filteredEmployees: IEmployeeSalarySettlement[];
@@ -14,7 +15,7 @@ export function SalaryTableBody({
   handleAllowance,
 }: ISalaryTableBodyProps) {
   return (
-    <Table.Body>
+    <Table.Body className="w-full mx-auto">
       {filteredEmployees.map((employee) => (
         <Table.Row
           key={employee.id}
@@ -30,28 +31,44 @@ export function SalaryTableBody({
             />
           </Table.Cell>
           <Table.Cell className="max-w-24">
-            <div className="truncate overflow-hidden whitespace-nowrap">{employee.name}</div>
-            <div className="text-gray-50">{employee.department}</div>
+            <div className="text-ellipsis overflow-hidden whitespace-nowrap">{employee.name}</div>
+            <div className="text-ellipsis overflow-hidden whitespace-nowrap text-gray-50">
+              {employee.department}
+            </div>
           </Table.Cell>
-          <Table.Cell className="whitespace-nowrap">
+          <Table.Cell className="max-w-32">
             {employee.resignDate ? (
               <>
-                <div>{employee.hireDate}</div>
-                <div>{employee.resignDate}</div>
+                <div className="text-ellipsis overflow-hidden whitespace-nowrap">
+                  {employee.hireDate}
+                </div>
+                <div className="text-ellipsis overflow-hidden whitespace-nowrap">
+                  {employee.resignDate}
+                </div>
               </>
             ) : (
               employee.hireDate
             )}
           </Table.Cell>
-          <Table.Cell align="center">{employee.salary.toLocaleString()}</Table.Cell>
-          <Table.Cell align="center">{employee.basePay.toLocaleString()}</Table.Cell>
-          <Table.Cell align="center">
+          <Table.Cell align="center" className="min-w-28 max-w-28 p-0">
+            {employee.salary.toLocaleString()}
+          </Table.Cell>
+          <Table.Cell align="center" className="min-w-28 max-w-28 p-0">
+            {employee.basePay.toLocaleString()}
+          </Table.Cell>
+          <Table.Cell align="center" className="w-24">
             {employee.comprehensiveOvertimePay.toLocaleString()}
           </Table.Cell>
-          <Table.Cell align="center">{employee.annualLeavePay.toLocaleString()}</Table.Cell>
-          <Table.Cell align="center">{employee.holidayPay.toLocaleString()}</Table.Cell>
-          <Table.Cell align="center">{employee.jobAllowance.toLocaleString()}</Table.Cell>
-          <Table.Cell align="center">
+          <Table.Cell align="center" className="w-24">
+            {employee.annualLeavePay.toLocaleString()}
+          </Table.Cell>
+          <Table.Cell align="center" className="w-24">
+            {employee.holidayPay.toLocaleString()}
+          </Table.Cell>
+          <Table.Cell align="center" className="w-24">
+            {employee.jobAllowance.toLocaleString()}
+          </Table.Cell>
+          <Table.Cell align="center" className="w-28">
             <TextField.Root
               className="w-20"
               type="number"
@@ -62,8 +79,10 @@ export function SalaryTableBody({
               max={MAX_SALARY}
             />
           </Table.Cell>
-          <Table.Cell align="center">{employee.attendanceDeduction.toLocaleString()}</Table.Cell>
-          <Table.Cell align="center">
+          <Table.Cell align="center" className="w-24">
+            {employee.attendanceDeduction.toLocaleString()}
+          </Table.Cell>
+          <Table.Cell align="center" className="w-28">
             <TextField.Root
               className="w-20"
               type="number"
@@ -76,8 +95,12 @@ export function SalaryTableBody({
               max={MAX_SALARY}
             />
           </Table.Cell>
-          <Table.Cell align="center">{employee.overtimePay.toLocaleString()}</Table.Cell>
-          <Table.Cell align="center">{employee.weekendWorkPay.toLocaleString()}</Table.Cell>
+          <Table.Cell align="center" className="w-24">
+            {employee.overtimePay.toLocaleString()}
+          </Table.Cell>
+          <Table.Cell align="center" className="w-24">
+            {employee.weekendWorkPay.toLocaleString()}
+          </Table.Cell>
           <Table.Cell
             align="center"
             className="min-w-32 max-w-32 overflow-hidden text-ellipsis whitespace-nowrap"

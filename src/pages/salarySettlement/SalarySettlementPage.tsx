@@ -1,3 +1,7 @@
+import { Button, Tooltip } from '@radix-ui/themes';
+import dayjs from 'dayjs';
+import { useState } from 'react';
+
 import { ChangeMonth } from '@/components/Common/ChangeMonth';
 import ContactSearchInput from '@/components/Common/ContactSearchInput';
 import TitleContainer from '@/components/Common/TitleContainer';
@@ -5,9 +9,6 @@ import CategorySelect from '@/components/SalarySettlement/SalaryPage/CategorySel
 import SalaryTable from '@/components/SalarySettlement/SalaryTable/SalaryTable';
 import { IEmployeeSalarySettlement } from '@/models/salarySettlement.model';
 import { calculatePaymentDate } from '@/utils/calculatePaymentDate';
-import { Button, Tooltip } from '@radix-ui/themes';
-import dayjs from 'dayjs';
-import { useState } from 'react';
 
 export default function SalarySettlementPage() {
   const [month, setMonth] = useState(dayjs());
@@ -109,13 +110,14 @@ const DUMMY_DATA: IEmployeeSalarySettlement[] = [
     job: '의사',
     name: '김예린',
     department: '피부과',
-    hireDate: '2024-01-07',
+    hireDate: '2024-01-08',
+    resignDate: '2024-01-07',
     salary: 5000000,
     basePay: 4000000,
-    comprehensiveOvertimePay: 500000,
-    annualLeavePay: 0,
-    holidayPay: 200000,
-    jobAllowance: 300000,
+    comprehensiveOvertimePay: 5000000,
+    annualLeavePay: 20000000,
+    holidayPay: 2000000,
+    jobAllowance: 3000000,
     incentive: 0,
     attendanceDeduction: 0,
     previousMonthUnpaid: 0,
