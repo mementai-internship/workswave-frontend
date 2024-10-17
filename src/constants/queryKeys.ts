@@ -4,4 +4,9 @@ export const QUERY_KEYS = {
   userManagementCurrentUser: 'currentUser',
   userManagementDetail: 'userDetail',
   userManagementResignedUsers: 'resignedUsers',
+
+  //branches queryKeys
+  branches: 'branches',
+  branch: 'branch',
+  branchDeleted: 'branches-deleted',
 };

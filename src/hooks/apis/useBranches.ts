@@ -1,13 +1,12 @@
-import { branchesApi } from '@/apis/branches.api';
 import { useMutation, useQuery } from '@tanstack/react-query';
+
+import { branchesApi } from '@/apis/branches.api';
+import { QUERY_KEYS } from '@/constants/queryKeys';
 
 export const useGetBranches = (page: string) => {
   return useQuery({
-    queryKey: ['branches', page],
-    queryFn: ({ queryKey }) => {
-      const [, page] = queryKey;
-      return branchesApi.getBranches(page);
-    },
+    queryKey: [QUERY_KEYS.branches, page],
+    queryFn: () => branchesApi.getBranches(page),
   });
 };
 export const usePostBranch = () => {
@@ -15,11 +14,8 @@ export const usePostBranch = () => {
 };
 export const useGetBranch = (id: string) => {
   return useQuery({
-    queryKey: ['branch', id],
-    queryFn: ({ queryKey }) => {
-      const [, id] = queryKey;
-      return branchesApi.getBranch(id);
-    },
+    queryKey: [QUERY_KEYS.branch, id],
+    queryFn: () => branchesApi.getBranch(id),
   });
 };
 export const useDeleteBranch = () => {
@@ -30,11 +26,8 @@ export const useDeleteBranch = () => {
 
 export const useGetDeleteBranches = (page: string) => {
   return useQuery({
-    queryKey: ['branches-deleted', page],
-    queryFn: ({ queryKey }) => {
-      const [, page] = queryKey;
-      return branchesApi.getDeleteBranches(page);
-    },
+    queryKey: [QUERY_KEYS.branchDeleted, page],
+    queryFn: () => branchesApi.getDeleteBranches(page),
   });
 };
 
