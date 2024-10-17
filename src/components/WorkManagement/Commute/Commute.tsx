@@ -97,7 +97,7 @@ export default function Commute() {
               </Table.Cell>
               <Table.Cell>
                 {employee.position}
-                <span className="border text-xs px-1 pt-0.5">{` 주 ${employee.days}일`}</span>
+                <span className="border text-xs px-1 pt-0.5">{`주 ${employee.days}일`}</span>
               </Table.Cell>
               {generateCommuteHeadTable.dayHeaders.map((day, index) => {
                 const daySchedule = employee.schedule[index + 1];

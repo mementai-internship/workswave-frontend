@@ -22,7 +22,8 @@ export interface IWorkData {
 
 export interface TWorkOption {
   id: number;
-  value: string;
+  name: string;
+  action: () => void;
 }
 
 export interface ICommuteData {
