@@ -1,7 +1,8 @@
 import Title from '@/components/Common/Title';
 import { Txt } from '@/components/Common/Txt';
 import { IHolidaySetting } from '@/models/holidaySetting.model';
-import { Button, CheckboxGroup, TextField } from '@radix-ui/themes';
+import { IWorkingSettingPartResponse } from '@/models/workingSetting.model';
+import { Button, CheckboxGroup, RadioGroup, TextField } from '@radix-ui/themes';
 import {
   Control,
   FormState,
@@ -9,27 +10,34 @@ import {
   UseFormRegister,
   UseFormReset,
   UseFormSetValue,
+  UseFormWatch,
+  useWatch,
 } from 'react-hook-form';
+import { PiCheckBold } from 'react-icons/pi';
 
 interface HolidaySettingFormProps {
   isEditingMode: boolean;
   control: Control<IHolidaySetting>;
   formState: FormState<IHolidaySetting>;
+  parts: IWorkingSettingPartResponse[];
   handleSubmit: UseFormHandleSubmit<IHolidaySetting>;
   reset: UseFormReset<IHolidaySetting>;
   onChangeEditMode: (boolean: boolean) => void;
   setValue: UseFormSetValue<IHolidaySetting>;
+  watch: UseFormWatch<IHolidaySetting>;
   register: UseFormRegister<IHolidaySetting>;
 }
 
 export default function HolidaySettingForm({
   isEditingMode,
   control,
-  reset,
   formState,
+  parts,
+  reset,
   handleSubmit,
   onChangeEditMode,
   setValue,
+  watch,
   register,
 }: HolidaySettingFormProps) {
   const onSubmitHolidaySetting = (data: IHolidaySetting) => {
@@ -41,7 +49,6 @@ export default function HolidaySettingForm({
     reset();
     // 지울것
     setValue('id', 0);
-    console.log(control);
   };
 
   const isFormValid = () => {
@@ -49,13 +56,19 @@ export default function HolidaySettingForm({
     return name && leave_count && formState.isValid;
   };
 
+  const isLeaveOfAbsence = useWatch({
+    control,
+    name: 'is_leave_of_absence',
+    defaultValue: false,
+  });
+
   return (
-    <div className="sticky top-0 left-0 z-[2] bg-white ">
+    <div className="sticky top-0 left-0 z-[2] bg-white">
       <div className="px-10 py-5 flex items-center gap-x-4 border-b">
         <Title content={`${isEditingMode ? '연차 수정하기' : '연차 추가하기'}`} />
       </div>
-      <form onSubmit={handleSubmit(onSubmitHolidaySetting)} className="p-10 flex flex-col gap-y-3">
-        <div className="flex items-center">
+      <form onSubmit={handleSubmit(onSubmitHolidaySetting)} className="p-8 flex flex-col gap-y-3">
+        <div className="flex items-center relative">
           <label htmlFor="name" className="w-40 text-gray-500 whitespace-nowrap">
             카테고리 이름
           </label>
@@ -69,6 +82,25 @@ export default function HolidaySettingForm({
             {...register('name', { required: true })}
             required
           />
+          <div className="absolute right-0 top-0 flex items-center border-l h-full px-2">
+            <Button
+              type="button"
+              variant="ghost"
+              color="gray"
+              size="3"
+              radius="small"
+              className="text-sm hover:bg-transparent cursor-pointer"
+              onClick={() => setValue('is_leave_of_absence', !isLeaveOfAbsence)}
+            >
+              <PiCheckBold className={isLeaveOfAbsence ? 'text-purple-50' : 'text-gray-500'} />
+              <Txt
+                variant="button"
+                className={`${isLeaveOfAbsence ? 'text-purple-50' : 'text-gray-500'}`}
+              >
+                휴직
+              </Txt>
+            </Button>
+          </div>
         </div>
 
         <div className="flex items-center">
@@ -86,81 +118,46 @@ export default function HolidaySettingForm({
           />
         </div>
 
+        <div className="flex items-center my-2">
+          <label htmlFor="is_paid" className="w-28 text-gray-500">
+            유급
+          </label>
+          <RadioGroup.Root
+            value={watch('is_paid') ? 'true' : 'false'}
+            id="is_paid"
+            onValueChange={(newValue) => setValue('is_paid', newValue === 'true')}
+          >
+            <div className="flex gap-4">
+              <RadioGroup.Item value="true">유급</RadioGroup.Item>
+              <RadioGroup.Item value="false">무급</RadioGroup.Item>
+            </div>
+          </RadioGroup.Root>
+        </div>
+
         <div className="flex items-center">
+          <label htmlFor="is_paid" className="w-28 text-gray-500 whitespace-nowrap">
+            제외 파트
+          </label>
           <CheckboxGroup.Root
-            size="3"
+            size="2"
             variant="surface"
             color="purple"
-            className="grid grid-cols-5 gap-x-4"
-            {...register('is_paid')}
+            className="grid grid-cols-4 justify-start"
+            // {...register('')} // 제외 파트 타입에 맞춰 수정 필요
           >
-            <div className="flex flex-row items-center justify-center">
-              <CheckboxGroup.Item value="1" className="w-8 h-8 border border-gray-50 rounded p-1" />
-              <label>
-                {' '}
-                <Txt variant="caption">퇴사자 포함</Txt>
-              </label>
-            </div>{' '}
-            <div className="flex flex-row items-center justify-center">
-              <CheckboxGroup.Item value="1" className="w-8 h-8 border border-gray-50 rounded p-1" />
-              <label>
-                {' '}
-                <Txt variant="caption">퇴사자 포함</Txt>
-              </label>
-            </div>{' '}
-            <div className="flex flex-row items-center justify-center">
-              <CheckboxGroup.Item value="1" className="w-8 h-8 border border-gray-50 rounded p-1" />
-              <label>
-                {' '}
-                <Txt variant="caption">퇴사자 포함</Txt>
-              </label>
-            </div>{' '}
-            <div className="flex flex-row items-center justify-center">
-              <CheckboxGroup.Item value="1" className="w-8 h-8 border border-gray-50 rounded p-1" />
-              <label>
-                {' '}
-                <Txt variant="caption">퇴사자 포함</Txt>
-              </label>
-            </div>{' '}
-            <div className="flex flex-row items-center justify-center">
-              <CheckboxGroup.Item value="1" className="w-8 h-8 border border-gray-50 rounded p-1" />
-              <label>
-                {' '}
-                <Txt variant="caption">퇴사자 포함</Txt>
-              </label>
-            </div>{' '}
-            <div className="flex flex-row items-center justify-center">
-              <CheckboxGroup.Item value="1" className="w-8 h-8 border border-gray-50 rounded p-1" />
-              <label>
-                {' '}
-                <Txt variant="caption">퇴사자 포함</Txt>
-              </label>
-            </div>{' '}
-            <div className="flex flex-row items-center justify-center">
-              <CheckboxGroup.Item value="1" className="w-8 h-8 border border-gray-50 rounded p-1" />
-              <label>
-                {' '}
-                <Txt variant="caption">퇴사자 포함</Txt>
-              </label>
-            </div>{' '}
-            <div className="flex flex-row items-center justify-center">
-              <CheckboxGroup.Item value="1" className="w-8 h-8 border border-gray-50 rounded p-1" />
-              <label>
-                {' '}
-                <Txt variant="caption">퇴사자 포함</Txt>
-              </label>
-            </div>{' '}
-            <div className="flex flex-row items-center justify-center">
-              <CheckboxGroup.Item value="1" className="w-8 h-8 border border-gray-50 rounded p-1" />
-              <label>
-                {' '}
-                <Txt className="text-gray-500">퇴사자 포함</Txt>
-              </label>
-            </div>
-            <div className="flex flex-row items-center justify-center">
-              <CheckboxGroup.Item value="2" className="w-8 h-8 border border-gray-50 rounded p-1" />
-              <label>휴직자</label>
-            </div>
+            {/** 파트 map */}
+            {!!parts &&
+              !!parts.length &&
+              parts.map((part) => (
+                <CheckboxGroup.Item
+                  key={part.id}
+                  value={part.id.toString()}
+                  className="text-xs text-gray-500 whitespace-nowrap flex items-center gap-x-1"
+                  style={{ justifyContent: 'center' }}
+                >
+                  {part.name}
+                </CheckboxGroup.Item>
+              ))}
           </CheckboxGroup.Root>
         </div>
         <div className="flex justify-center items-center gap-x-4 mt-10">
@@ -180,7 +177,7 @@ export default function HolidaySettingForm({
               size="3"
               radius="small"
               onClick={handleClickCancel}
-              className="w-[30%] h-10"
+              className="w-[30%] h-10 cursor-pointer"
             >
               취소
             </Button>

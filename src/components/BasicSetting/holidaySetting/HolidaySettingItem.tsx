@@ -40,7 +40,7 @@ export default function HolidaySettingItem({
      */
   };
   return (
-    <section className="min-w-[700px] flex items-center justify-between border px-4 py-3 border-gray-300 bg-blue-10">
+    <section className="flex items-center justify-between border px-4 py-3 border-gray-300 bg-blue-10">
       <div className="flex gap-x-10 whitespace-nowrap">
         <Txt variant="h4" className="w-32">
           {name}

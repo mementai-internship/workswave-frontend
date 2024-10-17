@@ -1,10 +1,14 @@
 import { getParts } from '@/apis/parts.api';
-import { useQuery } from '@tanstack/react-query';
+import { IWorkingSettingPartResponse } from '@/models/workingSetting.model';
+import { UseQueryResult, useQuery } from '@tanstack/react-query';
 
-const PART_QUERY_KEY = 'parts';
-export const useGetParts = (branch_id: number) => {
+export const useGetParts = (
+  branchId: number
+): UseQueryResult<IWorkingSettingPartResponse[], Error> => {
   return useQuery({
-    queryKey: [PART_QUERY_KEY, branch_id],
-    queryFn: () => getParts(branch_id),
+    queryKey: ['PART_QUERY_KEY', branchId],
+    queryFn: () => getParts(branchId),
   });
 };
+
+export const usePostParts = () => {};

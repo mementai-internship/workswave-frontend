@@ -1,8 +1,10 @@
+import HolidayAutoSetGroups from '@/components/BasicSetting/holidaySetting/HolidayAutoSetGroups';
 import HolidaySettingForm from '@/components/BasicSetting/holidaySetting/HolidaySettingForm';
 import HolidaySettingItem from '@/components/BasicSetting/holidaySetting/HolidaySettingItem';
 import Title from '@/components/Common/Title';
 import { Txt } from '@/components/Common/Txt';
 import { useGetHolidaySetting } from '@/hooks/apis/useHolidaySetting';
+import { useGetParts } from '@/hooks/apis/useParts';
 import { IHolidaySetting } from '@/models/holidaySetting.model';
 import { Button, Select } from '@radix-ui/themes';
 import { useState } from 'react';
@@ -17,6 +19,9 @@ const OPTIONS: { id: number; branch: string }[] = [
 
 export default function HolidayPage() {
   const { data: holidaySettings } = useGetHolidaySetting();
+
+  const { data: parts } = useGetParts(1);
+
   const [isEditingMode, setIsEditingMode] = useState(false);
   const [currentBranch, setCurrentBranch] = useState(OPTIONS[0].branch);
 
@@ -27,6 +32,7 @@ export default function HolidayPage() {
     reset,
     setValue,
     register,
+    watch,
   } = useForm<IHolidaySetting>({
     defaultValues: {
       id: 0,
@@ -45,8 +51,8 @@ export default function HolidayPage() {
   };
 
   return (
-    <main className="w-full mx-auto flex p-5 gap-x-2">
-      <section className="flex-1 bg-white border">
+    <main className="w-full mx-auto flex p-5 gap-x-2 overflow-x-auto">
+      <section className="bg-white border min-w-[600px] overflow-y-scroll h-screen">
         <div className="flex items-center justify-between gap-x-8 px-10 py-5 sticky top-0 left-0 z-[2] bg-white border-b">
           <Title content="지점명" />
 
@@ -91,21 +97,28 @@ export default function HolidayPage() {
       </section>
 
       {/* 연차 추가하기 분리 */}
-      <section className="flex-1 bg-white border min-w-[500px]">
-        <HolidaySettingForm
-          handleSubmit={holidayHandleSubmit}
-          onChangeEditMode={handleClickEditMode}
-          setValue={setValue}
-          register={register}
-          reset={reset}
-          control={control}
-          formState={holidayFormState}
-          isEditingMode={isEditingMode}
-        />
+      <section className="flex flex-col gap-y-4 min-w-[540px] h-full">
+        <div className="border bg-white">
+          <HolidaySettingForm
+            handleSubmit={holidayHandleSubmit}
+            onChangeEditMode={handleClickEditMode}
+            setValue={setValue}
+            register={register}
+            reset={reset}
+            watch={watch}
+            control={control}
+            formState={holidayFormState}
+            isEditingMode={isEditingMode}
+            parts={parts}
+          />
+        </div>
+        <div className="border bg-white grow">
+          <HolidayAutoSetGroups />
+        </div>
       </section>
 
       {/* 연차 자동 부여 분리 */}
-      <section className="flex-[0.8] bg-white border">
+      <section className="flex-[0.7] bg-white border min-w-[460px]">
         <div className="flex items-center justify-between whitespace-nowrap gap-x-8 px-10 py-5 sticky top-0 left-0 z-[2] bg-white border-b">
           <Title content="연차 자동 부여" />
           <div className="flex items-center gap-x-2">
