@@ -1,6 +1,6 @@
-import calculateWorkPeriod from '@/utils/calculateWorkPeriod';
+//import calculateWorkPeriod from '@/utils/calculateWorkPeriod';
 import { Table } from '@radix-ui/themes';
-import { PiGenderFemale, PiGenderMale, PiStarFill, PiXBold } from 'react-icons/pi';
+import { PiStarFill, PiXBold } from 'react-icons/pi';
 import { Link } from 'react-router-dom';
 
 import { IMemberManagementTableProps, userId } from './MemberManagementTable';
@@ -20,29 +20,24 @@ export default function MemberManagementTableCell({ data }: { data: IMemberManag
           <div
             className={`${data.id === userId ? 'font-bold' : ''} flex flex-row gap-1 justify-center items-center`}
           >
-            {data.gender === '남' ? <PiGenderMale /> : <PiGenderFemale />} {data.name}
+            {/* gender 값 없어서 주석 처리 {data.gender === '남' ? <PiGenderMale /> : <PiGenderFemale />} {data.name} */}
+            {data.name}
             {data.id === userId ? <PiStarFill /> : null}
           </div>
         </Link>
       </Table.Cell>
-      <Table.Cell className="p-4 align-middle w-[2%] whitespace-nowrap">{data.workPart}</Table.Cell>
-      <Table.Cell className="text-center p-4 align-middle w-[8%]">{data.birth}</Table.Cell>
-      <Table.Cell className="text-center p-4 align-middle w-[10%]">{data.phone}</Table.Cell>
+      <Table.Cell className="p-4 align-middle w-[2%] whitespace-nowrap">{data.branch}</Table.Cell>
+      <Table.Cell className="text-center p-4 align-middle w-[8%]">{data.birth_date}</Table.Cell>
+      <Table.Cell className="text-center p-4 align-middle w-[10%]">{data.phone_number}</Table.Cell>
       <Table.Cell className="text-center p-4 align-middle w-[8%]">{data.email}</Table.Cell>
+      <Table.Cell className="text-center p-4 align-middle w-[8%]">{data.hire_date}</Table.Cell>
+      <Table.Cell className="text-center p-4 align-middle w-[7%]">{data.monthly_salary}</Table.Cell>
+      <Table.Cell className="text-center p-4 align-middle w-[8%]">{data.annual_salary}</Table.Cell>
       <Table.Cell className="text-center p-4 align-middle w-[8%]">
-        {data.contractPeriod.start}
-      </Table.Cell>
-      <Table.Cell className="text-center p-4 align-middle w-[7%]">
-        {data.contractPeriod.salary}
-      </Table.Cell>
-      <Table.Cell className="text-center p-4 align-middle w-[8%]">
-        {data.contractPeriod.annualSalary}
-      </Table.Cell>
-      <Table.Cell className="text-center p-4 align-middle w-[8%]">
-        {calculateWorkPeriod(
+        {/* 값없어서 주석 처리{calculateWorkPeriod(
           data.contractPeriod.start.toString(),
           data.contractPeriod.end.toString()
-        )}
+        )} */}
       </Table.Cell>
       <Table.Cell className="flex flex-row h-full gap-0.5 justify-center items-center">
         <div className="flex flex-col gap-0.5">
