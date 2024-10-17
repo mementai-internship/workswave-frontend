@@ -1,4 +1,4 @@
-import { removeTokens } from '@/utils/tokenUtils';
+import { getAccessToken, removeTokens } from '@/utils/tokenUtils';
 import axios from 'axios';
 
 const axiosInstance = axios.create({
@@ -9,9 +9,15 @@ const axiosInstance = axios.create({
   withCredentials: true,
 });
 
-axiosInstance.interceptors.response.use(
-  (response) => {
-    return response;
+axiosInstance.interceptors.request.use(
+  (config) => {
+    const accessToken = getAccessToken().slice(1, getAccessToken().length - 1);
+
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
+    }
+
+    return config;
   },
   (error) => {
     switch (error.response.status) {
@@ -26,10 +32,8 @@ axiosInstance.interceptors.response.use(
         break;
       default:
         if (error.response.status.toString().startsWith('5')) {
-          // console.log('error', '서버에 오류가 발생했습니다.')
           console.error(error.response);
         } else {
-          // console.log('error', '알 수 없는 오류가 발생했습니다.')
           console.error(error.response);
         }
         break;
