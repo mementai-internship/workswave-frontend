@@ -6,6 +6,7 @@ import { useGetUsers } from '@/hooks/apis/useUserManagement';
 import { Button } from '@radix-ui/themes';
 import { useState } from 'react';
 import { PiGear } from 'react-icons/pi';
+import { Link } from 'react-router-dom';
 
 export default function MemberManagementPage() {
   const [selectedTab, setSelectedTab] = useState<string>('info');
@@ -39,9 +40,12 @@ export default function MemberManagementPage() {
       <div className="flex flex-row items-center justify-between w-full">
         <div className="flex items-center gap-2">
           <TitleContainer content="회원관리" />
-          <Button color="gray" variant="soft" radius="full" onClick={() => {}}>
-            <PiGear />
-            최고/지점관리자 설정
+          <Link to="/member-management/supermanager-setting">
+            <Button color="gray" variant="soft" radius="full" onClick={() => {}}>
+              <PiGear />
+              최고/지점관리자 설정
+            </Button>
+          </Link>
           </Button>
         </div>
         <div className="flex justify-end">

@@ -17,8 +17,10 @@ import HomePage from '@/pages/home/HomePage';
 import Login from '@/pages/login/Login';
 import MemberInfoPage from '@/pages/memberManagement/MemberInfoPage';
 import MemberManagementPage from '@/pages/memberManagement/MemberManagementPage';
+import SuperManagerSetting from '@/pages/memberManagement/SuperManagerSetting';
 import ManagementOfficePage from '@/pages/officeSetting/ManagementOfficePage';
 import SalarySettlementPage from '@/pages/salarySettlement/SalarySettlementPage';
+import SimpleMenuPage from '@/pages/simpleMenu/SimpleMenuPage';
 import BoardViewPage from '@/pages/userBoard/view/BoardViewPage';
 import BoardWritePage from '@/pages/userBoard/write/BoardWritePage';
 import WorkManagementPage from '@/pages/workManagement/WorkManagementPage';
@@ -127,6 +129,10 @@ const router = createBrowserRouter([
         element: <DayoffManagementPage />,
       },
       {
+        path: '/member-management/supermanager-setting',
+        element: <SuperManagerSetting />,
+      },
+      {
         path: '/board',
         children: [
           {
@@ -142,6 +148,10 @@ const router = createBrowserRouter([
             element: <BoardWritePage />,
           },
         ],
+      },
+      {
+        path: 'simple-menu',
+        element: <SimpleMenuPage />,
       },
     ],
   },
