@@ -63,7 +63,13 @@ export default function WorkHeader({
           {tabItems
             .filter((item) => item.id !== selectTab.id)
             .map((item) => (
-              <Button color="gray" variant="soft" radius="full" onClick={() => setSelectTab(item)}>
+              <Button
+                key={item.id}
+                color="gray"
+                variant="soft"
+                radius="full"
+                onClick={() => setSelectTab(item)}
+              >
                 <PiGear />
                 <span key={item.id} className="-mb-px mr-1">
                   {item.title}

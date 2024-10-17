@@ -2,11 +2,15 @@ import DetailCommuteRecord from '@/components/WorkManagement/Commute/DetailCommu
 import { GenderIcon } from '@/components/WorkManagement/Work/WorkTableRows';
 import { mockStatistics } from '@/constants/workManagementTable/workSelect.mock';
 import { commuteMockData } from '@/constants/workManagementTable/workTable.mock';
+import { ICommuteData } from '@/models/work.model';
 import { Table } from '@radix-ui/themes';
-import React from 'react';
+import React, { useState } from 'react';
 import { useMemo } from 'react';
 
 export default function Commute() {
+  const [showAllStatus, setShowAllStatus] = useState(true);
+
+  const [selectedEmployee, setSelectedEmployee] = useState<ICommuteData | null>(null);
   const generateCommuteHeadTable = useMemo(() => {
     const lastDay = Math.max(
       ...commuteMockData.flatMap((employee) => Object.keys(employee.schedule).map(Number))
@@ -17,9 +21,18 @@ export default function Commute() {
     return { baseHeaders, dayHeaders };
   }, []);
 
+  const handleShowAllStatus = (employee: ICommuteData) => {
+    setShowAllStatus(false);
+    setSelectedEmployee(employee);
+  };
   return (
     <>
-      <DetailCommuteRecord statistics={mockStatistics} />
+      <DetailCommuteRecord
+        statistics={mockStatistics}
+        selectedEmployee={selectedEmployee}
+        showAllStatus={showAllStatus}
+        setShowAllStatus={setShowAllStatus}
+      />
       <Table.Root className="mb-5 table-fixed w-full">
         <Table.Header className="bg-gray-200 text-xs text-gray-700 whitespace-nowrap border-gray-10">
           <Table.Row>
@@ -73,7 +86,7 @@ export default function Commute() {
 
         <Table.Body>
           {commuteMockData.map((employee) => (
-            <Table.Row key={employee.id}>
+            <Table.Row key={employee.id} onClick={() => handleShowAllStatus(employee)}>
               <Table.Cell>{employee.id}</Table.Cell>
               <Table.Cell>{employee.branch}</Table.Cell>
               <Table.Cell>
@@ -86,17 +99,17 @@ export default function Commute() {
                 {employee.position}
                 <span className="border text-xs px-1 pt-0.5">{` 주 ${employee.days}일`}</span>
               </Table.Cell>
-              {generateCommuteHeadTable.dayHeaders.map((_, index) => {
+              {generateCommuteHeadTable.dayHeaders.map((day, index) => {
                 const daySchedule = employee.schedule[index + 1];
                 return (
-                  <>
+                  <React.Fragment key={day}>
                     <Table.Cell className="text-center">
                       {daySchedule ? daySchedule.startTime : ''}
                     </Table.Cell>
                     <Table.Cell className="text-center">
                       {daySchedule ? daySchedule.endTime : ''}
                     </Table.Cell>
-                  </>
+                  </React.Fragment>
                 );
               })}
             </Table.Row>
