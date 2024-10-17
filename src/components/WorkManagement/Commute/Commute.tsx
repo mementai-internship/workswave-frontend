@@ -1,4 +1,5 @@
 import DetailCommuteRecord from '@/components/WorkManagement/Commute/DetailCommuteRecord';
+import { GenderIcon } from '@/components/WorkManagement/Work/WorkTableRows';
 import { mockStatistics } from '@/constants/workManagementTable/workSelect.mock';
 import { commuteMockData } from '@/constants/workManagementTable/workTable.mock';
 import { Table } from '@radix-ui/themes';
@@ -75,8 +76,16 @@ export default function Commute() {
             <Table.Row key={employee.id}>
               <Table.Cell>{employee.id}</Table.Cell>
               <Table.Cell>{employee.branch}</Table.Cell>
-              <Table.Cell>{employee.name}</Table.Cell>
-              <Table.Cell>{employee.position}</Table.Cell>
+              <Table.Cell>
+                <div className="flex gap-2 items-center">
+                  <GenderIcon gender={employee.gender} />
+                  {employee.name}
+                </div>
+              </Table.Cell>
+              <Table.Cell>
+                {employee.position}
+                <span className="border text-xs px-1 pt-0.5">{` 주 ${employee.days}일`}</span>
+              </Table.Cell>
               {generateCommuteHeadTable.dayHeaders.map((_, index) => {
                 const daySchedule = employee.schedule[index + 1];
                 return (

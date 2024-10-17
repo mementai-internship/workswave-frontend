@@ -2,7 +2,7 @@ import { ICommuteData, IWorkData } from '@/models/work.model';
 import { Table } from '@radix-ui/themes';
 import { PiGenderFemaleBold, PiGenderMaleBold } from 'react-icons/pi';
 
-const GenderIcon = ({ gender }: { gender: number }) => {
+export const GenderIcon = ({ gender }: { gender: number }) => {
   return gender ? (
     <PiGenderFemaleBold className="text-pink-600" />
   ) : (
@@ -10,7 +10,7 @@ const GenderIcon = ({ gender }: { gender: number }) => {
   );
 };
 
-const CellWithUnit = ({ value, unit }: { value: number | string; unit: string }) => {
+export const CellWithUnit = ({ value, unit }: { value: number | string; unit: string }) => {
   return (
     <>
       {value}

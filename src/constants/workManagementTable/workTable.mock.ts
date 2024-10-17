@@ -99,7 +99,9 @@ export const commuteMockData: ICommuteData[] = [
     id: 100,
     branch: '유즈의원(강남점)',
     name: '강동휘',
-    position: '코디네이터 주5일',
+    gender: 1,
+    position: '코디네이터 ',
+    days: 5,
     schedule: {
       '1': { startTime: '10:24', endTime: '21:08' },
       '2': { startTime: '10:39', endTime: '21:00' },
@@ -116,7 +118,9 @@ export const commuteMockData: ICommuteData[] = [
     id: 97,
     branch: '유즈의원(강남점)',
     name: '김예지',
-    position: '간호조무사 주5일',
+    gender: 0,
+    position: '간호조무사 ',
+    days: 5,
     schedule: {
       '1': { startTime: '09:47', endTime: '20:30' },
 
@@ -132,7 +136,9 @@ export const commuteMockData: ICommuteData[] = [
     id: 95,
     branch: '유즈의원(강남점)',
     name: '고혜솔',
-    position: '간호조무사 주5일',
+    gender: 0,
+    position: '간호조무사 ',
+    days: 5,
     schedule: {
       '1': { startTime: '10:36', endTime: '21:00' },
       '2': { startTime: '휴무', endTime: '휴무' },
@@ -149,7 +155,9 @@ export const commuteMockData: ICommuteData[] = [
     id: 94,
     branch: '유즈의원(강남점)',
     name: '권세인',
-    position: '피부관리사 주5일',
+    gender: 1,
+    position: '피부관리사 ',
+    days: 5,
     schedule: {
       '1': { startTime: '10:37', endTime: '21:02' },
       '2': { startTime: '10:43', endTime: '21:01' },
@@ -166,7 +174,9 @@ export const commuteMockData: ICommuteData[] = [
     id: 90,
     branch: '유즈의원(강남점)',
     name: '김가은',
-    position: '피부관리사 주5일',
+    gender: 1,
+    position: '피부관리사 ',
+    days: 5,
     schedule: {
       '1': { startTime: '10:38', endTime: '21:07' },
       '2': { startTime: '10:38', endTime: '21:02' },
@@ -183,7 +193,9 @@ export const commuteMockData: ICommuteData[] = [
     id: 87,
     branch: '유즈의원(강남점)',
     name: '김문정',
-    position: '피부관리사 주5일',
+    gender: 1,
+    position: '피부관리사 ',
+    days: 5,
     schedule: {
       '1': { startTime: '10:17', endTime: '21:02' },
       '2': { startTime: '10:04', endTime: '21:03' },

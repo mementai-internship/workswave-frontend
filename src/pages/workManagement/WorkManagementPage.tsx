@@ -27,7 +27,7 @@ export default function WorkManagementPage() {
       case 1:
         return <PartTime />;
       case 2:
-        return <Commute currentDate={currentDate} />;
+        return <Commute />;
       default:
         return null;
     }

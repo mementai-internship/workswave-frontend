@@ -29,7 +29,9 @@ export interface ICommuteData {
   id: number;
   branch: string;
   name: string;
+  gender: number;
   position: string;
+  days: number;
   schedule: {
     [key: string]: {
       startTime: string;

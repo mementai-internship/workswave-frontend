@@ -53,7 +53,7 @@ export default function WorkHeader({
       day: formattedDay,
       period: formattedPeriod,
     };
-  }, [currentDate, dayjs()]);
+  }, [currentDate]);
 
   return (
     <div className="flex justify-between content-center py-4">
