@@ -1,3 +1,5 @@
+import { isAxiosError } from 'axios';
+
 import axiosInstance from '@/apis/axiosInstance';
 import {
   TGetCurrentUserResponse,
@@ -11,7 +13,6 @@ import {
   TPostUserRequest,
   TPostUserResponse,
 } from '@/models/user-management.model';
-import { isAxiosError } from 'axios';
 
 const userManagementApi = {
   getUsers: async (page: number) => {

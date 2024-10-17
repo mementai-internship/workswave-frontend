@@ -1,5 +1,6 @@
-import RegisterDocsInput from '@/components/MemberInfo/MemberInfoCommon/RegisterDocsInput';
 import { Table } from '@radix-ui/themes';
+
+import RegisterDocsInput from '@/components/MemberInfo/MemberInfoCommon/RegisterDocsInput';
 
 export default function DocsRegisterTable() {
   return (

@@ -1,6 +1,7 @@
+import { CheckboxCards, Table } from '@radix-ui/themes';
+
 import MemberInfoButtonBar from '@/components/MemberInfo/MemberInfoCommon/MemberInfoButtonBar';
 import WrittenContractCheckBox from '@/components/MemberInfo/MemberInfoCommon/WrittenContractCheckBox';
-import { CheckboxCards, Table } from '@radix-ui/themes';
 
 // 테스트 데이터
 const testDataArray = [

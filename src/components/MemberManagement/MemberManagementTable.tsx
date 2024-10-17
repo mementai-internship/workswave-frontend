@@ -1,7 +1,8 @@
-import MemberManagementTableCell from '@/components/MemberManagement/MemberManagementTableCell';
-import { MEMBER_MANAGEMENT_TABLE_TITLE } from '@/constants/memberManagementTableTitle';
 import { Table } from '@radix-ui/themes';
 import React from 'react';
+
+import MemberManagementTableCell from '@/components/MemberManagement/MemberManagementTableCell';
+import { MEMBER_MANAGEMENT_TABLE_TITLE } from '@/constants/memberManagementTableTitle';
 
 export interface IMemberManagementTableProps {
   id: number;
