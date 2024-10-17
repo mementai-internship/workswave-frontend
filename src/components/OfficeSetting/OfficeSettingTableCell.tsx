@@ -1,16 +1,16 @@
-import { IOfficeItemResponse } from '@/models/officeSetting.model';
+import { IBranchResponse } from '@/models/branches.model';
 import { Button, Table } from '@radix-ui/themes';
 import React from 'react';
 
 interface IProps {
-  data: IOfficeItemResponse;
+  data: IBranchResponse;
   idx: number;
-  action: () => void;
+  action: (id: number) => void;
   buttonText: string;
 }
 
 export default function OfficeSettingTableCell({ action, data, idx, buttonText }: IProps) {
-  const isNotEmpty = (file: string) => (file ? 'Y' : 'N');
+  const isNotEmpty = (file: string) => (file !== 'None' ? 'Y' : 'N');
   return (
     <Table.Row className="text-center">
       <Table.RowHeaderCell className="w-[5%]">{idx + 1}</Table.RowHeaderCell>
@@ -24,7 +24,13 @@ export default function OfficeSettingTableCell({ action, data, idx, buttonText }
         {isNotEmpty(data.corporate_seal)}/{isNotEmpty(data.nameplate)}
       </Table.Cell>
       <Table.Cell className="w-[10%]">
-        <Button size="1" variant="outline" color="gray" className="text-xs" onClick={action}>
+        <Button
+          size="1"
+          variant="outline"
+          color="gray"
+          className="text-xs"
+          onClick={() => action(data.id)}
+        >
           {buttonText}
         </Button>
       </Table.Cell>

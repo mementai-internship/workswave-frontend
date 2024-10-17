@@ -1,12 +1,12 @@
 import OfficeSettingTableCell from '@/components/OfficeSetting/OfficeSettingTableCell';
 import { OFFICE_SETTING_TABLE_TITLE } from '@/constants/officeSettingTableTitle';
-import { IOfficeItemResponse } from '@/models/officeSetting.model';
+import { IBranchResponse } from '@/models/branches.model';
 import { Table } from '@radix-ui/themes';
 import React from 'react';
 
 interface IProps {
-  list: IOfficeItemResponse[];
-  action: () => void;
+  list: IBranchResponse[];
+  action: (id: number) => void;
   buttonText: string;
 }
 

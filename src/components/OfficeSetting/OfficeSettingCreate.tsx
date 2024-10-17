@@ -1,15 +1,15 @@
 import { Txt } from '@/components/Common/Txt';
 import OfficeSettingCreateRow from '@/components/OfficeSetting/OfficeSettingCreateRow';
 import OfficeSettingFileUpload from '@/components/OfficeSetting/OfficeSettingFileUpload';
-import { IOfficeItemResponse } from '@/models/officeSetting.model';
+import { IBranchesRequest } from '@/models/branches.model';
 import { Button } from '@radix-ui/themes';
 import React from 'react';
 import { Control, UseFormSetValue } from 'react-hook-form';
 
 interface IProps {
-  control: Control<IOfficeItemResponse>;
+  control: Control<IBranchesRequest>;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  setValue: UseFormSetValue<IOfficeItemResponse>;
+  setValue: UseFormSetValue<IBranchesRequest>;
 }
 
 export default function OfficeSettingCreate({ setValue, control, onSubmit }: IProps) {
@@ -54,9 +54,15 @@ export default function OfficeSettingCreate({ setValue, control, onSubmit }: IPr
             control={control}
           />
           <OfficeSettingCreateRow
-            label="사업자번호"
-            placeholder="사업자번호"
+            label="주소"
+            placeholder="주소"
             name="address"
+            control={control}
+          />
+          <OfficeSettingCreateRow
+            label="직인/명판"
+            placeholder="직인/명판"
+            name="corporate_seal"
             control={control}
           >
             <OfficeSettingFileUpload title="직인등록" setValue={setValue} name="corporate_seal" />

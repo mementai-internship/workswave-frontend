@@ -1,19 +1,19 @@
-import { IOfficeItemResponse } from '@/models/officeSetting.model';
+import { IBranchesRequest } from '@/models/branches.model';
 import { TextField } from '@radix-ui/themes';
 import React, { forwardRef } from 'react';
 import { Control, Controller } from 'react-hook-form';
 
 interface IProps {
   children?: React.ReactNode;
-  control?: Control<IOfficeItemResponse>;
-  name: keyof IOfficeItemResponse;
+  control?: Control<IBranchesRequest>;
+  name: keyof IBranchesRequest;
   placeholder?: string;
   label: string;
   maxLength?: number;
   isEmailType?: boolean;
 }
 
-type TInputType = '전화번호' | '사업자번호' | '메일';
+type TInputType = '전화번호' | '사업자번호';
 
 const OfficeSettingCreateRow = forwardRef<HTMLInputElement, IProps>(
   ({ children, control, name, placeholder, label, maxLength, isEmailType = false }, ref) => {
@@ -58,11 +58,11 @@ const OfficeSettingCreateRow = forwardRef<HTMLInputElement, IProps>(
                   maxLength={maxLength}
                   type={isEmailType ? 'email' : 'text'}
                   onBlur={() => {
+                    if (placeholder !== '사업자번호' && placeholder !== '전화번호') return;
                     const validatedValue = validateOnBlurForInputPattern(
                       value.toString(),
                       placeholder as TInputType
                     );
-                    console.log(value, validatedValue);
                     onChange(validatedValue);
                   }}
                   required
