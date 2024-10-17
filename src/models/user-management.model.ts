@@ -1,7 +1,24 @@
 //id만 있는 타입들은 임의로 설정
 
 export type TGetUsersResponse = {
-  id: number;
+  message: string;
+  data: [
+    {
+      id: number;
+      name: string;
+      birth_date: string | null;
+      phone_number: string;
+      email: string;
+      hire_date: string | null;
+      monthly_salary: number;
+      annual_salary: number;
+      part: string;
+      branch: string;
+    },
+  ];
+  total: number;
+  page: number;
+  record_size: number;
 };
 
 export type TPostUserRequest = {
