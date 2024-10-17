@@ -1,16 +1,21 @@
 import SetBasicWorkItem from '@/components/BasicSetting/WorkingSetting/SetBasicWorkItem';
 import TimeRangeSelector from '@/components/BasicSetting/WorkingSetting/TimeRangeSelector';
 import { Txt } from '@/components/Common/Txt';
-import { IWorkingSettingBranchResponse } from '@/models/workingSetting.model';
+import { IWorkPolicies } from '@/models/work-policies';
 import { Select } from '@radix-ui/themes';
-import { Control, Controller, UseFormRegister, UseFormSetValue } from 'react-hook-form';
+import { Control, Controller, UseFormRegister, UseFormSetValue, useWatch } from 'react-hook-form';
 
 interface IPropsType {
-  register: UseFormRegister<IWorkingSettingBranchResponse>;
-  setValue: UseFormSetValue<IWorkingSettingBranchResponse>;
-  control: Control<IWorkingSettingBranchResponse>;
+  register: UseFormRegister<IWorkPolicies>;
+  setValue: UseFormSetValue<IWorkPolicies>;
+  control: Control<IWorkPolicies>;
 }
 export default function WorkingSettingBasicWork({ register, setValue, control }: IPropsType) {
+  const workPolicies = useWatch({
+    control,
+    name: 'work_policies',
+  });
+
   return (
     <div className="p-8 items-center whitespace-nowrap relative">
       <div className="flex items-center gap-x-4 mb-10">
@@ -22,7 +27,7 @@ export default function WorkingSettingBasicWork({ register, setValue, control }:
         <div className="flex items-center">
           <Controller
             control={control}
-            name="basic_work.weekly_work_days"
+            name="work_policies.weekly_work_days"
             render={({ field: { onChange, value } }) => (
               <Select.Root value={value ? value.toString() : ''} onValueChange={onChange} size="3">
                 <Select.Trigger
@@ -57,9 +62,11 @@ export default function WorkingSettingBasicWork({ register, setValue, control }:
             <TimeRangeSelector
               startLabel="시업시간"
               endLabel="종업시간"
+              initialStartTime={workPolicies.weekday_start_time}
+              initialEndTime={workPolicies.weekday_end_time}
               onTimeRangeChange={(startTime, endTime) => {
-                setValue('basic_work.weekday_start_time', startTime);
-                setValue('basic_work.weekday_end_time', endTime);
+                setValue('work_policies.weekday_start_time', startTime);
+                setValue('work_policies.weekday_end_time', endTime);
               }}
             />
           </div>
@@ -73,9 +80,11 @@ export default function WorkingSettingBasicWork({ register, setValue, control }:
             <TimeRangeSelector
               startLabel="시업시간"
               endLabel="종업시간"
+              initialStartTime={workPolicies.saturday_start_time}
+              initialEndTime={workPolicies.saturday_end_time}
               onTimeRangeChange={(startTime, endTime) => {
-                setValue('basic_work.saturday_start_time', startTime);
-                setValue('basic_work.saturday_end_time', endTime);
+                setValue('work_policies.saturday_start_time', startTime);
+                setValue('work_policies.saturday_end_time', endTime);
               }}
             />
           </div>
@@ -89,9 +98,11 @@ export default function WorkingSettingBasicWork({ register, setValue, control }:
             <TimeRangeSelector
               startLabel="시업시간"
               endLabel="종업시간"
+              initialStartTime={workPolicies.sunday_start_time}
+              initialEndTime={workPolicies.sunday_end_time}
               onTimeRangeChange={(startTime, endTime) => {
-                setValue('basic_work.sunday_start_time', startTime);
-                setValue('basic_work.sunday_end_time', endTime);
+                setValue('work_policies.sunday_start_time', startTime);
+                setValue('work_policies.sunday_end_time', endTime);
               }}
             />
           </div>
@@ -104,9 +115,11 @@ export default function WorkingSettingBasicWork({ register, setValue, control }:
             <TimeRangeSelector
               startLabel="휴게 시작"
               endLabel="휴게 종료"
+              initialStartTime={workPolicies.doctor_lunch_start_time}
+              initialEndTime={workPolicies.doctor_lunch_end_time}
               onTimeRangeChange={(startTime, endTime) => {
-                setValue('basic_work.doctor_lunch_start_time', startTime);
-                setValue('basic_work.doctor_lunch_end_time', endTime);
+                setValue('work_policies.doctor_lunch_start_time', startTime);
+                setValue('work_policies.doctor_lunch_end_time', endTime);
               }}
             />
           </div>
@@ -117,9 +130,11 @@ export default function WorkingSettingBasicWork({ register, setValue, control }:
             <TimeRangeSelector
               startLabel="휴게 시작"
               endLabel="휴게 종료"
+              initialStartTime={workPolicies.common_lunch_start_time}
+              initialEndTime={workPolicies.common_lunch_end_time}
               onTimeRangeChange={(startTime, endTime) => {
-                setValue('basic_work.common_lunch_start_time', startTime);
-                setValue('basic_work.common_lunch_end_time', endTime);
+                setValue('work_policies.common_lunch_start_time', startTime);
+                setValue('work_policies.common_lunch_end_time', endTime);
               }}
             />
           </div>

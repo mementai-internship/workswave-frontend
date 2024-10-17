@@ -1,5 +1,6 @@
-import Title from '@/components/Common/Title';
 import { Button } from '@radix-ui/themes';
+
+import Title from '@/components/Common/Title';
 
 interface IProps {
   onChangePage: () => void;

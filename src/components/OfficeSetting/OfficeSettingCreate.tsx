@@ -1,10 +1,11 @@
+import { Button } from '@radix-ui/themes';
+import React from 'react';
+import { Control, UseFormSetValue } from 'react-hook-form';
+
 import { Txt } from '@/components/Common/Txt';
 import OfficeSettingCreateRow from '@/components/OfficeSetting/OfficeSettingCreateRow';
 import OfficeSettingFileUpload from '@/components/OfficeSetting/OfficeSettingFileUpload';
 import { IBranchesRequest } from '@/models/branches.model';
-import { Button } from '@radix-ui/themes';
-import React from 'react';
-import { Control, UseFormSetValue } from 'react-hook-form';
 
 interface IProps {
   control: Control<IBranchesRequest>;

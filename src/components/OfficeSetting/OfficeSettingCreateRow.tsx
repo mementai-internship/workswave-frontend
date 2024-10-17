@@ -1,7 +1,8 @@
-import { IBranchesRequest } from '@/models/branches.model';
 import { TextField } from '@radix-ui/themes';
 import React, { forwardRef } from 'react';
 import { Control, Controller } from 'react-hook-form';
+
+import { IBranchesRequest } from '@/models/branches.model';
 
 interface IProps {
   children?: React.ReactNode;
