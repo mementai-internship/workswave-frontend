@@ -19,6 +19,7 @@ import MemberInfoPage from '@/pages/memberManagement/MemberInfoPage';
 import MemberManagementPage from '@/pages/memberManagement/MemberManagementPage';
 import SuperManagerSetting from '@/pages/memberManagement/SuperManagerSetting';
 import ManagementOfficePage from '@/pages/officeSetting/ManagementOfficePage';
+import OtManagementPage from '@/pages/otManagement/OtManagementPage';
 import SalarySettlementPage from '@/pages/salarySettlement/SalarySettlementPage';
 import SimpleMenuPage from '@/pages/simpleMenu/SimpleMenuPage';
 import BoardViewPage from '@/pages/userBoard/view/BoardViewPage';
@@ -152,6 +153,10 @@ const router = createBrowserRouter([
       {
         path: 'simple-menu',
         element: <SimpleMenuPage />,
+      },
+      {
+        path: 'ot-management',
+        element: <OtManagementPage />,
       },
     ],
   },
