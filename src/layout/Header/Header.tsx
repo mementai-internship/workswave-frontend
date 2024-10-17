@@ -31,7 +31,9 @@ export default function Header() {
           </Link>
         )}
         <div className="px-4 py-3.5 text-sm border-x border-gray-50 hover:cursor-pointer">
-          {/* 간편메뉴를 누르면 어떤일이 발생?? */}간편메뉴
+          <Link to="/simple-menu">
+            <div>간편메뉴</div>
+          </Link>
         </div>
       </div>
     </header>
