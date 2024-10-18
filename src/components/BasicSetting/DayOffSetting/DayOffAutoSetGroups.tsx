@@ -2,7 +2,7 @@ import { RadioGroup } from '@radix-ui/themes';
 
 import { Txt } from '@/components/Common/Txt';
 
-export default function HolidayAutoSetGroups() {
+export default function DayOffAutoSetGroups() {
   return (
     <div className="flex justify-start items-center p-10">
       <div className="flex flex-col gap-y-10">

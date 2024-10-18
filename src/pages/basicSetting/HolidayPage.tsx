@@ -3,10 +3,10 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { PiEquals, PiGear } from 'react-icons/pi';
 
-import DragContainer from '@/components/BasicSetting/HolidaySetting/DragContainer';
-import HolidayAutoSetGroups from '@/components/BasicSetting/HolidaySetting/HolidayAutoSetGroups';
-import HolidaySettingForm from '@/components/BasicSetting/HolidaySetting/HolidaySettingForm';
-import HolidaySettingItem from '@/components/BasicSetting/HolidaySetting/HolidaySettingItem';
+import DayOffAutoSetGroups from '@/components/BasicSetting/DayOffSetting/DayOffAutoSetGroups';
+import DayOffSettingForm from '@/components/BasicSetting/DayOffSetting/DayOffSettingForm';
+import DayOffSettingItem from '@/components/BasicSetting/DayOffSetting/DayOffSettingItem';
+import DragContainer from '@/components/BasicSetting/DayOffSetting/DragContainer';
 import Title from '@/components/Common/Title';
 import { Txt } from '@/components/Common/Txt';
 import { useGetBranches } from '@/hooks/apis/useBranches';
@@ -90,7 +90,7 @@ export default function HolidayPage() {
         <div className="p-6 flex flex-col gap-y-3">
           {leaveCategories && !!leaveCategories.length ? (
             leaveCategories.map(({ leave_category, excluded_parts }) => (
-              <HolidaySettingItem
+              <DayOffSettingItem
                 key={leave_category.id}
                 leave_category={leave_category}
                 excluded_parts={excluded_parts}
@@ -109,7 +109,7 @@ export default function HolidayPage() {
 
       <section className="flex flex-col gap-y-4 min-w-[540px] h-[calc(100vh-100px)] overflow-y-scroll">
         <div className="border bg-white">
-          <HolidaySettingForm
+          <DayOffSettingForm
             handleSubmit={holidayHandleSubmit}
             onChangeEditMode={handleClickEditMode}
             setValue={holidayFormSetValue}
@@ -124,7 +124,7 @@ export default function HolidayPage() {
           />
         </div>
         <div className="border bg-white grow">
-          <HolidayAutoSetGroups />
+          <DayOffAutoSetGroups />
         </div>
       </section>
 

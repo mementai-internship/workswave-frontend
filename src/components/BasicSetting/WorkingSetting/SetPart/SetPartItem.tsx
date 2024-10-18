@@ -19,8 +19,7 @@ export default function WorkingSettingSetPartItem({
   onChangeEditMode,
   ...data
 }: IPropsType) {
-  const { name, task, is_doctor, required_certification, leave_granting_authority /*color*/ } =
-    data;
+  const { name, task, is_doctor, required_certification, leave_granting_authority, color } = data;
 
   const { mutate: deleteParts } = useDeleteParts(branchId);
 
@@ -35,7 +34,7 @@ export default function WorkingSettingSetPartItem({
   };
 
   // 백엔드업데이트 이후에는 색상 부분에 color 입력
-  const bgColor = `bg-[#1beeee]`;
+  const bgColor = `bg-[${color}]`;
 
   return (
     <div className="flex justify-between items-center border-2 p-6 bg-gray-10 min-w-[800px]">

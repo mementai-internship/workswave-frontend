@@ -29,7 +29,7 @@ interface HolidaySettingFormProps {
   branch_id: number;
 }
 
-export default function HolidaySettingForm({
+export default function DayOffSettingForm({
   isEditingMode,
   control,
   formState,

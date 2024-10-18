@@ -15,7 +15,7 @@ interface IPropsType {
   setValue: UseFormSetValue<ILeaveCategory>;
 }
 
-export default function HolidaySettingItem({
+export default function DayOffSettingItem({
   leave_category,
   branch_id,
   excluded_parts,
