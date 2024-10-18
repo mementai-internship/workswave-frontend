@@ -1,8 +1,9 @@
+import { Table } from '@radix-ui/themes';
+import React from 'react';
+
 import OfficeSettingTableCell from '@/components/OfficeSetting/OfficeSettingTableCell';
 import { OFFICE_SETTING_TABLE_TITLE } from '@/constants/officeSettingTableTitle';
 import { IBranchResponse } from '@/models/branches.model';
-import { Table } from '@radix-ui/themes';
-import React from 'react';
 
 interface IProps {
   list: IBranchResponse[];

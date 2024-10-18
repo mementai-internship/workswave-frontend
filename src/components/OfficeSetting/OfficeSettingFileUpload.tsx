@@ -1,7 +1,8 @@
-import { IBranchesRequest } from '@/models/branches.model';
 import { Button } from '@radix-ui/themes';
 import React, { useRef, useState } from 'react';
 import { UseFormSetValue } from 'react-hook-form';
+
+import { IBranchesRequest } from '@/models/branches.model';
 
 interface IProps {
   title: string;

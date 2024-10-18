@@ -1,14 +1,18 @@
-import { Txt } from '@/components/Common/Txt';
-import { getHours, getMinutes } from '@/utils/getTimes';
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Select } from '@radix-ui/themes';
 import dayjs, { Dayjs } from 'dayjs';
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
 import { useEffect, useState } from 'react';
 
+import { Txt } from '@/components/Common/Txt';
+import { getHours, getMinutes } from '@/utils/getTimes';
+
 dayjs.extend(isSameOrAfter);
 interface IPropsType {
   startLabel: string;
   endLabel: string;
+  initialStartTime: string;
+  initialEndTime: string;
   onTimeRangeChange: (startTime: string, endTime: string) => void;
 }
 
@@ -19,37 +23,59 @@ const combineTimeValues = (hour: string, minute: string): Dayjs => {
 export default function TimeRangeSelector({
   startLabel,
   endLabel,
-
+  initialStartTime,
+  initialEndTime,
   onTimeRangeChange,
 }: IPropsType) {
-  const [startHour, setStartHour] = useState<string>('');
-  const [startMinute, setStartMinute] = useState<string>('');
-  const [endHour, setEndHour] = useState<string>('');
-  const [endMinute, setEndMinute] = useState<string>('');
+  const [initStartHour, initStartMinute] = initialStartTime.split(':');
+  const [initEndHour, initEndMinute] = initialEndTime.split(':');
+
+  const [startHour, setStartHour] = useState<string>('00');
+  const [startMinute, setStartMinute] = useState<string>('00');
+  const [endHour, setEndHour] = useState<string>('23');
+  const [endMinute, setEndMinute] = useState<string>('50');
+
+  useEffect(() => {
+    setStartHour(initStartHour !== '00' ? initStartHour : '00');
+    setStartMinute(initStartMinute !== '00' ? initStartMinute : '00');
+    setEndHour(initEndHour !== '00' ? initEndHour : '23');
+    setEndMinute(initEndMinute !== '00' ? initEndMinute : '50');
+  }, [initialStartTime, initialEndTime]);
 
   useEffect(() => {
     if (startHour && startMinute && endHour && endMinute) {
-      validateAndUpdateTimeRange();
+      const startTime = combineTimeValues(startHour, startMinute);
+      const endTime = combineTimeValues(endHour, endMinute);
+
+      if (isValidTimeRange(startTime, endTime)) {
+        onTimeRangeChange(startTime.format('HH:mm'), endTime.format('HH:mm'));
+      }
     }
   }, [startHour, startMinute, endHour, endMinute]);
 
-  const validateAndUpdateTimeRange = () => {
-    const startTime = combineTimeValues(startHour, startMinute);
-    const endTime = combineTimeValues(endHour, endMinute);
+  const isValidTimeRange = (startTime: Dayjs, endTime: Dayjs): boolean => {
+    if (!endHour || !endMinute) {
+      return true; // 종료 시간이 완전히 선택되지 않았으면 유효성 검사를 건너뜁니다.
+    }
 
-    if (dayjs(startTime).isSameOrAfter(dayjs(endTime))) {
+    if (startTime.isSame(endTime) && startTime.format('HH:mm') !== '00:00') {
+      alert('종료 시간은 시작 시간과 같을 수 없습니다.');
+      resetTimeValues();
+      return false;
+    }
+    if (startTime.isAfter(endTime)) {
       alert('종료 시간은 시작 시간보다 이후여야 합니다.');
       resetTimeValues();
-    } else {
-      onTimeRangeChange(startTime.format('HH:mm'), endTime.format('HH:mm'));
+      return false;
     }
+    return true;
   };
 
   const resetTimeValues = () => {
-    setStartHour('');
-    setStartMinute('');
-    setEndHour('');
-    setEndMinute('');
+    setStartHour('00');
+    setStartMinute('00');
+    setEndHour('23');
+    setEndMinute('50');
   };
 
   return (

@@ -3,6 +3,13 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { branchesApi } from '@/apis/branches.api';
 import { QUERY_KEYS } from '@/constants/queryKeys';
 
+export const useGetAllBranches = () => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.branches],
+    queryFn: branchesApi.getAllBranches,
+  });
+};
+
 export const useGetBranches = (page: string) => {
   return useQuery({
     queryKey: [QUERY_KEYS.branches, page],

@@ -1,6 +1,6 @@
 import { useAtom } from 'jotai';
 import { PiBellFill } from 'react-icons/pi';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { postLogout } from '@/apis/logout.api';
 import { IHeader } from '@/layout/Header/Header';
@@ -9,11 +9,12 @@ import { userAtom, userTokenAtom } from '@/store/authAtoms';
 export default function HeaderProfile({ name, role }: IHeader) {
   const token = useAtom(userTokenAtom)[0];
   const [, setUser] = useAtom(userAtom);
-
+  const navigate = useNavigate();
   // Logout 함수
   const handleLogoutButtonClick = async () => {
     await postLogout(token);
     setUser();
+    navigate('/login');
   };
 
   return (

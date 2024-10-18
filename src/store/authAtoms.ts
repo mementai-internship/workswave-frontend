@@ -14,7 +14,7 @@ export const currentUserAtom = atomWithQuery<TUser>((get) => ({
   queryFn: async () => {
     const token = get(userTokenAtom);
     if (!token) throw new Error('No token available');
-    const response = await getCurrentUser(token);
+    const response = await getCurrentUser();
     return response.data;
   },
 }));
