@@ -2,15 +2,20 @@ import { isAxiosError } from 'axios';
 import dayjs from 'dayjs';
 
 import axiosInstance from '@/apis/axiosInstance';
-import { TBranchClosedDaysRequest } from '@/models/closedDays.model';
+import {
+  IClosedDayDeleteRequest,
+  IClosedDayRequest,
+  IClosedDaysDeleteRequest,
+  IClosedDaysRequest,
+} from '@/models/closedDays.model';
 
 export const closedDaysApi = {
-  // getEveryBranchesClosedDays: async () => {
+  // getClosedDaysAllBranch: async () => {
   //   try {
-  //     console.log('getAllClosedDays [전 지점 휴무일 조회]');
+  //     console.log('getClosedDaysAllBranch [전 지점 휴무일 조회]');
   //     const response = await axiosInstance.get('/branches/closed_days');
 
-  //     console.log('%cgetAllClosedDays [전 지점 휴무일 조회] 응답', 'color: orange;', response);
+  //     console.log('%c getClosedDaysAllBranch [전 지점 휴무일 조회] 응답', 'color: orange;', response);
   //     return response.data;
   //   } catch (err) {
   //     if (isAxiosError(err)) {
@@ -20,11 +25,11 @@ export const closedDaysApi = {
   //   }
   // },
 
-  // getBranchClosedDays: async (branchId: number) => {
+  // getClosedDays: async (branchId: number) => {
   //   try {
-  //     console.log('getBranchClosedDays [지점] [휴무일 - 모든 날짜] 조회', branchId);
+  //     console.log('getClosedDays [지점] [휴무일 - 모든 날짜] 조회', branchId);
   //     const response = await axiosInstance.get(`/branches/closed_days/${branchId}`);
-  //     console.log('%cgetBranchClosedDays [지점] [휴무일 - 모든 날짜] 응답', 'color: orange;', response);
+  //     console.log('%c getClosedDays [지점] [휴무일 - 모든 날짜] 응답', 'color: orange;', response);
   //     return response.data;
   //   } catch (err) {
   //     if (isAxiosError(err)) {
@@ -34,17 +39,17 @@ export const closedDaysApi = {
   //   }
   // },
 
-  getBranchClosedDaysByMonth: async ({ branch_id, date }: TBranchClosedDaysRequest) => {
+  getMonthlyClosedDays: async ({ branch_id, date }: IClosedDayRequest) => {
     try {
       const formattedDate = dayjs(date).format('YYYY-MM-DD');
       console.log(
-        `getBranchClosedDays [지점 "${branch_id}"] [휴무일 - 월별 ${formattedDate}] get 요청`
+        `getMonthlyClosedDays [지점 "${branch_id}"] [휴무일 - 월별 ${dayjs(date).format('MM')}월] get 요청`
       );
       const response = await axiosInstance.get(
         `/branches/${branch_id}/closed_days/branch_month/${formattedDate}`
       );
       console.log(
-        `%cgetBranchClosedDays [지점 "${branch_id}"] [휴무일 - 월별 ${formattedDate}] get 응답`,
+        `%c getMonthlyClosedDays [지점 "${branch_id}"] [휴무일 - 월별 ${dayjs(date).format('MM')}월] get 응답`,
         'color: orange;',
         response
       );
@@ -52,16 +57,16 @@ export const closedDaysApi = {
     } catch (err) {
       if (isAxiosError(err)) {
         console.error('Error:', err.response?.data);
-        throw new Error('지점 - 월별 휴무일 조회에 실패 했습니다.');
+        throw new Error(`지점의 ${dayjs(date).format('MM')}월 휴무일 조회에 실패 했습니다.`);
       }
     }
   },
 
-  // getClosedDaysByDate: async (date: Date) => {
+  // getDailyClosedDays: async (date: Date) => {
   //   try {
-  //     console.log(`getClosedDaysByDate [휴무일 - 특정 날짜 ${date}] get 요청`);
+  //     console.log(`getDailyClosedDays [휴무일 - 특정 날짜 ${date}] get 요청`);
   //     const response = await axiosInstance.get(`/branches/closed_days/${date}`);
-  //     console.log(`%cgetClosedDaysByDate [휴무일 - 특정 날짜 ${date}] get 응답`, 'color: orange;', response);
+  //     console.log(`%cgetDailyClosedDays [휴무일 - 특정 날짜 ${date}] get 응답`, 'color: orange;', response);
   //     return response.data;
   //   } catch (err) {
   //     if (isAxiosError(err)) {
@@ -71,72 +76,100 @@ export const closedDaysApi = {
   //   }
   // },
 
-  postBranchClosedDay: async ({
-    branch_id,
-    date,
-    memo = '지점 휴무일',
-  }: TBranchClosedDaysRequest) => {
+  postOneClosedDay: async ({ branch_id, date, memo = '지점 휴무일' }: IClosedDayRequest) => {
     try {
       const formattedDate = dayjs(date).format('YYYY-MM-DD');
 
-      console.log(`postBranchClosedDay [지점 "${branch_id}"] [휴무일 등록] post 요청`);
+      console.log(
+        `postOneClosedDay [지점 "${branch_id}"] [휴무일 "${formattedDate}" 등록] post 요청`
+      );
       const response = await axiosInstance.post(`/branches/${branch_id}/closed_days`, {
         closed_day_date: formattedDate,
         memo,
       });
       console.log(
-        `%cpostBranchClosedDay [지점 "${branch_id}"] [휴무일 등록] post 응답`,
-        'color: blue;',
+        `%c postOneClosedDay [지점 "${branch_id}"] [휴무일 "${formattedDate}" 등록] post 응답`,
+        'color: lightblue;',
         response
       );
       return response.data;
     } catch (err) {
       if (isAxiosError(err)) {
         console.error('Error:', err.response?.data);
-        throw new Error('휴무일 등록에 실패 했습니다.');
+        throw new Error(`지점의 ${dayjs(date).format('YYYY-MM-DD')} 휴무일 등록에 실패 했습니다.`);
+      }
+    }
+  },
+  postClosedDays: async ({ branch_id, dates, memo = '지점 휴무일' }: IClosedDaysRequest) => {
+    try {
+      const requestBody = dates.map((date) => ({
+        closed_day_date: dayjs(date).format('YYYY-MM-DD'),
+        memo,
+      }));
+
+      console.log(`postClosedDays [지점 "${branch_id}"] [휴무일 다중 등록] post 요청`);
+      const response = await axiosInstance.post(
+        `/branches/${branch_id}/closed_days/arrays`,
+        requestBody
+      );
+      console.log(
+        `%c postClosedDays [지점 "${branch_id}"] [휴무일 다중 등록] post 응답`,
+        'color: lightblue;',
+        response
+      );
+      return response.data;
+    } catch (err) {
+      if (isAxiosError(err)) {
+        console.error('Error:', err.response?.data);
+        throw new Error(`지점의 휴무일 다중 등록에 실패 했습니다.`);
       }
     }
   },
 
-  // 나중에 삭제
-
-  getBranches: async (page: string) => {
+  deleteOneClosedDay: async ({ branch_id, date, id }: IClosedDayDeleteRequest) => {
     try {
-      console.log('getBranches [지점 목록 조회] 요청', page);
-      const response = await axiosInstance.get<IBranchesResponse>('/branches/list', {
-        params: { page },
-      });
-      console.log('%cgetBranches [지점 목록 조회] 응답', 'color: orange;', response);
+      const formattedDate = dayjs(date).format('YYYY-MM-DD');
+      console.log(
+        `deleteOneClosedDay [지점 "${branch_id}"] [휴무일 "${formattedDate}" 삭제] delete 요청`
+      );
+      const response = await axiosInstance.delete(`/branches/${branch_id}/closed_days/${id}`);
+      console.log(
+        `%c deleteOneClosedDay [지점 "${branch_id}"] [휴무일 "${formattedDate}" 삭제] delete 응답`,
+        'color: pink;',
+        response
+      );
       return response.data;
-    } catch (error) {
-      if (isAxiosError(error)) {
-        console.log(error.response);
-        throw new Error('지점 목록을 가져오는 데 실패했습니다.');
+    } catch (err) {
+      if (isAxiosError(err)) {
+        console.error('Error:', err.response?.data);
+        throw new Error(`지점의 ${dayjs(date).format('YYYY-MM-DD')} 휴무일 삭제에 실패 했습니다.`);
+      }
+    }
+  },
+
+  deleteClosedDays: async ({ branch_id, idList }: IClosedDaysDeleteRequest) => {
+    try {
+      const reqIdList = idList.map((id) => Number(id));
+      console.log(
+        `deleteClosedDays [지점 "${branch_id}"] [휴무일 ${reqIdList} 다중 삭제] delete 요청`
+      );
+      const response = await axiosInstance.delete(
+        `/branches/${branch_id}/closed_days/arrays/delete`,
+        {
+          data: reqIdList,
+        }
+      );
+      console.log(
+        `%c deleteClosedDays [지점 "${branch_id}"] [휴무일 다중 삭제] delete 응답`,
+        'color: pink;',
+        response
+      );
+      return response.data;
+    } catch (err) {
+      if (isAxiosError(err)) {
+        console.error('Error:', err.response?.data);
+        throw new Error(`지점의 휴무일 다중 삭제에 실패 했습니다.`);
       }
     }
   },
 };
-
-export interface IBranchesResponse {
-  list: IBranchResponse[];
-  pagination: {
-    record_size: number;
-    total_record: number;
-  };
-}
-
-export interface IBranchResponse {
-  id: number;
-  code: string;
-  name: string;
-  representative_name: string;
-  registration_number: string;
-  call_number: string;
-  address: string;
-  corporate_seal: string;
-  nameplate: string;
-  mail_address: string;
-  created_at: string;
-  updated_at: string;
-  deleted_yn: string;
-}

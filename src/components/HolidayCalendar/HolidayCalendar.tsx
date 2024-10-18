@@ -5,25 +5,26 @@ import FullCalendar from '@fullcalendar/react';
 import dayjs from 'dayjs';
 
 import Badge from '@/components/Common/LabelBadge';
+import { TClosedDaysResponse } from '@/models/closedDays.model';
 import { adaptTaskToColor } from '@/utils/adaptTaskToColor';
 
-interface IDayOffCalendarProps {
+interface IDayoffCalendarProps {
   currDate: dayjs.Dayjs;
   view: 'dayGridMonth' | 'dayGridWeek';
   onDateAndEventClick: (date: Date) => void;
   events: EventInput[];
   isSundayOff: boolean;
-  holidays: Date[];
+  holidays: TClosedDaysResponse;
 }
 
-export default function HolidayCalendar({
+export default function DayoffCalendar({
   currDate,
   view,
   onDateAndEventClick,
   events,
   isSundayOff,
   holidays,
-}: IDayOffCalendarProps) {
+}: IDayoffCalendarProps) {
   const handleDateClick = (arg: DateClickArg) => {
     onDateAndEventClick(arg.date);
   };
@@ -60,7 +61,7 @@ export default function HolidayCalendar({
     const classes = ['overflow-hidden'];
     if (
       (isSundayOff && arg.date.getDay() === 0) ||
-      holidays.some((holiday) => dayjs(holiday).isSame(arg.date, 'day'))
+      holidays.data.some((holiday) => dayjs(holiday.closed_day_date).isSame(arg.date, 'day'))
     ) {
       classes.push('text-red font-bold bg-[#FDE8EC]');
     }
