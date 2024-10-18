@@ -7,6 +7,7 @@ import { TGetCurrentUserResponse } from '@/models/user-management.model';
 
 export interface IMemberManagementTableProps {
   data: IMemberManagementTableData[];
+  allUserList?: IMemberManagementTableData[];
   tab: string;
   currentUser: TGetCurrentUserResponse;
 }
@@ -23,8 +24,6 @@ export interface IMemberManagementTableData {
   part: string;
   branch: string;
 }
-//API 연결 후 삭제
-export const userId = 142;
 
 export const infoTestData: IMemberManagementTableProps[] = [];
 
@@ -33,7 +32,9 @@ export default function MemberManagementTable({
   tab,
   currentUser,
 }: IMemberManagementTableProps) {
-  console.log(data);
+  const userId = 1;
+  //console.log(currentUser.data.id);
+
   if (!data) {
     return <div>Loading...</div>;
   }
@@ -57,14 +58,14 @@ export default function MemberManagementTable({
           ?.filter((data) => data.id === userId)
           .map((data) => (
             <React.Fragment key={data.id}>
-              <MemberManagementTableCell data={data} tab={tab} />
+              <MemberManagementTableCell data={data} tab={tab} userId={userId} />
             </React.Fragment>
           ))}
         {data
           .filter((data) => data.id !== userId)
           .map((data: IMemberManagementTableData) => (
             <React.Fragment key={data.id}>
-              <MemberManagementTableCell data={data} tab={tab} />
+              <MemberManagementTableCell data={data} tab={tab} userId={userId} />
             </React.Fragment>
           ))}
       </Table.Body>

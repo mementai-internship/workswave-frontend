@@ -3,16 +3,16 @@ import { Table } from '@radix-ui/themes';
 import { PiStarFill, PiXBold } from 'react-icons/pi';
 import { Link } from 'react-router-dom';
 
-import { IMemberManagementTableData, userId } from './MemberManagementTable';
+import { IMemberManagementTableData } from './MemberManagementTable';
 
 export default function MemberManagementTableCell({
   data,
-  tab,
+  userId,
 }: {
   data: IMemberManagementTableData;
-  tab: string;
+  tab?: string;
+  userId: number;
 }) {
-  console.log(tab);
   return (
     <Table.Row
       key={data.id}

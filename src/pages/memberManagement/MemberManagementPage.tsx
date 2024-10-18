@@ -15,18 +15,43 @@ export default function MemberManagementPage() {
   const queryParams = new URLSearchParams(location.search);
   const currentPage = parseInt(queryParams.get('page') || '1', 10);
   const currentTab = queryParams.get('status') || '전체';
-  const itemsPerPage = 10;
+  const currentBranch = queryParams.get('search_branch_id') || '0';
+  const currentPart = queryParams.get('search_part_id') || '0';
+  const itemsPerPage = 6;
 
   const [selectedTab, setSelectedTab] = useState<string>(currentTab);
+  const [selectedBranch, setSelectedBranch] = useState<string>(currentBranch);
+  const [selectedPart, setSelectedPart] = useState<string>(currentPart);
 
-  function handleTabClick(tab: string) {
-    queryParams.set('status', tab);
-    setSelectedTab(tab);
+  function updateQueryParams(key: string, value: string) {
+    queryParams.set(key, value);
     queryParams.set('page', '1');
     navigate(`/member-management?${queryParams.toString()}`);
   }
 
-  const { data: userList } = useGetUsers(currentPage, itemsPerPage, selectedTab);
+  function handleTabClick(tab: string) {
+    setSelectedTab(tab);
+    updateQueryParams('status', tab);
+  }
+
+  function handleBranchChange(branch: string) {
+    setSelectedBranch(branch);
+    updateQueryParams('search_branch_id', branch);
+  }
+  function handlePartChange(part: string) {
+    setSelectedPart(part);
+    updateQueryParams('search_part_id', part);
+  }
+
+  console.log(selectedBranch, selectedPart);
+
+  const { data: userList } = useGetUsers(
+    currentPage,
+    itemsPerPage,
+    selectedTab,
+    selectedBranch,
+    selectedPart
+  );
   const { data: currentUser } = useGetCurrentUser();
 
   const tabList = [
@@ -85,7 +110,10 @@ export default function MemberManagementPage() {
             </button>
           ))}
         </div>
-        <MemberManagementFilterBar />
+        <MemberManagementFilterBar
+          onBranchChange={handleBranchChange}
+          onPartChange={handlePartChange}
+        />
       </div>
       <MemberManagementTable data={userList?.data} tab={selectedTab} currentUser={currentUser} />
       <Pagination totalItems={userList?.total} itemsPerPage={userList?.record_size} />
