@@ -1,10 +1,11 @@
-import Badge from '@/components/Common/LabelBadge';
-import { adaptTaskToColor } from '@/utils/adaptTaskToColor';
 import { EventClickArg, EventInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction';
 import FullCalendar from '@fullcalendar/react';
 import dayjs from 'dayjs';
+
+import Badge from '@/components/Common/LabelBadge';
+import { adaptTaskToColor } from '@/utils/adaptTaskToColor';
 
 interface IDayOffCalendarProps {
   currDate: dayjs.Dayjs;

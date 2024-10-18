@@ -1,8 +1,8 @@
-import { IPartTimeData } from '@/models/workManagement/work.model';
+import { ICommuteData, IWorkData } from '@/models/work.model';
 import { Table } from '@radix-ui/themes';
 import { PiGenderFemaleBold, PiGenderMaleBold } from 'react-icons/pi';
 
-const GenderIcon = ({ gender }: { gender: number }) => {
+export const GenderIcon = ({ gender }: { gender: number }) => {
   return gender ? (
     <PiGenderFemaleBold className="text-pink-600" />
   ) : (
@@ -10,7 +10,7 @@ const GenderIcon = ({ gender }: { gender: number }) => {
   );
 };
 
-const CellWithUnit = ({ value, unit }: { value: number | string; unit: string }) => {
+export const CellWithUnit = ({ value, unit }: { value: number | string; unit: string }) => {
   return (
     <>
       {value}
@@ -19,7 +19,7 @@ const CellWithUnit = ({ value, unit }: { value: number | string; unit: string })
   );
 };
 
-export default function PartTimeTableRows({ data }: { data: IPartTimeData }) {
+export default function CommuteTableRows({ data }: { data: IWorkData }) {
   const workDatas = [
     { key: 'id', isHeader: true },
     { key: 'branch' },
@@ -42,8 +42,14 @@ export default function PartTimeTableRows({ data }: { data: IPartTimeData }) {
       ),
     },
     { key: 'workDate' },
+    { key: 'leaveDate' },
+    { key: 'regularDaysOff' },
+    { key: 'unpaidLeaveUsed' },
+    { key: 'annualLeaveUsed' },
     { key: 'workFromHome', unit: '일' },
     { key: 'holidayWork', unit: '일' },
+    { key: 'weekendWorkHours', unit: '시간' },
+    { key: 'weekendWorkPay' },
     { key: 'overtimeCount30min' },
     { key: 'overtimeCount60min' },
     { key: 'overtimeCount90min' },
@@ -53,7 +59,7 @@ export default function PartTimeTableRows({ data }: { data: IPartTimeData }) {
     <Table.Row>
       {workDatas.map(({ key, isHeader, render, unit }) => {
         const CellComponent = isHeader ? Table.RowHeaderCell : Table.Cell;
-        const value = data[key as keyof IPartTimeData];
+        const value = data[key as keyof ICommuteData];
         return (
           <CellComponent key={key} align="center">
             {render ? (

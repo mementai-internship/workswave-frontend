@@ -1,5 +1,6 @@
-import MemberInfoButtonBar from '@/components/MemberInfo/MemberInfoCommon/MemberInfoButtonBar';
 import { CheckboxCards, Table, Text } from '@radix-ui/themes';
+
+import MemberInfoButtonBar from '@/components/MemberInfo/MemberInfoCommon/MemberInfoButtonBar';
 
 const testDataArray = [
   { id: '1', title: '사진/영상 촬영 동의서' },

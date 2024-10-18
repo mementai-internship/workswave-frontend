@@ -1,5 +1,7 @@
 import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom';
 
+import PartTime from '@/components/WorkManagement/PartTime/PartTime';
+import WorkManagementLayout from '@/components/WorkManagement/WorkManagementLayout';
 import RootLayout from '@/layout/root';
 import BoardPage from '@/pages/basicSetting/BoardPage';
 import CalendarPage from '@/pages/basicSetting/CalendarPage';
@@ -9,6 +11,7 @@ import SalaryRangePage from '@/pages/basicSetting/SalaryRangePage';
 import WagePage from '@/pages/basicSetting/WagePage';
 import WorkingPage from '@/pages/basicSetting/WorkingPage';
 import DayoffManagementPage from '@/pages/dayoffManagement/DayoffManagement';
+import ApprovalHistory from '@/pages/dayoffManagement/approvalHistory/ApprovalHistory';
 import ContractManagement from '@/pages/documentManagement/ContractManagement';
 import HolidayManagement from '@/pages/documentManagement/HolidayManagement';
 import CertificateManagement from '@/pages/documentManagement/certificationManagement/CertificateManagement';
@@ -18,12 +21,14 @@ import Login from '@/pages/login/Login';
 import MemberInfoPage from '@/pages/memberManagement/MemberInfoPage';
 import MemberManagementPage from '@/pages/memberManagement/MemberManagementPage';
 import SuperManagerSetting from '@/pages/memberManagement/SuperManagerSetting';
+import ManagementDeleteOfficePage from '@/pages/officeSetting/ManagementDeleteOfficePage';
 import ManagementOfficePage from '@/pages/officeSetting/ManagementOfficePage';
 import OtManagementPage from '@/pages/otManagement/OtManagementPage';
 import SalarySettlementPage from '@/pages/salarySettlement/SalarySettlementPage';
 import SimpleMenuPage from '@/pages/simpleMenu/SimpleMenuPage';
 import BoardViewPage from '@/pages/userBoard/view/BoardViewPage';
 import BoardWritePage from '@/pages/userBoard/write/BoardWritePage';
+import CommuteManagementPage from '@/pages/workManagement/CommuteManagementPage';
 import WorkManagementPage from '@/pages/workManagement/WorkManagementPage';
 
 // TODO: lazy load, preload는 나중에 하겠습니둥.
@@ -86,11 +91,42 @@ const router = createBrowserRouter([
       },
       {
         path: '/office-setting',
-        element: <ManagementOfficePage />,
+        children: [
+          {
+            index: true,
+            element: <Navigate to="/office-setting/office" replace />,
+          },
+          {
+            path: 'office',
+            element: <ManagementOfficePage />,
+          },
+          {
+            path: 'delete-office',
+            element: <ManagementDeleteOfficePage />,
+          },
+        ],
       },
       {
         path: '/work-management',
-        element: <WorkManagementPage />,
+        element: <WorkManagementLayout />,
+        children: [
+          {
+            index: true,
+            element: <Navigate to="/work-management/working" replace />,
+          },
+          {
+            path: 'working',
+            element: <WorkManagementPage />,
+          },
+          {
+            path: 'partTime',
+            element: <PartTime />,
+          },
+          {
+            path: 'commute',
+            element: <CommuteManagementPage />,
+          },
+        ],
       },
       {
         path: '/document-management',
@@ -128,6 +164,10 @@ const router = createBrowserRouter([
       {
         path: '/dayoff-management',
         element: <DayoffManagementPage />,
+      },
+      {
+        path: '/dayoff-management/approval-history',
+        element: <ApprovalHistory />,
       },
       {
         path: '/member-management/supermanager-setting',
