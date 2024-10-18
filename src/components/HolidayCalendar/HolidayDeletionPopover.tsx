@@ -27,13 +27,14 @@ export default function HolidayDeletionPopover({
   const [popoverMonth, setPopoverMonth] = useState<Date>(currDate.toDate());
   const [tempSelectedDays, setTempSelectedDays] = useState<Date[]>([]);
 
-  const { refetch: refetchHoliDays } = useGetClosedDays({ branch_id: branchId });
   const { mutate: deleteClosedDays } = useDeleteClosedDays();
+  const { refetch: refetchClosedDays } = useGetClosedDays({ branch_id: branchId });
+
+  // const { mutate: deleteOneClosedDay } = useDeleteOneClosedDay();
   // const { refetch: refetchClosedDays } = useGetMonthlyClosedDays({   // 월별 휴무일 조회
   //   branch_id: branchId,
   //   date: currDate.toDate(),
   // });
-  // const { mutate: deleteOneClosedDay } = useDeleteOneClosedDay();
 
   const handleDeletePopoverClose = () => {
     setTempSelectedDays([]);
@@ -61,14 +62,18 @@ export default function HolidayDeletionPopover({
       .map((holiday) => holiday.id);
 
     if (holidayIdsToDelete.length > 0) {
-      deleteClosedDays({
-        branch_id: branchId,
-        idList: holidayIdsToDelete,
-      });
+      deleteClosedDays(
+        {
+          branch_id: branchId,
+          idList: holidayIdsToDelete,
+        },
+        {
+          onSuccess: refetchClosedDays,
+        }
+      );
     }
 
     handleDeletePopoverClose();
-    refetchHoliDays();
   };
 
   return (

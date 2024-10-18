@@ -29,6 +29,7 @@ export default function HolidayRegisterPopover({
 
   const { refetch: refetchHoliDays } = useGetClosedDays({ branch_id: branchId });
   const { mutate: postClosedDays } = usePostClosedDays();
+
   // const { refetch: refetchClosedDays } = useGetMonthlyClosedDays({   // 월별 휴무일 조회
   //   branch_id: branchId,
   //   date: currDate.toDate(),
@@ -59,10 +60,14 @@ export default function HolidayRegisterPopover({
   };
 
   const submitNewHolidays = () => {
-    postClosedDays({ branch_id: branchId, dates: tempSelectedDays, memo: '지점 휴무일' });
+    postClosedDays(
+      { branch_id: branchId, dates: tempSelectedDays, memo: '지점 휴무일' },
+      {
+        onSuccess: refetchHoliDays,
+      }
+    );
 
     handleRegisterPopoverClose();
-    refetchHoliDays();
   };
 
   return (

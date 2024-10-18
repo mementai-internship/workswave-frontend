@@ -7,9 +7,10 @@ import { useEffect } from 'react';
 
 import Badge from '@/components/Common/LabelBadge';
 import { useGetClosedDays } from '@/hooks/apis/useClosedDays';
-// import { useGetMonthlyClosedDays } from '@/hooks/apis/useClosedDays';
 import { TClosedDay } from '@/models/closedDays.model';
 import { adaptTaskToColor } from '@/utils/adaptTaskToColor';
+
+// import { useGetMonthlyClosedDays } from '@/hooks/apis/useClosedDays';
 
 interface IHolidayCalendarProps {
   currDate: dayjs.Dayjs;
