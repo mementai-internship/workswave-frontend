@@ -12,4 +12,7 @@ export const QUERY_KEYS = {
 
   //parts queryKeys
   parts: 'parts',
+
+  //leaveCategories queryKeys
+  leaveCategories: 'leaveCategories',
 };

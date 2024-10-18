@@ -40,6 +40,9 @@ export const useDrag = () => {
       contents: [],
     },
   ]);
+  const [openCategories, setOpenCategories] = useState<string[]>(
+    items.map((item) => item.categoryId)
+  );
 
   const onChangeItems = (data) => {
     setItems(data);
@@ -101,9 +104,20 @@ export const useDrag = () => {
   );
 
   const onDragStart = useCallback((start: DragStart) => {
-    console.log(start);
     // 드래그 시작 시 필요한 로직 추가
+    const allCategoryIds = items.map((item) => item.categoryId);
+    // 모든 카테고리를 열린 상태로 설정합니다
+    setOpenCategories(allCategoryIds);
+    return start;
   }, []);
 
-  return { items, onChangeItems, onDragEnd, onDragUpdate, onDragStart };
+  return {
+    items,
+    openCategories,
+    onChangeItems,
+    onDragEnd,
+    onDragUpdate,
+    onDragStart,
+    setOpenCategories,
+  };
 };

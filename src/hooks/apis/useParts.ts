@@ -10,8 +10,8 @@ export const useGetParts = (
 ): UseQueryResult<IWorkingSettingPartResponse[], Error> => {
   return useQuery({
     queryKey: [QUERY_KEYS.parts, branchId],
-
     queryFn: () => getParts(branchId),
+    enabled: !!branchId,
   });
 };
 
