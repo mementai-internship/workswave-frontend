@@ -1,22 +1,23 @@
-import { Txt } from '@/components/Common/Txt';
-import { IWorkingSettingBranchResponse } from '@/models/workingSetting.model';
 import { TextField } from '@radix-ui/themes';
-import { UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
+import { FieldPath, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
+
+import { Txt } from '@/components/Common/Txt';
+import { IWorkPolicies } from '@/models/work-policies';
 
 interface IPropsType {
-  register: UseFormRegister<IWorkingSettingBranchResponse>;
-  setValue: UseFormSetValue<IWorkingSettingBranchResponse>;
-  watch: UseFormWatch<IWorkingSettingBranchResponse>;
+  register: UseFormRegister<IWorkPolicies>;
+  setValue: UseFormSetValue<IWorkPolicies>;
+  watch: UseFormWatch<IWorkPolicies>;
 }
 export default function WorkingSettingWeekendSalary({ register, setValue, watch }: IPropsType) {
-  const handleBlurInput = (field: string) => {
-    const value = watch(field as keyof IWorkingSettingBranchResponse);
+  const handleBlurInput = (field: FieldPath<IWorkPolicies>) => {
+    const value = watch(field as keyof IWorkPolicies);
     const numValue = Number(value);
     if (isNaN(numValue) || numValue < 0) {
-      setValue(field as keyof IWorkingSettingBranchResponse, 0);
+      setValue(field, 0);
       alert('0 미만의 값이나 문자, 또는 0으로 시작하는 숫자는 입력할 수 없습니다.');
     } else {
-      setValue(field as keyof IWorkingSettingBranchResponse, numValue);
+      setValue(field, numValue);
     }
   };
   return (
@@ -30,7 +31,11 @@ export default function WorkingSettingWeekendSalary({ register, setValue, watch 
             <div className="flex items-center gap-x-8 whitespace-nowrap">
               <div
                 className="flex items-center gap-x-6"
-                onBlur={() => handleBlurInput(`${type}_holiday_work_pay`)}
+                onBlur={() =>
+                  handleBlurInput(
+                    `holiday_allowance_policies.${type}_holiday_work_pay` as FieldPath<IWorkPolicies>
+                  )
+                }
               >
                 <TextField.Root
                   key={type}
@@ -38,7 +43,9 @@ export default function WorkingSettingWeekendSalary({ register, setValue, watch 
                   radius="none"
                   className="text-right"
                   required
-                  {...register(`${type}_holiday_work_pay` as keyof IWorkingSettingBranchResponse)}
+                  {...register(
+                    `holiday_allowance_policies.${type}_holiday_work_pay` as FieldPath<IWorkPolicies>
+                  )}
                 >
                   <TextField.Slot></TextField.Slot>
                   <TextField.Slot>원</TextField.Slot>

@@ -1,20 +1,20 @@
-import {
-  IWorkingSettingAutoOTForm,
-  IWorkingSettingBranchResponse,
-} from '@/models/workingSetting.model';
 import { RadioGroup } from '@radix-ui/themes';
-import { UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
+import { FieldPath, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 
-const radioOptions: { label: string; field: keyof IWorkingSettingAutoOTForm }[] = [
+import { IWorkPolicies } from '@/models/work-policies';
+
+const radioOptions: { label: string; field: keyof IWorkPolicies['auto_overtime_policies'] }[] = [
   { label: '최고관리자', field: 'top_manager_auto_applied' },
   { label: '통합관리자', field: 'manager_auto_applied' },
   { label: '파트관리자', field: 'employee_auto_applied' },
 ];
+
 interface IPropsType {
-  register: UseFormRegister<IWorkingSettingBranchResponse>;
-  setValue: UseFormSetValue<IWorkingSettingBranchResponse>;
-  watch: UseFormWatch<IWorkingSettingBranchResponse>;
+  register: UseFormRegister<IWorkPolicies>;
+  setValue: UseFormSetValue<IWorkPolicies>;
+  watch: UseFormWatch<IWorkPolicies>;
 }
+
 export default function WorkingSettingAutoOT({ register, setValue, watch }: IPropsType) {
   return (
     <div className="p-20 flex flex-col gap-y-10">
@@ -24,16 +24,28 @@ export default function WorkingSettingAutoOT({ register, setValue, watch }: IPro
             {option.label}
           </label>
           <RadioGroup.Root
-            value={watch(`auto_ot.${option.field}`) ? 'true' : 'false'}
+            value={watch(`auto_overtime_policies.${option.field}`) ? 'true' : 'false'}
             color="violet"
-            {...register(`auto_ot.${option.field}`)}
-            onValueChange={(newValue) => setValue(`auto_ot.${option.field}`, newValue === 'true')}
+            onValueChange={(newValue) =>
+              setValue(
+                `auto_overtime_policies.${option.field}` as FieldPath<IWorkPolicies>,
+                newValue === 'true'
+              )
+            }
           >
             <div className="flex gap-4">
-              <RadioGroup.Item value="true">자동</RadioGroup.Item>
-              <RadioGroup.Item value="false">수동</RadioGroup.Item>
+              <RadioGroup.Item value="true" id={`${option.field}-true`}>
+                <label htmlFor={`${option.field}-true`}>자동</label>
+              </RadioGroup.Item>
+              <RadioGroup.Item value="false" id={`${option.field}-false`}>
+                <label htmlFor={`${option.field}-false`}>수동</label>
+              </RadioGroup.Item>
             </div>
           </RadioGroup.Root>
+          <input
+            type="hidden"
+            {...register(`auto_overtime_policies.${option.field}` as FieldPath<IWorkPolicies>)}
+          />
         </div>
       ))}
     </div>

@@ -1,15 +1,16 @@
+import { RadioCards, Switch, Table } from '@radix-ui/themes';
+
 import SelectBox from '@/components/Common/Select';
 import ContractInfoCheckbox from '@/components/MemberInfo/MemberInfoCommon/ContractInfoCheckbox';
 import MemberBasicInfoDatePicker from '@/components/MemberInfo/MemberInfoCommon/MemberBasicInfoDatePicker';
 import MemberInfoInput from '@/components/MemberInfo/MemberInfoCommon/MemberInfoInput';
 import WorkContractTableCell from '@/components/MemberInfo/WorkContractTableCell';
 import { WEEK_DAY } from '@/constants/memberInfoTable';
-import { RadioCards, Switch, Table } from '@radix-ui/themes';
 
 export default function WorkContractTable() {
   return (
     <>
-      <h2 className="px-4 py-2 text-purple-50 font-bold">1) 근로계약</h2>
+      <h2 className="px-4 py-2 text-purple-50 font-bold whitespace-nowrap">1) 근로계약</h2>
       <hr className="border-gray-200 w-full border-2" />
       <Table.Root className="table-fixed h-72">
         <Table.Header>
@@ -19,17 +20,17 @@ export default function WorkContractTable() {
               className="bg-gray-200 flex items-center gap-4 h-24 py-8"
             >
               계약일
-              <SelectBox title="일수 선택" border={false} options={[]} size="xSmall" />
+              <SelectBox title="일수 선택" options={[]} size="xSmall" />
             </Table.ColumnHeaderCell>
             <Table.Cell className="align-middle w-[37.5%]">
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-0.5">
                 <MemberBasicInfoDatePicker style="rightTop" />
                 <MemberBasicInfoDatePicker style="rightTop" />
                 <div className="flex flex-row items-center justify-center">
-                  <div className="flex gap-2 justify-center items-center">
+                  <div className="flex gap-1 justify-center items-center">
                     <ContractInfoCheckbox text="기한없음" />
                     <p className="font-bold">|</p>
-                    <SelectBox title="필터" options={[]} border={false} size="xSmall" />
+                    <SelectBox title="필터" options={[]} border={false} size="2xSmall" />
                   </div>
                 </div>
               </div>
@@ -49,7 +50,7 @@ export default function WorkContractTable() {
                   </RadioCards.Root>
                 </div>
                 <div className="flex items-center justify-end gap-2">
-                  <p className="text-gray-500 text-[12px]">
+                  <p className="text-gray-500 text-[11px]">
                     *마우스 오른쪽으로 요일 클릭 시 격주 휴무를 만드실 수 있습니다.
                   </p>
                   <p className="text-gray-500 text-sm">
@@ -67,14 +68,14 @@ export default function WorkContractTable() {
         <Table.Body>
           <Table.Row>
             <Table.ColumnHeaderCell className="bg-gray-200 font-bold align-middle w-1/8">
-              <div className="flex flex-row items-center justify-between">
+              <div className="flex flex-row items-center justify-between whitespace-nowrap">
                 근로기본설정[평일]
                 <ContractInfoCheckbox text="휴일" />
               </div>
             </Table.ColumnHeaderCell>
             <WorkContractTableCell />
             <Table.ColumnHeaderCell className="bg-gray-200 font-bold align-middle">
-              <div className="flex flex-row items-center justify-between">
+              <div className="flex flex-row items-center justify-between whitespace-nowrap">
                 근로기본설정[토요일]
                 <ContractInfoCheckbox text="휴일" />
               </div>
@@ -83,13 +84,13 @@ export default function WorkContractTable() {
           </Table.Row>
           <Table.Row>
             <Table.ColumnHeaderCell className="bg-gray-200 font-bold align-middle h-28 w-1/8">
-              <div className="flex flex-row items-center justify-between">
+              <div className="flex flex-row items-center justify-between whitespace-nowrap">
                 근로기본설정[일요일]
                 <ContractInfoCheckbox text="휴일" />
               </div>
             </Table.ColumnHeaderCell>
             <WorkContractTableCell height="h-28" />
-            <Table.ColumnHeaderCell className="bg-gray-200 font-bold align-middle w-1/8">
+            <Table.ColumnHeaderCell className="bg-gray-200 font-bold align-middle w-1/8 ">
               휴게시간
             </Table.ColumnHeaderCell>
             <Table.Cell>

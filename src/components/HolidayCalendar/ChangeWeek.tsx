@@ -1,13 +1,13 @@
 import { Dayjs } from 'dayjs';
 import { useEffect, useState } from 'react';
 
-interface ChangeWeekProps {
+interface IChangeWeekProps {
   currWeek: Dayjs;
   onChangeWeek: (newDate: Dayjs) => void;
 }
 
-export function ChangeWeek({ currWeek, onChangeWeek }: ChangeWeekProps) {
-  const [weekRange, setWeekRange] = useState('');
+export function ChangeWeek({ currWeek, onChangeWeek }: IChangeWeekProps) {
+  const [weekRange, setWeekRange] = useState<string>('');
 
   useEffect(() => {
     const startOfWeek = currWeek.startOf('week');

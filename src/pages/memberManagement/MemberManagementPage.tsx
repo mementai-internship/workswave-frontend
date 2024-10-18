@@ -1,34 +1,43 @@
+import { Button } from '@radix-ui/themes';
+import { useState } from 'react';
+import { PiGear } from 'react-icons/pi';
+import { Link, useLocation } from 'react-router-dom';
+
 import Pagination from '@/components/Common/Pagination';
 import TitleContainer from '@/components/Common/TitleContainer';
 import MemberManagementFilterBar from '@/components/MemberManagement/MemberManagementFilterBar';
 import MemberManagementTable from '@/components/MemberManagement/MemberManagementTable';
-import { Button } from '@radix-ui/themes';
-import { useState } from 'react';
-import { PiGear } from 'react-icons/pi';
+import { useGetUsers } from '@/hooks/apis/useUserManagement';
 
 export default function MemberManagementPage() {
-  const itemsPerPage = 10;
-  const [selectedTab, setSelectedTab] = useState<string>('info');
+  const [selectedTab, setSelectedTab] = useState<string>('all');
   function handleTabClick(tab: string) {
     setSelectedTab(tab);
   }
 
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const currentPage = parseInt(queryParams.get('page') || '1', 10);
+  const itemsPerPage = 10;
+
+  const { data: userList } = useGetUsers(currentPage, itemsPerPage);
+
   const tabList = [
     {
       name: '전체',
-      value: 'info',
+      value: 'all',
     },
     {
       name: '퇴사자',
-      value: 'contract',
+      value: 'resignee',
     },
     {
       name: '휴직자',
-      value: 'document',
+      value: 'vacation',
     },
     {
       name: '삭제회원',
-      value: 'delete',
+      value: 'deleted',
     },
   ];
 
@@ -37,14 +46,12 @@ export default function MemberManagementPage() {
       <div className="flex flex-row items-center justify-between w-full">
         <div className="flex items-center gap-2">
           <TitleContainer content="회원관리" />
-          <Button color="gray" variant="soft" radius="full" onClick={() => {}}>
-            <PiGear />
-            최고관리자 설정
-          </Button>
-          <Button color="gray" variant="soft" radius="full" onClick={() => {}}>
-            <PiGear />
-            파트/통합관리자 설정
-          </Button>
+          <Link to="/member-management/supermanager-setting">
+            <Button color="gray" variant="soft" radius="full">
+              <PiGear />
+              최고/지점관리자 설정
+            </Button>
+          </Link>
         </div>
         <div className="flex justify-end">
           <Button
@@ -64,7 +71,7 @@ export default function MemberManagementPage() {
           {tabList.map((tab) => (
             <button
               key={tab.value}
-              className={`${selectedTab === tab.value ? 'font-bold border-b-2 border-black' : 'text-gray-50'} text-xl px-2 py-4 h-16`}
+              className={`${selectedTab === tab.value ? 'font-bold border-black' : 'text-gray-50 border-transparent'} border-b-2 text-xl px-2 py-4 h-16`}
               onClick={() => handleTabClick(tab.value)}
             >
               {tab.name}
@@ -73,8 +80,8 @@ export default function MemberManagementPage() {
         </div>
         <MemberManagementFilterBar />
       </div>
-      <MemberManagementTable />
-      <Pagination totalItems={500} itemsPerPage={itemsPerPage} />
+      <MemberManagementTable data={userList?.data} tab={selectedTab} />
+      <Pagination totalItems={userList?.total} itemsPerPage={userList?.record_size} />
     </div>
   );
 }
