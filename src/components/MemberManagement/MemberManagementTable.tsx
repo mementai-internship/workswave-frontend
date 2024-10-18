@@ -2,11 +2,19 @@ import { Table } from '@radix-ui/themes';
 import React from 'react';
 
 import MemberManagementTableCell from '@/components/MemberManagement/MemberManagementTableCell';
-import { MEMBER_MANAGEMENT_TABLE_TITLE } from '@/constants/memberManagementTableTitle';
+import {
+  MEMBER_MANAGEMENT_TABLE_TITLE,
+  MEMBER_MANAGEMENT_TABLE_TITLE_DELETED,
+  MEMBER_MANAGEMENT_TABLE_TITLE_LEAVE,
+  MEMBER_MANAGEMENT_TABLE_TITLE_REST,
+} from '@/constants/memberManagementTableTitle';
+import { TGetCurrentUserResponse } from '@/models/user-management.model';
 
 export interface IMemberManagementTableProps {
   data: IMemberManagementTableData[];
+  allUserList?: IMemberManagementTableData[];
   tab: string;
+  currentUser: TGetCurrentUserResponse;
 }
 
 export interface IMemberManagementTableData {
@@ -21,21 +29,32 @@ export interface IMemberManagementTableData {
   part: string;
   branch: string;
 }
-//API 연결 후 삭제
-export const userId = 142;
 
 export const infoTestData: IMemberManagementTableProps[] = [];
 
-export default function MemberManagementTable({ data, tab }: IMemberManagementTableProps) {
-  console.log(data);
-  if (!data) {
-    return <div>데이터가 없습니다.</div>;
+export default function MemberManagementTable({
+  data,
+  tab,
+  currentUser,
+}: IMemberManagementTableProps) {
+  if (!data || currentUser.data.id === 0) {
+    return <div>Loading...</div>;
   }
+
+  const userId = currentUser.data.id;
+  console.log(currentUser.data.id);
   return (
     <Table.Root>
       <Table.Header>
         <Table.Row className="bg-gray-300">
-          {MEMBER_MANAGEMENT_TABLE_TITLE.map((title) => (
+          {(tab === '전체'
+            ? MEMBER_MANAGEMENT_TABLE_TITLE
+            : tab === '퇴사자'
+              ? MEMBER_MANAGEMENT_TABLE_TITLE_LEAVE
+              : tab === '휴직자'
+                ? MEMBER_MANAGEMENT_TABLE_TITLE_REST
+                : MEMBER_MANAGEMENT_TABLE_TITLE_DELETED
+          ).map((title) => (
             <Table.ColumnHeaderCell
               className="p-2 text-center align-middle whitespace-nowrap"
               key={title}
@@ -50,14 +69,14 @@ export default function MemberManagementTable({ data, tab }: IMemberManagementTa
           ?.filter((data) => data.id === userId)
           .map((data) => (
             <React.Fragment key={data.id}>
-              <MemberManagementTableCell data={data} tab={tab} />
+              <MemberManagementTableCell data={data} tab={tab} userId={userId} />
             </React.Fragment>
           ))}
         {data
           .filter((data) => data.id !== userId)
           .map((data: IMemberManagementTableData) => (
             <React.Fragment key={data.id}>
-              <MemberManagementTableCell data={data} tab={tab} />
+              <MemberManagementTableCell data={data} tab={tab} userId={userId} />
             </React.Fragment>
           ))}
       </Table.Body>

@@ -3,17 +3,17 @@ import { Table } from '@radix-ui/themes';
 import { PiStarFill, PiXBold } from 'react-icons/pi';
 import { Link } from 'react-router-dom';
 
-import { IMemberManagementTableData, userId } from './MemberManagementTable';
+import { IMemberManagementTableData } from './MemberManagementTable';
 
 export default function MemberManagementTableCell({
   data,
+  userId,
   tab,
 }: {
   data: IMemberManagementTableData;
-  tab: string;
+  tab?: string;
+  userId: number;
 }) {
-  // 테스트용 코드
-  console.log(tab);
   return (
     <Table.Row
       key={data.id}
@@ -52,39 +52,51 @@ export default function MemberManagementTableCell({
         {data.hire_date}
       </Table.Cell>
       <Table.Cell className="text-center p-4 align-middle w-[6%] whitespace-nowrap">
-        {data.monthly_salary}
+        {tab === '퇴사자' || tab == '휴직자' ? '2024-01-01' : data.monthly_salary}
       </Table.Cell>
-      <Table.Cell className="text-center p-4 align-middle w-[6%] whitespace-nowrap">
-        {data.annual_salary}
+      <Table.Cell
+        className={`text-center p-4 align-middle ${tab === '퇴사자' || tab == '휴직자' ? 'w-[6%]' : 'w-[20%]'} whitespace-nowrap`}
+      >
+        {tab === '퇴사자' || tab == '휴직자' ? '2024-01-01 - 2024-10-10' : data.annual_salary}
       </Table.Cell>
-      <Table.Cell className="text-center p-4 align-middle w-[7%] whitespace-nowrap">
+      <Table.Cell
+        className={`text-center p-4 align-middle ${tab === '퇴사자' ? 'w-[7%]' : 'w-[13%]'} whitespace-nowrap`}
+      >
         {/* 값없어서 주석 처리{calculateWorkPeriod(
           data.contractPeriod.start.toString(),
           data.contractPeriod.end.toString()
         )} */}
       </Table.Cell>
-      <Table.Cell className="flex flex-row h-full gap-0.5 justify-center items-center">
-        <div className="flex flex-col gap-0.5">
-          <div className="bg-gray-200 rounded-md px-1 h-4 text-[10px] whitespace-nowrap flex items-center justify-center">
-            -30
+      {tab === '퇴사자' || tab === '휴직자' ? (
+        <></>
+      ) : (
+        <Table.Cell className="flex flex-row h-full gap-0.5 justify-center items-center">
+          <div className="flex flex-col gap-0.5">
+            <div className="bg-gray-200 rounded-md px-1 h-4 text-[10px] whitespace-nowrap flex items-center justify-center">
+              -30
+            </div>
+            <div className="bg-gray-200 rounded-md px-1 h-4 text-[10px] whitespace-nowrap bg-gray-500 text-white flex items-center justify-center">
+              근로
+            </div>
           </div>
-          <div className="bg-gray-200 rounded-md px-1 h-4 text-[10px] whitespace-nowrap bg-gray-500 text-white flex items-center justify-center">
-            근로
+          <div className="flex flex-col gap-0.5">
+            <div className="bg-gray-200 rounded-md px-1 h-4 text-[10px] whitespace-nowrap bg-gray-500 text-white flex items-center justify-center">
+              임금
+            </div>
+            <div className="bg-gray-200 rounded-md px-1 h-4 text-[10px] whitespace-nowrap bg-gray-500 text-white flex items-center justify-center">
+              기본
+            </div>
           </div>
-        </div>
-        <div className="flex flex-col gap-0.5">
-          <div className="bg-gray-200 rounded-md px-1 h-4 text-[10px] whitespace-nowrap bg-gray-500 text-white flex items-center justify-center">
-            임금
-          </div>
-          <div className="bg-gray-200 rounded-md px-1 h-4 text-[10px] whitespace-nowrap bg-gray-500 text-white flex items-center justify-center">
-            기본
-          </div>
-        </div>
-      </Table.Cell>
+        </Table.Cell>
+      )}
       <Table.Cell className="text-center p-4 align-middle w-[2%]">
-        <button>
-          <PiXBold />
-        </button>
+        {tab !== '삭제회원' ? (
+          <button>
+            <PiXBold />
+          </button>
+        ) : (
+          <button className="font-bold">복구</button>
+        )}
       </Table.Cell>
     </Table.Row>
   );

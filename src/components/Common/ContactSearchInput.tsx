@@ -15,10 +15,10 @@ export default function ContactSearchInput() {
   const onSubmit = (data: ISearch) => {
     const searchParams = new URLSearchParams();
     if (data.name && data.name.trim() !== '') {
-      searchParams.set('name', data.name.trim());
+      searchParams.set('search_name', data.name.trim());
     }
     if (data.phoneNumber && data.phoneNumber.trim() !== '') {
-      searchParams.set('phoneNumber', data.phoneNumber.trim());
+      searchParams.set('search_phone', data.phoneNumber.trim());
     }
     const searchUrl = `?${searchParams.toString()}`;
     navigate(searchUrl);
