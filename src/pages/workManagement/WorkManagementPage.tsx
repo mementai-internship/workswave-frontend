@@ -1,18 +1,18 @@
 import Pagination from '@/components/Common/Pagination';
-import Commute from '@/components/WorkManagement/Commute/Commute';
-import PartTime from '@/components/WorkManagement/PartTime/PartTime';
-import WorkFilterLayout from '@/components/WorkManagement/WorkFilterLayout';
-import WorkHeader from '@/components/WorkManagement/WorkHeader';
-import { useState } from 'react';
+import WorkTable from '@/components/WorkManagement/Work/WorkTable';
+import WorkFilter from '@/components/WorkManagement/WorkFilter';
+
+export interface ItabItem {
+  id: number;
+  title: string;
+  path: string;
+}
 
 export default function WorkManagementPage() {
-  const [isPartTime, isSetPartTime] = useState(false);
-
   return (
     <div className="w-full">
-      <WorkHeader isPartTime={isPartTime} isSetPartTime={isSetPartTime} />
-      <WorkFilterLayout />
-      {isPartTime ? <Commute /> : <PartTime />}
+      <WorkFilter />
+      <WorkTable />
       <Pagination totalItems={10} itemsPerPage={1} />
     </div>
   );

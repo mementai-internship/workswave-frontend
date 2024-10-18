@@ -1,5 +1,6 @@
-import SelectBox from '@/components/Common/Select';
 import { Table } from '@radix-ui/themes';
+
+import SelectBox from '@/components/Common/Select';
 
 export default function WorkContractTableCell({ height }: { height?: string }) {
   return (

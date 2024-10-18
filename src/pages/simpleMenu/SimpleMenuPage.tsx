@@ -1,4 +1,3 @@
-import { Txt } from '@/components/Common/Txt';
 import {
   PiCalendarDotsLight,
   PiClockLight,
@@ -7,6 +6,8 @@ import {
   PiUserCircleThin,
 } from 'react-icons/pi';
 import { Link } from 'react-router-dom';
+
+import { Txt } from '@/components/Common/Txt';
 
 export default function SimpleMenuPage() {
   return (

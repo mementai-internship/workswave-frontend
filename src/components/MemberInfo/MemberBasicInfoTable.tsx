@@ -1,3 +1,5 @@
+import { Button, Table } from '@radix-ui/themes';
+
 import MemberBasicInfoDatePicker from '@/components/MemberInfo/MemberInfoCommon/MemberBasicInfoDatePicker';
 import MemberInfoButton from '@/components/MemberInfo/MemberInfoCommon/MemberInfoButton';
 import MemberInfoDropdown from '@/components/MemberInfo/MemberInfoCommon/MemberInfoDropdownMenu';
@@ -6,7 +8,6 @@ import {
   MEMBER_BASIC_INFO_TITLE1,
   MEMBER_BASIC_INFO_TITLE2,
 } from '@/constants/memberManagementTableTitle';
-import { Button, Table } from '@radix-ui/themes';
 
 //test data API 연결 후 삭제
 const memberInfoDropdownMenu = [

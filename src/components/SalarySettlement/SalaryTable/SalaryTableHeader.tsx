@@ -1,5 +1,6 @@
-import { IEmployeeSalarySettlement } from '@/models/salarySettlement.model';
 import { Checkbox, Table } from '@radix-ui/themes';
+
+import { IEmployeeSalarySettlement } from '@/models/salarySettlement.model';
 
 interface ISalaryTableHeaderProps {
   employees: IEmployeeSalarySettlement[];

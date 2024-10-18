@@ -1,15 +1,15 @@
-import { COMMUTEHEADTABLE } from '@/constants/workManagementTable/workTable';
-import { commuteMockData } from '@/constants/workManagementTable/workTable.mock';
 import { Table } from '@radix-ui/themes';
 
-import CommuteTableRows from './CommuteTableRows';
+import WorkTableRows from '@/components/WorkManagement/Work/WorkTableRows';
+import { WORKTABLE } from '@/constants/workManagementTable/workTable';
+import { workMockData } from '@/constants/workManagementTable/workTable.mock';
 
-export default function Commute() {
+export default function WorkTable() {
   return (
     <Table.Root className="mb-5">
       <Table.Header className="bg-gray-200 text-xs text-gray-700 whitespace-nowrap border-t border-gray-300">
         <Table.Row>
-          {COMMUTEHEADTABLE.map((head) => {
+          {WORKTABLE.map((head) => {
             return (
               <Table.ColumnHeaderCell key={head} align="center">
                 {head}
@@ -20,8 +20,8 @@ export default function Commute() {
       </Table.Header>
 
       <Table.Body>
-        {commuteMockData.map((data) => {
-          return <CommuteTableRows key={data.id} data={data} />;
+        {workMockData.map((data) => {
+          return <WorkTableRows key={data.id} data={data} />;
         })}
       </Table.Body>
     </Table.Root>

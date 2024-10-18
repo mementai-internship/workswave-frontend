@@ -1,6 +1,7 @@
+import { Checkbox, Table, TextField } from '@radix-ui/themes';
+
 import { MAX_SALARY } from '@/constants/salarySettlement';
 import { IEmployeeSalarySettlement } from '@/models/salarySettlement.model';
-import { Checkbox, Table, TextField } from '@radix-ui/themes';
 
 interface ISalaryTableBodyProps {
   filteredEmployees: IEmployeeSalarySettlement[];

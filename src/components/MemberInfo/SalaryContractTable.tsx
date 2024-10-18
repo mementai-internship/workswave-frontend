@@ -1,10 +1,11 @@
+import { Button, Table } from '@radix-ui/themes';
+import { Link } from 'react-router-dom';
+
 import SelectBox from '@/components/Common/Select';
 import ContractInfoCheckbox from '@/components/MemberInfo/MemberInfoCommon/ContractInfoCheckbox';
 import MemberBasicInfoDatePicker from '@/components/MemberInfo/MemberInfoCommon/MemberBasicInfoDatePicker';
 import MemberInfoInput from '@/components/MemberInfo/MemberInfoCommon/MemberInfoInput';
 import { SALARY_CONTRACT_TITLE1, SALARY_CONTRACT_TITLE2 } from '@/constants/memberInfoTable';
-import { Button, Table } from '@radix-ui/themes';
-import { Link } from 'react-router-dom';
 
 export default function SalaryContractTable() {
   return (
