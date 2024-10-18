@@ -1,12 +1,13 @@
-import { postLogin } from '@/apis/login.api';
-import { Txt } from '@/components/Common/Txt';
-import { userTokenAtom } from '@/store/authAtoms';
 import { Button, TextField } from '@radix-ui/themes';
 import { useAtom } from 'jotai';
 import { useForm } from 'react-hook-form';
 import { AiOutlineMail } from 'react-icons/ai';
 import { PiKey } from 'react-icons/pi';
 import { useNavigate } from 'react-router-dom';
+
+import { postLogin } from '@/apis/login.api';
+import { Txt } from '@/components/Common/Txt';
+import { userTokenAtom } from '@/store/authAtoms';
 
 type TFormValues = {
   email: string;
@@ -24,7 +25,7 @@ export default function Login() {
       const { access_token } = await postLogin(data);
       // 로그인 성공시 토큰값 저장
       setToken(access_token);
-      navigate('/');
+      navigate('/member-management');
     } catch (error) {
       // 로그인 실패
       console.error(error, '로그인에 실패했습니다.');

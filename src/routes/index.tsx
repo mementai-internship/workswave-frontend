@@ -1,6 +1,5 @@
 import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-import PartTime from '@/components/WorkManagement/PartTime/PartTime';
 import WorkManagementLayout from '@/components/WorkManagement/WorkManagementLayout';
 import RootLayout from '@/layout/root';
 import BoardPage from '@/pages/basicSetting/BoardPage';
@@ -28,6 +27,7 @@ import SimpleMenuPage from '@/pages/simpleMenu/SimpleMenuPage';
 import BoardViewPage from '@/pages/userBoard/view/BoardViewPage';
 import BoardWritePage from '@/pages/userBoard/write/BoardWritePage';
 import CommuteManagementPage from '@/pages/workManagement/CommuteManagementPage';
+import PartManagementPage from '@/pages/workManagement/PartManagementPage';
 import WorkManagementPage from '@/pages/workManagement/WorkManagementPage';
 
 // TODO: lazy load, preload는 나중에 하겠습니둥.
@@ -119,7 +119,7 @@ const router = createBrowserRouter([
           },
           {
             path: 'partTime',
-            element: <PartTime />,
+            element: <PartManagementPage />,
           },
           {
             path: 'commute',
