@@ -22,6 +22,7 @@ export default function MemberManagementPage() {
   const [selectedTab, setSelectedTab] = useState<string>(currentTab);
   const [selectedBranch, setSelectedBranch] = useState<string>(currentBranch);
   const [selectedPart, setSelectedPart] = useState<string>(currentPart);
+  const [filterKey, setFilterKey] = useState<string>('');
 
   function updateQueryParams(key: string, value: string) {
     queryParams.set(key, value);
@@ -43,7 +44,18 @@ export default function MemberManagementPage() {
     updateQueryParams('search_part_id', part);
   }
 
-  console.log(selectedBranch, selectedPart);
+  function handleResetFilter() {
+    queryParams.delete('search_branch_id');
+    queryParams.delete('search_part_id');
+    queryParams.delete('status');
+    queryParams.set('page', '1');
+
+    setSelectedBranch('0');
+    setSelectedPart('0');
+    setSelectedTab('전체');
+    setFilterKey((prev) => prev + 1);
+    navigate(`/member-management?${queryParams.toString()}`);
+  }
 
   const { data: userList } = useGetUsers(
     currentPage,
@@ -111,8 +123,10 @@ export default function MemberManagementPage() {
           ))}
         </div>
         <MemberManagementFilterBar
+          key={filterKey}
           onBranchChange={handleBranchChange}
           onPartChange={handlePartChange}
+          onResetFilter={handleResetFilter}
         />
       </div>
       <MemberManagementTable data={userList?.data} tab={selectedTab} currentUser={currentUser} />

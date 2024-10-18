@@ -4,7 +4,7 @@ import ContactSearchInput from '@/components/Common/ContactSearchInput';
 import SelectBox from '@/components/Common/Select';
 import { useGetUsers } from '@/hooks/apis/useUserManagement';
 
-export default function MemberManagementFilterBar({ onBranchChange, onPartChange }) {
+export default function MemberManagementFilterBar({ onBranchChange, onPartChange, onResetFilter }) {
   const { data: allUserList } = useGetUsers(1, 1000, '0', '0', '0');
   const branchList = Array.from(new Set(allUserList?.data?.map((user) => user.branch)));
   const partList = Array.from(new Set(allUserList?.data?.map((user) => user.part)));
@@ -20,21 +20,21 @@ export default function MemberManagementFilterBar({ onBranchChange, onPartChange
           options={branchList.map((branch, index) => ({
             id: index,
             name: branch,
-            action: () => onBranchChange((index + 1).toString()),
+            action: () => onBranchChange(index.toString()),
           }))}
         />
         <SelectBox
           title="파트"
           size="xSmall"
-          options={partList.map((part, index) => ({
+          options={partList.map((branch, index) => ({
             id: index,
-            name: part,
-            action: () => onPartChange((index + 1).toString()),
+            name: branch,
+            action: () => onPartChange(index.toString()),
           }))}
         />
       </div>
       <ContactSearchInput />
-      <Button color="gray" size="2">
+      <Button color="gray" size="2" onClick={onResetFilter}>
         초기화
       </Button>
     </div>
