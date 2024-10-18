@@ -1,13 +1,13 @@
 import SalaryRangeTableTd from '@/components/BasicSetting/SalaryRange/SalaryRangeTableTd';
 import { ANNUAL_SALARY_IN_MILLIONS, SALARY_RANGE_BORDER_COLOR } from '@/constants/salaryRange';
-import { ISalaryRangeValue } from '@/models/salaryRange.model';
+import { ICalculatedSalaryOutput } from '@/models/salary-range.model';
 
 interface IProps {
-  calcRangeRows: ISalaryRangeValue[];
+  calcRangeRows: ICalculatedSalaryOutput[];
 }
 
 export default function SalaryRangeCalcRange({ calcRangeRows }: IProps) {
-  const getBgColor = (annualSalary: number, key: keyof ISalaryRangeValue) => {
+  const getBgColor = (annualSalary: number, key: keyof ICalculatedSalaryOutput) => {
     if (key === 'netPay') return 'red';
     return annualSalary % ANNUAL_SALARY_IN_MILLIONS === 0 ? 'gray' : 'white';
   };
@@ -105,7 +105,7 @@ export default function SalaryRangeCalcRange({ calcRangeRows }: IProps) {
             {Object.entries(row).map(([key, value]) => (
               <SalaryRangeTableTd
                 styles="text-right"
-                bgColor={getBgColor(row.annualSalary, key as keyof ISalaryRangeValue)}
+                bgColor={getBgColor(row.annualSalary, key as keyof ICalculatedSalaryOutput)}
                 borderStyle={
                   key === 'localIncomeTax'
                     ? `border-b ${SALARY_RANGE_BORDER_COLOR}`

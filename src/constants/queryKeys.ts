@@ -15,4 +15,6 @@ export const QUERY_KEYS = {
 
   //leaveCategories queryKeys
   leaveCategories: 'leaveCategories',
+  // salary-bracket
+  salaryBracket: 'salaryBracket',
 };
