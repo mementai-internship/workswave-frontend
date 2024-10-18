@@ -47,7 +47,7 @@ const calculateSalaryData = ({
     Math.round((salaryWithoutMealAllowance * tax.employment_insurance) / 100 / 50) * 50;
 
   // 소득세 계산 - 연봉 x 세율 - 누진공제액
-  const incomeTax = 0;
+  const incomeTax = adjustedValue((salaryWithoutMealAllowance * 6) / 10);
   const localIncomeTax = adjustedValue(incomeTax * tax.local_income_tax_rate);
 
   const totalDeductions =
