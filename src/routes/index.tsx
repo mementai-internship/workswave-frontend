@@ -11,7 +11,7 @@ import SalaryRangePage from '@/pages/basicSetting/SalaryRangePage';
 import WagePage from '@/pages/basicSetting/WagePage';
 import WorkingPage from '@/pages/basicSetting/WorkingPage';
 import DayoffManagementPage from '@/pages/dayoffManagement/DayoffManagement';
-import ApprovalHistory from '@/pages/dayoffManagement/approvalHistory/approvalHistory';
+import ApprovalHistory from '@/pages/dayoffManagement/approvalHistory/ApprovalHistory';
 import ContractManagement from '@/pages/documentManagement/ContractManagement';
 import HolidayManagement from '@/pages/documentManagement/HolidayManagement';
 import CertificateManagement from '@/pages/documentManagement/certificationManagement/CertificateManagement';
