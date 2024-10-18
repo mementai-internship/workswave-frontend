@@ -40,7 +40,6 @@ export const DETAILPARTTIMEHEADTABLE = [
   '종업시간',
   '설정시간',
   '근무시간',
-
   '휴게시간',
   '최종금액',
   '등록일',

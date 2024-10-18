@@ -1,4 +1,5 @@
 import { Table } from '@radix-ui/themes';
+import { PiPencilSimple } from 'react-icons/pi';
 
 import SelectBox from '@/components/Common/Select';
 import DetailTotalPartTime from '@/components/WorkManagement/PartTime/DetailTotalPartTime';
@@ -10,19 +11,33 @@ export default function DetailPartTimeList({
 }: {
   detailPartTimeData: IDetailPartTimeData[];
 }) {
+  const editableColumns = ['근무부분', '설정시간', '휴게시간'];
+
+  const EditableBadge = () => (
+    <span className="ml-1 px-1 py-0.5 text-sm font-medium ">
+      <PiPencilSimple />
+    </span>
+  );
+
+  const HeaderCell = ({ header }: { header: string }) => (
+    <div className="flex items-center justify-center">
+      {header}
+      {editableColumns.includes(header) && <EditableBadge />}
+    </div>
+  );
+
   return (
     <>
       <Table.Root className="w-full mb-5">
-        <Table.Header className="bg-gray-200 text-xs text-gray-700 whitespace-nowrap border-t border-gray-300">
+        <Table.Header className="bg-gray-200 text-xs text-gray-700 whitespace-nowrap border-t border-gray-300 align-middle">
           <Table.Row>
             {DETAILPARTTIMEHEADTABLE.map((header) => (
               <Table.ColumnHeaderCell key={header} align="center">
-                {header}
+                <HeaderCell header={header} />
               </Table.ColumnHeaderCell>
             ))}
           </Table.Row>
         </Table.Header>
-
         <Table.Body>
           {detailPartTimeData.map((row, index) => (
             <Table.Row key={index}>

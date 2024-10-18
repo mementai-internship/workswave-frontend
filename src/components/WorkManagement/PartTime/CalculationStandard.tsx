@@ -8,9 +8,11 @@ export default function CalculationStandard() {
     border border-gray-300
     first:rounded-l-md last:rounded-r-md
     hover:bg-gray-100
-    focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+    focus:outline-none focus:border-blue-500
     data-[state=on]:bg-blue-100 data-[state=on]:text-blue-700 data-[state=on]:border-blue-500
+     
   `;
+
   return (
     <ToggleGroup.Root
       className="inline-flex rounded-md overflow-hidden"

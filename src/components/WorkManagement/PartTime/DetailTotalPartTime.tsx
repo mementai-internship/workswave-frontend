@@ -29,7 +29,7 @@ export default function DetailTotalPartTime({
       <SummaryItem label="병원근무" value={hospitalWorkHours} />
       <SummaryItem label="재택근무" value={remoteWorkHours} />
       <SummaryItem label="휴일근무" value={holidayWorkHours} />
-      <div className="flex flex-col items-center px-4 rounded-md shadow-sm">
+      <div className="flex flex-col items-center px-4 rounded-md ">
         <span className="text-sm text-gray-600">급여 합계</span>
         <span className="font-bold text-lg text-blue-600">{totalSalary}</span>
       </div>
