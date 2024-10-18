@@ -3,10 +3,7 @@ const SUPREME_AUTH_NAVIGATION = [
     path: '/member-management',
     content: '회원관리',
   },
-  {
-    path: '/board',
-    content: '회원게시판',
-  },
+
   {
     path: '/dayoff-management',
     content: '연차관리',
@@ -89,10 +86,7 @@ const SUPREME_AUTH_NAVIGATION = [
       //   childPath: '/basic-setting/hr',
       //   childContent: '인사기록 설정',
       // },
-      {
-        childPath: '/basic-setting/board',
-        childContent: '게시판 설정',
-      },
+
       {
         childPath: '/basic-setting/salary-range',
         childContent: '급여구간표 설정',
@@ -110,10 +104,7 @@ const PART_MANAGER_AUTH_NAVIGATION = [
     path: '/member-management',
     content: '회원관리',
   },
-  {
-    path: '/board',
-    content: '회원게시판',
-  },
+
   {
     path: '/dayoff-management',
     content: '연차관리',
@@ -178,10 +169,7 @@ const PART_MANAGER_AUTH_NAVIGATION = [
       //   childPath: '/basic-setting/hr',
       //   childContent: '인사기록 설정',
       // },
-      {
-        childPath: '/basic-setting/board',
-        childContent: '게시판 설정',
-      },
+
       {
         childPath: '/basic-setting/salary-range',
         childContent: '급여구간표 설정',
@@ -195,10 +183,7 @@ const STAFF_AUTH_NAVIGATION = [
     path: '/member-management',
     content: '회원관리',
   },
-  {
-    path: '/board',
-    content: '회원게시판',
-  },
+
   {
     path: '/dayoff-management',
     content: '연차관리',

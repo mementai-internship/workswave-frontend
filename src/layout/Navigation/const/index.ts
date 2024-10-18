@@ -3,10 +3,7 @@ export const NAVIGATION_CONTENTS = [
     path: '/member-management',
     content: '회원관리',
   },
-  {
-    path: '/board/view',
-    content: '회원게시판',
-  },
+
   {
     path: '/dayoff-management',
     content: '연차관리',
