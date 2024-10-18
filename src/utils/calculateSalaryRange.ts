@@ -40,10 +40,11 @@ const calculateSalaryData = ({
   const salaryWithoutMealAllowance = salary - mealAllowance;
   const adjustedValue = (value: number) => Math.floor(value / 100 / 10) * 10;
 
-  const nationalPension = adjustedValue(salary * tax.national_pension);
-  const healthInsurance = adjustedValue(salary * tax.health_insurance);
+  const nationalPension = adjustedValue(salaryWithoutMealAllowance * tax.national_pension);
+  const healthInsurance = adjustedValue(salaryWithoutMealAllowance * tax.health_insurance);
   const longTermCareInsurance = adjustedValue(healthInsurance * tax.long_term_care_insurance);
-  const employmentInsurance = Math.round((salary * tax.employment_insurance) / 100 / 50) * 50;
+  const employmentInsurance =
+    Math.round((salaryWithoutMealAllowance * tax.employment_insurance) / 100 / 50) * 50;
 
   // 소득세 계산 - 연봉 x 세율 - 누진공제액
   const incomeTax = 0;
