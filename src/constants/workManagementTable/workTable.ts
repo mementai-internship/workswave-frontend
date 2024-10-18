@@ -31,3 +31,17 @@ export const PARTTIMEHEADTABLE = [
   '급여합계',
   '근무내역',
 ] as const;
+
+export const DETAILPARTTIMEHEADTABLE = [
+  '일자',
+  '파트',
+  '근무부분',
+  '시업시간',
+  '종업시간',
+  '설정시간',
+  '근무시간',
+
+  '휴게시간',
+  '최종금액',
+  '등록일',
+] as const;

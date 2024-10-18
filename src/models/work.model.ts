@@ -65,3 +65,20 @@ export interface IPartTimeData {
   workDetails: string;
   gender: number;
 }
+
+// 파트 관리 상세
+
+export interface IDetailPartTimeData {
+  id: number;
+  name: string;
+  date: string;
+  department: string;
+  workSection: string;
+  startTime: string;
+  endTime: string;
+  settingTime: string;
+  workHours: string;
+  breakTime: string;
+  finalAmount: string;
+  registrationDate: string;
+}
