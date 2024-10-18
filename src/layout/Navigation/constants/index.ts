@@ -15,10 +15,10 @@ const SUPREME_AUTH_NAVIGATION = [
     path: '/ot-management',
     content: 'O.T관리',
   },
-  {
-    path: '/hr-management',
-    content: '인사관리',
-  },
+  // {
+  //   path: '/hr-management',
+  //   content: '인사관리',
+  // },
   {
     path: '/work-management',
     content: '근로관리',
@@ -85,10 +85,10 @@ const SUPREME_AUTH_NAVIGATION = [
         childPath: '/basic-setting/calendar',
         childContent: '캘린더 설정',
       },
-      {
-        childPath: '/basic-setting/hr',
-        childContent: '인사기록 설정',
-      },
+      // {
+      //   childPath: '/basic-setting/hr',
+      //   childContent: '인사기록 설정',
+      // },
       {
         childPath: '/basic-setting/board',
         childContent: '게시판 설정',
@@ -122,10 +122,10 @@ const PART_MANAGER_AUTH_NAVIGATION = [
     path: '/ot-management',
     content: 'O.T관리',
   },
-  {
-    path: '/hr-management',
-    content: '인사관리',
-  },
+  // {
+  //   path: '/hr-management',
+  //   content: '인사관리',
+  // },
   {
     path: '/work-management',
     content: '근로관리',
@@ -174,10 +174,10 @@ const PART_MANAGER_AUTH_NAVIGATION = [
         childPath: '/basic-setting/calendar',
         childContent: '캘린더 설정',
       },
-      {
-        childPath: '/basic-setting/hr',
-        childContent: '인사기록 설정',
-      },
+      // {
+      //   childPath: '/basic-setting/hr',
+      //   childContent: '인사기록 설정',
+      // },
       {
         childPath: '/basic-setting/board',
         childContent: '게시판 설정',

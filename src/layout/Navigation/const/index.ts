@@ -11,10 +11,10 @@ export const NAVIGATION_CONTENTS = [
     path: '/dayoff-management',
     content: '연차관리',
   },
-  {
-    path: '/hr-management',
-    content: '인사관리',
-  },
+  // {
+  //   path: '/hr-management',
+  //   content: '인사관리',
+  // },
   {
     path: '/work-management',
     content: '근로관리',
