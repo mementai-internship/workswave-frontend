@@ -30,6 +30,6 @@ export interface IBranchesRequest {
   call_number: string;
   address: string;
   corporate_seal: string;
-  nameplate: string;
+  nameplate: string | null;
   mail_address: string;
 }
