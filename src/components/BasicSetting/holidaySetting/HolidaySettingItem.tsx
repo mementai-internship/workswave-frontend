@@ -1,7 +1,7 @@
 import BasicSettingSubTitle from '@/components/Common/BasicSettingSubTitle';
 import { Txt } from '@/components/Common/Txt';
 // import { useGetParts } from '@/hooks/apis/useParts';
-import { IHolidaySetting } from '@/models/holidaySetting.model';
+import { ILeaveCategory } from '@/models/leave-categories.model';
 import { Button } from '@radix-ui/themes';
 import { UseFormSetValue } from 'react-hook-form';
 import { PiXBold } from 'react-icons/pi';
@@ -9,27 +9,27 @@ import { PiXBold } from 'react-icons/pi';
 // TODO: user 브랜치 아이디로 변경될 것
 // const branchId = 1;
 
-interface IPropsType extends IHolidaySetting {
+interface IPropsType {
+  leave_category: ILeaveCategory['leave_category'];
+  excluded_parts: { id: number; part_name: string }[];
   onChangeEditMode: (boolean: boolean) => void;
-  setValue: UseFormSetValue<IHolidaySetting>;
+  setValue: UseFormSetValue<ILeaveCategory>;
 }
 
 export default function HolidaySettingItem({
-  id,
-  name,
+  leave_category,
+  excluded_parts,
   onChangeEditMode,
   setValue,
-
-  ...data
 }: IPropsType) {
   // const { data: parts, isFetching } = useGetParts(branchId);
-
-  const { leave_count, is_paid } = data;
+  const { id, name, is_paid } = leave_category;
   const handleClickUpdateItem = (id: number) => {
     onChangeEditMode(true);
-    setValue('id', id);
-    setValue('name', name);
-    Object.entries(data).forEach(([key, value]) => setValue(key as keyof typeof data, value));
+    setValue('leave_category.id', id);
+    Object.entries(leave_category).forEach(([key, value]) => {
+      setValue(`leave_category.${key}` as `leave_category.${keyof typeof leave_category}`, value);
+    });
   };
 
   const handleClickDeleteItem = (id: number) => {
@@ -57,7 +57,15 @@ export default function HolidaySettingItem({
             content={is_paid ? '사용' : '미사용'}
             gap="gap-x-4"
           />
-          <BasicSettingSubTitle title="제외파트" content={leave_count.toString()} gap="gap-x-4" />
+          <BasicSettingSubTitle
+            title="제외파트"
+            content={
+              excluded_parts.length > 0
+                ? excluded_parts.map(({ part_name }) => part_name).join(', ')
+                : '-'
+            }
+            gap="gap-x-4"
+          />
         </div>
       </div>
       <div className="flex items-center gap-x-4 ml-4 whitespace-nowrap">

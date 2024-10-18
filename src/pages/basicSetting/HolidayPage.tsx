@@ -1,11 +1,12 @@
+import DragContainer from '@/components/BasicSetting/holidaySetting/DragContainer';
 import HolidayAutoSetGroups from '@/components/BasicSetting/holidaySetting/HolidayAutoSetGroups';
 import HolidaySettingForm from '@/components/BasicSetting/holidaySetting/HolidaySettingForm';
 import HolidaySettingItem from '@/components/BasicSetting/holidaySetting/HolidaySettingItem';
 import Title from '@/components/Common/Title';
 import { Txt } from '@/components/Common/Txt';
-import { useGetHolidaySetting } from '@/hooks/apis/useHolidaySetting';
+import { useGetLeaveCategories } from '@/hooks/apis/useLeaveCategories';
 import { useGetParts } from '@/hooks/apis/useParts';
-import { IHolidaySetting } from '@/models/holidaySetting.model';
+import { ILeaveCategory } from '@/models/leave-categories.model';
 import { Button, Select } from '@radix-ui/themes';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -18,9 +19,9 @@ const OPTIONS: { id: number; branch: string }[] = [
 ];
 
 export default function HolidayPage() {
-  const { data: holidaySettings } = useGetHolidaySetting();
-
   const { data: parts } = useGetParts(1);
+
+  const { data: leaveCategories } = useGetLeaveCategories(3);
 
   const [isEditingMode, setIsEditingMode] = useState(false);
   const [currentBranch, setCurrentBranch] = useState(OPTIONS[0].branch);
@@ -33,12 +34,16 @@ export default function HolidayPage() {
     setValue,
     register,
     watch,
-  } = useForm<IHolidaySetting>({
+  } = useForm<ILeaveCategory>({
     defaultValues: {
-      id: 0,
-      name: '',
-      leave_count: 0,
-      is_paid: true,
+      leave_category: {
+        id: 0,
+        name: '',
+        leave_count: 0,
+        is_paid: true,
+        is_leave_of_absence: false,
+      },
+      excluded_parts: [],
     },
   });
 
@@ -82,16 +87,17 @@ export default function HolidayPage() {
           )}
         </div>
         <div className="p-6 flex flex-col gap-y-3">
-          {holidaySettings.map(({ id, name, ...data }) => (
-            <HolidaySettingItem
-              key={id}
-              id={id}
-              name={name}
-              onChangeEditMode={handleClickEditMode}
-              setValue={setValue}
-              {...data}
-            />
-          ))}
+          {leaveCategories &&
+            !!leaveCategories.length &&
+            leaveCategories.map(({ leave_category, excluded_parts }) => (
+              <HolidaySettingItem
+                key={leave_category.id}
+                leave_category={leave_category}
+                excluded_parts={excluded_parts.map(({ id, ...rest }) => ({ id, ...rest }))}
+                onChangeEditMode={handleClickEditMode}
+                setValue={setValue}
+              />
+            ))}
           <div>옵저브</div>
         </div>
       </section>
@@ -132,6 +138,7 @@ export default function HolidayPage() {
             </Button>
           </div>
         </div>
+        <DragContainer />
       </section>
     </main>
   );

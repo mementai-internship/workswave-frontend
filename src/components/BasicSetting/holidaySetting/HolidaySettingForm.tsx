@@ -1,6 +1,6 @@
 import Title from '@/components/Common/Title';
 import { Txt } from '@/components/Common/Txt';
-import { IHolidaySetting } from '@/models/holidaySetting.model';
+import { ILeaveCategory } from '@/models/leave-categories.model';
 import { IWorkingSettingPartResponse } from '@/models/workingSetting.model';
 import { Button, CheckboxGroup, RadioGroup, TextField } from '@radix-ui/themes';
 import {
@@ -17,15 +17,15 @@ import { PiCheckBold } from 'react-icons/pi';
 
 interface HolidaySettingFormProps {
   isEditingMode: boolean;
-  control: Control<IHolidaySetting>;
-  formState: FormState<IHolidaySetting>;
+  control: Control<ILeaveCategory>;
+  formState: FormState<ILeaveCategory>;
   parts: IWorkingSettingPartResponse[];
-  handleSubmit: UseFormHandleSubmit<IHolidaySetting>;
-  reset: UseFormReset<IHolidaySetting>;
+  handleSubmit: UseFormHandleSubmit<ILeaveCategory>;
+  reset: UseFormReset<ILeaveCategory>;
   onChangeEditMode: (boolean: boolean) => void;
-  setValue: UseFormSetValue<IHolidaySetting>;
-  watch: UseFormWatch<IHolidaySetting>;
-  register: UseFormRegister<IHolidaySetting>;
+  setValue: UseFormSetValue<ILeaveCategory>;
+  watch: UseFormWatch<ILeaveCategory>;
+  register: UseFormRegister<ILeaveCategory>;
 }
 
 export default function HolidaySettingForm({
@@ -40,27 +40,36 @@ export default function HolidaySettingForm({
   watch,
   register,
 }: HolidaySettingFormProps) {
-  const onSubmitHolidaySetting = (data: IHolidaySetting) => {
+  const onSubmitHolidaySetting = (data: ILeaveCategory) => {
     console.log(data);
   };
 
   const handleClickCancel = () => {
     onChangeEditMode(false);
     reset();
-    // 지울것
-    setValue('id', 0);
   };
 
   const isFormValid = () => {
-    const { name, leave_count } = formState.dirtyFields;
-    return name && leave_count && formState.isValid;
+    const { leave_category } = formState.dirtyFields;
+    return leave_category?.name && leave_category?.leave_count && formState.isValid;
   };
 
   const isLeaveOfAbsence = useWatch({
     control,
-    name: 'is_leave_of_absence',
+    name: 'leave_category.is_leave_of_absence',
     defaultValue: false,
   });
+
+  const handleExcludedPartsChange = (values: string[]) => {
+    const excludedParts = values
+      .map((value) => {
+        const part = parts.find((p) => p.id.toString() === value);
+        return part ? { id: part.id, part_name: part.name } : null;
+      })
+      .filter((part): part is { id: number; part_name: string } => part !== null);
+
+    setValue('excluded_parts', excludedParts);
+  };
 
   return (
     <div className="sticky top-0 left-0 z-[2] bg-white">
@@ -79,7 +88,7 @@ export default function HolidaySettingForm({
             size="3"
             radius="none"
             className="w-full"
-            {...register('name', { required: true })}
+            {...register('leave_category.name', { required: true })}
             required
           />
           <div className="absolute right-0 top-0 flex items-center border-l h-full px-2">
@@ -90,7 +99,7 @@ export default function HolidaySettingForm({
               size="3"
               radius="small"
               className="text-sm hover:bg-transparent cursor-pointer"
-              onClick={() => setValue('is_leave_of_absence', !isLeaveOfAbsence)}
+              onClick={() => setValue('leave_category.is_leave_of_absence', !isLeaveOfAbsence)}
             >
               <PiCheckBold className={isLeaveOfAbsence ? 'text-purple-50' : 'text-gray-500'} />
               <Txt
@@ -113,7 +122,7 @@ export default function HolidaySettingForm({
             className="w-full"
             size="3"
             radius="none"
-            {...register('leave_count', { required: true })}
+            {...register('leave_category.leave_count', { required: true })}
             required
           />
         </div>
@@ -123,9 +132,9 @@ export default function HolidaySettingForm({
             유급
           </label>
           <RadioGroup.Root
-            value={watch('is_paid') ? 'true' : 'false'}
+            value={watch('leave_category.is_paid') ? 'true' : 'false'}
             id="is_paid"
-            onValueChange={(newValue) => setValue('is_paid', newValue === 'true')}
+            onValueChange={(newValue) => setValue('leave_category.is_paid', newValue === 'true')}
           >
             <div className="flex gap-4">
               <RadioGroup.Item value="true">유급</RadioGroup.Item>
@@ -135,7 +144,7 @@ export default function HolidaySettingForm({
         </div>
 
         <div className="flex items-center">
-          <label htmlFor="is_paid" className="w-28 text-gray-500 whitespace-nowrap">
+          <label htmlFor="excluded_parts" className="w-28 text-gray-500 whitespace-nowrap">
             제외 파트
           </label>
           <CheckboxGroup.Root
@@ -143,10 +152,10 @@ export default function HolidaySettingForm({
             variant="surface"
             color="purple"
             className="grid grid-cols-4 justify-start"
-            // {...register('')} // 제외 파트 타입에 맞춰 수정 필요
+            onValueChange={handleExcludedPartsChange}
+            value={watch('excluded_parts')?.map((part) => part.id.toString()) || []}
           >
-            {/** 파트 map */}
-            {!!parts &&
+            {parts &&
               !!parts.length &&
               parts.map((part) => (
                 <CheckboxGroup.Item
