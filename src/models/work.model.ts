@@ -49,3 +49,19 @@ export interface IWorkStatistics {
   dayOffWorkers: number;
   remoteWorkers: number;
 }
+
+// 파트 관리
+export interface IPartTimeData {
+  id: number;
+  branch: string;
+  name: string;
+  workPart: string;
+  workDate: string;
+  hospitalWork: string;
+  remoteWork: string;
+  holidayWork: string;
+  totalWorkHours: string;
+  totalSalary: string;
+  workDetails: string;
+  gender: number;
+}

@@ -18,17 +18,16 @@ export const WORKTABLE = [
   'O.T 총 금액',
 ] as const;
 
-// export const COMMUTEHEADTABLE = [
-//   { id: 'number', label: '번호' },
-//   { id: 'branch', label: '지점' },
-//   { id: 'name', label: '이름' },
-//   { id: 'position', label: '근무파트' },
-//   { id: 'day1', label: '1일' },
-//   { id: 'day2', label: '2일' },
-//   { id: 'day3', label: '3일' },
-//   { id: 'day4', label: '4일' },
-//   { id: 'day5', label: '5일' },
-//   { id: 'day6', label: '6일' },
-// ] as const;
-
-export const PARTTIMEHEADTABLE = [] as const;
+export const PARTTIMEHEADTABLE = [
+  '번호',
+  '지점',
+  '이름',
+  '근무파트',
+  '근무일자',
+  '병원근무',
+  '재택근무',
+  '휴일근무',
+  '총근무시간',
+  '급여합계',
+  '근무내역',
+] as const;

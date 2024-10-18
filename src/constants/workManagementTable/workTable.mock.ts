@@ -1,5 +1,5 @@
 // Mocks 폴더 만들기 좀 그래서 우선 constants에 넣었습니다.
-import { ICommuteData, IWorkData } from '@/models/work.model';
+import { ICommuteData, IPartTimeData, IWorkData } from '@/models/work.model';
 
 // 근로 관리
 export const workMockData: IWorkData[] = [
@@ -91,7 +91,37 @@ export const workMockData: IWorkData[] = [
     days: 4,
   },
 ];
-// 파트타임
+// 파트 관리
+export const partTimeMockData: IPartTimeData[] = [
+  {
+    id: 1,
+    branch: '서울지점',
+    name: '김철수',
+    workPart: '간호사',
+    workDate: '2023-10-18',
+    hospitalWork: '8시간',
+    remoteWork: '0시간',
+    holidayWork: '0시간',
+    totalWorkHours: '8시간',
+    totalSalary: '150,000원',
+    workDetails: '정상근무',
+    gender: 0,
+  },
+  {
+    id: 2,
+    branch: '서울지점',
+    name: '김철수',
+    workPart: '간호사',
+    workDate: '2023-10-18',
+    hospitalWork: '8시간',
+    remoteWork: '0시간',
+    holidayWork: '0시간',
+    totalWorkHours: '8시간',
+    totalSalary: '150,000원',
+    workDetails: '정상근무',
+    gender: 1,
+  },
+];
 
 // 출퇴근 관리
 export const commuteMockData: ICommuteData[] = [
