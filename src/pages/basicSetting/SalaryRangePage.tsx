@@ -1,45 +1,57 @@
 import dayjs from 'dayjs';
+import { useEffect, useState } from 'react';
 
-// import { useEffect } from 'react';
+// import { useForm } from 'react-hook-form';
 // import SalaryRangeHeader from '@/components/BasicSetting/SalaryRange/SalaryRangeHeader';
 // import SalaryRangeTable from '@/components/BasicSetting/SalaryRange/SalaryRangeTable';
-// import Title from '@/components/Common/Title';
-// import { Txt } from '@/components/Common/Txt';
-// import { SALARY_RANGE_BORDER_COLOR } from '@/constants/salaryRange';
+import Title from '@/components/Common/Title';
+import { Txt } from '@/components/Common/Txt';
+import { SALARY_RANGE_BORDER_COLOR } from '@/constants/salaryRange';
 import useGetSalaryBracket from '@/hooks/apis/useSalaryBracket';
+import { calculateInitialValueSalaryRange } from '@/utils/calculateInitialValueSalaryRange';
+import { ITax } from '@/utils/calculateSalaryRange';
 
-// import { ITax } from '@/utils/calculateSalaryRange';
+export interface ISalaryRangeForm {
+  salaryInput: number;
+}
 
 export default function SalaryRangePage() {
   const currentYear = dayjs().year();
   const { data } = useGetSalaryBracket(currentYear.toString());
+  // const { register, handleSubmit } = useForm<ISalaryRangeForm>({});
+  // const [calculatedSalary, setCalculatedSalary] = useState();
+  const [salaryRange, setSalaryRange] = useState({
+    salaryRangeWithMealAllowance: [],
+    salaryRangeWithoutMealAllowance: [],
+  });
 
   console.log(data);
+  // setCalculatedSalary()
 
-  // useEffect(() => {
-  //   const taxPercentageCalculation: ITax = {
-  //     national_pension: data.national_pension,
-  //     health_insurance: data.health_insurance,
-  //     long_term_care_insurance: data.long_term_care_insurance,
-  //     employment_insurance: data.employment_insurance,
-  //     local_income_tax_rate: data.long_term_care_insurance,
-  //   };
-  // }, [currentYear]);
+  useEffect(() => {
+    if (data) {
+      const taxPercentageCalculation: ITax = {
+        national_pension: data.national_pension,
+        health_insurance: data.health_insurance,
+        long_term_care_insurance: data.long_term_care_insurance,
+        employment_insurance: data.employment_insurance,
+        local_income_tax_rate: data.long_term_care_insurance,
+      };
+      console.log(taxPercentageCalculation);
+      const { calculatedSalaryWithMealAllowance, calculatedSalaryWithoutMealAllowance } =
+        calculateInitialValueSalaryRange(taxPercentageCalculation);
+      setSalaryRange({
+        salaryRangeWithMealAllowance: calculatedSalaryWithMealAllowance,
+        salaryRangeWithoutMealAllowance: calculatedSalaryWithoutMealAllowance,
+      });
+    }
+  }, []);
 
-  // const { calculatedSalary, onSubmit, register, setValue, handleSubmit, watch, salaries } =
-  //   useSalaryRange();
-
-  // const inputSalary = watch('inputSalary');
-
-  // useEffect(() => {
-  //   if (inputSalary < 0) {
-  //     setValue('inputSalary', 0);
-  //   }
-  // }, [inputSalary, setValue]);
+  console.log(salaryRange);
 
   return (
     <div className="w-full">
-      {/* <div
+      <div
         className={`min-w-[1700px] mx-auto w-full overflow-x-scroll border ${SALARY_RANGE_BORDER_COLOR}`}
       >
         <div className={`bg-[#ffffff]`}>
@@ -50,7 +62,7 @@ export default function SalaryRangePage() {
             </Txt>
           </div>
 
-          <SalaryRangeHeader
+          {/* <SalaryRangeHeader
             salaryDetails={calculatedSalary.salaryDetails}
             onSubmit={handleSubmit(onSubmit)}
             register={register}
@@ -60,17 +72,17 @@ export default function SalaryRangePage() {
               direction="left"
               tableHeaderTitle="O"
               calcResult={calculatedSalary.salaryWithMealAllowance}
-              calcRange={salaries.salaryRangeWithMealAllowance}
+              calcRange={salaryRange.salaryRangeWithMealAllowance}
             />
             <SalaryRangeTable
               direction="right"
               tableHeaderTitle="X (급여 전액 과세)"
               calcResult={calculatedSalary.salaryWithoutMealAllowance}
-              calcRange={salaries.salaryRangeWithoutMealAllowance}
+              calcRange={salaryRange.salaryRangeWithoutMealAllowance}
             />
-          </div>
+          </div> */}
         </div>
-      </div> */}
+      </div>
     </div>
   );
 }
