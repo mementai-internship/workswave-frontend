@@ -3,10 +3,12 @@ import React from 'react';
 
 import MemberManagementTableCell from '@/components/MemberManagement/MemberManagementTableCell';
 import { MEMBER_MANAGEMENT_TABLE_TITLE } from '@/constants/memberManagementTableTitle';
+import { TGetCurrentUserResponse } from '@/models/user-management.model';
 
 export interface IMemberManagementTableProps {
   data: IMemberManagementTableData[];
   tab: string;
+  currentUser: TGetCurrentUserResponse;
 }
 
 export interface IMemberManagementTableData {
@@ -26,11 +28,16 @@ export const userId = 142;
 
 export const infoTestData: IMemberManagementTableProps[] = [];
 
-export default function MemberManagementTable({ data, tab }: IMemberManagementTableProps) {
+export default function MemberManagementTable({
+  data,
+  tab,
+  currentUser,
+}: IMemberManagementTableProps) {
   console.log(data);
   if (!data) {
-    return <div>데이터가 없습니다.</div>;
+    return <div>Loading...</div>;
   }
+  console.log(currentUser);
   return (
     <Table.Root>
       <Table.Header>

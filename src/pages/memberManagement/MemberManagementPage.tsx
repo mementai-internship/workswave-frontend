@@ -7,7 +7,7 @@ import Pagination from '@/components/Common/Pagination';
 import TitleContainer from '@/components/Common/TitleContainer';
 import MemberManagementFilterBar from '@/components/MemberManagement/MemberManagementFilterBar';
 import MemberManagementTable from '@/components/MemberManagement/MemberManagementTable';
-import { useGetUsers } from '@/hooks/apis/useUserManagement';
+import { useGetCurrentUser, useGetUsers } from '@/hooks/apis/useUserManagement';
 
 export default function MemberManagementPage() {
   const [selectedTab, setSelectedTab] = useState<string>('all');
@@ -21,6 +21,7 @@ export default function MemberManagementPage() {
   const itemsPerPage = 10;
 
   const { data: userList } = useGetUsers(currentPage, itemsPerPage);
+  const { data: currentUser } = useGetCurrentUser();
 
   const tabList = [
     {
@@ -80,7 +81,7 @@ export default function MemberManagementPage() {
         </div>
         <MemberManagementFilterBar />
       </div>
-      <MemberManagementTable data={userList?.data} tab={selectedTab} />
+      <MemberManagementTable data={userList?.data} tab={selectedTab} currentUser={currentUser} />
       <Pagination totalItems={userList?.total} itemsPerPage={userList?.record_size} />
     </div>
   );
