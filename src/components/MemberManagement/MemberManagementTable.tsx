@@ -37,14 +37,12 @@ export default function MemberManagementTable({
   tab,
   currentUser,
 }: IMemberManagementTableProps) {
-  const userId = 1;
-  //console.log(currentUser.data.id);
-
-  if (!data) {
+  if (!data || currentUser.data.id === 0) {
     return <div>Loading...</div>;
   }
 
-  console.log(currentUser);
+  const userId = currentUser.data.id;
+  console.log(currentUser.data.id);
   return (
     <Table.Root>
       <Table.Header>

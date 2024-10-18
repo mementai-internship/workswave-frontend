@@ -5,9 +5,11 @@ import SelectBox from '@/components/Common/Select';
 import { useGetUsers } from '@/hooks/apis/useUserManagement';
 
 export default function MemberManagementFilterBar({ onBranchChange, onPartChange, onResetFilter }) {
-  const { data: allUserList } = useGetUsers(1, 1000, '0', '0', '0');
+  const { data: allUserList } = useGetUsers(1, 1000, '0', '0', '0', '0', '0');
   const branchList = Array.from(new Set(allUserList?.data?.map((user) => user.branch)));
   const partList = Array.from(new Set(allUserList?.data?.map((user) => user.part)));
+
+  console.log(allUserList);
 
   return (
     <div className="flex gap-2">
@@ -18,7 +20,7 @@ export default function MemberManagementFilterBar({ onBranchChange, onPartChange
           options={branchList.map((branch, index) => ({
             id: index,
             name: branch,
-            action: () => onBranchChange(index.toString()),
+            action: () => onBranchChange(index + 1),
           }))}
         />
         <SelectBox
@@ -27,7 +29,7 @@ export default function MemberManagementFilterBar({ onBranchChange, onPartChange
           options={partList.map((branch, index) => ({
             id: index,
             name: branch,
-            action: () => onPartChange(index.toString()),
+            action: () => onPartChange(index + 1),
           }))}
         />
       </div>

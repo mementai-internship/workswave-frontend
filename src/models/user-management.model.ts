@@ -73,6 +73,7 @@ export type TGetCurrentUserResponse = {
     id: number;
     last_career_end_date: string;
     last_career_start_date: string;
+    last_company: string;
     last_position: string;
     name: string;
     part: {
