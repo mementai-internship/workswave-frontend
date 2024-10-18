@@ -1,6 +1,6 @@
-import { Button, Table } from '@radix-ui/themes';
-import { PiMagnifyingGlass } from 'react-icons/pi';
+import { Table } from '@radix-ui/themes';
 
+import ContractTableView from '@/components/DocumentManagement/ContractManagement/ContractTableView';
 import { contract } from '@/constants/documentManagement/contract.mock';
 import { CONTRACT_TABLE_HEADERS } from '@/constants/documentManagement/contractTable';
 
@@ -34,9 +34,7 @@ export default function ContractTable() {
             <Table.Cell className={`w-96 ${cellClasses}`}>{row.adminMemo}</Table.Cell>
             <Table.Cell className={cellClasses}>{row.userWriteDate}</Table.Cell>
             <Table.Cell className={cellClasses}>
-              <Button className="bg-gray-50">
-                <PiMagnifyingGlass />
-              </Button>
+              <ContractTableView contract={row.contractName} />
             </Table.Cell>
           </Table.Row>
         ))}
