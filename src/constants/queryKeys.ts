@@ -8,5 +8,8 @@ export const QUERY_KEYS = {
   //branches queryKeys
   branches: 'branches',
   branch: 'branch',
-  branchDeleted: 'branches-deleted',
+  branchDeleted: 'branchesDeleted',
+
+  // salary-bracket
+  salaryBracket: 'salaryBracket',
 };
