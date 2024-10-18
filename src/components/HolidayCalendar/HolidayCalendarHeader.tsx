@@ -10,7 +10,7 @@ import EmployeeHolidayRegisterModal from '@/components/HolidayCalendar/EmployeeH
 import HolidayDeletionPopover from '@/components/HolidayCalendar/HolidayDeletionPopover';
 import HolidayRegisterPopover from '@/components/HolidayCalendar/HolidayRegisterPopover';
 import { useGetBranches } from '@/hooks/apis/useBranches';
-import { TClosedDaysResponse } from '@/models/closedDays.model';
+import { useGetClosedDays } from '@/hooks/apis/useClosedDays';
 
 interface IDayoffCalendarHeaderProps {
   branchId: number;
@@ -21,7 +21,6 @@ interface IDayoffCalendarHeaderProps {
   setView: (view: 'dayGridMonth' | 'dayGridWeek') => void;
   sundayOff: boolean;
   setIsSundayOff: (isSundayOff: boolean) => void;
-  holidays: TClosedDaysResponse;
 }
 
 export default function DayoffCalendarHeader({
@@ -33,11 +32,15 @@ export default function DayoffCalendarHeader({
   setView,
   sundayOff,
   setIsSundayOff,
-  holidays,
 }: IDayoffCalendarHeaderProps) {
-  const [employeeModalOpen, setEmployeeModalOpen] = useState<boolean>(false); // 다중 휴무 등록 : 모달 온오프
+  const [employeeModalOpen, setEmployeeModalOpen] = useState<boolean>(false);
 
+  // const { data: holidays } = useGetMonthlyClosedDays({ branch_id: branchId, date: currDate.toDate() });  // 월별 휴무일 조회
+  const { data: holidays, isLoading: isHolidaysLoading } = useGetClosedDays({
+    branch_id: branchId,
+  });
   const { data: branches, isFetching } = useGetBranches('1');
+
   const branchSelection = isFetching
     ? []
     : branches?.list.map((branch) => ({
@@ -47,6 +50,10 @@ export default function DayoffCalendarHeader({
           setBranchId(branch.id);
         },
       }));
+
+  const handleCalendarView = () => {
+    setView(view === 'dayGridMonth' ? 'dayGridWeek' : 'dayGridMonth');
+  };
 
   // 다중 휴무 등록 Btn 로직
   const handleEmployeeModalOpen = () => {
@@ -59,10 +66,6 @@ export default function DayoffCalendarHeader({
 
   const submitNewEmployeeHoliday = (holidays: { employee: string; dates: Date[] }[]) => {
     console.log('다중 휴무 등록 (직원):', holidays);
-  };
-
-  const handleCalendarView = () => {
-    setView(view === 'dayGridMonth' ? 'dayGridWeek' : 'dayGridMonth');
   };
 
   return (
@@ -103,18 +106,12 @@ export default function DayoffCalendarHeader({
           </Popover.Content>
         </Popover.Root>
 
-        <HolidayRegisterPopover
-          currDate={currDate}
-          setCurrentDate={setCurrentDate}
-          holidays={holidays}
-          branchId={branchId}
-        />
-        <HolidayDeletionPopover
-          currDate={currDate}
-          setCurrentDate={setCurrentDate}
-          holidays={holidays}
-          branchId={branchId}
-        />
+        {!isHolidaysLoading && holidays && (
+          <>
+            <HolidayRegisterPopover currDate={currDate} holidays={holidays} branchId={branchId} />
+            <HolidayDeletionPopover currDate={currDate} holidays={holidays} branchId={branchId} />
+          </>
+        )}
 
         <Button variant="surface" color="gray" size="2" onClick={handleEmployeeModalOpen}>
           직원 휴무 등록

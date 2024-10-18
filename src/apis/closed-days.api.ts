@@ -25,19 +25,20 @@ export const closedDaysApi = {
   //   }
   // },
 
-  // getClosedDays: async (branchId: number) => {
-  //   try {
-  //     console.log('getClosedDays [지점] [휴무일 - 모든 날짜] 조회', branchId);
-  //     const response = await axiosInstance.get(`/branches/closed_days/${branchId}`);
-  //     console.log('%c getClosedDays [지점] [휴무일 - 모든 날짜] 응답', 'color: orange;', response);
-  //     return response.data;
-  //   } catch (err) {
-  //     if (isAxiosError(err)) {
-  //       console.error('Error:', err.response?.data);
-  //       throw new Error('지점 휴무일 조회에 실패 했습니다.');
-  //     }
-  //   }
-  // },
+  getClosedDays: async (branchId: number) => {
+    try {
+      console.log(`getClosedDays [지점 "${branchId}"] [휴무일 - 모든 날짜] 조회`);
+      const response = await axiosInstance.get(`/branches/closed_days/${branchId}`);
+      console.log('%c getClosedDays [지점] [휴무일 - 모든 날짜] 응답', 'color: orange;', response);
+
+      return response.data;
+    } catch (err) {
+      if (isAxiosError(err)) {
+        console.error('Error:', err.response?.data);
+        throw new Error('지점 휴무일 조회에 실패 했습니다.');
+      }
+    }
+  },
 
   getMonthlyClosedDays: async ({ branch_id, date }: IClosedDayRequest) => {
     try {
@@ -53,6 +54,7 @@ export const closedDaysApi = {
         'color: orange;',
         response
       );
+
       return response.data;
     } catch (err) {
       if (isAxiosError(err)) {
@@ -92,6 +94,7 @@ export const closedDaysApi = {
         'color: lightblue;',
         response
       );
+
       return response.data;
     } catch (err) {
       if (isAxiosError(err)) {
@@ -117,6 +120,7 @@ export const closedDaysApi = {
         'color: lightblue;',
         response
       );
+
       return response.data;
     } catch (err) {
       if (isAxiosError(err)) {
@@ -138,6 +142,7 @@ export const closedDaysApi = {
         'color: pink;',
         response
       );
+
       return response.data;
     } catch (err) {
       if (isAxiosError(err)) {
@@ -164,6 +169,7 @@ export const closedDaysApi = {
         'color: pink;',
         response
       );
+
       return response.data;
     } catch (err) {
       if (isAxiosError(err)) {

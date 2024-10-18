@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { closedDaysApi } from '@/apis/closedDays.api';
+import { closedDaysApi } from '@/apis/closed-days.api';
 import { QUERY_KEYS } from '@/constants/queryKeys';
 import {
   IClosedDayDeleteRequest,
@@ -16,9 +16,16 @@ import {
 //   });
 // };
 
+export const useGetClosedDays = ({ branch_id }: IClosedDayRequest) => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.branchClose, branch_id],
+    queryFn: () => closedDaysApi.getClosedDays(branch_id),
+  });
+};
+
 export const useGetMonthlyClosedDays = ({ branch_id, date }: IClosedDayRequest) => {
   return useQuery({
-    queryKey: [QUERY_KEYS.branchClosedDays, branch_id],
+    queryKey: [QUERY_KEYS.branchMonthlyClose, branch_id, date],
     queryFn: () => closedDaysApi.getMonthlyClosedDays({ branch_id, date }),
   });
 };

@@ -11,5 +11,6 @@ export const QUERY_KEYS = {
   branchDeleted: 'branches-deleted',
 
   //closedDays queryKeys
-  branchClosedDays: 'getMonthlyClosedDays',
+  branchMonthlyClose: 'getMonthlyClosedDays',
+  branchClose: 'getClosedDays',
 };

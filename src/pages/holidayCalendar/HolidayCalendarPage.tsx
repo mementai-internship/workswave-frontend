@@ -1,25 +1,17 @@
 import { EventInput } from '@fullcalendar/core';
 import dayjs from 'dayjs';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import HolidayCalendar from '@/components/HolidayCalendar/HolidayCalendar';
 import HolidayCalendarHeader from '@/components/HolidayCalendar/HolidayCalendarHeader';
-import { useGetMonthlyClosedDays } from '@/hooks/apis/useClosedDays';
+
+// import { useGetMonthlyClosedDays } from '@/hooks/apis/useClosedDays';
 
 export default function HolidayCalendarPage() {
   const [currentDate, setCurrentDate] = useState<dayjs.Dayjs>(dayjs()); // 오늘 날짜 (디폴트값)
   const [branchId, setBranchId] = useState<number>(1); // 지점 선택
   const [isSundayOff, setIsSundayOff] = useState<boolean>(false); // 설정버튼 : 일요일 휴무 여부 (추후 백엔드 연동 필요)
   const [view, setView] = useState<'dayGridMonth' | 'dayGridWeek'>('dayGridMonth'); // 월간/주간 뷰 토글
-
-  const { data: closedDays } = useGetMonthlyClosedDays({
-    branch_id: branchId,
-    date: currentDate.toDate(),
-  });
-
-  useEffect(() => {
-    console.log('Closed days refetched');
-  }, [closedDays]);
 
   const handleDateAndEventClick = (date: Date) => {
     setCurrentDate(dayjs(date));
@@ -28,31 +20,28 @@ export default function HolidayCalendarPage() {
 
   return (
     <div className="flex flex-col gap-4 h-full w-full">
-      {closedDays && (
-        <>
-          <HolidayCalendarHeader
+      <>
+        <HolidayCalendarHeader
+          currDate={currentDate}
+          setCurrentDate={setCurrentDate}
+          branchId={branchId}
+          setBranchId={setBranchId}
+          view={view}
+          setView={setView}
+          sundayOff={isSundayOff}
+          setIsSundayOff={setIsSundayOff}
+        />
+        <main className="flex-grow overflow-y-auto px-3 pb-3 bg-white rounded-md">
+          <HolidayCalendar
             currDate={currentDate}
-            setCurrentDate={setCurrentDate}
-            branchId={branchId}
-            setBranchId={setBranchId}
             view={view}
-            setView={setView}
-            sundayOff={isSundayOff}
-            setIsSundayOff={setIsSundayOff}
-            holidays={closedDays}
+            onDateAndEventClick={handleDateAndEventClick}
+            events={MOCK_EVENTS}
+            isSundayOff={isSundayOff}
+            branch_id={branchId}
           />
-          <main className="flex-grow overflow-y-auto px-3 pb-3 bg-white rounded-md">
-            <HolidayCalendar
-              currDate={currentDate}
-              view={view}
-              onDateAndEventClick={handleDateAndEventClick}
-              events={MOCK_EVENTS}
-              isSundayOff={isSundayOff}
-              holidays={closedDays}
-            />
-          </main>
-        </>
-      )}
+        </main>
+      </>
     </div>
   );
 }
