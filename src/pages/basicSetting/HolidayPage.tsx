@@ -3,10 +3,10 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { PiEquals, PiGear } from 'react-icons/pi';
 
-import DragContainer from '@/components/BasicSetting/holidaySetting/DragContainer';
-import HolidayAutoSetGroups from '@/components/BasicSetting/holidaySetting/HolidayAutoSetGroups';
-import HolidaySettingForm from '@/components/BasicSetting/holidaySetting/HolidaySettingForm';
-import HolidaySettingItem from '@/components/BasicSetting/holidaySetting/HolidaySettingItem';
+import DragContainer from '@/components/BasicSetting/HolidaySetting/DragContainer';
+import HolidayAutoSetGroups from '@/components/BasicSetting/HolidaySetting/HolidayAutoSetGroups';
+import HolidaySettingForm from '@/components/BasicSetting/HolidaySetting/HolidaySettingForm';
+import HolidaySettingItem from '@/components/BasicSetting/HolidaySetting/HolidaySettingItem';
 import Title from '@/components/Common/Title';
 import { Txt } from '@/components/Common/Txt';
 import { useGetBranches } from '@/hooks/apis/useBranches';

@@ -2,8 +2,8 @@ import * as Accordion from '@radix-ui/react-accordion';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { PiArrowDownBold, PiArrowUpBold } from 'react-icons/pi';
 
-import DragItem from '@/components/BasicSetting/holidaySetting/DragItem';
-import StrictModeDroppable from '@/components/BasicSetting/holidaySetting/StrictModeDroppable';
+import DragItem from '@/components/BasicSetting/HolidaySetting/DragItem';
+import StrictModeDroppable from '@/components/BasicSetting/HolidaySetting/StrictModeDroppable';
 import { useDrag } from '@/hooks/useDrag';
 
 export default function DragContainer() {
