@@ -26,8 +26,6 @@ import ManagementOfficePage from '@/pages/officeSetting/ManagementOfficePage';
 import OtManagementPage from '@/pages/otManagement/OtManagementPage';
 import SalarySettlementPage from '@/pages/salarySettlement/SalarySettlementPage';
 import SimpleMenuPage from '@/pages/simpleMenu/SimpleMenuPage';
-import BoardViewPage from '@/pages/userBoard/view/BoardViewPage';
-import BoardWritePage from '@/pages/userBoard/write/BoardWritePage';
 import CommuteManagementPage from '@/pages/workManagement/CommuteManagementPage';
 import WorkManagementPage from '@/pages/workManagement/WorkManagementPage';
 
@@ -173,23 +171,23 @@ const router = createBrowserRouter([
         path: '/member-management/supermanager-setting',
         element: <SuperManagerSetting />,
       },
-      {
-        path: '/board',
-        children: [
-          {
-            index: true,
-            element: <Navigate to="/board/view" replace />,
-          },
-          {
-            path: '/board/view',
-            element: <BoardViewPage />,
-          },
-          {
-            path: '/board/write',
-            element: <BoardWritePage />,
-          },
-        ],
-      },
+      // {
+      //   path: '/board',
+      //   children: [
+      //     {
+      //       index: true,
+      //       element: <Navigate to="/board/view" replace />,
+      //     },
+      //     {
+      //       path: '/board/view',
+      //       element: <BoardViewPage />,
+      //     },
+      //     {
+      //       path: '/board/write',
+      //       element: <BoardWritePage />,
+      //     },
+      //   ],
+      // },
       {
         path: 'simple-menu',
         element: <SimpleMenuPage />,
