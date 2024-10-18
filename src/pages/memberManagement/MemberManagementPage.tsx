@@ -97,7 +97,7 @@ export default function MemberManagementPage() {
     },
     {
       name: '삭제회원',
-      value: '삭제유저',
+      value: '삭제회원',
     },
   ];
 

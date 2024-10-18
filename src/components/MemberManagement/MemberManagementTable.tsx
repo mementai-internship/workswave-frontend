@@ -2,7 +2,12 @@ import { Table } from '@radix-ui/themes';
 import React from 'react';
 
 import MemberManagementTableCell from '@/components/MemberManagement/MemberManagementTableCell';
-import { MEMBER_MANAGEMENT_TABLE_TITLE } from '@/constants/memberManagementTableTitle';
+import {
+  MEMBER_MANAGEMENT_TABLE_TITLE,
+  MEMBER_MANAGEMENT_TABLE_TITLE_DELETED,
+  MEMBER_MANAGEMENT_TABLE_TITLE_LEAVE,
+  MEMBER_MANAGEMENT_TABLE_TITLE_REST,
+} from '@/constants/memberManagementTableTitle';
 import { TGetCurrentUserResponse } from '@/models/user-management.model';
 
 export interface IMemberManagementTableProps {
@@ -38,12 +43,20 @@ export default function MemberManagementTable({
   if (!data) {
     return <div>Loading...</div>;
   }
+
   console.log(currentUser);
   return (
     <Table.Root>
       <Table.Header>
         <Table.Row className="bg-gray-300">
-          {MEMBER_MANAGEMENT_TABLE_TITLE.map((title) => (
+          {(tab === '전체'
+            ? MEMBER_MANAGEMENT_TABLE_TITLE
+            : tab === '퇴사자'
+              ? MEMBER_MANAGEMENT_TABLE_TITLE_LEAVE
+              : tab === '휴직자'
+                ? MEMBER_MANAGEMENT_TABLE_TITLE_REST
+                : MEMBER_MANAGEMENT_TABLE_TITLE_DELETED
+          ).map((title) => (
             <Table.ColumnHeaderCell
               className="p-2 text-center align-middle whitespace-nowrap"
               key={title}
