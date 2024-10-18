@@ -15,7 +15,7 @@ import { usePatchLeaveCategory, usePostLeaveCategory } from '@/hooks/apis/useLea
 import { ILeaveCategory } from '@/models/leave-categories.model';
 import { IWorkingSettingPartResponse } from '@/models/workingSetting.model';
 
-interface HolidaySettingFormProps {
+interface IDayOffSettingFormProps {
   isEditingMode: boolean;
   control: Control<ILeaveCategory>;
   formState: FormState<ILeaveCategory>;
@@ -41,7 +41,7 @@ export default function DayOffSettingForm({
   setValue,
   watch,
   register,
-}: HolidaySettingFormProps) {
+}: IDayOffSettingFormProps) {
   const { mutate: postLeaveCategory } = usePostLeaveCategory(branch_id);
   const { mutate: patchLeaveCategory } = usePatchLeaveCategory(branch_id);
 

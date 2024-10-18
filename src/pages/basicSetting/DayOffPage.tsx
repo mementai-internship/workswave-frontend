@@ -14,7 +14,7 @@ import { useGetLeaveCategories } from '@/hooks/apis/useLeaveCategories';
 import { useGetParts } from '@/hooks/apis/useParts';
 import { ILeaveCategory } from '@/models/leave-categories.model';
 
-export default function HolidayPage() {
+export default function DayOffPage() {
   const [isEditingMode, setIsEditingMode] = useState(false);
   const [currentBranch, setCurrentBranch] = useState({ id: null, name: '' });
 
@@ -143,11 +143,6 @@ export default function HolidayPage() {
           </div>
         </div>
         <DragContainer />
-        <div className="flex justify-center mb-10">
-          <Button variant="outline" color="purple" size="3" className="w-32 cursor-pointer">
-            저장하기
-          </Button>
-        </div>
       </section>
     </main>
   );
