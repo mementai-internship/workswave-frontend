@@ -2,21 +2,8 @@ import { isAxiosError } from 'axios';
 
 import axiosInstance from '@/apis/axiosInstance';
 import { IBranchResponse, IBranchesRequest, IBranchesResponse } from '@/models/branches.model';
-import { TBranch } from '@/models/user.model';
 
 export const branchesApi = {
-  // 모든 지점 조회 api 예정입니다.
-  getAllBranches: async (): Promise<TBranch[]> => {
-    try {
-      const { data } = await axiosInstance.get('/branches/list');
-      return data.list;
-    } catch (error) {
-      if (isAxiosError(error)) {
-        console.error(error.response?.data);
-        throw new Error(error.response?.data);
-      }
-    }
-  },
   getBranches: async (page: string) => {
     try {
       const response = await axiosInstance.get<IBranchesResponse>('/branches/list', {

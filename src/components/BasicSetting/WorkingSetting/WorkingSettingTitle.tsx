@@ -19,7 +19,7 @@ export default function WorkingSettingTitle({
   isBranchSelected,
 }: IPropsType) {
   const [isOpen, setIsOpen] = useState(!isBranchSelected ? false : true);
-  console.log(isOpen);
+
   useEffect(() => {
     setIsOpen(!isBranchSelected);
   }, [isBranchSelected]);
