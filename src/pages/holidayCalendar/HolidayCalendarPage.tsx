@@ -1,19 +1,27 @@
+import { EventInput } from '@fullcalendar/core';
+import { Button, Popover, Switch } from '@radix-ui/themes';
+import { ko } from 'date-fns/locale';
+import dayjs from 'dayjs';
+import { useEffect, useState } from 'react';
+import { DayPicker, getDefaultClassNames } from 'react-day-picker';
+import { PiGear } from 'react-icons/pi';
+
 import { ChangeMonth } from '@/components/Common/ChangeMonth';
 import SelectBox from '@/components/Common/Select';
 import { ChangeWeek } from '@/components/HolidayCalendar/ChangeWeek';
 import EmployeeHolidayRegisterModal from '@/components/HolidayCalendar/EmployeeHolidayRegisterModal';
 import HolidayCalendar from '@/components/HolidayCalendar/HolidayCalendar';
-import { EventInput } from '@fullcalendar/core';
-import { Button, Popover, Switch } from '@radix-ui/themes';
-import { ko } from 'date-fns/locale';
-import dayjs from 'dayjs';
-import { useState } from 'react';
-import { DayPicker, getDefaultClassNames } from 'react-day-picker';
-import { PiGear } from 'react-icons/pi';
+import {
+  useGetBranchClosedDaysByMonth,
+  useGetBranches,
+  usePostBranchClosedDay,
+} from '@/hooks/apis/useClosedDays';
 
 export default function DayOffCalendarPage() {
-  const defaultClassNames = getDefaultClassNames(); // react-day-picker 에서 tailwind 사용을 위한 선언
+  const defaultClassNames = getDefaultClassNames();
+
   const [currentDate, setCurrentDate] = useState<dayjs.Dayjs>(dayjs()); // 오늘 날짜 (디폴트값)
+  const [branchId, setBranchId] = useState<number>(1); // 지점 선택
   const [holidays, setHolidays] = useState<Date[]>([]); // 백엔드에서 받아오는 휴무일 데이터
 
   const [isSundayOff, setIsSundayOff] = useState<boolean>(false); // 설정버튼 : 일요일 휴무 여부 (추후 백엔드 연동 필요)
@@ -24,6 +32,28 @@ export default function DayOffCalendarPage() {
 
   const [employeeModalOpen, setEmployeeModalOpen] = useState<boolean>(false); // 다중 휴무 등록 : 모달 온오프
   const [view, setView] = useState<'dayGridMonth' | 'dayGridWeek'>('dayGridMonth'); // 월간/주간 뷰 토글
+
+  const { data: branches, isFetching } = useGetBranches('1');
+  const { data: closedDays, isFetching: isClosedDaysFetching } = useGetBranchClosedDaysByMonth({
+    branch_id: branchId,
+    date: currentDate.toDate(),
+  });
+  const branchSelection = isFetching
+    ? []
+    : branches?.list.map((branch) => ({
+        id: branch.id,
+        name: branch.name,
+        action: () => {
+          setBranchId(branch.id);
+        },
+      }));
+  const { mutate: postBranchClosedDay } = usePostBranchClosedDay();
+
+  useEffect(() => {
+    if (!isClosedDaysFetching && closedDays) {
+      setHolidays(closedDays.data.map((day) => new Date(day.closed_day_date)));
+    }
+  }, [closedDays, isClosedDaysFetching]);
 
   const handleCalendarView = () => {
     setView((prevView) => (prevView === 'dayGridMonth' ? 'dayGridWeek' : 'dayGridMonth'));
@@ -61,11 +91,12 @@ export default function DayOffCalendarPage() {
   };
 
   const handleBranchHolidayRegister = () => {
-    // TODO: 백엔드에서 받아온 휴무일 데이터 + 새롭게 등록/삭제하는 휴무일에 대해서 어떻게 처리할 지 고민
+    // TODO: 백엔드에서 받아온 휴무일 데이터 + 새롭게 등록/삭제하는 휴무일에 대해 어떻게 처리할 지 고민
     // 현재는 새롭게 등록하는 휴무일에 대해서만 처리
+    // TODO: 현재는 휴무일 등록이 하루만 가능함.
     setHolidays(tempSelectedHolidays);
     setBranchModalOpen(false);
-    console.log('휴무일 등록 (지점):', tempSelectedHolidays);
+    postBranchClosedDay({ branch_id: branchId, date: tempSelectedHolidays[0] });
   };
 
   // 다중 휴무 등록 Btn 로직
@@ -83,137 +114,126 @@ export default function DayOffCalendarPage() {
 
   return (
     <div className="flex flex-col gap-4 h-full w-full">
-      <header className="relative flex justify-between items-center">
-        <SelectBox title="지점 선택" name="지점 선택" options={DUMMY_DROP_DOWN_MENU} />
-        {view === 'dayGridMonth' ? (
-          <div className="absolute left-1/2 transform -translate-x-1/2">
-            <ChangeMonth
-              currMonth={currentDate}
-              onChangeMonth={(newDate: dayjs.Dayjs) => {
-                setCurrentDate(newDate);
-              }}
-            />
-          </div>
-        ) : (
-          <div className="absolute left-1/2 transform -translate-x-1/2">
-            <ChangeWeek
-              currWeek={currentDate}
-              onChangeWeek={(newDate: dayjs.Dayjs) => {
-                setCurrentDate(newDate);
-              }}
-            />
-          </div>
-        )}
-        <div className="flex gap-2">
-          <Popover.Root>
-            <Popover.Trigger>
-              <Button variant="surface" color="gray" size="2">
-                <PiGear className="w-4 h-4" />
-              </Button>
-            </Popover.Trigger>
-            <Popover.Content>
-              <div className="w-48 p-1">
-                <div className="flex items-center justify-between">
-                  <span>일요일 지점 휴무</span>
-                  <Switch checked={isSundayOff} onCheckedChange={setIsSundayOff} />
-                </div>
-              </div>
-            </Popover.Content>
-          </Popover.Root>
-
-          <Popover.Root open={branchModalOpen} onOpenChange={setBranchModalOpen}>
-            <Popover.Trigger>
-              <Button variant="surface" color="gray" size="2" onClick={handleBranchModalOpen}>
-                휴무일 지정
-              </Button>
-            </Popover.Trigger>
-            <Popover.Content>
-              <div className="p-4">
-                <DayPicker
-                  mode="multiple"
-                  selected={tempSelectedHolidays}
-                  onSelect={handleTempHolidaySelection}
-                  locale={ko}
-                  defaultMonth={currentDate.toDate()}
-                  month={branchModalMonth}
-                  onMonthChange={setBranchModalMonth}
-                  formatters={{
-                    formatCaption: (date: Date) => dayjs(date).format('YYYY년 MM월'),
-                  }}
-                  classNames={{
-                    day: 'p-1 text-lg',
-                    today: `font-bold text-xl text-amber-500`,
-                    selected: `bg-purple-10 rounded-full`,
-                    root: `${defaultClassNames.root}`,
-                    chevron: `${defaultClassNames.chevron} fill-purple-30`,
+      {isClosedDaysFetching ? (
+        <div>로딩 중...</div>
+      ) : (
+        <>
+          <header className="relative flex justify-between items-center">
+            <SelectBox title="지점 선택" name="지점 선택" options={branchSelection} />
+            {view === 'dayGridMonth' ? (
+              <div className="absolute left-1/2 transform -translate-x-1/2">
+                <ChangeMonth
+                  currMonth={currentDate}
+                  onChangeMonth={(newDate: dayjs.Dayjs) => {
+                    setCurrentDate(newDate);
                   }}
                 />
-                <div className="mt-4 flex justify-between">
-                  <Button variant="soft" color="gray" onClick={handleBranchModalClose}>
-                    닫기
-                  </Button>
-                  <div className="flex gap-2">
-                    <Button variant="soft" color="gray" onClick={handleHolidayReset}>
-                      초기화
-                    </Button>
-                    <Button onClick={handleBranchHolidayRegister}>등록</Button>
-                  </div>
-                </div>
               </div>
-            </Popover.Content>
-          </Popover.Root>
+            ) : (
+              <div className="absolute left-1/2 transform -translate-x-1/2">
+                <ChangeWeek
+                  currWeek={currentDate}
+                  onChangeWeek={(newDate: dayjs.Dayjs) => {
+                    setCurrentDate(newDate);
+                  }}
+                />
+              </div>
+            )}
+            <div className="flex gap-2">
+              <Popover.Root>
+                <Popover.Trigger>
+                  <Button variant="surface" color="gray" size="2">
+                    <PiGear className="w-4 h-4" />
+                  </Button>
+                </Popover.Trigger>
+                <Popover.Content>
+                  <div className="w-48 p-1">
+                    <div className="flex items-center justify-between">
+                      <span>일요일 지점 휴무</span>
+                      <Switch checked={isSundayOff} onCheckedChange={setIsSundayOff} />
+                    </div>
+                  </div>
+                </Popover.Content>
+              </Popover.Root>
 
-          <Button variant="surface" color="gray" size="2" onClick={handleEmployeeModalOpen}>
-            다중 휴무 등록
-          </Button>
-          {/* <Button variant="surface" color="gray" size="2">
-            파트타임
-          </Button> */}
+              <Popover.Root open={branchModalOpen} onOpenChange={setBranchModalOpen}>
+                <Popover.Trigger>
+                  <Button variant="surface" color="gray" size="2" onClick={handleBranchModalOpen}>
+                    휴무일 지정
+                  </Button>
+                </Popover.Trigger>
+                <Popover.Content>
+                  <div className="p-4">
+                    <DayPicker
+                      mode="multiple"
+                      selected={tempSelectedHolidays}
+                      onSelect={handleTempHolidaySelection}
+                      locale={ko}
+                      defaultMonth={currentDate.toDate()}
+                      month={branchModalMonth}
+                      onMonthChange={setBranchModalMonth}
+                      formatters={{
+                        formatCaption: (date: Date) => dayjs(date).format('YYYY년 MM월'),
+                      }}
+                      classNames={{
+                        day: 'p-1 text-lg',
+                        today: `font-bold text-xl text-amber-500`,
+                        selected: `bg-purple-10 rounded-full`,
+                        root: `${defaultClassNames.root}`,
+                        chevron: `${defaultClassNames.chevron} fill-purple-30`,
+                      }}
+                    />
+                    <div className="mt-4 flex justify-between">
+                      <Button variant="soft" color="gray" onClick={handleBranchModalClose}>
+                        닫기
+                      </Button>
+                      <div className="flex gap-2">
+                        <Button variant="soft" color="gray" onClick={handleHolidayReset}>
+                          초기화
+                        </Button>
+                        <Button onClick={handleBranchHolidayRegister}>등록</Button>
+                      </div>
+                    </div>
+                  </div>
+                </Popover.Content>
+              </Popover.Root>
 
-          <Button variant="surface" color="gray" size="2" onClick={handleCalendarView}>
-            {view === 'dayGridMonth' ? '주간' : '월간'}
-          </Button>
-        </div>
+              <Button variant="surface" color="gray" size="2" onClick={handleEmployeeModalOpen}>
+                다중 휴무 등록
+              </Button>
+              {/* <Button variant="surface" color="gray" size="2">
+                파트타임
+              </Button> */}
 
-        <EmployeeHolidayRegisterModal
-          isOpen={employeeModalOpen}
-          onClose={handleEmployeeModalClose}
-          employees={DUMMY_EMPLOYEES}
-          onRegisterHoliday={handleEmployeeHolidayRegister}
-          currDate={currentDate}
-        />
-      </header>
+              <Button variant="surface" color="gray" size="2" onClick={handleCalendarView}>
+                {view === 'dayGridMonth' ? '주간' : '월간'}
+              </Button>
+            </div>
 
-      <main className="flex-grow overflow-y-auto px-3 pb-3 bg-white rounded-md">
-        <HolidayCalendar
-          currDate={currentDate}
-          view={view}
-          onDateAndEventClick={handleDateAndEventClick}
-          events={MOCK_EVENTS}
-          isSundayOff={isSundayOff}
-          holidays={holidays}
-        />
-      </main>
+            <EmployeeHolidayRegisterModal
+              isOpen={employeeModalOpen}
+              onClose={handleEmployeeModalClose}
+              employees={DUMMY_EMPLOYEES}
+              onRegisterHoliday={handleEmployeeHolidayRegister}
+              currDate={currentDate}
+            />
+          </header>
+
+          <main className="flex-grow overflow-y-auto px-3 pb-3 bg-white rounded-md">
+            <HolidayCalendar
+              currDate={currentDate}
+              view={view}
+              onDateAndEventClick={handleDateAndEventClick}
+              events={MOCK_EVENTS}
+              isSundayOff={isSundayOff}
+              holidays={holidays}
+            />
+          </main>
+        </>
+      )}
     </div>
   );
 }
-
-const DUMMY_DROP_DOWN_MENU = [
-  {
-    id: 1,
-    name: '뮤즈의원(강남점)',
-    action: () => {
-      console.log('뮤즈의원(강남점)');
-    },
-  },
-  {
-    id: 2,
-    name: '뮤즈의원(수원인계점)',
-    action: () => {
-      console.log('뮤즈의원(수원인계점)');
-    },
-  },
-];
 
 const DUMMY_EMPLOYEES = [
   {

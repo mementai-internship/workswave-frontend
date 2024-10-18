@@ -1,4 +1,3 @@
-import { Txt } from '@/components/Common/Txt';
 import * as Dialog from '@radix-ui/react-dialog';
 import * as Tooltip from '@radix-ui/react-tooltip';
 import { Button } from '@radix-ui/themes';
@@ -6,6 +5,8 @@ import { ko } from 'date-fns/locale';
 import dayjs from 'dayjs';
 import { useState } from 'react';
 import { DayPicker, getDefaultClassNames } from 'react-day-picker';
+
+import { Txt } from '@/components/Common/Txt';
 
 interface IHolidayRegisterModalProps {
   isOpen: boolean;
@@ -22,7 +23,7 @@ export default function HolidayRegisterModal({
   onRegisterHoliday,
   currDate,
 }: IHolidayRegisterModalProps) {
-  const defaultClassNames = getDefaultClassNames(); // react-day-picker 에서 tailwind 사용을 위한 선언
+  const defaultClassNames = getDefaultClassNames();
   const [selectedDates, setSelectedDates] = useState<{ [employeeId: string]: Date[] }>({});
   const [currentEmployee, setCurrentEmployee] = useState<string | null>(null);
   const [showTooltip, setShowTooltip] = useState<boolean>(false);
