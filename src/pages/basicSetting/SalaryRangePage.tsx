@@ -1,26 +1,45 @@
-import SalaryRangeHeader from '@/components/BasicSetting/SalaryRange/SalaryRangeHeader';
-import SalaryRangeTable from '@/components/BasicSetting/SalaryRange/SalaryRangeTable';
-import Title from '@/components/Common/Title';
-import { Txt } from '@/components/Common/Txt';
-import { SALARY_RANGE_BORDER_COLOR } from '@/constants/salaryRange';
-import { useSalaryRange } from '@/hooks/useSalaryRange';
-import { useEffect } from 'react';
+import dayjs from 'dayjs';
+
+// import { useEffect } from 'react';
+// import SalaryRangeHeader from '@/components/BasicSetting/SalaryRange/SalaryRangeHeader';
+// import SalaryRangeTable from '@/components/BasicSetting/SalaryRange/SalaryRangeTable';
+// import Title from '@/components/Common/Title';
+// import { Txt } from '@/components/Common/Txt';
+// import { SALARY_RANGE_BORDER_COLOR } from '@/constants/salaryRange';
+import useGetSalaryBracket from '@/hooks/apis/useSalaryBracket';
+
+// import { ITax } from '@/utils/calculateSalaryRange';
 
 export default function SalaryRangePage() {
-  const { calculatedSalary, onSubmit, register, setValue, handleSubmit, watch, salaries } =
-    useSalaryRange();
+  const currentYear = dayjs().year();
+  const { data } = useGetSalaryBracket(currentYear.toString());
 
-  const inputSalary = watch('inputSalary');
+  console.log(data);
 
-  useEffect(() => {
-    if (inputSalary < 0) {
-      setValue('inputSalary', 0);
-    }
-  }, [inputSalary, setValue]);
+  // useEffect(() => {
+  //   const taxPercentageCalculation: ITax = {
+  //     national_pension: data.national_pension,
+  //     health_insurance: data.health_insurance,
+  //     long_term_care_insurance: data.long_term_care_insurance,
+  //     employment_insurance: data.employment_insurance,
+  //     local_income_tax_rate: data.long_term_care_insurance,
+  //   };
+  // }, [currentYear]);
+
+  // const { calculatedSalary, onSubmit, register, setValue, handleSubmit, watch, salaries } =
+  //   useSalaryRange();
+
+  // const inputSalary = watch('inputSalary');
+
+  // useEffect(() => {
+  //   if (inputSalary < 0) {
+  //     setValue('inputSalary', 0);
+  //   }
+  // }, [inputSalary, setValue]);
 
   return (
     <div className="w-full">
-      <div
+      {/* <div
         className={`min-w-[1700px] mx-auto w-full overflow-x-scroll border ${SALARY_RANGE_BORDER_COLOR}`}
       >
         <div className={`bg-[#ffffff]`}>
@@ -51,7 +70,7 @@ export default function SalaryRangePage() {
             />
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
