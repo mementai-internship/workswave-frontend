@@ -1,9 +1,10 @@
+import React, { useState } from 'react';
+
 import Pagination from '@/components/Common/Pagination';
 import CommuteTable from '@/components/WorkManagement/Commute/CommuteTable';
 import DetailCommuteRecord from '@/components/WorkManagement/Commute/DetailCommuteRecord';
 import { mockStatistics } from '@/constants/workManagementTable/workSelect.mock';
 import { ICommuteData } from '@/models/work.model';
-import React, { useState } from 'react';
 
 export default function CommuteManagementPage() {
   const [showAllStatus, setShowAllStatus] = useState(true);

@@ -1,5 +1,7 @@
 import dayjs from 'dayjs';
 
+import { Txt } from '@/components/Common/Txt';
+
 export type TMonthChange = 'prev' | 'next';
 
 interface IChangeSalarySettlementMonthProps {
@@ -15,12 +17,34 @@ export function ChangeMonth({ currMonth, onChangeMonth }: IChangeSalarySettlemen
   };
 
   return (
-    <div className="flex w-48 items-center justify-center h-10 bg-white border rounded-md">
-      <button onClick={() => handleMonthChange('prev')} className="p-2">
+    <div className="flex w-48 items-center justify-between h-10 bg-white border rounded-md">
+      <button onClick={() => handleMonthChange('prev')} className="w-8 pt-1 h-10 border-r text-xl">
         &lt;
       </button>
-      <span className="px-4 py-2 w-32 text-center">{currMonth.format('YYYY년 M월')}</span>
-      <button onClick={() => handleMonthChange('next')} className="p-2">
+      <Txt variant="subtitle1" className="pt-1">
+        {currMonth.format('YYYY년 M월')}
+      </Txt>
+      <button onClick={() => handleMonthChange('next')} className="w-8 pt-1 h-10 border-l text-xl">
+        &gt;
+      </button>
+    </div>
+  );
+}
+
+export function ChangeMonthNone({ currMonth, onChangeMonth }: IChangeSalarySettlementMonthProps) {
+  const handleMonthChange = (direction: TMonthChange) => {
+    const newDate =
+      direction === 'prev' ? currMonth.subtract(1, 'month') : currMonth.add(1, 'month');
+    onChangeMonth(newDate);
+  };
+
+  return (
+    <div className="flex w-60 items-center justify-center h-10 gap-5">
+      <button onClick={() => handleMonthChange('prev')} className="px-1 pt-1 text-3xl text-gray-50">
+        &lt;
+      </button>
+      <Txt variant="h4">{currMonth.format('YYYY년 M월')}</Txt>
+      <button onClick={() => handleMonthChange('next')} className="px-1 pt-1 text-3xl text-gray-50">
         &gt;
       </button>
     </div>

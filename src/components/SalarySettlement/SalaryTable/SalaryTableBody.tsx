@@ -36,20 +36,6 @@ export function SalaryTableBody({
               {employee.department}
             </div>
           </Table.Cell>
-          <Table.Cell className="max-w-32">
-            {employee.resignDate ? (
-              <>
-                <div className="text-ellipsis overflow-hidden whitespace-nowrap">
-                  {employee.hireDate}
-                </div>
-                <div className="text-ellipsis overflow-hidden whitespace-nowrap">
-                  {employee.resignDate}
-                </div>
-              </>
-            ) : (
-              employee.hireDate
-            )}
-          </Table.Cell>
           <Table.Cell align="center" className="min-w-28 max-w-28 p-0">
             {employee.salary.toLocaleString()}
           </Table.Cell>
