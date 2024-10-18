@@ -17,16 +17,24 @@ export default function MemberManagementPage() {
   const currentTab = queryParams.get('status') || '전체';
   const currentBranch = queryParams.get('search_branch_id') || '0';
   const currentPart = queryParams.get('search_part_id') || '0';
+  const updatedSearchName = queryParams.get('search_name') || '0';
+  const updatedSearchPhone = queryParams.get('search_phone') || '0';
   const itemsPerPage = 6;
 
   const [selectedTab, setSelectedTab] = useState<string>(currentTab);
   const [selectedBranch, setSelectedBranch] = useState<string>(currentBranch);
   const [selectedPart, setSelectedPart] = useState<string>(currentPart);
+  const [, setSearchName] = useState<string>(updatedSearchName);
+  const [, setSearchPhone] = useState<string>(updatedSearchPhone);
   const [filterKey, setFilterKey] = useState<string>('');
 
   function updateQueryParams(key: string, value: string) {
     queryParams.set(key, value);
     queryParams.set('page', '1');
+
+    setSearchName(updatedSearchName);
+    setSearchPhone(updatedSearchPhone);
+
     navigate(`/member-management?${queryParams.toString()}`);
   }
 
@@ -48,11 +56,15 @@ export default function MemberManagementPage() {
     queryParams.delete('search_branch_id');
     queryParams.delete('search_part_id');
     queryParams.delete('status');
+    queryParams.delete('search_name');
+    queryParams.delete('search_phone');
     queryParams.set('page', '1');
 
     setSelectedBranch('0');
     setSelectedPart('0');
     setSelectedTab('전체');
+    setSearchName('0');
+    setSearchPhone('0');
     setFilterKey((prev) => prev + 1);
     navigate(`/member-management?${queryParams.toString()}`);
   }
@@ -62,8 +74,12 @@ export default function MemberManagementPage() {
     itemsPerPage,
     selectedTab,
     selectedBranch,
-    selectedPart
+    selectedPart,
+    updatedSearchName,
+    updatedSearchPhone
   );
+
+  console.log(userList);
   const { data: currentUser } = useGetCurrentUser();
 
   const tabList = [

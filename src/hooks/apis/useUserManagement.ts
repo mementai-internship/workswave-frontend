@@ -13,11 +13,13 @@ export const useGetUsers = (
   recordSize: number,
   status?: string,
   branch?: string,
-  part?: string
+  part?: string,
+  name?: string,
+  phone?: string
 ) => {
   return useQuery({
-    queryKey: [QUERY_KEYS.userManagementList, page, recordSize, status, branch, part],
-    queryFn: () => userManagementApi.getUsers(page, recordSize, status, branch, part),
+    queryKey: [QUERY_KEYS.userManagementList, page, recordSize, status, branch, part, name, phone],
+    queryFn: () => userManagementApi.getUsers(page, recordSize, status, branch, part, name, phone),
   });
 };
 
