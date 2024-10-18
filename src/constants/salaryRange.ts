@@ -8,3 +8,6 @@ export const CELL_BG_COLOR = {
   white: 'bg-[#ffffff]',
   red: 'bg-[#FFF2F2]',
 };
+
+export const MINIMUM_SALARY = 10000000;
+export const MAXIMUM_SALARY = 400000000;
