@@ -1,5 +1,6 @@
 import { MAXIMUM_SALARY, MINIMUM_SALARY } from '@/constants/salaryRange';
-import { ITax, calculateSalaryDataByAnnualSalary } from '@/utils/calculateSalaryRange';
+import { ITax } from '@/models/salary-range.model';
+import { calculateSalaryDataByAnnualSalary } from '@/utils/calculateSalaryRange';
 
 export const calculateInitialValueSalaryRange = (tax: ITax) => {
   const calculatedSalaryWithMealAllowance = [];

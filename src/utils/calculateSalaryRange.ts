@@ -1,3 +1,5 @@
+import { ICalculatedSalary, ICalculatedSalaryOutput, ITax } from '@/models/salary-range.model';
+
 export interface ICalculatedBasedSalary {
   salary: number;
   mealAllowance: number;
@@ -10,36 +12,12 @@ export interface ICalculatedBasedAnnualSalary {
   tax: ITax;
 }
 
-export interface ITax {
-  national_pension: number;
-  health_insurance: number;
-  long_term_care_insurance: number;
-  employment_insurance: number;
-  local_income_tax_rate: number;
-}
-
 export interface ICalculatedSalaryProps {
   salary: number;
   annualSalary: number;
   mealAllowance: number;
   tax: ITax;
 }
-
-export interface ICalculatedSalaryOutput {
-  annualSalary: number;
-  salary: number;
-  salaryWithoutMealAllowance: number;
-  mealAllowance: number;
-  netPay: number;
-  totalDeductions: number;
-  nationalPension: number;
-  healthInsurance: number;
-  employmentInsurance: number;
-  longTermCareInsurance: number;
-  incomeTax: number;
-  localIncomeTax: number;
-}
-
 // 연봉을 바탕으로 급여계산데이터를 만드는 함수
 export const calculateSalaryDataByAnnualSalary = (data: ICalculatedBasedAnnualSalary) => {
   const salary = Math.round(data.annualSalary / 12);
@@ -58,7 +36,7 @@ const calculateSalaryData = ({
   annualSalary,
   mealAllowance,
   tax,
-}: ICalculatedSalaryProps) => {
+}: ICalculatedSalaryProps): ICalculatedSalaryOutput => {
   const salaryWithoutMealAllowance = salary - mealAllowance;
   const adjustedValue = (value: number) => Math.floor(value / 100 / 10) * 10;
 
@@ -94,5 +72,25 @@ const calculateSalaryData = ({
     longTermCareInsurance,
     incomeTax,
     localIncomeTax,
+  };
+};
+
+export const calculateSalaryResult = (salary: number, tax: ITax): ICalculatedSalary => {
+  if (salary < 0) return;
+  const salaryWithMealAllowance = calculateSalaryDataBySalary({
+    salary,
+    mealAllowance: 200000,
+    tax,
+  });
+  const salaryWithoutMealAllowance = calculateSalaryDataBySalary({ salary, mealAllowance: 0, tax });
+
+  return {
+    salaryWithMealAllowance,
+    salaryWithoutMealAllowance,
+    salaryDetails: {
+      annualSalary: salaryWithMealAllowance.annualSalary,
+      netPayWithMealAllowance: salaryWithMealAllowance.netPay,
+      netPayWithoutMealAllowance: salaryWithoutMealAllowance.netPay,
+    },
   };
 };
