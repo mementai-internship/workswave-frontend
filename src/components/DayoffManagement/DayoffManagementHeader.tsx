@@ -4,6 +4,7 @@ import { ko } from 'date-fns/locale';
 import React, { useState } from 'react';
 import { DayPicker, getDefaultClassNames } from 'react-day-picker';
 import { PiGear } from 'react-icons/pi';
+import { Link } from 'react-router-dom';
 
 import SelectBox from '@/components/Common/Select';
 import TitleContainer from '@/components/Common/TitleContainer';
@@ -16,11 +17,12 @@ export default function DayoffManagementHeader() {
   return (
     <div>
       <div className="flex justify-between items-center">
+
         <TitleContainer content="연차관리">
           <div className="flex flex-row gap-2 items-center">
             <Button color="gray" variant="soft" radius="full" onClick={() => {}}>
               <PiGear />
-              최고관리자설정
+              <Link to="/dayoff-management/approval-history">전체승인내역</Link>
             </Button>
           </div>
         </TitleContainer>
