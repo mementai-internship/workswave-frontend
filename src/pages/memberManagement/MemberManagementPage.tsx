@@ -1,7 +1,7 @@
 import { Button } from '@radix-ui/themes';
 import { useState } from 'react';
 import { PiGear } from 'react-icons/pi';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import Pagination from '@/components/Common/Pagination';
 import TitleContainer from '@/components/Common/TitleContainer';
@@ -10,35 +10,41 @@ import MemberManagementTable from '@/components/MemberManagement/MemberManagemen
 import { useGetCurrentUser, useGetUsers } from '@/hooks/apis/useUserManagement';
 
 export default function MemberManagementPage() {
-  const [selectedTab, setSelectedTab] = useState<string>('all');
-  function handleTabClick(tab: string) {
-    setSelectedTab(tab);
-  }
-
+  const navigate = useNavigate();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const currentPage = parseInt(queryParams.get('page') || '1', 10);
+  const currentTab = queryParams.get('status') || '전체';
   const itemsPerPage = 10;
 
-  const { data: userList } = useGetUsers(currentPage, itemsPerPage);
+  const [selectedTab, setSelectedTab] = useState<string>(currentTab);
+
+  function handleTabClick(tab: string) {
+    queryParams.set('status', tab);
+    setSelectedTab(tab);
+    queryParams.set('page', '1');
+    navigate(`/member-management?${queryParams.toString()}`);
+  }
+
+  const { data: userList } = useGetUsers(currentPage, itemsPerPage, selectedTab);
   const { data: currentUser } = useGetCurrentUser();
 
   const tabList = [
     {
       name: '전체',
-      value: 'all',
+      value: '전체',
     },
     {
       name: '퇴사자',
-      value: 'resignee',
+      value: '퇴사자',
     },
     {
       name: '휴직자',
-      value: 'vacation',
+      value: '휴직자',
     },
     {
       name: '삭제회원',
-      value: 'deleted',
+      value: '삭제유저',
     },
   ];
 

@@ -12,7 +12,6 @@ export default function MemberManagementTableCell({
   data: IMemberManagementTableData;
   tab: string;
 }) {
-  // 테스트용 코드
   console.log(tab);
   return (
     <Table.Row

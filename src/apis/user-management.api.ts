@@ -15,10 +15,10 @@ import {
 } from '@/models/user-management.model';
 
 const userManagementApi = {
-  getUsers: async (page: number, recordSize: number) => {
+  getUsers: async (page: number, recordSize: number, status?: string) => {
     try {
       const response = await axiosInstance.get<TGetUsersResponse>(
-        `/user-management?page=${page}&record_size=${recordSize}`
+        `/user-management?search_status=${status}&page=${page}&record_size=${recordSize}`
       );
       return response.data;
     } catch (error) {
