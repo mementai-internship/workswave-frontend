@@ -28,7 +28,7 @@ export const closedDaysApi = {
   getClosedDays: async (branchId: number) => {
     try {
       console.log(`getClosedDays [지점 "${branchId}"] [휴무일 - 모든 날짜] 조회`);
-      const response = await axiosInstance.get(`/branches/closed_days/${branchId}`);
+      const response = await axiosInstance.get(`/branches/${branchId}/closed_days`);
       console.log('%c getClosedDays [지점] [휴무일 - 모든 날짜] 응답', 'color: orange;', response);
 
       return response.data;
