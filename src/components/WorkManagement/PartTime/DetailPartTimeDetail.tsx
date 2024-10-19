@@ -41,23 +41,37 @@ export default function DetailPartTimeList({
         <Table.Body>
           {detailPartTimeData.map((row, index) => (
             <Table.Row key={index}>
-              <Table.Cell align="center">{row.date}</Table.Cell>
-              <Table.Cell align="center">{row.department}</Table.Cell>
-              <Table.Cell align="center">
+              <Table.Cell align="center" className="align-middle">
+                {row.date}
+              </Table.Cell>
+              <Table.Cell align="center" className="align-middle">
+                {row.department}
+              </Table.Cell>
+              <Table.Cell align="center" className="align-middle">
                 <SelectBox title={row.workSection} options={[]} size="xSmall" />
               </Table.Cell>
 
-              <Table.Cell align="center">{row.startTime}</Table.Cell>
-              <Table.Cell align="center">{row.endTime}</Table.Cell>
+              <Table.Cell align="center" className="align-middle">
+                {row.startTime}
+              </Table.Cell>
+              <Table.Cell align="center" className="align-middle">
+                {row.endTime}
+              </Table.Cell>
               <Table.Cell align="center">
                 <SelectBox title={row.settingTime} options={[]} size="xSmall" />
               </Table.Cell>
-              <Table.Cell align="center">{row.workHours}</Table.Cell>
+              <Table.Cell align="center" className="align-middle">
+                {row.workHours}
+              </Table.Cell>
               <Table.Cell align="center">
                 <SelectBox title={row.breakTime} options={[]} size="xSmall" />
               </Table.Cell>
-              <Table.Cell align="center">{row.finalAmount}</Table.Cell>
-              <Table.Cell align="center">{row.registrationDate}</Table.Cell>
+              <Table.Cell align="center" className="align-middle">
+                {row.finalAmount}
+              </Table.Cell>
+              <Table.Cell align="center" className="align-middle">
+                {row.registrationDate}
+              </Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>
