@@ -1,7 +1,7 @@
 import { Table } from '@radix-ui/themes';
 
+import GenderIcon from '@/components/WorkManagement/GenderIcon';
 import DetailPartTime from '@/components/WorkManagement/PartTime/DetailPartTime';
-import { GenderIcon } from '@/components/WorkManagement/Work/WorkTableRows';
 import { PARTTIMEHEADTABLE } from '@/constants/workManagement/workTable';
 import { partTimeMockData } from '@/constants/workManagement/workTable.mock';
 
