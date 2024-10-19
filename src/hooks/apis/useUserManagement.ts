@@ -29,10 +29,10 @@ export const usePostUser = () => {
   });
 };
 
-export const useGetCurrentUser = () => {
+export const useGetCurrentUserInfo = () => {
   return useQuery({
     queryKey: [QUERY_KEYS.userManagementCurrentUser],
-    queryFn: () => userManagementApi.getCurrentUser(),
+    queryFn: () => userManagementApi.getCurrentUserInfo(),
   });
 };
 

@@ -45,58 +45,59 @@ export type TPostUserResponse = {
 };
 
 export type TGetCurrentUserResponse = {
-  data: {
+  data: TCurrentUserInfo;
+};
+
+export type TCurrentUserInfo = {
+  address: string;
+  birth_date: string;
+  branch: {
     address: string;
-    birth_date: string;
-    branch: {
-      address: string;
-      call_number: string;
-      code: string;
-      corporate_seal: string;
-      created_at: string;
-      deleted_yn: string;
-      id: number;
-      mail_address: string;
-      name: string;
-      nameplate: string;
-      registration_number: string;
-      representative_name: string;
-      updated_at: string;
-    };
-    branch_id: number;
+    call_number: string;
+    code: string;
+    corporate_seal: string;
     created_at: string;
     deleted_yn: string;
-    education: string;
-    email: string;
-    gender: string;
-    hire_date: string;
     id: number;
-    last_career_end_date: string;
-    last_career_start_date: string;
-    last_company: string;
-    last_position: string;
+    mail_address: string;
     name: string;
-    part: {
-      branch_id: number;
-      color: string;
-      created_at: string;
-      deleted_yn: string;
-      id: number;
-      is_doctor: boolean;
-      leave_granting_authority: boolean;
-      name: string;
-      required_certification: string;
-      task: string;
-      updated_at: string;
-    };
-    part_id: number;
-    password: string;
-    phone_number: string;
-    resignation_date: string;
-    role: string;
+    nameplate: string;
+    registration_number: string;
+    representative_name: string;
     updated_at: string;
   };
-  message: string;
+  branch_id: number;
+  created_at: string;
+  deleted_yn: string;
+  education: string;
+  email: string;
+  gender: string;
+  hire_date: string;
+  id: number;
+  last_career_end_date: string;
+  last_career_start_date: string;
+  last_company: string;
+  last_position: string;
+  name: string;
+  part: {
+    branch_id: number;
+    color: string;
+    created_at: string;
+    deleted_yn: string;
+    id: number;
+    is_doctor: boolean;
+    leave_granting_authority: boolean;
+    name: string;
+    required_certification: string;
+    task: string;
+    updated_at: string;
+  };
+  part_id: number;
+  password: string;
+  phone_number: string;
+  resignation_date: string;
+  role: string;
+  updated_at: string;
 };
 
 export type TGetUserDetailResponse = {

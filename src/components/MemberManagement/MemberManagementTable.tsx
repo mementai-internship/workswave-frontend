@@ -8,13 +8,13 @@ import {
   MEMBER_MANAGEMENT_TABLE_TITLE_LEAVE,
   MEMBER_MANAGEMENT_TABLE_TITLE_REST,
 } from '@/constants/memberManagementTableTitle';
-import { TGetCurrentUserResponse } from '@/models/user-management.model';
+import { TCurrentUserInfo } from '@/models/user-management.model';
 
 export interface IMemberManagementTableProps {
   data: IMemberManagementTableData[];
   allUserList?: IMemberManagementTableData[];
   tab: string;
-  currentUser: TGetCurrentUserResponse;
+  currentUser: TCurrentUserInfo;
 }
 
 export interface IMemberManagementTableData {
@@ -37,12 +37,12 @@ export default function MemberManagementTable({
   tab,
   currentUser,
 }: IMemberManagementTableProps) {
-  if (!data || currentUser.data.id === 0) {
+  if (!data || currentUser.id === 0) {
     return <div>Loading...</div>;
   }
 
-  const userId = currentUser.data.id;
-  console.log(currentUser.data.id);
+  const userId = currentUser.id;
+  console.log(currentUser.id);
   return (
     <Table.Root>
       <Table.Header>

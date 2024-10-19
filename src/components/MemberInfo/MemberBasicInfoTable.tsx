@@ -8,6 +8,7 @@ import {
   MEMBER_BASIC_INFO_TITLE1,
   MEMBER_BASIC_INFO_TITLE2,
 } from '@/constants/memberManagementTableTitle';
+import { useGetCurrentUserInfo } from '@/hooks/apis/useUserManagement';
 
 //test data API 연결 후 삭제
 const memberInfoDropdownMenu = [
@@ -24,6 +25,9 @@ const memberInfoDropdownMenu = [
 ];
 
 export default function MemberBasicInfoTable() {
+  const { data: currentUserInfo } = useGetCurrentUserInfo();
+  console.log(currentUserInfo);
+
   return (
     <Table.Root className="table-fixed h-full">
       <Table.Header>

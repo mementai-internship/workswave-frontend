@@ -45,10 +45,10 @@ const userManagementApi = {
       throw new Error('사용자를 생성하는 데 실패했습니다.');
     }
   },
-  getCurrentUser: async () => {
+  getCurrentUserInfo: async () => {
     try {
       const response = await axiosInstance.get<TGetCurrentUserResponse>(`/user-management/me`);
-      return response.data;
+      return response.data.data;
     } catch (error) {
       isAxiosError(error);
       throw new Error('현재 사용자를 가져오는 데 실패했습니다.');
