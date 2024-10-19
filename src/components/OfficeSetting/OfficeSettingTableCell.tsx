@@ -12,7 +12,7 @@ interface IProps {
 }
 
 export default function OfficeSettingTableCell({ action, data, idx, buttonText }: IProps) {
-  const isNotEmpty = (file: string) => (file !== 'None' ? 'Y' : 'N');
+  const isNotEmpty = (file: string) => (file ? 'Y' : 'N');
   const [searchParams] = useSearchParams();
   const currentPage = searchParams.get('page') ?? 1;
   const startIdx = (Number(currentPage) - 1) * 10;
