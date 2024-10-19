@@ -2,7 +2,7 @@ import { Table } from '@radix-ui/themes';
 import React from 'react';
 import { useMemo } from 'react';
 
-import { GenderIcon } from '@/components/WorkManagement/Work/WorkTableRows';
+import GenderIcon from '@/components/WorkManagement/GenderIcon';
 import { commuteMockData } from '@/constants/workManagement/workTable.mock';
 import { ICommuteData } from '@/models/work.model';
 
