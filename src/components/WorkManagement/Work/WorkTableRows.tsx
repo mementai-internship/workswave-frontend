@@ -1,6 +1,7 @@
-import { ICommuteData, IWorkData } from '@/models/work.model';
 import { Table } from '@radix-ui/themes';
 import { PiGenderFemaleBold, PiGenderMaleBold } from 'react-icons/pi';
+
+import { ICommuteData, IWorkData } from '@/models/work.model';
 
 export const GenderIcon = ({ gender }: { gender: number }) => {
   return gender ? (

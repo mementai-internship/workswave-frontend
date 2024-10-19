@@ -36,8 +36,8 @@ const SUPREME_AUTH_NAVIGATION = [
         childContent: '계약서 관리',
       },
       {
-        childPath: '/document-management/holiday-management',
-        childContent: '휴무 관리',
+        childPath: '/document-management/dayoff-management',
+        childContent: '휴직 관리',
       },
     ],
   },

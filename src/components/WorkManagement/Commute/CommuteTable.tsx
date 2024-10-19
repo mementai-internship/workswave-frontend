@@ -1,9 +1,10 @@
-import { GenderIcon } from '@/components/WorkManagement/Work/WorkTableRows';
-import { commuteMockData } from '@/constants/workManagementTable/workTable.mock';
-import { ICommuteData } from '@/models/work.model';
 import { Table } from '@radix-ui/themes';
 import React from 'react';
 import { useMemo } from 'react';
+
+import { GenderIcon } from '@/components/WorkManagement/Work/WorkTableRows';
+import { commuteMockData } from '@/constants/workManagementTable/workTable.mock';
+import { ICommuteData } from '@/models/work.model';
 
 export default function CommuteTable({
   handleShowAllStatus,
