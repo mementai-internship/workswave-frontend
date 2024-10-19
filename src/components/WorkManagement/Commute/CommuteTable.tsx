@@ -70,6 +70,13 @@ const EmployeeRow = React.memo(({ employee, dayHeaders, onClick }: IEmployeeRowP
     </Table.Cell>
     {dayHeaders.map((_, index) => {
       const daySchedule = employee.schedule[index + 1];
+      if (daySchedule?.isDayOff) {
+        return (
+          <Table.Cell key={index} colSpan={2} className="text-center">
+            휴무
+          </Table.Cell>
+        );
+      }
       return (
         <React.Fragment key={index}>
           <Table.Cell className="text-center">{daySchedule?.startTime || ''}</Table.Cell>

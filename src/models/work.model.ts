@@ -33,10 +33,12 @@ export interface ICommuteData {
   gender: number;
   position: string;
   days: number;
+  isDayOff: boolean;
   schedule: {
     [key: string]: {
       startTime: string;
       endTime: string;
+      isDayOff: boolean;
     };
   };
 }
