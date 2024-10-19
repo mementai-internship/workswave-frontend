@@ -70,7 +70,7 @@ const EmployeeRow = React.memo(({ employee, dayHeaders, onClick }: IEmployeeRowP
     </Table.Cell>
     {dayHeaders.map((_, index) => {
       const daySchedule = employee.schedule[index + 1];
-      if (daySchedule?.isDayOff) {
+      if (daySchedule?.isHoliday) {
         return (
           <Table.Cell key={index} colSpan={2} className="text-center">
             휴무

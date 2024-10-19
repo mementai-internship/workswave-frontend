@@ -132,13 +132,12 @@ export const commuteMockData: ICommuteData[] = [
     gender: 1,
     position: '코디네이터',
     days: 5,
-    isDayOff: false,
     schedule: {
-      '1': { startTime: '10:24', endTime: '21:08', isDayOff: false },
-      '2': { startTime: '10:39', endTime: '21:00', isDayOff: false },
-      '3': { startTime: '21:08', endTime: '21:08', isDayOff: true },
-      '4': { startTime: '20:30', endTime: '10:38', isDayOff: false },
-      '5': { startTime: '09:00', endTime: '18:00', isDayOff: false },
+      '1': { startTime: '10:24', endTime: '21:08', isHoliday: false },
+      '2': { startTime: '10:39', endTime: '21:00', isHoliday: false },
+      '3': { startTime: '21:08', endTime: '21:08', isHoliday: true },
+      '4': { startTime: '20:30', endTime: '10:38', isHoliday: false },
+      '5': { startTime: '09:00', endTime: '18:00', isHoliday: false },
     },
   },
   {
@@ -148,12 +147,12 @@ export const commuteMockData: ICommuteData[] = [
     gender: 2,
     position: '간호사',
     days: 4,
-    isDayOff: false,
+
     schedule: {
-      '1': { startTime: '08:30', endTime: '17:30', isDayOff: false },
-      '2': { startTime: '08:45', endTime: '17:45', isDayOff: false },
-      '3': { startTime: '09:00', endTime: '18:00', isDayOff: false },
-      '4': { startTime: '08:30', endTime: '17:30', isDayOff: false },
+      '1': { startTime: '08:30', endTime: '17:30', isHoliday: false },
+      '2': { startTime: '08:45', endTime: '17:45', isHoliday: false },
+      '3': { startTime: '09:00', endTime: '18:00', isHoliday: false },
+      '4': { startTime: '08:30', endTime: '17:30', isHoliday: false },
     },
   },
   {
@@ -163,14 +162,14 @@ export const commuteMockData: ICommuteData[] = [
     gender: 1,
     position: '의사',
     days: 6,
-    isDayOff: false,
+
     schedule: {
-      '1': { startTime: '09:00', endTime: '18:00', isDayOff: false },
-      '2': { startTime: '09:30', endTime: '18:30', isDayOff: false },
-      '3': { startTime: '09:00', endTime: '18:00', isDayOff: false },
-      '4': { startTime: '09:30', endTime: '18:30', isDayOff: false },
-      '5': { startTime: '09:00', endTime: '18:00', isDayOff: false },
-      '6': { startTime: '10:00', endTime: '15:00', isDayOff: false },
+      '1': { startTime: '09:00', endTime: '18:00', isHoliday: false },
+      '2': { startTime: '09:30', endTime: '18:30', isHoliday: false },
+      '3': { startTime: '09:00', endTime: '18:00', isHoliday: false },
+      '4': { startTime: '09:30', endTime: '18:30', isHoliday: false },
+      '5': { startTime: '09:00', endTime: '18:00', isHoliday: false },
+      '6': { startTime: '10:00', endTime: '15:00', isHoliday: false },
     },
   },
   {
@@ -180,13 +179,13 @@ export const commuteMockData: ICommuteData[] = [
     gender: 2,
     position: '코디네이터',
     days: 5,
-    isDayOff: true,
+
     schedule: {
-      '1': { startTime: '00:00', endTime: '00:00', isDayOff: true },
-      '2': { startTime: '00:00', endTime: '00:00', isDayOff: true },
-      '3': { startTime: '00:00', endTime: '00:00', isDayOff: true },
-      '4': { startTime: '00:00', endTime: '00:00', isDayOff: true },
-      '5': { startTime: '00:00', endTime: '00:00', isDayOff: true },
+      '1': { startTime: '00:00', endTime: '00:00', isHoliday: true },
+      '2': { startTime: '00:00', endTime: '00:00', isHoliday: true },
+      '3': { startTime: '00:00', endTime: '00:00', isHoliday: true },
+      '4': { startTime: '00:00', endTime: '00:00', isHoliday: true },
+      '5': { startTime: '00:00', endTime: '00:00', isHoliday: true },
     },
   },
 ];

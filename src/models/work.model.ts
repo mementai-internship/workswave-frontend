@@ -33,12 +33,11 @@ export interface ICommuteData {
   gender: number;
   position: string;
   days: number;
-  isDayOff: boolean;
   schedule: {
     [key: string]: {
       startTime: string;
       endTime: string;
-      isDayOff: boolean;
+      isHoliday: boolean;
     };
   };
 }
@@ -48,7 +47,7 @@ export interface IWorkStatistics {
   overtimeWorkers: number;
   lateWorkers: number;
   holidayWorkers: number;
-  dayOffWorkers: number;
+  holidayWorkers: number;
   remoteWorkers: number;
 }
 
