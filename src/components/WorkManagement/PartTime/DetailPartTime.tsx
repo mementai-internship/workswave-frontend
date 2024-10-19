@@ -6,7 +6,7 @@ import { PiMagnifyingGlass, PiXBold } from 'react-icons/pi';
 import { ChangeMonth } from '@/components/Common/ChangeMonth';
 import CalculationStandard from '@/components/WorkManagement/PartTime/CalculationStandard';
 import DetailPartTimeList from '@/components/WorkManagement/PartTime/DetailPartTimeDetail';
-import { detailPartTimeData } from '@/constants/workManagementTable/workTable.mock';
+import { detailPartTimeData } from '@/constants/workManagement/workTable.mock';
 
 export default function DetailPartTime() {
   const [month, setMonth] = useState(dayjs());

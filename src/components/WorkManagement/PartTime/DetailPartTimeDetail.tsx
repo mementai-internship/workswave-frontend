@@ -3,7 +3,7 @@ import { PiPencilSimple } from 'react-icons/pi';
 
 import SelectBox from '@/components/Common/Select';
 import DetailTotalPartTime from '@/components/WorkManagement/PartTime/DetailTotalPartTime';
-import { DETAILPARTTIMEHEADTABLE } from '@/constants/workManagementTable/workTable';
+import { DETAILPARTTIMEHEADTABLE } from '@/constants/workManagement/workTable';
 import { IDetailPartTimeData } from '@/models/work.model';
 
 export default function DetailPartTimeList({

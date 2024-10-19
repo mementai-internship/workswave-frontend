@@ -2,8 +2,8 @@ import { Table } from '@radix-ui/themes';
 
 import DetailPartTime from '@/components/WorkManagement/PartTime/DetailPartTime';
 import { GenderIcon } from '@/components/WorkManagement/Work/WorkTableRows';
-import { PARTTIMEHEADTABLE } from '@/constants/workManagementTable/workTable';
-import { partTimeMockData } from '@/constants/workManagementTable/workTable.mock';
+import { PARTTIMEHEADTABLE } from '@/constants/workManagement/workTable';
+import { partTimeMockData } from '@/constants/workManagement/workTable.mock';
 
 export default function PartTime() {
   return (
