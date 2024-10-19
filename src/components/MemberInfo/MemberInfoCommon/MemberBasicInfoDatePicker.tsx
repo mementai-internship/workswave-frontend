@@ -7,9 +7,10 @@ import { PiCalendarCheck } from 'react-icons/pi';
 
 interface IDatePickerProps {
   style?: 'bottom' | 'rightTop';
+  defaultValue?: string;
 }
 
-export default function MemberBasicInfoDatePicker({ style }: IDatePickerProps) {
+export default function MemberBasicInfoDatePicker({ style, defaultValue }: IDatePickerProps) {
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [selectedDate, setSelectedDate] = useState(dayjs().toDate());
 
@@ -25,7 +26,7 @@ export default function MemberBasicInfoDatePicker({ style }: IDatePickerProps) {
   return (
     <div className="relative">
       <TextField.Root className="flex items-center justify-center w-44 h-10 justify-between bg-light-gray border border-gray-30 border-solid text-black rounded-sm p-1">
-        <TextField.Slot>{dayjs(selectedDate).format('YYYY-MM-DD')}</TextField.Slot>
+        <TextField.Slot>{defaultValue}</TextField.Slot>
         <button onClick={handleDateClick}>
           <PiCalendarCheck className="w-6 h-6" />
         </button>

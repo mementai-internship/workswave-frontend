@@ -1,32 +1,23 @@
 import { Button, Table } from '@radix-ui/themes';
 
+import SelectBox from '@/components/Common/Select';
 import MemberBasicInfoDatePicker from '@/components/MemberInfo/MemberInfoCommon/MemberBasicInfoDatePicker';
 import MemberInfoButton from '@/components/MemberInfo/MemberInfoCommon/MemberInfoButton';
-import MemberInfoDropdown from '@/components/MemberInfo/MemberInfoCommon/MemberInfoDropdownMenu';
 import MemberInfoInput from '@/components/MemberInfo/MemberInfoCommon/MemberInfoInput';
 import {
   MEMBER_BASIC_INFO_TITLE1,
   MEMBER_BASIC_INFO_TITLE2,
 } from '@/constants/memberManagementTableTitle';
 import { useGetCurrentUserInfo } from '@/hooks/apis/useUserManagement';
-
-//test data API 연결 후 삭제
-const memberInfoDropdownMenu = [
-  {
-    id: 1,
-    name: '뮤즈의원(강남점)',
-    link: '/member-info/gangnam',
-  },
-  {
-    id: 2,
-    name: '뮤즈의원(수원인계점)',
-    link: '/member-info/suwon',
-  },
-];
+import { useBranchList } from '@/hooks/useBranchList';
+import { usePartList } from '@/hooks/usePartList';
 
 export default function MemberBasicInfoTable() {
   const { data: currentUserInfo } = useGetCurrentUserInfo();
   console.log(currentUserInfo);
+  const branchList = useBranchList();
+  const partList = usePartList();
+  const genderList = ['남자', '여자', '기타'];
 
   return (
     <Table.Root className="table-fixed h-full">
@@ -45,24 +36,38 @@ export default function MemberBasicInfoTable() {
               {(() => {
                 switch (index) {
                   case 0:
-                    return <MemberInfoDropdown title="지점 선택" menu={memberInfoDropdownMenu} />;
+                    return (
+                      <SelectBox
+                        title={currentUserInfo?.branch.name || '지점 선택'}
+                        style="h-10"
+                        options={branchList.map((branch, index) => ({
+                          id: index,
+                          name: branch,
+                          action: () => {},
+                        }))}
+                      />
+                    );
                   case 1:
-                    return <MemberInfoInput defaultValue={'이서인'} />;
+                    return (
+                      <div className="h-[50px] translate-y-1">
+                        <MemberInfoInput defaultValue={currentUserInfo?.name} />
+                      </div>
+                    );
                   case 2:
-                    return <MemberInfoInput defaultValue={'01036270286'} />;
+                    return <MemberInfoInput defaultValue={currentUserInfo?.phone_number} />;
                   case 3:
                     return (
                       <div className="flex items-center gap-2">
                         <MemberInfoButton text="주소입력" />
-                        <MemberInfoInput size="small" defaultValue={'서울특별시 강남구'} />
+                        <MemberInfoInput size="small" defaultValue={currentUserInfo?.address} />
                       </div>
                     );
                   case 4:
                     return <MemberInfoButton text="학력입력" />;
                   case 5:
-                    return <MemberBasicInfoDatePicker />;
+                    return <MemberBasicInfoDatePicker defaultValue={currentUserInfo?.birth_date} />;
                   case 6:
-                    return <MemberBasicInfoDatePicker />;
+                    return <MemberBasicInfoDatePicker defaultValue={currentUserInfo?.hire_date} />;
                   case 7:
                     return <MemberInfoButton text="OT신청" />;
                   default:
@@ -84,7 +89,15 @@ export default function MemberBasicInfoTable() {
                       case 0:
                         return (
                           <>
-                            <MemberInfoDropdown title="권한 선택" menu={memberInfoDropdownMenu} />
+                            <SelectBox
+                              title={currentUserInfo?.role || '권한 선택'}
+                              style="h-10"
+                              options={branchList.map((branch, index) => ({
+                                id: index,
+                                name: branch,
+                                action: () => {},
+                              }))}
+                            />
                             <Button
                               variant="surface"
                               color="gray"
@@ -97,18 +110,40 @@ export default function MemberBasicInfoTable() {
                         );
                       case 1:
                         return (
-                          <MemberInfoDropdown title="성별 선택" menu={memberInfoDropdownMenu} />
+                          <div className="h-[38px]">
+                            <SelectBox
+                              title={currentUserInfo?.gender || '성별 선택'}
+                              style="h-10"
+                              options={genderList.map((gender, index) => ({
+                                id: index,
+                                name: gender,
+                              }))}
+                            />
+                          </div>
                         );
                       case 2:
-                        return <MemberInfoInput size="large" defaultValue={'seoin@test.com'} />;
+                        return (
+                          <MemberInfoInput size="large" defaultValue={currentUserInfo?.email} />
+                        );
                       case 4:
                         return <MemberInfoButton text="경력입력" />;
                       case 5:
                         return (
-                          <MemberInfoDropdown title="근무파트 선택" menu={memberInfoDropdownMenu} />
+                          <SelectBox
+                            title={currentUserInfo?.part.name || '근무 파트 선택'}
+                            style="h-10"
+                            options={partList.map((part, index) => ({
+                              id: index,
+                              name: part,
+                            }))}
+                          />
                         );
                       case 6:
-                        return <MemberBasicInfoDatePicker />;
+                        return (
+                          <MemberBasicInfoDatePicker
+                            defaultValue={currentUserInfo?.resignation_date || '근무 중'}
+                          />
+                        );
                       case 7:
                         return <MemberInfoButton text="연차신청" />;
                       default:

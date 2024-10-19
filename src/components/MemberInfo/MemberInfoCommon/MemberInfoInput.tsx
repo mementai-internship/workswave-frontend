@@ -28,7 +28,7 @@ export default function MemberInfoInput({
 
   return (
     <TextField.Root
-      placeholder={defaultValue}
+      defaultValue={defaultValue}
       className={`flex items-center justify-center ${MemberInfoInputSize[size]} h-10 justify-between bg-light-gray border border-gray-30 border-solid text-black rounded-sm p-1`}
       disabled={isDirectInput}
     >

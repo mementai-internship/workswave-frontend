@@ -8,12 +8,13 @@ interface ISelectProps<T extends FieldValues> {
   options: ISelectOption[];
   size?: '2xSmall' | 'xSmall' | 'small' | 'medium' | 'large';
   border?: boolean;
+  style?: string;
 }
 
 interface ISelectOption {
   id: number;
   name: string;
-  action: () => void;
+  action?: () => void;
 }
 
 export default function SelectBox<T>({
@@ -23,6 +24,7 @@ export default function SelectBox<T>({
   options,
   size = 'medium',
   border = true,
+  style,
 }: ISelectProps<T>) {
   const SelectBoxSize = {
     '2xSmall': 'w-12',
@@ -46,7 +48,7 @@ export default function SelectBox<T>({
       <Select.Trigger
         {...registerOption}
         placeholder={title}
-        className={`${SelectBoxSize[size]} relative justify-between text-black`}
+        className={`${SelectBoxSize[size]} ${style} relative justify-between text-black`}
         variant={border ? 'surface' : 'ghost'}
       />
       <Select.Content>
