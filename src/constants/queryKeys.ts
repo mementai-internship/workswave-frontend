@@ -12,4 +12,7 @@ export const QUERY_KEYS = {
 
   // salary-bracket
   salaryBracket: 'salaryBracket',
+
+  // hour-wage-templates
+  hourWageTemplates: 'hourWageTemplates',
 };
