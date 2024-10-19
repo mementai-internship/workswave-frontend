@@ -40,10 +40,6 @@ export type TPostUserRequest = {
   last_career_end_date: string;
 };
 
-export type TPostUserResponse = {
-  id: number;
-};
-
 export type TGetCurrentUserResponse = {
   data: TCurrentUserInfo;
 };
@@ -126,14 +122,18 @@ export type TPatchUserResponse = {
   id: number;
 };
 
-export type TGetResignedUsersResponse = {
-  id: number;
-};
-
 export type TPatchUserRoleRequest = {
   role: string;
 };
 
 export type TPatchUserRoleResponse = {
   id: number;
+};
+
+export type TGetBranchsResponse = {
+  data: string[];
+};
+
+export type TGetPartsResponse = {
+  data: string[];
 };
