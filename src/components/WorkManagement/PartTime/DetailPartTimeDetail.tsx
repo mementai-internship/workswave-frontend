@@ -2,6 +2,7 @@ import { Table } from '@radix-ui/themes';
 import { PiPencilSimple } from 'react-icons/pi';
 
 import SelectBox from '@/components/Common/Select';
+import CustomTimePicker from '@/components/WorkManagement/PartTime/CustomTimePicker';
 import DetailTotalPartTime from '@/components/WorkManagement/PartTime/DetailTotalPartTime';
 import { DETAILPARTTIMEHEADTABLE } from '@/constants/workManagement/workTable';
 import { IDetailPartTimeData } from '@/models/work.model';
@@ -58,7 +59,14 @@ export default function DetailPartTimeList({
                 {row.endTime}
               </Table.Cell>
               <Table.Cell align="center">
-                <SelectBox title={row.settingTime} options={[]} size="xSmall" />
+                <div className=" flex gap-2 ">
+                  <div>
+                    <CustomTimePicker value={row.startTime} onChange={() => {}} />
+                  </div>
+                  <div>
+                    <CustomTimePicker value={row.startTime} onChange={() => {}} />
+                  </div>
+                </div>
               </Table.Cell>
               <Table.Cell align="center" className="align-middle">
                 {row.workHours}

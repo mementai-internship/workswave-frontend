@@ -25,7 +25,7 @@ export default function DetailPartTime() {
           </Button>
         </Dialog.Trigger>
 
-        <Dialog.Content className="w-[90vw] max-w-[1000px]">
+        <Dialog.Content className="w-[90vw] max-w-[1200px]">
           <div className="flex justify-between mb-5">
             <Dialog.Title className="mb-5 flex">
               <div className="flex items-center">
