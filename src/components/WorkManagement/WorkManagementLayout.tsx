@@ -2,14 +2,9 @@ import dayjs from 'dayjs';
 import { useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
+import WorkFilter from '@/components/WorkManagement/WorkFilter';
 import WorkHeader from '@/components/WorkManagement/WorkHeader';
 import { TAB_ITEMS, TabItem } from '@/constants/workManagement/workManagement';
-
-export interface ItabItem {
-  id: number;
-  title: string;
-  path: string;
-}
 
 export default function WorkManagementLayout() {
   const navigate = useNavigate();
@@ -37,6 +32,8 @@ export default function WorkManagementLayout() {
         currentDate={currentDate}
         onChangeMonth={handleChangeMonth}
       />
+      <WorkFilter />
+
       <Outlet />
     </div>
   );

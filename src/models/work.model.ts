@@ -19,6 +19,25 @@ export interface IWorkData {
   gender: number;
   days: number;
 }
+// 백엔드 data
+export interface IAttendance {
+  branch_name: string;
+  name: string;
+  gender: string;
+  part_name: string;
+  workdays: number;
+  leavedays: number;
+  regular_holiday: number;
+  annual_leave: number;
+  unpaid_use: number;
+  work_from_home: number;
+  weekend_work_hours: number;
+  holiday_work: number;
+  ot_30: number;
+  ot_60: number;
+  ot_90: number;
+  ot_total: number;
+}
 
 export interface TWorkOption {
   id: number;
