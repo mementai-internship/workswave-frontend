@@ -20,6 +20,7 @@ export const hourWageTemplatesAPI = {
   },
   postHourWageTemplate: async (branchId: number, data: IHourWageTemplatesRequest) => {
     try {
+      console.log(branchId, data);
       const response = await axiosInstance.post(
         `/branches/${branchId}/hour-wage-templates/create`,
         data
