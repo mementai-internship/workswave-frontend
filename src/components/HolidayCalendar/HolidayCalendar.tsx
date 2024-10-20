@@ -3,7 +3,6 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction';
 import FullCalendar from '@fullcalendar/react';
 import dayjs from 'dayjs';
-import { useEffect } from 'react';
 
 import Badge from '@/components/Common/LabelBadge';
 import { Txt } from '@/components/Common/Txt';
@@ -30,13 +29,8 @@ export default function HolidayCalendar({
   isSundayOff,
   branch_id,
 }: IHolidayCalendarProps) {
-  const { data: holidays, refetch: refetchHoliDays, isLoading } = useGetClosedDays({ branch_id });
-  // const { data: holidays, refetch } = useGetMonthlyClosedDays({ branch_id, date: currDate.toDate() });  // 월별 휴무일 조회
-
-  useEffect(() => {
-    console.log('%c refetch 실행', 'color: green; font-size: 15px;');
-    refetchHoliDays();
-  }, [branch_id, refetchHoliDays]);
+  const { data: holidays, isLoading } = useGetClosedDays({ branch_id });
+  // const { data: holidays } = useGetMonthlyClosedDays({ branch_id, date: currDate.toDate() });  // 월별 휴무일 조회
 
   const handleDateClick = (arg: DateClickArg) => {
     onDateAndEventClick(arg.date);
