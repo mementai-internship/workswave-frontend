@@ -47,7 +47,7 @@ export interface IWorkStatistics {
   overtimeWorkers: number;
   lateWorkers: number;
   holidayWorkers: number;
-  holidayWorkers: number;
+  dayOffWorkers: number;
   remoteWorkers: number;
 }
 
