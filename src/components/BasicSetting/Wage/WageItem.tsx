@@ -16,7 +16,7 @@ export default function WageItem({ editMode, handleDeleteItem, handleOpenEditMod
   const commaSalary = (value) => value.toLocaleString('ko-KR');
 
   return (
-    <li className="bg-blue-10 p-4 border border-[#dddddd]">
+    <li className="bg-blue-10 p-4 border border-zinc-300">
       <div className="relative flex">
         <div className="flex flex-col w-1/5">
           <Txt variant="subtitle2" className="font-bold" color="black">
