@@ -1,4 +1,4 @@
-import { Button, Select } from '@radix-ui/themes';
+import { Button, Select, Spinner } from '@radix-ui/themes';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { PiEquals, PiGear } from 'react-icons/pi';
@@ -21,7 +21,7 @@ export default function DayOffPage() {
   const { data } = useGetBranches('0');
   const branches = data?.list;
   const { data: parts } = useGetParts(currentBranch.id);
-  const { data: leaveCategories } = useGetLeaveCategories(currentBranch.id);
+  const { data: leaveCategories, isFetching } = useGetLeaveCategories(currentBranch.id);
 
   const {
     formState: holidayFormState,
@@ -88,7 +88,11 @@ export default function DayOffPage() {
           )}
         </div>
         <div className="p-6 flex flex-col gap-y-3">
-          {leaveCategories && !!leaveCategories.length ? (
+          {isFetching ? (
+            <div className="flex justify-center items-center">
+              <Spinner size="3" />
+            </div>
+          ) : leaveCategories && !!leaveCategories.length ? (
             leaveCategories.map(({ leave_category, excluded_parts }) => (
               <DayOffSettingItem
                 key={leave_category.id}
