@@ -7,6 +7,7 @@ import BoardPage from '@/pages/basicSetting/BoardPage';
 import CalendarPage from '@/pages/basicSetting/CalendarPage';
 import HolidayPage from '@/pages/basicSetting/HolidayPage';
 import HourlyRangePage from '@/pages/basicSetting/HourlyRangePage';
+import HrManagementSettingPage from '@/pages/basicSetting/HrManagementPage';
 import SalaryRangePage from '@/pages/basicSetting/SalaryRangePage';
 import WagePage from '@/pages/basicSetting/WagePage';
 import WorkingPage from '@/pages/basicSetting/WorkingPage';
@@ -85,6 +86,10 @@ const router = createBrowserRouter([
           {
             path: 'salary-range',
             element: <SalaryRangePage />,
+          },
+          {
+            path: 'hr',
+            element: <HrManagementSettingPage />,
           },
         ],
       },
