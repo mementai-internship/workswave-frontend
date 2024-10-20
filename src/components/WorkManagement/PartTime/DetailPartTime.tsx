@@ -6,7 +6,7 @@ import { PiMagnifyingGlass, PiXBold } from 'react-icons/pi';
 import { ChangeMonth } from '@/components/Common/ChangeMonth';
 import CalculationStandard from '@/components/WorkManagement/PartTime/CalculationStandard';
 import DetailPartTimeList from '@/components/WorkManagement/PartTime/DetailPartTimeDetail';
-import { detailPartTimeData } from '@/constants/workManagementTable/workTable.mock';
+import { detailPartTimeData } from '@/constants/workManagement/workTable.mock';
 
 export default function DetailPartTime() {
   const [month, setMonth] = useState(dayjs());
@@ -25,7 +25,7 @@ export default function DetailPartTime() {
           </Button>
         </Dialog.Trigger>
 
-        <Dialog.Content className="w-[90vw] max-w-[1000px]">
+        <Dialog.Content className="w-[90vw] max-w-[1200px]">
           <div className="flex justify-between mb-5">
             <Dialog.Title className="mb-5 flex">
               <div className="flex items-center">

@@ -37,6 +37,7 @@ export interface ICommuteData {
     [key: string]: {
       startTime: string;
       endTime: string;
+      isHoliday: boolean;
     };
   };
 }
