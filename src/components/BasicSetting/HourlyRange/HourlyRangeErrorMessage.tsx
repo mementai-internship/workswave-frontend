@@ -8,7 +8,7 @@ interface IProps {
 
 export default function HourlyRangeErrorMessage({ message }: IProps) {
   return (
-    <Txt variant="caption" className="text-red-500">
+    <Txt variant="caption" color="red" className="text-right">
       {message}
     </Txt>
   );

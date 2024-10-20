@@ -21,7 +21,7 @@ const HourlyRangeInput = forwardRef<HTMLInputElement, IProps>(
   ({ styles = '', label, error, ...props }, ref) => {
     return (
       <div
-        className={`flex items-center ${styles} flex-1 w-full ${error ? 'border-red-500' : ''}}`}
+        className={`flex items-center ${styles} flex-1 w-full ${error ? 'border-2 border-red' : ''}}`}
       >
         <TextField.Root
           radius="none"
