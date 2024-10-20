@@ -10,39 +10,49 @@ import PolicyDetails from '@/components/BasicSetting/DayOffSetting/PolicyDetails
 import StrictModeDroppable from '@/components/BasicSetting/DayOffSetting/StrictModeDroppable';
 import { useDayOffDrag } from '@/hooks/useDayOffDrag';
 
-interface PartId {
+interface IPartId {
   id: number;
   name: string;
   isGhosting: boolean;
 }
-interface BaseCategory {
+interface IBaseCategory {
   category: string;
-  part_ids: PartId[];
+  part_ids: IPartId[];
 }
 
-export interface FormValues {
-  accountingStandard: BaseCategory & {
-    categoryId: 'accountingStandard';
-    reset: boolean;
-    lessThanOneYearService: boolean;
-    decimalProcessing: string;
-  };
-  hireDate: BaseCategory & {
-    categoryId: 'hireDate';
-    reset: boolean;
-  };
-  conditionalGrant: BaseCategory & {
-    categoryId: 'conditionalGrant';
-    monthCount: number;
-    count: number;
-    monthlyBasis: boolean;
-  };
-  manualGrant: BaseCategory & {
-    categoryId: 'manualGrant';
-  };
+interface IAccountingStandard extends IBaseCategory {
+  categoryId: 'accountingStandard';
+  reset: boolean;
+  lessThanOneYearService: boolean;
+  decimalProcessing: '올림' | '내림' | '반올림' | '0.5';
+}
+
+interface IHireDate extends IBaseCategory {
+  categoryId: 'hireDate';
+  reset: boolean;
+}
+
+interface IConditionalGrant extends IBaseCategory {
+  categoryId: 'conditionalGrant';
+  monthCount: number;
+  count: number;
+  monthlyBasis: boolean;
+}
+
+interface IManualGrant extends IBaseCategory {
+  categoryId: 'manualGrant';
+}
+
+export type TPolicyDetailsType = IAccountingStandard | IHireDate | IConditionalGrant | IManualGrant;
+
+export interface IFormValues {
+  accountingStandard: IAccountingStandard;
+  hireDate: IHireDate;
+  conditionalGrant: IConditionalGrant;
+  manualGrant: IManualGrant;
 }
 export default function DragContainer() {
-  const { reset, watch, handleSubmit } = useForm<FormValues>({
+  const { reset, watch, handleSubmit, register, setValue } = useForm<IFormValues>({
     defaultValues: {
       accountingStandard: {
         categoryId: 'accountingStandard',
@@ -83,24 +93,24 @@ export default function DragContainer() {
     },
   });
 
-  const [formValues, setFormValues] = useState<FormValues>(watch());
+  const [formValues, setFormValues] = useState<IFormValues>(watch());
   const { openCategories, onDragEnd, onDragUpdate, onDragStart, setOpenCategories } =
     useDayOffDrag(formValues);
 
   useEffect(() => {
     const subscription = watch((value) => {
-      setFormValues(value as FormValues);
+      setFormValues(value as IFormValues);
     });
     return () => subscription.unsubscribe();
   }, [watch]);
 
-  const onSubmit = (data: FormValues) => {
+  const onSubmit = (data: IFormValues) => {
     console.log(data);
   };
 
   const handleDragEnd = (result) => {
-    const newValues = onDragEnd(result);
-    if (newValues) {
+    const { items: newValues, hasChanged } = onDragEnd(result);
+    if (hasChanged) {
       // 새로운 값이 있을 때만 상태 업데이트
       setFormValues(newValues);
       reset(newValues); // react-hook-form의 값도 업데이트
@@ -146,7 +156,12 @@ export default function DragContainer() {
                   </Accordion.Header>
                   <Accordion.Content>
                     <div className="px-4 py-2">
-                      <PolicyDetails categoryId={categoryId} policyDetails={policyDetails} />
+                      <PolicyDetails
+                        categoryId={categoryId as keyof IFormValues}
+                        register={register}
+                        setValue={setValue}
+                        watch={watch}
+                      />
                     </div>
                     <StrictModeDroppable droppableId={categoryId}>
                       {(provided, snapshot) => (

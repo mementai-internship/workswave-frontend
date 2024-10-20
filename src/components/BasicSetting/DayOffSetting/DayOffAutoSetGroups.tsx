@@ -14,7 +14,7 @@ export default function DayOffAutoSetGroups() {
             </label>
             <RadioGroup.Root>
               <div className="flex items-center gap-x-8">
-                <RadioGroup.Item value="1">자동</RadioGroup.Item>
+                <RadioGroup.Item value="0">자동</RadioGroup.Item>
                 <RadioGroup.Item value="1">수동</RadioGroup.Item>
               </div>
             </RadioGroup.Root>
@@ -25,19 +25,19 @@ export default function DayOffAutoSetGroups() {
             </label>
             <RadioGroup.Root>
               <div className="flex items-center gap-x-8">
-                <RadioGroup.Item value="1">자동</RadioGroup.Item>
-                <RadioGroup.Item value="1">수동</RadioGroup.Item>
+                <RadioGroup.Item value="3">자동</RadioGroup.Item>
+                <RadioGroup.Item value="4">수동</RadioGroup.Item>
               </div>
             </RadioGroup.Root>
-          </div>{' '}
+          </div>
           <div className="flex items-center">
             <label htmlFor="" className="text-gray-500 text-sm w-24">
               최고관리자
             </label>
             <RadioGroup.Root>
               <div className="flex items-center gap-x-8">
-                <RadioGroup.Item value="1">자동</RadioGroup.Item>
-                <RadioGroup.Item value="1">수동</RadioGroup.Item>
+                <RadioGroup.Item value="5">자동</RadioGroup.Item>
+                <RadioGroup.Item value="6">수동</RadioGroup.Item>
               </div>
             </RadioGroup.Root>
           </div>
