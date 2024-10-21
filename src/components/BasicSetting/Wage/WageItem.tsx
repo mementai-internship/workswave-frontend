@@ -2,17 +2,17 @@ import { Button } from '@radix-ui/themes';
 import { PiX } from 'react-icons/pi';
 
 import { Txt } from '@/components/Common/Txt';
-import { IWageSettingEditMode } from '@/hooks/useWageSetting';
 import { IWageSetting } from '@/models/wageSetting.model';
+import { TWageEditMode } from '@/pages/basicSetting/WagePage';
 
 interface IProps {
   item: IWageSetting;
-  handleOpenEditMode: (id?: string) => void;
-  handleDeleteItem: (id: string) => void;
-  editMode: IWageSettingEditMode;
+  activeEditMode: (id: number) => void;
+  handleDeleteItem: (id: number) => void;
+  editMode: TWageEditMode;
 }
 
-export default function WageItem({ editMode, handleDeleteItem, handleOpenEditMode, item }: IProps) {
+export default function WageItem({ editMode, handleDeleteItem, activeEditMode, item }: IProps) {
   const commaSalary = (value) => value.toLocaleString('ko-KR');
 
   return (
@@ -53,7 +53,7 @@ export default function WageItem({ editMode, handleDeleteItem, handleOpenEditMod
               <Txt variant="body2" color="gray-50">
                 연차수당
               </Txt>
-              <Txt variant="body2">{item.holidayAllowance}</Txt>
+              <Txt variant="body2">{commaSalary(item.holidayAllowance)}</Txt>
               <Txt variant="body2" color="gray-50">
                 {item.holidayHours}시간
               </Txt>
@@ -104,13 +104,9 @@ export default function WageItem({ editMode, handleDeleteItem, handleOpenEditMod
             </div>
           </div>
         </div>
-        {editMode.itemId !== item.templateId && (
+        {editMode.editItemId !== item.templateId && (
           <div className="absolute right-3 bottom-0">
-            <Button
-              color="gray"
-              variant="surface"
-              onClick={() => handleOpenEditMode(item.templateId)}
-            >
+            <Button color="gray" variant="surface" onClick={() => activeEditMode(item.templateId)}>
               수정하기
             </Button>
           </div>
