@@ -1,5 +1,6 @@
 import { useAtom } from 'jotai';
 import React, { useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { getCurrentUser } from '@/apis/auth.api';
 import ContactSearchInput from '@/components/Common/ContactSearchInput';
@@ -26,26 +27,50 @@ const dummyPart = [
   },
 ];
 export default function DayoffManagementFilterbar() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const [currentUser] = useAtom(currentUserAtom);
-  const { data: branchData } = useGetAllBranches();
+  const { data: branchData, isLoading: branchLoading } = useGetAllBranches();
 
   useEffect(() => {
     getCurrentUser().then((res) => {
       console.log(res);
-      console.log(branchData);
     });
   }, [currentUser]);
+
+  if (currentUser.status === 'error') return navigate('/login');
+  if (branchLoading) return <div>Loading...</div>;
+
+  const handleBranchSelect = (branchId: number) => {
+    const searchParams = new URLSearchParams(location.search);
+    searchParams.set('branch_id', branchId.toString());
+    navigate({
+      pathname: location.pathname,
+      search: searchParams.toString(),
+    });
+  };
+
+  const handleStatusSelect = (status: string) => {
+    const searchParams = new URLSearchParams(location.search);
+    searchParams.set('status', status);
+    navigate({
+      pathname: location.pathname,
+      search: searchParams.toString(),
+    });
+  };
+
   return (
     <div className="flex gap-4 justify-between">
       <div>
-        {currentUser.data.role === 'MSO 최고권한' && (
+        {currentUser.data?.role && currentUser.data.role === 'MSO 최고권한' && (
           <SelectBox
             size="small"
             title="지점 선택"
             options={branchData?.map((branch) => ({
               id: branch.id,
               name: branch.name,
-              action: () => {},
+              action: () => handleBranchSelect(branch.id),
             }))}
           />
         )}
@@ -58,22 +83,22 @@ export default function DayoffManagementFilterbar() {
             {
               id: 0,
               name: '전체',
-              action: () => {},
-            },
-            {
-              id: 3,
-              name: '대기',
-              action: () => {},
+              action: () => handleStatusSelect('all'),
             },
             {
               id: 1,
-              name: '승인',
-              action: () => {},
+              name: '대기',
+              action: () => handleStatusSelect('pending'),
             },
             {
               id: 2,
+              name: '승인',
+              action: () => handleStatusSelect('approved'),
+            },
+            {
+              id: 3,
               name: '반려',
-              action: () => {},
+              action: () => handleStatusSelect('rejected'),
             },
           ]}
         />
