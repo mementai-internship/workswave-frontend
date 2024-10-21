@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import ContactSearchInput from '@/components/Common/ContactSearchInput';
@@ -6,10 +6,19 @@ import WorkSelect, { TOptions } from '@/components/WorkManagement/WorkSelect';
 import { useGetAllBranches } from '@/hooks/apis/useBranches';
 import { useGetParts } from '@/hooks/apis/useParts';
 
-export default function WorkFilter() {
-  const [selectedBranch, setSelectedBranch] = useState<TOptions | null>(null);
-  const [selectedDepartment, setSelectedDepartment] = useState<TOptions | null>(null);
+interface IWorkFilterProps {
+  selectedBranch: TOptions | null;
+  setSelectedBranch: (branch: TOptions | null) => void;
+  selectedDepartment: TOptions | null;
+  setSelectedDepartment: (department: TOptions | null) => void;
+}
 
+export default function WorkFilter({
+  selectedBranch,
+  setSelectedBranch,
+  selectedDepartment,
+  setSelectedDepartment,
+}: IWorkFilterProps) {
   const { data: branches } = useGetAllBranches();
   const { data: parts } = useGetParts(selectedBranch?.id || null);
   const location = useLocation();
@@ -18,12 +27,12 @@ export default function WorkFilter() {
     if (selectedBranch) {
       setSelectedDepartment(null);
     }
-  }, [selectedBranch]);
+  }, [selectedBranch, setSelectedDepartment]);
 
   useEffect(() => {
     setSelectedBranch(null);
     setSelectedDepartment(null);
-  }, [location.pathname]);
+  }, [location.pathname, setSelectedBranch, setSelectedDepartment]);
 
   const mapToOptions = (items: { id: number; name: string }[] | undefined) =>
     items ? items.map((item) => ({ id: item.id, name: item.name })) : [];
