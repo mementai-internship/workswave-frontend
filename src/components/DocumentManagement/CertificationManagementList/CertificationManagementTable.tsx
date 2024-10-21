@@ -1,18 +1,40 @@
 // import { useOutletContext } from 'react-router-dom';
+import { useMemo } from 'react';
+
 import Pagination from '@/components/Common/Pagination';
 import CertificationManagementItem from '@/components/DocumentManagement/CertificationManagementList/CertificationManagementItem';
 
-export default function CertificationManagementTable() {
+interface ICertificationManagementTableProps {
+  userName: string;
+}
+
+export default function CertificationManagementTable({
+  userName,
+}: ICertificationManagementTableProps) {
   // TODO : branchId, partId로 데이터 조회 후 내려주는 로직 필요
   // const { branchId, partId } = useOutletContext<{
   //   branchId: number;
   //   partId: number;
   // }>();
 
+  const sortedTableData = useMemo(() => {
+    if (!userName) return TABLE_DATA;
+
+    return [...TABLE_DATA].sort((a, b) => {
+      if (a.name === userName) return -1;
+      if (b.name === userName) return 1;
+      return 0;
+    });
+  }, [userName]);
+
   return (
     <div className="flex flex-col gap-2">
-      {TABLE_DATA.map((item) => (
-        <CertificationManagementItem key={item.id} {...item} />
+      {sortedTableData.map((item) => (
+        <CertificationManagementItem
+          key={item.id}
+          {...item}
+          isCurrentUser={item.name === userName}
+        />
       ))}
       <Pagination totalItems={100} itemsPerPage={10} />
     </div>
@@ -30,7 +52,7 @@ const TABLE_DATA = [
     applyStatus: '승인',
     applyUse: '은행 제출',
     applyMemo:
-      '긴급 처리 요청긴급 처리 요청긴급 처리 요청긴급 처리 요청긴급 처리 요청긴급 처리 요청긴급 처리 요청긴급 처리 요청긴급 처리 요청긴급 처리 요청긴급 처리 요청긴급 처리 요청긴급 처리 요청긴급 처리 요청',
+      '긴급 처리 요청긴급 처리 요청긴급 처리 요청긴급 처리 요청긴급 처리 요청긴급 처리 요청긴급 처리 요청긴급 처리 요청긴급 처리 요청긴급 처리 요청긴급 처리 요청긴급 처리 요청긴급 처리 요청',
     applyTreatDate: new Date('2024-10-06'),
   },
   {
@@ -144,7 +166,7 @@ const TABLE_DATA = [
   {
     id: 2087,
     part: '의사',
-    name: '신현호',
+    name: '이서인22',
     applyDate: '2024-07-05',
     applyType: '2024년 갑종근로소득세 원천징수영수증',
     applyManager: '이서인',
@@ -156,7 +178,7 @@ const TABLE_DATA = [
   {
     id: 2086,
     part: '지점장',
-    name: '이서인',
+    name: '이서인22',
     applyDate: '2024-07-05',
     applyType: '재직증명서',
     applyManager: '홍길동',
