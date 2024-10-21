@@ -346,7 +346,7 @@ export default function MemberBasicInfoTable() {
                               render={({ field: { value } }) => (
                                 <MemberInfoSelect
                                   value={value}
-                                  content={partList.data?.list}
+                                  content={partList.data || []}
                                   defaultValue={currentUserInfo?.part.id}
                                   name="part_id"
                                   onChange={handlePartChange}

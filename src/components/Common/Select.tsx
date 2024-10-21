@@ -9,6 +9,7 @@ interface ISelectProps<T extends FieldValues> {
   size?: '2xSmall' | 'xSmall' | 'small' | 'medium' | 'large';
   border?: boolean;
   style?: string;
+  disabled?: boolean;
 }
 
 interface ISelectOption {
@@ -25,6 +26,7 @@ export default function SelectBox<T>({
   size = 'medium',
   border = true,
   style,
+  disabled,
 }: ISelectProps<T>) {
   const SelectBoxSize = {
     '2xSmall': 'w-12',
