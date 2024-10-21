@@ -13,4 +13,7 @@ export const QUERY_KEYS = {
   //closedDays queryKeys
   branchMonthlyClose: 'getMonthlyClosedDays',
   branchClose: 'getClosedDays',
+
+  //work queryKeys
+  work: 'work',
 };

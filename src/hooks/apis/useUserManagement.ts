@@ -8,10 +8,18 @@ import {
   TPostUserRequest,
 } from '@/models/user-management.model';
 
-export const useGetUsers = (page: number, recordSize: number) => {
+export const useGetUsers = (
+  page: number,
+  recordSize: number,
+  status?: string,
+  branch?: string,
+  part?: string,
+  name?: string,
+  phone?: string
+                            ) => {
   return useQuery({
-    queryKey: [QUERY_KEYS.userManagementList, page, recordSize],
-    queryFn: () => userManagementApi.getUsers(page, recordSize),
+    queryKey: [QUERY_KEYS.userManagementList, page, recordSize, status, branch, part, name, phone],
+    queryFn: () => userManagementApi.getUsers(page, recordSize, status, branch, part, name, phone),
   });
 };
 
