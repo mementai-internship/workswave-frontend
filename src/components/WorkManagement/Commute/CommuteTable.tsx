@@ -1,7 +1,9 @@
 import { Table } from '@radix-ui/themes';
 import React, { useMemo } from 'react';
+import { useOutletContext } from 'react-router-dom';
 
 import GenderIcon from '@/components/WorkManagement/GenderIcon';
+import { WorkTableContext } from '@/components/WorkManagement/Work/WorkTable';
 import { commuteMockData } from '@/constants/workManagement/workTable.mock';
 import { ICommuteData } from '@/models/work.model';
 
@@ -65,7 +67,7 @@ const EmployeeRow = React.memo(({ employee, dayHeaders, onClick }: IEmployeeRowP
       </div>
     </Table.Cell>
     <Table.Cell>
-      {employee.position}
+      {employee.department}
       <span className="border text-xs px-1 pt-0.5">{`주 ${employee.days}일`}</span>
     </Table.Cell>
     {dayHeaders.map((_, index) => {
@@ -88,6 +90,16 @@ const EmployeeRow = React.memo(({ employee, dayHeaders, onClick }: IEmployeeRowP
 ));
 
 export default function CommuteTable({ handleShowAllStatus }: ICommuteTableProps) {
+  const context = useOutletContext<WorkTableContext>();
+  const { selectedBranch, selectedDepartment } = context || {
+    selectedBranch: null,
+    selectedDepartment: null,
+  };
+  const filteredData = commuteMockData.filter((data) => {
+    const branchMatch = !selectedBranch || data.branch === selectedBranch.name;
+    const departmentMatch = !selectedDepartment || data.department === selectedDepartment.name;
+    return branchMatch && departmentMatch;
+  });
   const { dayHeaders } = useMemo(() => {
     const lastDay = Math.max(
       ...commuteMockData.flatMap((employee) => Object.keys(employee.schedule).map(Number))
@@ -99,7 +111,7 @@ export default function CommuteTable({ handleShowAllStatus }: ICommuteTableProps
     <Table.Root className="mb-5 table-fixed w-full">
       <TableHeader dayHeaders={dayHeaders} />
       <Table.Body>
-        {commuteMockData.map((employee) => (
+        {filteredData.map((employee) => (
           <EmployeeRow
             key={employee.id}
             employee={employee}
