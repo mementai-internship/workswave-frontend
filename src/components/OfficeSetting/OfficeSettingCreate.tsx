@@ -15,9 +15,9 @@ interface IProps {
 
 export default function OfficeSettingCreate({ setValue, control, onSubmit }: IProps) {
   return (
-    <div className="w-1/3 max-w-[420px] h-[48px]">
+    <div className="w-1/3 max-w-[420px] ">
       <form onSubmit={onSubmit}>
-        <div className="bg-gray-300 px-3 py-2 flex items-center justify-between">
+        <div className="bg-gray-300 h-[48px] px-3 py-2 flex items-center justify-between">
           <Txt variant="h6">지점정보</Txt>
           <Button variant="outline" color="gray">
             등록
