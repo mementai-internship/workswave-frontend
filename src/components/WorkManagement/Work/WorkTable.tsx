@@ -5,7 +5,6 @@ import { WORKTABLE } from '@/constants/workManagement/workTable';
 import { workMockData } from '@/constants/workManagement/workTable.mock';
 
 export default function WorkTable() {
-  // const { data } = useGetAllWork();
   return (
     <Table.Root className="mb-5">
       <Table.Header className="bg-gray-200 text-xs text-gray-700 whitespace-nowrap border-t border-gray-300">
