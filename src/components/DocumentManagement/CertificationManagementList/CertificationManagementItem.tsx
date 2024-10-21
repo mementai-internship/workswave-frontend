@@ -1,8 +1,9 @@
-import { Button, Popover } from '@radix-ui/themes';
+import { Button, Dialog, Popover } from '@radix-ui/themes';
 import { PiArrowUUpRightFill, PiCheck, PiNote, PiX } from 'react-icons/pi';
 
 import Badge from '@/components/Common/LabelBadge';
 import { Txt } from '@/components/Common/Txt';
+import CertificationManagementDialog from '@/components/DocumentManagement/CertificationManagement/CertificationManagementDialog';
 
 interface CertificationManagementItemProps {
   id: number;
@@ -19,6 +20,7 @@ interface CertificationManagementItemProps {
 }
 
 export default function CertificationManagementItem({
+  id,
   part,
   name,
   applyDate,
@@ -94,10 +96,17 @@ export default function CertificationManagementItem({
           </Popover.Root>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="soft" color="gray">
-            <PiCheck />
-            승인
-          </Button>
+          <Dialog.Root>
+            <Dialog.Trigger>
+              <Button variant="soft" color="gray">
+                <PiCheck />
+                승인
+              </Button>
+            </Dialog.Trigger>
+            <Dialog.Content className="w-[90vw] h-[100vh] max-w-[1500px] max-h-[800px]">
+              <CertificationManagementDialog id={id} name={name} part={part} applyUse={applyUse} />
+            </Dialog.Content>
+          </Dialog.Root>
           <Button variant="soft" color="gray">
             <PiArrowUUpRightFill />
             반려
