@@ -10,6 +10,7 @@ import SalaryRangePage from '@/pages/basicSetting/SalaryRangePage';
 import WagePage from '@/pages/basicSetting/WagePage';
 import WorkingPage from '@/pages/basicSetting/WorkingPage';
 import DayoffManagementPage from '@/pages/dayoffManagement/DayoffManagement';
+import ApprovalHistory from '@/pages/dayoffManagement/approvalHistory/ApprovalHistory';
 import ContractManagement from '@/pages/documentManagement/ContractManagement';
 import HolidayManagement from '@/pages/documentManagement/HolidayManagement';
 import CertificateManagement from '@/pages/documentManagement/certificationManagement/CertificateManagement';
@@ -21,6 +22,7 @@ import MemberManagementPage from '@/pages/memberManagement/MemberManagementPage'
 import SuperManagerSetting from '@/pages/memberManagement/SuperManagerSetting';
 import ManagementDeleteOfficePage from '@/pages/officeSetting/ManagementDeleteOfficePage';
 import ManagementOfficePage from '@/pages/officeSetting/ManagementOfficePage';
+import EntireHistoryPage from '@/pages/otManagement/EntireHistory/EntireHistoryPage';
 import OtManagementPage from '@/pages/otManagement/OtManagementPage';
 import SalarySettlementPage from '@/pages/salarySettlement/SalarySettlementPage';
 import SimpleMenuPage from '@/pages/simpleMenu/SimpleMenuPage';
@@ -163,6 +165,10 @@ const router = createBrowserRouter([
         element: <DayoffManagementPage />,
       },
       {
+        path: '/dayoff-management/approval-history',
+        element: <ApprovalHistory />,
+      },
+      {
         path: '/member-management/supermanager-setting',
         element: <SuperManagerSetting />,
       },
@@ -190,6 +196,10 @@ const router = createBrowserRouter([
       {
         path: 'ot-management',
         element: <OtManagementPage />,
+      },
+      {
+        path: 'ot-management/entire-history',
+        element: <EntireHistoryPage />,
       },
     ],
   },
