@@ -1,0 +1,161 @@
+import { Table } from '@radix-ui/themes';
+
+import Pagination from '@/components/Common/Pagination';
+import TimeoffManagementTableBody from '@/components/DocumentManagement/TimeoffManagement/TimeoffManagementTableBody';
+import TimeoffManagementTableHeader from '@/components/DocumentManagement/TimeoffManagement/TimeoffManagementTableHeader';
+import { ITimeoff_mock_type } from '@/constants/documentManagement/timeoffTable';
+
+export default function TimeoffManagementTable() {
+  return (
+    <>
+      <Table.Root className=" mb-5">
+        <TimeoffManagementTableHeader />
+        <TimeoffManagementTableBody timeoffData={TIMEOFF_TABLE_DATA} />
+      </Table.Root>
+      <Pagination totalItems={100} itemsPerPage={10} />
+    </>
+  );
+}
+
+const TIMEOFF_TABLE_DATA: ITimeoff_mock_type[] = [
+  {
+    id: 1,
+    branch: '서울 본점',
+    name: '김철수',
+    part: '영업',
+    applyDate: new Date('2024-03-01'),
+    startDate: new Date('2024-03-01'),
+    endDate: new Date('2024-03-20'),
+    timeoffType: '유급',
+    timeoffTypeDetail: '산재',
+    reason: '개인 사정',
+    manager: '박지원',
+    status: '승인',
+  },
+  {
+    id: 2,
+    branch: '부산 지점',
+    name: '이영희',
+    part: '인사',
+    applyDate: new Date('2024-03-02'),
+    startDate: new Date('2024-03-02'),
+    endDate: new Date('2024-04-10'),
+    timeoffType: '유급',
+    timeoffTypeDetail: '육아휴직',
+    reason: '개인 사정',
+    manager: '정민수',
+    status: '휴가',
+  },
+  {
+    id: 3,
+    branch: '대구 지점',
+    name: '박민준',
+    part: '마케팅',
+    applyDate: new Date('2024-03-03'),
+    startDate: new Date('2024-03-03'),
+    endDate: new Date('2024-03-25'),
+    timeoffType: '유급',
+    timeoffTypeDetail: '병가',
+    reason: '개인 사정',
+    manager: '김서연',
+    status: '승인',
+  },
+  {
+    id: 4,
+    branch: '인천 지점',
+    name: '최수진',
+    part: 'IT',
+    applyDate: new Date('2024-03-04'),
+    startDate: new Date('2024-03-04'),
+    endDate: new Date('2024-05-15'),
+    timeoffType: '유급',
+    timeoffTypeDetail: '산재',
+    reason: '개인 사정',
+    manager: '이동훈',
+    status: '승인',
+  },
+  {
+    id: 5,
+    branch: '광주 지점',
+    name: '정태영',
+    part: '고객서비스',
+    applyDate: new Date('2024-03-05'),
+    startDate: new Date('2024-03-05'),
+    endDate: new Date('2024-04-20'),
+    timeoffType: '유급',
+    timeoffTypeDetail: '육아휴직',
+    reason: '개인 사정',
+    manager: '한미영',
+    status: '휴가',
+  },
+  {
+    id: 6,
+    branch: '대전 지점',
+    name: '송지은',
+    part: '재무',
+    applyDate: new Date('2024-03-06'),
+    startDate: new Date('2024-03-06'),
+    endDate: new Date('2024-06-10'),
+    timeoffType: '유급',
+    timeoffTypeDetail: '육아휴직',
+    reason: '개인 사정',
+    manager: '임재현',
+    status: '승인',
+  },
+  {
+    id: 7,
+    branch: '울산 지점',
+    name: '강현우',
+    part: '물류',
+    applyDate: new Date('2024-03-07'),
+    startDate: new Date('2024-03-07'),
+    endDate: new Date('2024-03-30'),
+    timeoffType: '유급',
+    timeoffTypeDetail: '산재',
+    reason: '개인 사정',
+    manager: '오세진',
+    status: '승인',
+  },
+  {
+    id: 8,
+    branch: '세종 지점',
+    name: '윤서연',
+    part: '연구개발',
+    applyDate: new Date('2024-03-08'),
+    startDate: new Date('2024-03-08'),
+    endDate: new Date('2024-07-15'),
+    timeoffType: '무급',
+    timeoffTypeDetail: '병가',
+    reason: '개인 사정',
+    manager: '배준호',
+    status: '복직',
+  },
+  {
+    id: 9,
+    branch: '제주 지점',
+    name: '조민재',
+    part: '영업',
+    applyDate: new Date('2024-03-09'),
+    startDate: new Date('2024-03-09'),
+    endDate: new Date('2024-04-10'),
+    timeoffType: '유급',
+    timeoffTypeDetail: '병가',
+    reason: '개인 사정',
+    manager: '신혜원',
+    status: '복직',
+  },
+  {
+    id: 10,
+    branch: '창원 지점',
+    name: '황은주',
+    part: '인사',
+    applyDate: new Date('2024-03-10'),
+    startDate: new Date('2024-03-10'),
+    endDate: new Date('2024-05-20'),
+    timeoffType: '무급',
+    timeoffTypeDetail: '육아휴직',
+    reason: '개인 사정',
+    manager: '권태준',
+    status: '복직',
+  },
+];

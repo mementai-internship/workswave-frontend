@@ -19,6 +19,7 @@ axiosInstance.interceptors.request.use(
 
     return config;
   },
+  // TODO : 아래 로직 response 로 분리 필요
   (error) => {
     switch (error.response.status) {
       case 400:

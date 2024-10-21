@@ -5,7 +5,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import Input from '@/components/Common/Input';
 import { Txt } from '@/components/Common/Txt';
 
-interface CertificationManagementDialogProps {
+interface ICertificationManagementDialogProps {
   id: number;
   name: string;
   part: string;
@@ -26,7 +26,8 @@ export default function CertificationManagementDialog({
   name,
   part,
   applyUse,
-}: CertificationManagementDialogProps) {
+}: ICertificationManagementDialogProps) {
+  // TODO : 내부에 증명서 파일과, 양식에 맞는 데이터 입력을 받고 승인 버튼을 통해 출력
   const methods = useForm<FormData>();
 
   const onSubmit = (data: FormData) => {

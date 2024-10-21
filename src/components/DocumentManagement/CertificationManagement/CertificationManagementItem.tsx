@@ -5,7 +5,7 @@ import Badge from '@/components/Common/LabelBadge';
 import { Txt } from '@/components/Common/Txt';
 import CertificationManagementDialog from '@/components/DocumentManagement/CertificationManagement/CertificationManagementDialog';
 
-interface CertificationManagementItemProps {
+interface ICertificationManagementItemProps {
   id: number;
   part: string;
   name: string;
@@ -31,7 +31,9 @@ export default function CertificationManagementItem({
   applyMemo,
   applyTreatDate,
   isCurrentUser,
-}: CertificationManagementItemProps) {
+}: ICertificationManagementItemProps) {
+  // TODO : 증명서 승인 버튼 클릭 시 모달창(Dialog) 팝업 됨, Dialog Contents 추가 구현 필요
+
   return (
     <div
       className={`flex items-center justify-between p-4 bg-gray-200 rounded-lg ${

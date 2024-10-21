@@ -9,8 +9,6 @@ import { useDeleteClosedDays } from '@/hooks/apis/useClosedDays';
 import { useGetClosedDays } from '@/hooks/apis/useClosedDays';
 import { TClosedDaysResponse } from '@/models/closedDays.model';
 
-// import { useDeleteOneClosedDay } from '@/hooks/apis/useClosedDays';
-
 interface IHolidayRegisterPopoverProps {
   currDate: dayjs.Dayjs;
   holidays: TClosedDaysResponse;
@@ -29,12 +27,6 @@ export default function HolidayDeletionPopover({
 
   const { mutate: deleteClosedDays } = useDeleteClosedDays();
   const { refetch: refetchClosedDays } = useGetClosedDays({ branch_id: branchId });
-
-  // const { mutate: deleteOneClosedDay } = useDeleteOneClosedDay();
-  // const { refetch: refetchClosedDays } = useGetMonthlyClosedDays({   // 월별 휴무일 조회
-  //   branch_id: branchId,
-  //   date: currDate.toDate(),
-  // });
 
   const handleDeletePopoverClose = () => {
     setTempSelectedDays([]);

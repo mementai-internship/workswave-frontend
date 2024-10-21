@@ -1,6 +1,6 @@
 import { useAtomValue } from 'jotai';
 
-import CertificationManagementTable from '@/components/DocumentManagement/CertificationManagementList/CertificationManagementTable';
+import CertificationManagementTable from '@/components/DocumentManagement/CertificationManagement/CertificationManagementTable';
 import { useGetCurrentUser } from '@/hooks/apis/useGetCurrentUser';
 import { userTokenAtom } from '@/store/authAtoms';
 
@@ -12,7 +12,7 @@ export default function CertificateManagement() {
 
   return (
     <>
-      <CertificationManagementTable userName={user?.data?.name} />
+      <CertificationManagementTable currUser={user?.data} />
     </>
   );
 }

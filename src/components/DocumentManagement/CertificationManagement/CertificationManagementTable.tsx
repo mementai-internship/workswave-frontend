@@ -2,30 +2,36 @@
 import { useMemo } from 'react';
 
 import Pagination from '@/components/Common/Pagination';
-import CertificationManagementItem from '@/components/DocumentManagement/CertificationManagementList/CertificationManagementItem';
+import CertificationManagementItem from '@/components/DocumentManagement/CertificationManagement/CertificationManagementItem';
+import { TUser } from '@/models/user.model';
 
 interface ICertificationManagementTableProps {
-  userName: string;
+  currUser: TUser;
 }
 
 export default function CertificationManagementTable({
-  userName,
+  currUser,
 }: ICertificationManagementTableProps) {
-  // TODO : branchId, partId로 데이터 조회 후 내려주는 로직 필요
+  // TODO : branchId, partId로 데이터 조회 후 내려주는 로직 필요 // 또는 outlet으로 partname을 받아서 branchId로 받아온 전체 데이터에 대해 필터링 해주는 로직 필요
   // const { branchId, partId } = useOutletContext<{
   //   branchId: number;
   //   partId: number;
   // }>();
 
+  // TODO : 지금 로직은 현재 유저의 신청 증명서를 보여주는 로직이 'name'으로 값을 찾고 있음 -> 동명이인 등의 문제가 발생 할 수 있으니 user의 고유한 id 값으로 찾을 수 있도록 수정해야 함.
+  // 이 때, 증명서 신청 목록에도 user 객체에 대한 정보가 증명서 테이블에 join 되어 있어야 함.
+
+  // TODO : 페이지네이션 추가 구현 필요 ( 백엔드 API에 params로 처리 )
+
   const sortedTableData = useMemo(() => {
-    if (!userName) return TABLE_DATA;
+    if (!currUser) return TABLE_DATA;
 
     return [...TABLE_DATA].sort((a, b) => {
-      if (a.name === userName) return -1;
-      if (b.name === userName) return 1;
+      if (a.name === currUser.name) return -1;
+      if (b.name === currUser.name) return 1;
       return 0;
     });
-  }, [userName]);
+  }, [currUser]);
 
   return (
     <div className="flex flex-col gap-2">
@@ -33,7 +39,7 @@ export default function CertificationManagementTable({
         <CertificationManagementItem
           key={item.id}
           {...item}
-          isCurrentUser={item.name === userName}
+          isCurrentUser={item.name === currUser?.name}
         />
       ))}
       <Pagination totalItems={100} itemsPerPage={10} />
@@ -41,6 +47,7 @@ export default function CertificationManagementTable({
   );
 }
 
+// 목 데이터
 const TABLE_DATA = [
   {
     id: 2097,

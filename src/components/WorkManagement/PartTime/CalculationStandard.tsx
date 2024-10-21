@@ -10,7 +10,6 @@ export default function CalculationStandard() {
     hover:bg-gray-100
     focus:outline-none focus:border-blue-500
     data-[state=on]:bg-blue-100 data-[state=on]:text-blue-700 data-[state=on]:border-blue-500
-     
   `;
 
   return (

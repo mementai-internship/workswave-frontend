@@ -55,22 +55,10 @@ export default function EmployeeHolidayRegisterModal({
     }
   };
 
-  // 백엔드 연동 시 필요
-  // const handleRegisterHolidays = async () => {
-  //   if (holidayList.length > 0) {
-  //     try {
-  //       const response = await axios.post('/api/holidays', { holidays: holidayList });
-  //       if (response.status === 200) {
-  //         onRegisterHoliday(holidayList);
-  //         onClose();
-  //       } else {
-  //         throw new Error('휴무일 등록에 실패했습니다.');
-  //       }
-  //     } catch (error) {
-  //       console.error('휴무일 등록 중 오류 발생:', error);
-  //       alert('휴무일 등록에 실패했습니다. 다시 시도해 주세요.');
-  //     }
-  //   }
+  // TODO : 백엔드와 CRUD API 연동 필요
+  // TODO : 브랜치(또는 브랜치의 파트) 직원 리스트, 직원 휴무 리스트 받아와야 함.
+
+  // const handleRegisterHolidays = () => {
   // };
 
   const handleClearAllHolidays = () => {
