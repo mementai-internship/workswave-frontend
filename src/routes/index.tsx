@@ -5,7 +5,7 @@ import WorkManagementLayout from '@/components/WorkManagement/WorkManagementLayo
 import RootLayout from '@/layout/root';
 import BoardPage from '@/pages/basicSetting/BoardPage';
 import CalendarPage from '@/pages/basicSetting/CalendarPage';
-import HolidayPage from '@/pages/basicSetting/HolidayPage';
+import DayOffPage from '@/pages/basicSetting/DayOffPage';
 import HourlyRangePage from '@/pages/basicSetting/HourlyRangePage';
 import SalaryRangePage from '@/pages/basicSetting/SalaryRangePage';
 import WagePage from '@/pages/basicSetting/WagePage';
@@ -69,8 +69,8 @@ const router = createBrowserRouter([
             element: <HourlyRangePage />,
           },
           {
-            path: 'holiday',
-            element: <HolidayPage />,
+            path: 'day-off',
+            element: <DayOffPage />,
           },
           {
             path: 'calendar',
