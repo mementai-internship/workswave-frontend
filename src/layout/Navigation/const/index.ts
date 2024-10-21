@@ -25,7 +25,7 @@ export const NAVIGATION_CONTENTS = [
     content: '급여정산',
   },
   {
-    path: '/dayoff-calander',
+    path: '/holiday-calendar',
     content: '휴무캘린더',
   },
   {

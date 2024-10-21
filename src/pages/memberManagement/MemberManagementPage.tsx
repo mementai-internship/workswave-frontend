@@ -80,6 +80,7 @@ export default function MemberManagementPage() {
   });
 
   console.log(userList);
+
   const { data: currentUser } = useGetCurrentUserInfo();
 
   const tabList = [

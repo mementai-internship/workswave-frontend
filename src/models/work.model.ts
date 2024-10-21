@@ -19,6 +19,25 @@ export interface IWorkData {
   gender: number;
   days: number;
 }
+// 백엔드 data
+export interface IAttendance {
+  branch_name: string;
+  name: string;
+  gender: string;
+  part_name: string;
+  workdays: number;
+  leavedays: number;
+  regular_holiday: number;
+  annual_leave: number;
+  unpaid_use: number;
+  work_from_home: number;
+  weekend_work_hours: number;
+  holiday_work: number;
+  ot_30: number;
+  ot_60: number;
+  ot_90: number;
+  ot_total: number;
+}
 
 export interface TWorkOption {
   id: number;
@@ -30,13 +49,14 @@ export interface ICommuteData {
   id: number;
   branch: string;
   name: string;
-  gender: number;
+  gender: string;
   position: string;
   days: number;
   schedule: {
     [key: string]: {
       startTime: string;
       endTime: string;
+      isHoliday: boolean;
     };
   };
 }
@@ -48,4 +68,37 @@ export interface IWorkStatistics {
   holidayWorkers: number;
   dayOffWorkers: number;
   remoteWorkers: number;
+}
+
+// 파트 관리
+export interface IPartTimeData {
+  id: number;
+  branch: string;
+  name: string;
+  workPart: string;
+  workDate: string;
+  hospitalWork: string;
+  remoteWork: string;
+  holidayWork: string;
+  totalWorkHours: string;
+  totalSalary: string;
+  workDetails: string;
+  gender: string;
+}
+
+// 파트 관리 상세
+
+export interface IDetailPartTimeData {
+  id: number;
+  name: string;
+  date: string;
+  department: string;
+  workSection: string;
+  startTime: string;
+  endTime: string;
+  settingTime: string;
+  workHours: string;
+  breakTime: string;
+  finalAmount: string;
+  registrationDate: string;
 }

@@ -10,4 +10,11 @@ export const QUERY_KEYS = {
   branches: 'branches',
   branch: 'branch',
   branchDeleted: 'branches-deleted',
+
+  //closedDays queryKeys
+  branchMonthlyClose: 'getMonthlyClosedDays',
+  branchClose: 'getClosedDays',
+
+  //work queryKeys
+  work: 'work',
 };
