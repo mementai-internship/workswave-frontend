@@ -18,10 +18,18 @@ const menuItems = [
   { icon: PiMapPinArea, text: '출/퇴근', view: <Commute /> },
 ];
 
-const MenuItem = ({ icon: Icon, text, view }) => (
-  <div className="flex grow items-center justify-center border border-slate-300 rounded-2xl hover:cursor-pointer hover:bg-slate-200">
+const MenuItem = ({
+  icon: Icon,
+  text,
+  view,
+}: {
+  icon: React.ElementType;
+  text: string;
+  view: React.ReactNode;
+}) => (
+  <div className="flex-1 content-center">
     <Dialog.Root>
-      <Dialog.Trigger>
+      <Dialog.Trigger className="w-full aspect-square border border-slate-300 rounded-2xl hover:cursor-pointer hover:bg-slate-200">
         <div className="flex gap-2 items-center justify-center p-2">
           <Icon size={24} />
           <Txt variant="h6">{text}</Txt>
