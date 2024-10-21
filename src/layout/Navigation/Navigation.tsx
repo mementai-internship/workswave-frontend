@@ -1,8 +1,9 @@
-import { NAVIGATION_CONTENTS } from '@/layout/Navigation/constants';
-import { currentUserAtom } from '@/store/authAtoms';
 import { useAtom } from 'jotai';
 import { Link, useLocation } from 'react-router-dom';
 import { Fragment } from 'react/jsx-runtime';
+
+import { NAVIGATION_CONTENTS } from '@/layout/Navigation/constants';
+import { currentUserAtom } from '@/store/authAtoms';
 
 type TNavigation = {
   path: string;

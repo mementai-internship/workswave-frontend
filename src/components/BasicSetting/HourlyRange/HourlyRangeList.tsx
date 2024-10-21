@@ -1,61 +1,83 @@
 import HourlyRangeContainer from '@/components/BasicSetting/HourlyRange/HourlyRangeContainer';
 import HourlyRangeItem from '@/components/BasicSetting/HourlyRange/HourlyRangeItem';
-import HourlyRangeSelect from '@/components/BasicSetting/HourlyRange/HourlyRangeSelect';
-import { useHourlyRange } from '@/hooks/useHourlyRange';
+import HourlyRangeSelect, {
+  THourlyRangeSelectType,
+} from '@/components/BasicSetting/HourlyRange/HourlyRangeSelect';
+import { Txt } from '@/components/Common/Txt';
+import { IHourWageTemplatesForm } from '@/models/hour-wage-templates';
+import { THourlyRangeEditMode } from '@/pages/basicSetting/HourlyRangePage';
 
-export default function HourlyRangeList() {
-  const { data } = useHourlyRange();
+interface IProps {
+  editMode: THourlyRangeEditMode;
+  selectedBranchId: number;
+  selectPartId: number | null;
+  branches: { id: number; name: string }[];
+  parts: THourlyRangeSelectType;
+  list: IHourWageTemplatesForm[];
+  activateEditMode: (id: number) => void;
+  handleDeleteItem: (id: number) => void;
+  handleSelectBranch: (id: string) => void;
+  handleSelectPart: (id: string) => void;
+}
+
+export default function HourlyRangeList({
+  handleDeleteItem,
+  activateEditMode,
+  handleSelectBranch,
+  handleSelectPart,
+  selectedBranchId,
+  selectPartId,
+  branches,
+  parts,
+  list,
+  editMode,
+}: IProps) {
+  if (!list || !branches || !parts) return null;
+
+  const filteredTemplates = (templates) => {
+    return templates.filter((template) => {
+      if (selectPartId === null) return template;
+      return template.part_id === selectPartId;
+    });
+  };
+
   return (
     <HourlyRangeContainer
       title="시급설정"
       width="w-[70%]"
       subTitleElement={
         <>
-          <HourlyRangeSelect content={DUMMY_DATA_OFFICE} defaultValue={0} isTitle />
           <HourlyRangeSelect
-            content={DUMMY_DATA_POSITION}
-            placeholder="직책선택"
-            name="positionId"
+            content={branches}
+            defaultValue={selectedBranchId}
             isTitle
+            onClick={handleSelectBranch}
+          />
+          <HourlyRangeSelect
+            content={parts}
+            placeholder="직책선택"
+            isTitle
+            onClick={handleSelectPart}
           />
         </>
       }
     >
       <ul className="flex flex-col gap-2 py-3">
-        {data.map((item) => (
-          <HourlyRangeItem key={item.templateId} item={item} />
-        ))}
+        {filteredTemplates(list).length === 0 ? (
+          <Txt className="text-center pt-6">시급 설정 템플릿이 없습니다.</Txt>
+        ) : (
+          filteredTemplates(list).map((item) => (
+            <HourlyRangeItem
+              key={item.id}
+              item={item}
+              parts={parts}
+              editMode={editMode}
+              activateEditMode={activateEditMode}
+              handleDeleteItem={handleDeleteItem}
+            />
+          ))
+        )}
       </ul>
     </HourlyRangeContainer>
   );
 }
-
-const DUMMY_DATA_POSITION = [
-  {
-    name: '의사',
-    id: 'ROLE_001',
-  },
-  {
-    name: '상담실장',
-    id: 'ROLE_002',
-  },
-  {
-    name: '간호조무사',
-    id: 'ROLE_003',
-  },
-  {
-    name: '코디네이터',
-    id: 'ROLE_004',
-  },
-  {
-    name: '피부관리사',
-    id: 'ROLE_005',
-  },
-];
-
-const DUMMY_DATA_OFFICE = [
-  {
-    name: '뮤즈의원(강남점)',
-    id: '0',
-  },
-];

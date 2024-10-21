@@ -1,4 +1,4 @@
-export const SALARY_RANGE_BORDER_COLOR = 'border-[#dddddd]';
+export const SALARY_RANGE_BORDER_COLOR = 'border-zinc-300';
 
 export const ANNUAL_SALARY_IN_MILLIONS = 10000000;
 

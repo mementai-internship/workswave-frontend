@@ -88,10 +88,10 @@ export default function SalaryRangeHeader({
 
       <form className="relative flex-1" onSubmit={onSubmit}>
         <div
-          className={`caption absolute top-[-50px] left-[112px] inline-block bg-[#ffffff] rounded-md border ${SALARY_RANGE_BORDER_COLOR} px-4 py-2 shadow`}
+          className={`caption absolute top-[-50px] left-[112px] inline-block bg-white rounded-md border ${SALARY_RANGE_BORDER_COLOR} px-4 py-2 shadow`}
         >
           <p>Enter Key 입력시 값이 계산됩니다.</p>
-          <div className="absolute right-[10px] bottom-[5px] -mb-4 ml-4 w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-t-[10px] border-t-[#dddddd]"></div>
+          <div className="absolute right-[10px] bottom-[5px] -mb-4 ml-4 w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-t-[10px] border-t-zinc-300"></div>
         </div>
 
         <table className={`border-4 ${SALARY_RANGE_BORDER_COLOR} `}>

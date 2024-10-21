@@ -1,40 +1,60 @@
-import HourlyRangeInput from '@/components/BasicSetting/HourlyRange/HourlyRangeInput';
-import HourlyRangeInputContainer from '@/components/BasicSetting/HourlyRange/HourlyRangeInputContainer';
-import { Txt } from '@/components/Common/Txt';
-import { useHourlyRange } from '@/hooks/useHourlyRange';
-import { IHourlyRangeItemSplitTime } from '@/models/hourlyRange.model';
 import { Box, Button, Flex } from '@radix-ui/themes';
 import { PiPencilLine, PiX } from 'react-icons/pi';
 
+import HourlyRangeInput from '@/components/BasicSetting/HourlyRange/HourlyRangeInput';
+import HourlyRangeInputContainer from '@/components/BasicSetting/HourlyRange/HourlyRangeInputContainer';
+import { THourlyRangeSelectType } from '@/components/BasicSetting/HourlyRange/HourlyRangeSelect';
+import { Txt } from '@/components/Common/Txt';
+import { IHourWageTemplatesForm } from '@/models/hour-wage-templates';
+import { THourlyRangeEditMode } from '@/pages/basicSetting/HourlyRangePage';
+
 interface IProps {
-  item: IHourlyRangeItemSplitTime;
+  editMode: THourlyRangeEditMode;
+  item: IHourWageTemplatesForm;
+  parts: THourlyRangeSelectType;
+  activateEditMode: (id: number) => void;
+  handleDeleteItem: (id: number) => void;
 }
 
-export default function HourlyRangeItem({ item }: IProps) {
-  const { handleEditMode, itemId } = useHourlyRange();
+export default function HourlyRangeItem({
+  parts,
+  handleDeleteItem,
+  activateEditMode,
+  item,
+  editMode,
+}: IProps) {
+  const partName = parts.find((part) => part.id === item.part_id)?.name;
   return (
-    <li key={item.templateId} className="list-none px-6 py-2">
+    <li key={item.id} className="list-none px-6 py-2">
       <Box className="flex items-center justify-between mb-2">
         <Box className="flex gap-2">
-          <Txt>{item.positionName}</Txt>
-          <Txt className="font-semibold">{item.templateName}</Txt>
+          <Txt>{partName}</Txt>
+          <Txt className="font-semibold">{item.name}</Txt>
         </Box>
 
         <Flex gap="1">
-          {Number(itemId) !== item.templateId && (
+          {editMode.editItemId !== item.id && (
             <Button
               variant="outline"
               color="gray"
               radius="none"
               size="1"
               className="cursor-pointer"
-              onClick={() => handleEditMode(item.templateId)}
+              onClick={() => activateEditMode(item.id)}
             >
               <PiPencilLine />
               수정
             </Button>
           )}
-          <Button variant="outline" color="gray" radius="none" size="1" className="cursor-pointer">
+
+          <Button
+            variant="outline"
+            color="gray"
+            radius="none"
+            size="1"
+            className="cursor-pointer"
+            onClick={() => handleDeleteItem(item.id)}
+          >
             <PiX />
             삭제
           </Button>
@@ -43,27 +63,45 @@ export default function HourlyRangeItem({ item }: IProps) {
 
       <Box className="flex gap-3">
         <HourlyRangeInputContainer title="시업시간">
-          <HourlyRangeInput label="시" value={item.startTimeHour} readOnly name="startTimeHour" />
+          <HourlyRangeInput
+            label="시"
+            value={item.start_time_hour}
+            readOnly
+            name="start_time_hour"
+          />
           <HourlyRangeInput
             label="분"
-            value={item.startTimeMinute}
+            value={item.start_time_minutes}
             readOnly
-            name="startTimeMinute"
+            name="start_time_minutes"
           />
         </HourlyRangeInputContainer>
+
         <HourlyRangeInputContainer title="종업시간">
-          <HourlyRangeInput label="시" value={item.endTimeHour} readOnly name="endTimeHour" />
-          <HourlyRangeInput label="분" value={item.endTimeMinute} readOnly name="endTimeMinute" />
+          <HourlyRangeInput label="시" value={item.end_time_hour} readOnly name="end_time_hour" />
+          <HourlyRangeInput
+            label="분"
+            value={item.end_time_minutes}
+            readOnly
+            name="end_time_minutes"
+          />
         </HourlyRangeInputContainer>
+
         <HourlyRangeInputContainer title="시급">
-          <HourlyRangeInput label="원" value={item.hourlyWage} readOnly name="hourlyWage" />
+          <HourlyRangeInput
+            label="원"
+            value={item.hour_wage.toLocaleString()}
+            readOnly
+            name="hour_wage"
+          />
         </HourlyRangeInputContainer>
+
         <HourlyRangeInputContainer title="재택근무시급">
           <HourlyRangeInput
             label="원"
-            value={item.remoteHourlyWage}
+            value={item.home_hour_wage.toLocaleString()}
             readOnly
-            name="remoteHourlyWage"
+            name="home_hour_wage"
           />
         </HourlyRangeInputContainer>
       </Box>

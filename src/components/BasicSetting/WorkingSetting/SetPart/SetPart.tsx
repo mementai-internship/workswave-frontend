@@ -55,13 +55,14 @@ export default function WorkingSettingSetPart({ branchId }: { branchId: number }
       <div className="flex flex-col gap-y-4 p-10 flex-1 overflow-y-scroll ">
         {parts &&
           !!parts.length &&
-          parts.map((part) => (
+          parts.map(({ id, ...data }) => (
             <WorkingSettingSetPartItem
-              key={part.id}
+              key={id}
+              id={id}
               branchId={branchId}
               setValue={setPartValue}
               onChangeEditMode={handleClickEditMode}
-              {...part}
+              {...data}
             />
           ))}
       </div>

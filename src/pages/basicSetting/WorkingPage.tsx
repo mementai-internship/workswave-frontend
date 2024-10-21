@@ -13,15 +13,11 @@ import WorkingSettingWeekendSalary from '@/components/BasicSetting/WorkingSettin
 import WorkingSettingTitle from '@/components/BasicSetting/WorkingSetting/WorkingSettingTitle';
 import Title from '@/components/Common/Title';
 import { Txt } from '@/components/Common/Txt';
-import { useGetAllBranches } from '@/hooks/apis/useBranches';
+import { useGetBranches } from '@/hooks/apis/useBranches';
 import { useGetWorkPolicies, usePatchWorkPolicies } from '@/hooks/apis/useWorkPolicies';
 import { IWorkPolicies } from '@/models/work-policies';
 
 export default function WorkingSettingPage() {
-  const { data: branches } = useGetAllBranches();
-
-  const [currentBranch, setCurrentBranch] = useState({ id: null, name: '' });
-
   const {
     register: branchRegister,
     setValue: setBranchValue,
@@ -78,6 +74,10 @@ export default function WorkingSettingPage() {
     },
   });
 
+  const { data } = useGetBranches('0');
+  const branches = data?.list;
+
+  const [currentBranch, setCurrentBranch] = useState({ id: null, name: '' });
   const { data: workPolicies, isSuccess: isSuccessWorkPolicies } = useGetWorkPolicies(
     currentBranch.id
   );
