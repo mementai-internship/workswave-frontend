@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import HourlyRangeCreate from '@/components/BasicSetting/HourlyRange/HourlyRangeCreate';
 import HourlyRangeList from '@/components/BasicSetting/HourlyRange/HourlyRangeList';
 import { THourlyRangeSelectType } from '@/components/BasicSetting/HourlyRange/HourlyRangeSelect';
-import { useGetAllBranches } from '@/hooks/apis/useBranches';
+import { useGetBranches } from '@/hooks/apis/useBranches';
 import {
   useDeleteHourWageTemplates,
   useGetHourWageTemplates,
@@ -21,7 +21,7 @@ export type THourlyRangeEditMode = { editItemId: null | number; isEdit: boolean 
 
 export default function HourlyRangePage() {
   const { data: currentUser } = useGetCurrentUser();
-  const { data: allBranches } = useGetAllBranches();
+  const { data } = useGetBranches('0');
   const [selectedBranchId, setSelectedBranchId] = useState<number | null>(null);
   const [selectPartId, setSelectPartId] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -59,18 +59,18 @@ export default function HourlyRangePage() {
   const { data: dbParts } = useGetParts(selectedBranchId);
 
   useEffect(() => {
-    if (currentUser && allBranches) {
+    if (currentUser && data) {
       if (currentUser.data.role === 'MSO 최고권한') {
-        setSelectedBranchId(allBranches[0].id);
+        setSelectedBranchId(data.list[0].id);
       } else {
         setSelectedBranchId(currentUser.data.branch_id);
       }
     }
     setIsLoading(false);
-  }, [currentUser, allBranches]);
+  }, [currentUser, data]);
 
   const branches: THourlyRangeSelectType =
-    allBranches?.map((branch) => ({ id: branch.id, name: branch.name })) || [];
+    data?.list?.map((branch) => ({ id: branch.id, name: branch.name })) || [];
 
   const parts: THourlyRangeSelectType = dbParts?.reduce(
     (acc: THourlyRangeSelectType, part: TPart) => [...acc, { id: part.id, name: part.name }],
