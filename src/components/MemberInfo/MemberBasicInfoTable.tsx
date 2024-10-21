@@ -17,6 +17,7 @@ import { TZipCode } from '@/models/zipCode.model';
 
 export default function MemberBasicInfoTable() {
   const { data: currentUserInfo } = useGetCurrentUserInfo();
+  console.log(currentUserInfo);
 
   const branchList = useGetBranches('0');
   const partList = useGetParts(currentUserInfo?.branch.id);
@@ -258,6 +259,21 @@ export default function MemberBasicInfoTable() {
                         case 0:
                           return (
                             <>
+                              {/* BE patch 로직에 role이 없어서 주석 처리
+                            <Controller
+                                name="role"
+                                control={basicInfoControl}
+                                render={({ field: { value } }) => (
+                                  <MemberInfoSelect
+                                    value={value}
+                                    content={roleList}
+                                    defaultValue={currentUserInfo?.role}
+                                    name="role"
+                                    onChange={handleRoleChange}
+                                    placeholder={currentUserInfo?.role}
+                                  />
+                                )}
+                              /> */}
                               <Button
                                 variant="surface"
                                 color="gray"
@@ -341,9 +357,16 @@ export default function MemberBasicInfoTable() {
                           );
                         case 6:
                           return (
-                            <MemberBasicInfoDatePicker
-                              defaultValue={currentUserInfo?.resignation_date || '근무 중'}
-                              {...basicInfoRegister('resignation_date')}
+                            <Controller
+                              control={basicInfoControl}
+                              name="resignation_date"
+                              render={({ field }) => (
+                                <MemberBasicInfoDatePicker
+                                  defaultValue={currentUserInfo?.resignation_date || '근무 중'}
+                                  style="top"
+                                  {...field}
+                                />
+                              )}
                             />
                           );
                         case 7:
