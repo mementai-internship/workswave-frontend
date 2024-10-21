@@ -1,31 +1,37 @@
-import { Button, Popover, Table } from '@radix-ui/themes';
+import { Button, Table } from '@radix-ui/themes';
 import { useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 
 import MemberBasicInfoDatePicker from '@/components/MemberInfo/MemberInfoCommon/MemberBasicInfoDatePicker';
 import MemberInfoButton from '@/components/MemberInfo/MemberInfoCommon/MemberInfoButton';
 import MemberInfoInput from '@/components/MemberInfo/MemberInfoCommon/MemberInfoInput';
+import MemberInfoPopover from '@/components/MemberInfo/MemberInfoCommon/MemberInfoPopover';
 import MemberInfoSelect from '@/components/MemberInfo/MemberInfoCommon/MemberInfoSelect';
 import {
   MEMBER_BASIC_INFO_TITLE1,
   MEMBER_BASIC_INFO_TITLE2,
 } from '@/constants/memberManagementTableTitle';
-import { useGetBranches } from '@/hooks/apis/useBranches';
-import { useGetParts } from '@/hooks/apis/useParts';
-import { useGetCurrentUserInfo, usePatchUser } from '@/hooks/apis/useUserManagement';
+import { useMemberBasicInfoForm } from '@/hooks/useMemberBasicInfoForm';
 import { TZipCode } from '@/models/zipCode.model';
 
 export default function MemberBasicInfoTable() {
-  const { data: currentUserInfo } = useGetCurrentUserInfo();
-  console.log(currentUserInfo);
-
-  const branchList = useGetBranches('0');
-  const partList = useGetParts(currentUserInfo?.branch.id);
   const genderList = [
     { id: 1, name: '남자' },
     { id: 2, name: '여자' },
     { id: 3, name: '기타' },
   ];
+
+  const {
+    handleBasicInfoSubmit,
+    currentUserInfo,
+    basicInfoControl,
+    branchList,
+    partList,
+    patchUser,
+    basicInfoRegister,
+    basicInfoGetValues,
+    basicInfoSetValue,
+  } = useMemberBasicInfoForm();
 
   const [, setBranchId] = useState(currentUserInfo?.branch.id);
   const [, setPartId] = useState(currentUserInfo?.part.id);
@@ -49,33 +55,6 @@ export default function MemberBasicInfoTable() {
     patchUser(basicInfoGetValues());
   }
 
-  const {
-    register: basicInfoRegister,
-    handleSubmit: handleBasicInfoSubmit,
-    getValues: basicInfoGetValues,
-    control: basicInfoControl,
-    setValue: basicInfoSetValue,
-  } = useForm({
-    defaultValues: {
-      name: currentUserInfo?.name || '',
-      email: currentUserInfo?.email || '',
-      phone_number: currentUserInfo?.phone_number || '',
-      address: currentUserInfo?.address || '',
-      education: currentUserInfo?.education || '',
-      birth_date: currentUserInfo?.birth_date || '2024-10-01',
-      hire_date: currentUserInfo?.hire_date || '2024-10-01',
-      resignation_date: currentUserInfo?.resignation_date || '2024-10-01',
-      gender: currentUserInfo?.gender || '',
-      part_id: Number(currentUserInfo?.part.id) || 0,
-      branch_id: Number(currentUserInfo?.branch.id) || 0,
-      last_company: currentUserInfo?.last_company || '',
-      last_position: currentUserInfo?.last_position || '',
-      last_career_start_date: currentUserInfo?.last_career_start_date || '2024-10-01',
-      last_career_end_date: currentUserInfo?.last_career_end_date || '2024-10-01',
-    },
-  });
-
-  const { mutate: patchUser } = usePatchUser(currentUserInfo?.id);
   function onSubmitBasicInfo(data) {
     const basicInfo = basicInfoGetValues();
     if (basicInfo.resignation_date === '근무 중' || basicInfo.resignation_date === '') {
@@ -193,36 +172,15 @@ export default function MemberBasicInfoTable() {
                       );
                     case 4:
                       return (
-                        <Popover.Root>
-                          <Popover.Trigger>
-                            <Button
-                              variant="outline"
-                              size="2"
-                              color="purple"
-                              className="text-purple w-44 h-10 px-8"
-                            >
-                              학력입력
-                            </Button>
-                          </Popover.Trigger>
-                          <Popover.Content
-                            width="100%"
-                            height="80px"
-                            className="flex flex-col gap-2"
-                          >
-                            <iframe
-                              src="http://api.data.go.kr/openapi/tn_pubr_public_univ_info_api?ServiceKey=XGTV%2BCkrGAVh6KuNSSJQL0IAxRaHnLh3Jnq3cy9uKj6J8ECU82jrsObbZeewBiqNrkVJto%2BqPJcuDosR4xTz%2FA%3D%3D"
-                              name="학력"
-                              width="1000"
-                              height="1200"
-                              className="border-width:0px border-color:white border-style:solid;"
-                            >
-                              {' '}
-                            </iframe>
-                            <Popover.Close>
-                              <Button size="1">추가하기</Button>
-                            </Popover.Close>
-                          </Popover.Content>
-                        </Popover.Root>
+                        <MemberInfoPopover title="학력입력" buttonText="추가하기">
+                          <iframe
+                            src="http://api.data.go.kr/openapi/tn_pubr_public_univ_info_api?ServiceKey=XGTV%2BCkrGAVh6KuNSSJQL0IAxRaHnLh3Jnq3cy9uKj6J8ECU82jrsObbZeewBiqNrkVJto%2BqPJcuDosR4xTz%2FA%3D%3D"
+                            name="학력"
+                            width="1000"
+                            height="1200"
+                            className="border-width:0px border-color:white border-style:solid;"
+                          />
+                        </MemberInfoPopover>
                       );
                     case 5:
                       return (
@@ -319,24 +277,10 @@ export default function MemberBasicInfoTable() {
                           );
                         case 4:
                           return (
-                            <Popover.Root>
-                              <Popover.Trigger>
-                                <Button
-                                  variant="outline"
-                                  size="2"
-                                  color="purple"
-                                  className="text-purple w-44 h-10 px-8"
-                                >
-                                  경력입력
-                                </Button>
-                              </Popover.Trigger>
-                              <Popover.Content width="360px" className="flex flex-col gap-2">
-                                경력 추가하기
-                                <Popover.Close>
-                                  <Button size="1">추가하기</Button>
-                                </Popover.Close>
-                              </Popover.Content>
-                            </Popover.Root>
+                            <MemberInfoPopover
+                              title="경력입력"
+                              buttonText="추가하기"
+                            ></MemberInfoPopover>
                           );
                         case 5:
                           return (
