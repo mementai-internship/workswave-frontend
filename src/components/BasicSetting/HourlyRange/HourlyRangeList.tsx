@@ -5,8 +5,10 @@ import HourlyRangeSelect, {
 } from '@/components/BasicSetting/HourlyRange/HourlyRangeSelect';
 import { Txt } from '@/components/Common/Txt';
 import { IHourWageTemplatesForm } from '@/models/hour-wage-templates';
+import { THourlyRangeEditMode } from '@/pages/basicSetting/HourlyRangePage';
 
 interface IProps {
+  editMode: THourlyRangeEditMode;
   selectedBranchId: number;
   selectPartId: number | null;
   branches: { id: number; name: string }[];
@@ -28,8 +30,16 @@ export default function HourlyRangeList({
   branches,
   parts,
   list,
+  editMode,
 }: IProps) {
   if (!list || !branches || !parts) return null;
+
+  const filteredTemplates = (templates) => {
+    return templates.filter((template) => {
+      if (selectPartId === null) return template;
+      return template.part_id === selectPartId;
+    });
+  };
 
   return (
     <HourlyRangeContainer
@@ -53,22 +63,19 @@ export default function HourlyRangeList({
       }
     >
       <ul className="flex flex-col gap-2 py-3">
-        {list.length === 0 ? (
+        {filteredTemplates(list).length === 0 ? (
           <Txt className="text-center pt-6">시급 설정 템플릿이 없습니다.</Txt>
         ) : (
-          list
-            .filter((item) => {
-              if (selectPartId === null) return item;
-              return item.part_id === selectPartId;
-            })
-            .map((item) => (
-              <HourlyRangeItem
-                item={item}
-                activateEditMode={activateEditMode}
-                handleDeleteItem={handleDeleteItem}
-                parts={parts}
-              />
-            ))
+          filteredTemplates(list).map((item) => (
+            <HourlyRangeItem
+              key={item.id}
+              item={item}
+              parts={parts}
+              editMode={editMode}
+              activateEditMode={activateEditMode}
+              handleDeleteItem={handleDeleteItem}
+            />
+          ))
         )}
       </ul>
     </HourlyRangeContainer>

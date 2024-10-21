@@ -14,6 +14,7 @@ interface IProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'content'
   isWidthFull?: boolean;
   name?: keyof IHourWageTemplatesForm;
   onClick?: (id: string) => void;
+  onChange?: (...event) => void;
 }
 
 const HourlyRangeSelect = forwardRef<HTMLButtonElement, IProps>(
@@ -26,17 +27,22 @@ const HourlyRangeSelect = forwardRef<HTMLButtonElement, IProps>(
       defaultValue,
       isWidthFull = false,
       onClick,
+      onChange,
     },
     ref
   ) => {
     return (
-      <Select.Root defaultValue={defaultValue?.toString() ?? undefined} onValueChange={onClick}>
+      <Select.Root
+        defaultValue={defaultValue?.toString() ?? undefined}
+        onValueChange={onClick ? onClick : onChange}
+      >
         <Select.Trigger
           variant={!isBorder ? 'ghost' : 'surface'}
           radius="none"
           className={`bg-transparent text-black px-4 py-4 ${isTitle ? 'text-lg' : 'text-md'} ${isWidthFull ? 'grow' : 'w-36'}`}
           placeholder={placeholder || undefined}
           ref={ref}
+          type="submit"
         />
         <Select.Content>
           <Select.Group>

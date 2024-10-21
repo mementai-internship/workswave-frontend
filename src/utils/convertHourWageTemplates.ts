@@ -7,6 +7,7 @@ export const convertTemplateToForm = (
   const [endHour, endMinute] = template.end_time.split(':');
 
   return {
+    id: template.id ?? null,
     part_id: template.part_id,
     name: template.name,
     start_time_hour: Number(startHour),
@@ -18,16 +19,15 @@ export const convertTemplateToForm = (
   };
 };
 
-export const convertFormToTemplate = (
-  data: IHourWageTemplatesForm
-): Omit<IHourWageTemplatesResponse, 'id'> => {
+export const convertFormToTemplate = (data: IHourWageTemplatesForm): IHourWageTemplatesResponse => {
   const formattedTime = (value: number) => value.toString().padStart(2, '0');
   return {
-    part_id: data.part_id,
+    id: data.id ?? null,
+    part_id: Number(data.part_id),
     name: data.name,
     start_time: `${formattedTime(data.start_time_hour)}:${formattedTime(data.start_time_minutes)}`,
     end_time: `${formattedTime(data.end_time_hour)}:${formattedTime(data.end_time_minutes)}`,
-    hour_wage: data.hour_wage,
-    home_hour_wage: data.home_hour_wage,
+    hour_wage: Number(data.hour_wage),
+    home_hour_wage: Number(data.home_hour_wage),
   };
 };

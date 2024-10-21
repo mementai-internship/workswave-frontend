@@ -29,6 +29,7 @@ export default function HourlyRangePage() {
     isEdit: false,
     editItemId: null,
   });
+
   const {
     reset,
     setValue,
@@ -38,6 +39,7 @@ export default function HourlyRangePage() {
   } = useForm<IHourWageTemplatesForm>({
     mode: 'onChange',
     defaultValues: {
+      id: null,
       part_id: 0,
       name: '',
       start_time_hour: 0,
@@ -102,7 +104,11 @@ export default function HourlyRangePage() {
   };
 
   const handleDeleteItem = (id: number) => {
-    deleteHourWageTemplates(id);
+    deleteHourWageTemplates(id, {
+      onSuccess: () => {
+        refetchGetHourWageTemplates();
+      },
+    });
   };
 
   const onSubmit = handleSubmit((data: IHourWageTemplatesForm) => {
@@ -120,6 +126,7 @@ export default function HourlyRangePage() {
           onSuccess: () => {
             refetchGetHourWageTemplates();
             reset();
+            setEditMode({ editItemId: null, isEdit: false });
           },
         }
       );
@@ -128,6 +135,7 @@ export default function HourlyRangePage() {
         onSuccess: () => {
           refetchGetHourWageTemplates();
           reset();
+          setEditMode({ editItemId: null, isEdit: false });
         },
       });
     }
@@ -139,6 +147,7 @@ export default function HourlyRangePage() {
         {!isLoading && (
           <>
             <HourlyRangeList
+              editMode={editMode}
               branches={branches}
               parts={parts}
               list={list}
