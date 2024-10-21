@@ -1,6 +1,6 @@
 import { useAtom } from 'jotai';
 import React, { useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 
 import { getCurrentUser } from '@/apis/auth.api';
 import ContactSearchInput from '@/components/Common/ContactSearchInput';
@@ -39,7 +39,7 @@ export default function DayoffManagementFilterbar() {
     });
   }, [currentUser]);
 
-  if (currentUser.status === 'error') return navigate('/login');
+  if (currentUser.status === 'error') return <Navigate to="/login" />;
   if (branchLoading) return <div>Loading...</div>;
 
   const handleBranchSelect = (branchId: number) => {
@@ -105,11 +105,9 @@ export default function DayoffManagementFilterbar() {
       </div>
       <WeekSelector />
 
-      <div>
-        <div className="flex items-center justify-center gap-3">
-          <span className="text-sm">검색</span>
-          <ContactSearchInput />
-        </div>
+      <div className="flex items-center justify-center gap-3">
+        <span className="text-sm">검색</span>
+        <ContactSearchInput />
       </div>
     </div>
   );
