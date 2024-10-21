@@ -83,7 +83,7 @@ export interface IPartTimeData {
   totalWorkHours: string;
   totalSalary: string;
   workDetails: string;
-  gender: number;
+  gender: string;
 }
 
 // 파트 관리 상세

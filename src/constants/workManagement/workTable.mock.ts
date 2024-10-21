@@ -187,7 +187,7 @@ export const partTimeMockData: IPartTimeData[] = [
     totalWorkHours: '8시간',
     totalSalary: '150,000원',
     workDetails: '정상근무',
-    gender: 0,
+    gender: '남자',
   },
   {
     id: 2,
@@ -201,7 +201,7 @@ export const partTimeMockData: IPartTimeData[] = [
     totalWorkHours: '8시간',
     totalSalary: '150,000원',
     workDetails: '정상근무',
-    gender: 1,
+    gender: '남자',
   },
 ];
 
