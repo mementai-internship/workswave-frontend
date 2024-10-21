@@ -8,8 +8,13 @@ import { Link } from 'react-router-dom';
 
 import SelectBox from '@/components/Common/Select';
 import TitleContainer from '@/components/Common/TitleContainer';
+import { TUser } from '@/models/user.model';
 
-export default function DayoffManagementHeader() {
+interface DayoffManagementHeaderProps {
+  currentUser: TUser;
+}
+
+export default function DayoffManagementHeader({ currentUser }: DayoffManagementHeaderProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
 
@@ -18,12 +23,13 @@ export default function DayoffManagementHeader() {
     <div>
       <div className="flex justify-between items-center">
         <TitleContainer content="연차관리">
-          <div className="flex flex-row gap-2 items-center">
-            <Button color="gray" variant="soft" radius="full" onClick={() => {}}>
-              <PiGear />
-              <Link to="/dayoff-management/approval-history">전체승인내역</Link>
-            </Button>
-          </div>
+          {currentUser.role === 'MSO 최고권한' ||
+            (currentUser.role === '최고관리자' && (
+              <Button color="gray" variant="soft" radius="full" onClick={() => {}}>
+                <PiGear />
+                <Link to="/dayoff-management/approval-history">전체승인내역</Link>
+              </Button>
+            ))}
         </TitleContainer>
         <div>
           <Dialog.Root open={isModalOpen} onOpenChange={setIsModalOpen}>

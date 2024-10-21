@@ -1,13 +1,12 @@
-import { useAtom } from 'jotai';
 import React, { useEffect } from 'react';
-import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { getCurrentUser } from '@/apis/auth.api';
 import ContactSearchInput from '@/components/Common/ContactSearchInput';
 import SelectBox from '@/components/Common/Select';
-import WeekSelector from '@/components/DayoffManagement/DayoffManagementFilterbar/WeekSelector';
+// import WeekSelector from '@/components/DayoffManagement/DayoffManagementFilterbar/WeekSelector';
 import { useGetAllBranches } from '@/hooks/apis/useBranches';
-import { currentUserAtom } from '@/store/authAtoms';
+import { TUser } from '@/models/user.model';
 
 const dummyPart = [
   {
@@ -26,12 +25,15 @@ const dummyPart = [
     action: () => {},
   },
 ];
-export default function DayoffManagementFilterbar() {
+
+export default function DayoffManagementFilterbar({ currentUser }: { currentUser: TUser }) {
   const navigate = useNavigate();
+
   const location = useLocation();
 
-  const [currentUser] = useAtom(currentUserAtom);
-  const { data: branchData, isLoading: branchLoading } = useGetAllBranches();
+  const { data: branchData, isLoading: branchLoading } = useGetAllBranches({
+    role: currentUser.role,
+  });
 
   useEffect(() => {
     getCurrentUser().then((res) => {
@@ -39,7 +41,6 @@ export default function DayoffManagementFilterbar() {
     });
   }, [currentUser]);
 
-  if (currentUser.status === 'error') return <Navigate to="/login" />;
   if (branchLoading) return <div>Loading...</div>;
 
   const handleBranchSelect = (branchId: number) => {
@@ -63,7 +64,7 @@ export default function DayoffManagementFilterbar() {
   return (
     <div className="flex gap-4 justify-between">
       <div>
-        {currentUser.data?.role && currentUser.data.role === 'MSO 최고권한' && (
+        {currentUser.role && currentUser.role === 'MSO 최고권한' && (
           <SelectBox
             size="small"
             title="지점 선택"
@@ -103,12 +104,14 @@ export default function DayoffManagementFilterbar() {
           ]}
         />
       </div>
-      <WeekSelector />
+      {/* <WeekSelector /> */}
 
-      <div className="flex items-center justify-center gap-3">
-        <span className="text-sm">검색</span>
-        <ContactSearchInput />
-      </div>
+      {currentUser.role !== '사원' && (
+        <div className="flex items-center justify-center gap-3">
+          <span className="text-sm">검색</span>
+          <ContactSearchInput />
+        </div>
+      )}
     </div>
   );
 }
