@@ -1,13 +1,19 @@
 // Mocks 폴더 만들기 좀 그래서 우선 constants에 넣었습니다.
-import { ICommuteData, IDetailPartTimeData, IPartTimeData, IWorkData } from '@/models/work.model';
+import {
+  IAttendance,
+  ICommuteData,
+  IDetailPartTimeData,
+  IPartTimeData,
+  IWorkData,
+} from '@/models/work.model';
 
 // 근로 관리
 export const workMockData: IWorkData[] = [
   {
     id: 0,
-    branch: '서울 강남점',
+    branch: '부산 클리어스킨 센터',
     name: '김영희',
-    department: '의사',
+    department: '간호사',
     workDate: 1,
     leaveDate: 0,
     regularDaysOff: 1,
@@ -26,7 +32,7 @@ export const workMockData: IWorkData[] = [
   },
   {
     id: 1,
-    branch: '서울 강남점',
+    branch: '부산 클리어스킨 센터',
     name: '김철수',
     department: '의사',
     workDate: 1,
@@ -48,7 +54,7 @@ export const workMockData: IWorkData[] = [
   },
   {
     id: 2,
-    branch: '서울 강남점',
+    branch: '대전 더마케어 클리닉',
     name: '김경택',
     department: '의사',
     workDate: 1,
@@ -91,6 +97,82 @@ export const workMockData: IWorkData[] = [
     days: 4,
   },
 ];
+//백엔드 구조
+export const mockAttendanceData: IAttendance[] = [
+  {
+    branch_name: '서울 본사',
+    name: '김철수',
+    gender: '남성',
+    part_name: '개발팀',
+    workdays: 22,
+    leavedays: 1,
+    regular_holiday: 8,
+    annual_leave: 1,
+    unpaid_use: 0,
+    work_from_home: 5,
+    weekend_work_hours: 4,
+    holiday_work: 1,
+    ot_30: 10,
+    ot_60: 5,
+    ot_90: 2,
+    ot_total: 17,
+  },
+  {
+    branch_name: '부산 지사',
+    name: '이영희',
+    gender: '여성',
+    part_name: '마케팅팀',
+    workdays: 21,
+    leavedays: 2,
+    regular_holiday: 8,
+    annual_leave: 2,
+    unpaid_use: 0,
+    work_from_home: 3,
+    weekend_work_hours: 0,
+    holiday_work: 0,
+    ot_30: 8,
+    ot_60: 3,
+    ot_90: 0,
+    ot_total: 11,
+  },
+  {
+    branch_name: '대전 지사',
+    name: '박민수',
+    gender: '남성',
+    part_name: '인사팀',
+    workdays: 20,
+    leavedays: 3,
+    regular_holiday: 8,
+    annual_leave: 3,
+    unpaid_use: 0,
+    work_from_home: 1,
+    weekend_work_hours: 6,
+    holiday_work: 1,
+    ot_30: 15,
+    ot_60: 7,
+    ot_90: 3,
+    ot_total: 25,
+  },
+  {
+    branch_name: '광주 지사',
+    name: '최수진',
+    gender: '여성',
+    part_name: '영업팀',
+    workdays: 23,
+    leavedays: 0,
+    regular_holiday: 8,
+    annual_leave: 0,
+    unpaid_use: 0,
+    work_from_home: 2,
+    weekend_work_hours: 8,
+    holiday_work: 2,
+    ot_30: 20,
+    ot_60: 10,
+    ot_90: 5,
+    ot_total: 35,
+  },
+];
+
 // 파트 관리
 export const partTimeMockData: IPartTimeData[] = [
   {
@@ -105,7 +187,7 @@ export const partTimeMockData: IPartTimeData[] = [
     totalWorkHours: '8시간',
     totalSalary: '150,000원',
     workDetails: '정상근무',
-    gender: 0,
+    gender: '남자',
   },
   {
     id: 2,
@@ -119,7 +201,7 @@ export const partTimeMockData: IPartTimeData[] = [
     totalWorkHours: '8시간',
     totalSalary: '150,000원',
     workDetails: '정상근무',
-    gender: 1,
+    gender: '남자',
   },
 ];
 
@@ -129,7 +211,7 @@ export const commuteMockData: ICommuteData[] = [
     id: 100,
     branch: '유즈의원(강남점)',
     name: '강동휘',
-    gender: 1,
+    gender: '여자',
     position: '코디네이터',
     days: 5,
     schedule: {
@@ -144,7 +226,7 @@ export const commuteMockData: ICommuteData[] = [
     id: 101,
     branch: '유즈의원(서초점)',
     name: '김미영',
-    gender: 2,
+    gender: '남자',
     position: '간호사',
     days: 4,
 
@@ -159,7 +241,7 @@ export const commuteMockData: ICommuteData[] = [
     id: 102,
     branch: '유즈의원(강남점)',
     name: '박준서',
-    gender: 1,
+    gender: '여자',
     position: '의사',
     days: 6,
 
@@ -176,7 +258,7 @@ export const commuteMockData: ICommuteData[] = [
     id: 103,
     branch: '유즈의원(서초점)',
     name: '이지은',
-    gender: 2,
+    gender: '여자',
     position: '코디네이터',
     days: 5,
 
