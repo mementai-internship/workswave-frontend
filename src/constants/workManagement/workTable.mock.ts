@@ -211,7 +211,7 @@ export const commuteMockData: ICommuteData[] = [
     id: 100,
     branch: '유즈의원(강남점)',
     name: '강동휘',
-    gender: 1,
+    gender: '여자',
     position: '코디네이터',
     days: 5,
     schedule: {
@@ -226,7 +226,7 @@ export const commuteMockData: ICommuteData[] = [
     id: 101,
     branch: '유즈의원(서초점)',
     name: '김미영',
-    gender: 2,
+    gender: '남자',
     position: '간호사',
     days: 4,
 
@@ -241,7 +241,7 @@ export const commuteMockData: ICommuteData[] = [
     id: 102,
     branch: '유즈의원(강남점)',
     name: '박준서',
-    gender: 1,
+    gender: '여자',
     position: '의사',
     days: 6,
 
@@ -258,7 +258,7 @@ export const commuteMockData: ICommuteData[] = [
     id: 103,
     branch: '유즈의원(서초점)',
     name: '이지은',
-    gender: 2,
+    gender: '여자',
     position: '코디네이터',
     days: 5,
 
