@@ -69,15 +69,15 @@ export default function MemberManagementPage() {
     navigate(`/member-management?${queryParams.toString()}`);
   }
 
-  const { data: userList } = useGetUsers(
+  const { data: userList } = useGetUsers({
     currentPage,
     itemsPerPage,
     selectedTab,
     selectedBranch,
     selectedPart,
     updatedSearchName,
-    updatedSearchPhone
-  );
+    updatedSearchPhone,
+  });
 
   console.log(userList);
   const { data: currentUser } = useGetCurrentUserInfo();

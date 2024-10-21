@@ -4,18 +4,36 @@ import userManagementApi from '@/apis/user-management.api';
 import { QUERY_KEYS } from '@/constants/queryKeys';
 import { TPatchUserRequest, TPatchUserRoleRequest } from '@/models/user-management.model';
 
-export const useGetUsers = (
-  page: number,
-  recordSize: number,
-  status?: string,
-  branch?: string,
-  part?: string,
-  name?: string,
-  phone?: string
-) => {
+export const useGetUsers = ({
+  currentPage,
+  itemsPerPage,
+  selectedTab,
+  selectedBranch,
+  selectedPart,
+  updatedSearchName,
+  updatedSearchPhone,
+}) => {
   return useQuery({
-    queryKey: [QUERY_KEYS.userManagementList, page, recordSize, status, branch, part, name, phone],
-    queryFn: () => userManagementApi.getUsers(page, recordSize, status, branch, part, name, phone),
+    queryKey: [
+      QUERY_KEYS.userManagementList,
+      currentPage,
+      itemsPerPage,
+      selectedTab,
+      selectedBranch,
+      selectedPart,
+      updatedSearchName,
+      updatedSearchPhone,
+    ],
+    queryFn: () =>
+      userManagementApi.getUsers(
+        currentPage,
+        itemsPerPage,
+        selectedTab,
+        selectedBranch,
+        selectedPart,
+        updatedSearchName,
+        updatedSearchPhone
+      ),
     staleTime: 1000 * 60 * 5,
     gcTime: 1000 * 60 * 10,
   });
