@@ -1,9 +1,9 @@
 import { Table } from '@radix-ui/themes';
 
+import GenderIcon from '@/components/WorkManagement/GenderIcon';
 import DetailPartTime from '@/components/WorkManagement/PartTime/DetailPartTime';
-import { GenderIcon } from '@/components/WorkManagement/Work/WorkTableRows';
-import { PARTTIMEHEADTABLE } from '@/constants/workManagementTable/workTable';
-import { partTimeMockData } from '@/constants/workManagementTable/workTable.mock';
+import { PARTTIMEHEADTABLE } from '@/constants/workManagement/workTable';
+import { partTimeMockData } from '@/constants/workManagement/workTable.mock';
 
 export default function PartTime() {
   return (
@@ -23,22 +23,40 @@ export default function PartTime() {
       <Table.Body>
         {partTimeMockData.map((row) => (
           <Table.Row key={row.id}>
-            <Table.Cell align="center">{row.id}</Table.Cell>
-            <Table.Cell align="center">{row.branch}</Table.Cell>
-            <Table.Cell align="center" className="">
+            <Table.Cell align="center" className="align-middle">
+              {row.id}
+            </Table.Cell>
+            <Table.Cell align="center" className="align-middle">
+              {row.branch}
+            </Table.Cell>
+            <Table.Cell align="center" className="align-middle">
               <div className="flex gap-2 items-center">
                 <GenderIcon gender={row.gender} />
                 {row.name}
               </div>
             </Table.Cell>
-            <Table.Cell align="center">{row.workPart}</Table.Cell>
-            <Table.Cell align="center">{row.workDate}</Table.Cell>
-            <Table.Cell align="center">{row.hospitalWork}</Table.Cell>
-            <Table.Cell align="center">{row.remoteWork}</Table.Cell>
-            <Table.Cell align="center">{row.holidayWork}</Table.Cell>
-            <Table.Cell align="center">{row.totalWorkHours}</Table.Cell>
-            <Table.Cell align="center">{row.totalSalary}</Table.Cell>
-            <Table.Cell align="center">
+            <Table.Cell align="center" className="align-middle">
+              {row.workPart}
+            </Table.Cell>
+            <Table.Cell align="center" className="align-middle">
+              {row.workDate}
+            </Table.Cell>
+            <Table.Cell align="center" className="align-middle">
+              {row.hospitalWork}
+            </Table.Cell>
+            <Table.Cell align="center" className="align-middle">
+              {row.remoteWork}
+            </Table.Cell>
+            <Table.Cell align="center" className="align-middle">
+              {row.holidayWork}
+            </Table.Cell>
+            <Table.Cell align="center" className="align-middle">
+              {row.totalWorkHours}
+            </Table.Cell>
+            <Table.Cell align="center" className="align-middle">
+              {row.totalSalary}
+            </Table.Cell>
+            <Table.Cell align="center" className="align-middle">
               <DetailPartTime />
             </Table.Cell>
           </Table.Row>

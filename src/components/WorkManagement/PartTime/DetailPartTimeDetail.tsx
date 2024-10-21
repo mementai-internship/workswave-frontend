@@ -2,8 +2,9 @@ import { Table } from '@radix-ui/themes';
 import { PiPencilSimple } from 'react-icons/pi';
 
 import SelectBox from '@/components/Common/Select';
+import CustomTimePicker from '@/components/WorkManagement/PartTime/CustomTimePicker';
 import DetailTotalPartTime from '@/components/WorkManagement/PartTime/DetailTotalPartTime';
-import { DETAILPARTTIMEHEADTABLE } from '@/constants/workManagementTable/workTable';
+import { DETAILPARTTIMEHEADTABLE } from '@/constants/workManagement/workTable';
 import { IDetailPartTimeData } from '@/models/work.model';
 
 export default function DetailPartTimeList({
@@ -41,23 +42,44 @@ export default function DetailPartTimeList({
         <Table.Body>
           {detailPartTimeData.map((row, index) => (
             <Table.Row key={index}>
-              <Table.Cell align="center">{row.date}</Table.Cell>
-              <Table.Cell align="center">{row.department}</Table.Cell>
-              <Table.Cell align="center">
+              <Table.Cell align="center" className="align-middle">
+                {row.date}
+              </Table.Cell>
+              <Table.Cell align="center" className="align-middle">
+                {row.department}
+              </Table.Cell>
+              <Table.Cell align="center" className="align-middle">
                 <SelectBox title={row.workSection} options={[]} size="xSmall" />
               </Table.Cell>
 
-              <Table.Cell align="center">{row.startTime}</Table.Cell>
-              <Table.Cell align="center">{row.endTime}</Table.Cell>
-              <Table.Cell align="center">
-                <SelectBox title={row.settingTime} options={[]} size="xSmall" />
+              <Table.Cell align="center" className="align-middle">
+                {row.startTime}
               </Table.Cell>
-              <Table.Cell align="center">{row.workHours}</Table.Cell>
+              <Table.Cell align="center" className="align-middle">
+                {row.endTime}
+              </Table.Cell>
+              <Table.Cell align="center">
+                <div className=" flex gap-2 ">
+                  <div>
+                    <CustomTimePicker value={row.startTime} onChange={() => {}} />
+                  </div>
+                  <div>
+                    <CustomTimePicker value={row.startTime} onChange={() => {}} />
+                  </div>
+                </div>
+              </Table.Cell>
+              <Table.Cell align="center" className="align-middle">
+                {row.workHours}
+              </Table.Cell>
               <Table.Cell align="center">
                 <SelectBox title={row.breakTime} options={[]} size="xSmall" />
               </Table.Cell>
-              <Table.Cell align="center">{row.finalAmount}</Table.Cell>
-              <Table.Cell align="center">{row.registrationDate}</Table.Cell>
+              <Table.Cell align="center" className="align-middle">
+                {row.finalAmount}
+              </Table.Cell>
+              <Table.Cell align="center" className="align-middle">
+                {row.registrationDate}
+              </Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>
