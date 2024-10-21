@@ -49,7 +49,7 @@ export interface ICommuteData {
   id: number;
   branch: string;
   name: string;
-  gender: number;
+  gender: string;
   position: string;
   days: number;
   schedule: {
