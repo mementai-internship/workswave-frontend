@@ -23,6 +23,7 @@ import MemberManagementPage from '@/pages/memberManagement/MemberManagementPage'
 import SuperManagerSetting from '@/pages/memberManagement/SuperManagerSetting';
 import ManagementDeleteOfficePage from '@/pages/officeSetting/ManagementDeleteOfficePage';
 import ManagementOfficePage from '@/pages/officeSetting/ManagementOfficePage';
+import EntireHistoryPage from '@/pages/otManagement/EntireHistory/EntireHistoryPage';
 import OtManagementPage from '@/pages/otManagement/OtManagementPage';
 import SalarySettlementPage from '@/pages/salarySettlement/SalarySettlementPage';
 import SimpleMenuPage from '@/pages/simpleMenu/SimpleMenuPage';
@@ -195,6 +196,10 @@ const router = createBrowserRouter([
       {
         path: 'ot-management',
         element: <OtManagementPage />,
+      },
+      {
+        path: 'ot-management/entire-history',
+        element: <EntireHistoryPage />,
       },
     ],
   },
