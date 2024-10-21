@@ -24,9 +24,6 @@ export function SalaryTableHeader({ employees, handleAllCheckbox }: ISalaryTable
           <br />
           근무파트
         </Table.ColumnHeaderCell>
-        <Table.ColumnHeaderCell justify="center" className="w-32">
-          입사일/퇴사일
-        </Table.ColumnHeaderCell>
         <Table.ColumnHeaderCell justify="center" className="w-28">
           월급
         </Table.ColumnHeaderCell>
