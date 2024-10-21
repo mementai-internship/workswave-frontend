@@ -52,11 +52,12 @@ export default function CertificationManagementItem({
           </div>
           <div className="flex items-center gap-2 my-1">
             <Txt variant="subtitle1">{name}</Txt>
-            {applyStatus === '승인' ? (
-              <Badge size={1} color="green" radius="large" text={applyStatus} />
-            ) : (
-              <Badge size={1} color="gray" radius="large" text={applyStatus} />
-            )}
+            <Badge
+              size={1}
+              color={applyStatus === '복직' ? 'purple' : 'gray'}
+              radius="large"
+              text={applyStatus}
+            />
           </div>
           <div className="flex items-center gap-2">
             <p className="text-xs text-gray-500">{applyType}</p>
