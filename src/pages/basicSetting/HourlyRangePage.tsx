@@ -54,27 +54,18 @@ export default function HourlyRangePage() {
   const { mutate: postHourWageTemplates } = usePostHourWageTemplates(selectedBranchId);
   const { mutate: patchHourWageTemplates } = usePatchHourWageTemplates(selectedBranchId);
   const { mutate: deleteHourWageTemplates } = useDeleteHourWageTemplates(selectedBranchId);
-  const { data: dbParts, refetch: refetchGetParts } = useGetParts(selectedBranchId);
+  const { data: dbParts } = useGetParts(selectedBranchId);
 
   useEffect(() => {
     if (currentUser && allBranches) {
       if (currentUser.data.role === 'MSO 최고권한') {
-        if (allBranches) {
-          setSelectedBranchId(allBranches[0].id);
-        }
+        setSelectedBranchId(allBranches[0].id);
       } else {
         setSelectedBranchId(currentUser.data.branch_id);
       }
     }
+    setIsLoading(false);
   }, [currentUser, allBranches]);
-
-  useEffect(() => {
-    if (selectedBranchId) {
-      refetchGetHourWageTemplates();
-      refetchGetParts();
-      setIsLoading(false);
-    }
-  }, [selectedBranchId]);
 
   const branches: THourlyRangeSelectType =
     allBranches?.map((branch) => ({ id: branch.id, name: branch.name })) || [];
