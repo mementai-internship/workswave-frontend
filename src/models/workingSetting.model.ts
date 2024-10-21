@@ -5,6 +5,7 @@ export interface IWorkingSettingPartResponse {
   name: string;
   task: string;
   is_doctor: boolean;
+  color: string;
   required_certification: boolean;
   leave_granting_authority: boolean;
 }
