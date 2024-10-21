@@ -9,8 +9,6 @@ import { usePostClosedDays } from '@/hooks/apis/useClosedDays';
 import { useGetClosedDays } from '@/hooks/apis/useClosedDays';
 import { TClosedDaysResponse } from '@/models/closedDays.model';
 
-// import { useGetMonthlyClosedDays } from '@/hooks/apis/useClosedDays';
-
 interface IHolidayRegisterPopoverProps {
   currDate: dayjs.Dayjs;
   holidays: TClosedDaysResponse;
@@ -29,11 +27,6 @@ export default function HolidayRegisterPopover({
 
   const { refetch: refetchHoliDays } = useGetClosedDays({ branch_id: branchId });
   const { mutate: postClosedDays } = usePostClosedDays();
-
-  // const { refetch: refetchClosedDays } = useGetMonthlyClosedDays({   // 월별 휴무일 조회
-  //   branch_id: branchId,
-  //   date: currDate.toDate(),
-  // });
 
   const handleRegisterPopoverClose = () => {
     setTempSelectedDays([]);
@@ -59,6 +52,7 @@ export default function HolidayRegisterPopover({
     setTempSelectedDays(updatedHolidays);
   };
 
+  // 오늘 날짜보다 이전 날짜를 선택 후 휴무일 등록 버튼 클릭 시 백엔드에서 에러 뱉음
   const submitNewHolidays = () => {
     postClosedDays(
       { branch_id: branchId, dates: tempSelectedDays, memo: '지점 휴무일' },

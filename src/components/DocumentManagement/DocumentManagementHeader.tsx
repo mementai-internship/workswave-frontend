@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import ContactSearchInput from '@/components/Common/ContactSearchInput';
@@ -18,6 +17,8 @@ export default function DocumentManagementHeader({
   setBranchId,
   setPartId,
 }: IDocumentManagementHeaderProps) {
+  //TODO : UI 분기 처리 필요 ( 권한 별로 지점(branch) 셀렉트, 파트 셀렉트가 보일 필요 없음 )
+
   const location = useLocation();
 
   const { data: branches, isFetching: isBranchesFetching } = useGetBranches('1');
@@ -54,7 +55,7 @@ export default function DocumentManagementHeader({
     }));
 
   return (
-    <Fragment>
+    <>
       <div className="flex items-center">
         <Title content={getTitleContent()} />
         <span className="text-purple-50 px-4">
@@ -74,6 +75,6 @@ export default function DocumentManagementHeader({
           <ContactSearchInput />
         </div>
       </div>
-    </Fragment>
+    </>
   );
 }

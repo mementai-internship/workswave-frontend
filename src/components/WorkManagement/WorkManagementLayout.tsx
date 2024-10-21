@@ -42,7 +42,7 @@ export default function WorkManagementLayout() {
         setSelectedDepartment={setSelectedDepartment}
       />
 
-      <Outlet context={{ selectedBranch, selectedDepartment }} />
+      <Outlet />
     </div>
   );
 }

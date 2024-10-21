@@ -179,7 +179,7 @@ export const partTimeMockData: IPartTimeData[] = [
     id: 1,
     branch: '서울지점',
     name: '김철수',
-    workPart: '간호사',
+    department: '간호사',
     workDate: '2023-10-18',
     hospitalWork: '8시간',
     remoteWork: '0시간',
@@ -193,7 +193,7 @@ export const partTimeMockData: IPartTimeData[] = [
     id: 2,
     branch: '서울지점',
     name: '김철수',
-    workPart: '간호사',
+    department: '간호사',
     workDate: '2023-10-18',
     hospitalWork: '8시간',
     remoteWork: '0시간',
@@ -212,7 +212,7 @@ export const commuteMockData: ICommuteData[] = [
     branch: '유즈의원(강남점)',
     name: '강동휘',
     gender: '여자',
-    position: '코디네이터',
+    department: '코디네이터',
     days: 5,
     schedule: {
       '1': { startTime: '10:24', endTime: '21:08', isHoliday: false },
@@ -227,7 +227,7 @@ export const commuteMockData: ICommuteData[] = [
     branch: '유즈의원(서초점)',
     name: '김미영',
     gender: '남자',
-    position: '간호사',
+    department: '간호사',
     days: 4,
 
     schedule: {
@@ -242,7 +242,7 @@ export const commuteMockData: ICommuteData[] = [
     branch: '유즈의원(강남점)',
     name: '박준서',
     gender: '여자',
-    position: '의사',
+    department: '의사',
     days: 6,
 
     schedule: {
@@ -259,7 +259,7 @@ export const commuteMockData: ICommuteData[] = [
     branch: '유즈의원(서초점)',
     name: '이지은',
     gender: '여자',
-    position: '코디네이터',
+    department: '코디네이터',
     days: 5,
 
     schedule: {

@@ -50,7 +50,7 @@ export interface ICommuteData {
   branch: string;
   name: string;
   gender: string;
-  position: string;
+  department: string;
   days: number;
   schedule: {
     [key: string]: {
@@ -75,7 +75,7 @@ export interface IPartTimeData {
   id: number;
   branch: string;
   name: string;
-  workPart: string;
+  department: string;
   workDate: string;
   hospitalWork: string;
   remoteWork: string;

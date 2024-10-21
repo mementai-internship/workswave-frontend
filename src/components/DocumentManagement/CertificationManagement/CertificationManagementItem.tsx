@@ -1,9 +1,11 @@
-import { Button, Popover } from '@radix-ui/themes';
+import { Button, Dialog, Popover } from '@radix-ui/themes';
 import { PiArrowUUpRightFill, PiCheck, PiNote, PiX } from 'react-icons/pi';
 
+import Badge from '@/components/Common/LabelBadge';
 import { Txt } from '@/components/Common/Txt';
+import CertificationManagementDialog from '@/components/DocumentManagement/CertificationManagement/CertificationManagementDialog';
 
-interface CertificationManagementItemProps {
+interface ICertificationManagementItemProps {
   id: number;
   part: string;
   name: string;
@@ -14,9 +16,11 @@ interface CertificationManagementItemProps {
   applyUse: string;
   applyMemo: string;
   applyTreatDate: Date | null;
+  isCurrentUser: boolean;
 }
 
 export default function CertificationManagementItem({
+  id,
   part,
   name,
   applyDate,
@@ -26,20 +30,34 @@ export default function CertificationManagementItem({
   applyUse,
   applyMemo,
   applyTreatDate,
-}: CertificationManagementItemProps) {
+  isCurrentUser,
+}: ICertificationManagementItemProps) {
+  // TODO : 증명서 승인 버튼 클릭 시 모달창(Dialog) 팝업 됨, Dialog Contents 추가 구현 필요
+
   return (
-    <div className="flex items-center justify-between p-4 bg-gray-200 rounded-lg">
+    <div
+      className={`flex items-center justify-between p-4 bg-gray-200 rounded-lg ${
+        isCurrentUser ? 'bg-slate-200 border border-slate-300 ' : ''
+      }`}
+    >
       <div className="flex items-center">
         <div className="w-16 h-16 rounded-lg bg-gray-300 flex items-center justify-center">
           <span className="text-sm font-bold">{part}</span>
         </div>
         <div className="ml-4">
           <div className="flex items-center gap-2">
-            <p className="text-sm ">신청일 {applyDate}</p>
+            <Txt variant="body2" color="gray-50">
+              신청일 {applyDate}
+            </Txt>
           </div>
-          <div className="flex items-center gap-2">
-            <p className="text-lg font-semibold">{name}</p>
-            <p className="text-xs text-gray-500">{applyStatus}</p>
+          <div className="flex items-center gap-2 my-1">
+            <Txt variant="subtitle1">{name}</Txt>
+            <Badge
+              size={1}
+              color={applyStatus === '복직' ? 'purple' : 'gray'}
+              radius="large"
+              text={applyStatus}
+            />
           </div>
           <div className="flex items-center gap-2">
             <p className="text-xs text-gray-500">{applyType}</p>
@@ -81,10 +99,17 @@ export default function CertificationManagementItem({
           </Popover.Root>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="soft" color="gray">
-            <PiCheck />
-            승인
-          </Button>
+          <Dialog.Root>
+            <Dialog.Trigger>
+              <Button variant="soft" color="gray">
+                <PiCheck />
+                승인
+              </Button>
+            </Dialog.Trigger>
+            <Dialog.Content className="w-[90vw] h-[100vh] max-w-[1500px] max-h-[800px]">
+              <CertificationManagementDialog id={id} name={name} part={part} applyUse={applyUse} />
+            </Dialog.Content>
+          </Dialog.Root>
           <Button variant="soft" color="gray">
             <PiArrowUUpRightFill />
             반려

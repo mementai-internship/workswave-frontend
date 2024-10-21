@@ -6,7 +6,7 @@ import { TOptions } from '@/components/WorkManagement/WorkSelect';
 import { WORKTABLE } from '@/constants/workManagement/workTable';
 import { workMockData } from '@/constants/workManagement/workTable.mock';
 
-interface WorkTableContext {
+export interface WorkTableContext {
   selectedBranch: TOptions | null;
   selectedDepartment: TOptions | null;
 }

@@ -1,3 +1,5 @@
+import TimeoffManagementTable from '@/components/DocumentManagement/TimeoffManagement/TimeoffManagementTable';
+
 export default function TimeoffManagement() {
-  return <div>TimeoffManagement</div>;
+  return <TimeoffManagementTable />;
 }
