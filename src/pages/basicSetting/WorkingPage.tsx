@@ -1,4 +1,4 @@
-import { Button, Select } from '@radix-ui/themes';
+import { AlertDialog, Button, Flex, Select } from '@radix-ui/themes';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { PiCheckBold } from 'react-icons/pi';
@@ -18,10 +18,6 @@ import { useGetWorkPolicies, usePatchWorkPolicies } from '@/hooks/apis/useWorkPo
 import { IWorkPolicies } from '@/models/work-policies';
 
 export default function WorkingSettingPage() {
-  const { data: branches } = useGetAllBranches();
-
-  const [currentBranch, setCurrentBranch] = useState({ id: null, name: '' });
-
   const {
     register: branchRegister,
     setValue: setBranchValue,
@@ -78,10 +74,12 @@ export default function WorkingSettingPage() {
     },
   });
 
+  const [currentBranch, setCurrentBranch] = useState({ id: null, name: '' });
+
+  const { data: branches } = useGetAllBranches();
   const { data: workPolicies, isSuccess: isSuccessWorkPolicies } = useGetWorkPolicies(
     currentBranch.id
   );
-
   const { mutate: postWorkPolicies } = usePatchWorkPolicies(currentBranch.id);
 
   useEffect(() => {
@@ -99,6 +97,29 @@ export default function WorkingSettingPage() {
   const handleChangeBranch = (branchId: string) => {
     const selectedBranch = branches?.find((branch) => branch.id.toString() === branchId);
     setCurrentBranch({ ...selectedBranch, id: selectedBranch.id, name: selectedBranch.name });
+  };
+
+  const handleClickBasicSetting = () => {
+    setBranchValue('default_allowance_policies.comprehensive_overtime', true);
+    setBranchValue('default_allowance_policies.annual_leave', true);
+    setBranchValue('default_allowance_policies.holiday_work', true);
+    setBranchValue('default_allowance_policies.job_duty', true);
+    setBranchValue('default_allowance_policies.meal', true);
+    setBranchValue('holiday_work_policies.do_holiday_work', false);
+    setBranchValue('work_policies.weekly_work_days', 5);
+    setBranchValue('work_policies.weekday_start_time', '09:30');
+    setBranchValue('work_policies.weekday_end_time', '18:30');
+    setBranchValue('work_policies.weekday_is_holiday', false);
+    setBranchValue('work_policies.saturday_start_time', '09:30');
+    setBranchValue('work_policies.saturday_end_time', '13:30');
+    setBranchValue('work_policies.saturday_is_holiday', false);
+    setBranchValue('work_policies.sunday_start_time', '09:30');
+    setBranchValue('work_policies.sunday_end_time', '13:30');
+    setBranchValue('work_policies.sunday_is_holiday', true);
+    setBranchValue('work_policies.doctor_lunch_start_time', '12:30');
+    setBranchValue('work_policies.doctor_lunch_end_time', '13:30');
+    setBranchValue('work_policies.common_lunch_start_time', '12:30');
+    setBranchValue('work_policies.common_lunch_end_time', '13:30');
   };
 
   return (
@@ -136,10 +157,40 @@ export default function WorkingSettingPage() {
               <Txt variant="h5">{currentBranch.name}</Txt>
             </div>
           )}
-          <Button variant="outline" color="gray" className="px-6 cursor-pointer">
-            <PiCheckBold />
-            <Txt variant="button">기본세팅적용</Txt>
-          </Button>
+          {currentBranch.name && (
+            <AlertDialog.Root>
+              <AlertDialog.Trigger>
+                <Button variant="outline" color="gray" className="px-6 cursor-pointer">
+                  <PiCheckBold />
+                  <Txt variant="button">기본세팅적용</Txt>
+                </Button>
+              </AlertDialog.Trigger>
+              <AlertDialog.Content maxWidth="450px">
+                <AlertDialog.Title>지점 기본 설정 적용</AlertDialog.Title>
+                <AlertDialog.Description size="2">
+                  지점의 기본 설정으로 세팅하시겠습니까?
+                </AlertDialog.Description>
+
+                <Flex gap="3" mt="4" justify="end">
+                  <AlertDialog.Cancel>
+                    <Button variant="soft" color="gray" className="cursor-pointer">
+                      취소하기
+                    </Button>
+                  </AlertDialog.Cancel>
+                  <AlertDialog.Action>
+                    <Button
+                      variant="solid"
+                      color="purple"
+                      onClick={handleClickBasicSetting}
+                      className="cursor-pointer"
+                    >
+                      설정하기
+                    </Button>
+                  </AlertDialog.Action>
+                </Flex>
+              </AlertDialog.Content>
+            </AlertDialog.Root>
+          )}
         </div>
 
         <WorkingSettingTitle

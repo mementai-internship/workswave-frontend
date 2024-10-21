@@ -1,5 +1,5 @@
-import { Button, RadioGroup, TextField, Tooltip } from '@radix-ui/themes';
-import { useCallback } from 'react';
+import { Button, Checkbox, Dialog, Flex, RadioGroup, TextField, Tooltip } from '@radix-ui/themes';
+import { useCallback, useState } from 'react';
 import {
   Control,
   FormState,
@@ -12,7 +12,9 @@ import { PiInfo } from 'react-icons/pi';
 
 import Title from '@/components/Common/Title';
 import { Txt } from '@/components/Common/Txt';
+import { usePostParts } from '@/hooks/apis/useParts';
 import { IPartsResponse } from '@/models/parts';
+import { adaptPartValue } from '@/utils/adaptPartValue';
 
 interface IPropsType {
   handleSubmit: UseFormHandleSubmit<IPartsResponse>;
@@ -24,18 +26,25 @@ interface IPropsType {
   control: Control<IPartsResponse>;
   formState: FormState<IPartsResponse>;
   isEditingMode: boolean;
+  branchId: number;
+  parts: IPartsResponse[];
 }
 
 export default function WorkingSettingPartForm({
   formState,
   isEditingMode,
+  branchId,
   handleSubmit,
   register,
   onSubmit,
   onChangeEditMode,
   setValue,
   watch,
+  parts,
 }: IPropsType) {
+  const [checkedList, setCheckedList] = useState<string[]>([]);
+  const { mutate: postPart } = usePostParts(branchId);
+
   const handleClickCancel = () => {
     onChangeEditMode(false);
     setValue('id', 0);
@@ -51,18 +60,91 @@ export default function WorkingSettingPartForm({
     return name && task;
   }, [formState]);
 
+  const handleCheckboxToggle = useCallback((value: string) => {
+    setCheckedList((prev) =>
+      prev.includes(value) ? prev.filter((item) => item !== value) : [...prev, value]
+    );
+  }, []);
+  const handleAddPart = async () => {
+    const partList = checkedList.map((value) => adaptPartValue(value));
+    console.log(partList);
+    const result = await Promise.allSettled(partList.map((part) => postPart(part)));
+    console.log(result);
+    setCheckedList([]);
+  };
+
   return (
     <div className="flex flex-col gap-y-4 bg-gray-10 min-w-[400px] max-w-[500px] px-6 py-5">
       <div className="flex justify-between items-center">
         <Title content="근무일정 추가하기" />
-        <Button
-          variant="solid"
-          className="px-4 bg-white text-gray-50 cursor-pointer hover:bg-gray-300"
-        >
-          <Txt variant="button">간편추가</Txt>
-        </Button>
+        <Dialog.Root>
+          <Dialog.Trigger>
+            <Button
+              type="button"
+              variant="solid"
+              className="px-4 bg-white text-gray-50 cursor-pointer hover:bg-gray-300"
+            >
+              <Txt variant="button">간편추가</Txt>
+            </Button>
+          </Dialog.Trigger>
+
+          <Dialog.Content maxWidth="450px">
+            <Dialog.Title>파트 간편 추가</Dialog.Title>
+            <Dialog.Description size="2" mb="4">
+              직원들의 파트를 간편 추가 할 수 있습니다.
+            </Dialog.Description>
+
+            <Flex direction="column" gap="3">
+              <div className="flex items-center gap-x-2">
+                <label className="w-24">의사</label>
+                <Checkbox
+                  checked={checkedList.includes('의사')}
+                  disabled={parts.some((part) => part.name === '의사')}
+                  onClick={() => handleCheckboxToggle('의사')}
+                />
+              </div>
+              <div className="flex items-center gap-x-2">
+                <label className="w-24">간호사</label>
+                <Checkbox
+                  checked={checkedList.includes('간호사')}
+                  disabled={parts.some((part) => part.name === '간호사')}
+                  onClick={() => handleCheckboxToggle('간호사')}
+                />
+              </div>
+              <div className="flex items-center gap-x-2">
+                <label className="w-24">간호조무사</label>
+                <Checkbox
+                  checked={checkedList.includes('간호조무사')}
+                  disabled={parts.some((part) => part.name === '간호조무사')}
+                  onClick={() => handleCheckboxToggle('간호조무사')}
+                />
+              </div>
+              <div className="flex items-center gap-x-2">
+                <label className="w-24">상담</label>
+                <Checkbox
+                  checked={checkedList.includes('상담')}
+                  disabled={parts.some((part) => part.name === '상담')}
+                  onClick={() => handleCheckboxToggle('상담')}
+                />
+              </div>
+            </Flex>
+
+            <Flex gap="3" mt="4" justify="end">
+              <Dialog.Close>
+                <Button type="button" variant="soft" color="gray">
+                  취소하기
+                </Button>
+              </Dialog.Close>
+              <Dialog.Close>
+                <Button type="button" color="purple" variant="outline" onClick={handleAddPart}>
+                  설정하기
+                </Button>
+              </Dialog.Close>
+            </Flex>
+          </Dialog.Content>
+        </Dialog.Root>
       </div>
-      <div className="flex flex-col gap-5">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
         <div className="flex items-center relative">
           <label
             htmlFor="name"
@@ -134,10 +216,11 @@ export default function WorkingSettingPartForm({
             </div>
           </RadioGroup.Root>
         </div>
-      </div>
+      </form>
       <div className="flex justify-center gap-x-8 w-full">
         {isEditingMode && (
           <Button
+            type="button"
             onClick={handleClickCancel}
             variant="solid"
             size="3"
@@ -148,7 +231,7 @@ export default function WorkingSettingPartForm({
           </Button>
         )}
         <Button
-          onClick={handleSubmit(onSubmit)}
+          type="submit"
           variant="solid"
           size="3"
           radius="small"

@@ -1,16 +1,22 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import {
+  UseMutationResult,
+  UseQueryResult,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
 
 import { deleteParts, getParts, patchParts, postParts } from '@/apis/parts.api';
-import { IPartsForm } from '@/models/parts';
+import { IPartsForm, IPartsResponse } from '@/models/parts';
 
-export const useGetParts = (branchId: number) => {
+export const useGetParts = (branchId: number): UseQueryResult<IPartsResponse[]> => {
   return useQuery({
     queryKey: ['parts', branchId],
     queryFn: () => getParts(branchId),
   });
 };
 
-export const usePostParts = (branchId: number) => {
+export const usePostParts = (branchId: number): UseMutationResult<IPartsResponse> => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (data: IPartsForm) => postParts(branchId, data),
