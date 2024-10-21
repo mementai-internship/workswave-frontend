@@ -16,6 +16,8 @@ export const useGetUsers = (
   return useQuery({
     queryKey: [QUERY_KEYS.userManagementList, page, recordSize, status, branch, part, name, phone],
     queryFn: () => userManagementApi.getUsers(page, recordSize, status, branch, part, name, phone),
+    staleTime: 1000 * 60 * 5,
+    gcTime: 1000 * 60 * 10,
   });
 };
 
@@ -23,6 +25,8 @@ export const useGetCurrentUserInfo = () => {
   return useQuery({
     queryKey: [QUERY_KEYS.userManagementCurrentUser],
     queryFn: () => userManagementApi.getCurrentUserInfo(),
+    staleTime: 1000 * 60 * 5,
+    gcTime: 1000 * 60 * 10,
   });
 };
 

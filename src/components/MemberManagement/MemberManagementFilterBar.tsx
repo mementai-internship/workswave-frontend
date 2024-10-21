@@ -18,6 +18,7 @@ export default function MemberManagementFilterBar({ onBranchChange, onPartChange
           options={branchList.map((branch, index) => ({
             id: index,
             name: branch,
+            value: (index + 1).toString(),
             action: () => onBranchChange(index + 1),
           }))}
         />
@@ -27,6 +28,7 @@ export default function MemberManagementFilterBar({ onBranchChange, onPartChange
           options={partList.map((branch, index) => ({
             id: index,
             name: branch,
+            value: (index + 1).toString(),
             action: () => onPartChange(index + 1),
           }))}
         />

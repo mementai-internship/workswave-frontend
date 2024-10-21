@@ -81,8 +81,11 @@ const userManagementApi = {
   },
   getBranchs: async () => {
     try {
-      const response = await axiosInstance.get<userManagementModel.TGetBranchsResponse>(`/branch`);
-      return response.data;
+      const response =
+        await axiosInstance.get<userManagementModel.TGetBranchsResponse>(
+          `/user-management/branches`
+        );
+      return response.data.data;
     } catch (error) {
       isAxiosError(error);
       throw new Error('지점 목록을 가져오는 데 실패했습니다.');
@@ -90,8 +93,9 @@ const userManagementApi = {
   },
   getParts: async () => {
     try {
-      const response = await axiosInstance.get<userManagementModel.TGetPartsResponse>(`/part`);
-      return response.data;
+      const response =
+        await axiosInstance.get<userManagementModel.TGetPartsResponse>(`/user-management/parts`);
+      return response.data.data;
     } catch (error) {
       isAxiosError(error);
       throw new Error('파트 목록을 가져오는 데 실패했습니다.');
