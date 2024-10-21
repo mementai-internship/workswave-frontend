@@ -1,7 +1,7 @@
 import { isAxiosError } from 'axios';
 
 import axiosInstance from '@/apis/axiosInstance';
-import { ILeaveCategory, IPatchLeaveCategory } from '@/models/leave-categories.model';
+import { ILeaveCategory } from '@/models/leave-categories.model';
 
 export const getLeaveCategories = async (branch_id: number): Promise<ILeaveCategory[]> => {
   try {
@@ -30,7 +30,7 @@ export const postLeaveCategory = async (branch_id: number, data: ILeaveCategory)
   }
 };
 
-export const patchLeaveCategory = async (branch_id: number, data: IPatchLeaveCategory) => {
+export const patchLeaveCategory = async (branch_id: number, data: ILeaveCategory) => {
   try {
     const response = await axiosInstance.patch(
       `/branches/${branch_id}/leave-categories/${data.leave_category.id}/update`,

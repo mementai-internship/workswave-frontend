@@ -7,7 +7,7 @@ import {
   postLeaveCategory,
 } from '@/apis/leave-categories.api';
 import { QUERY_KEYS } from '@/constants/queryKeys';
-import { ILeaveCategory, IPatchLeaveCategory } from '@/models/leave-categories.model';
+import { ILeaveCategory } from '@/models/leave-categories.model';
 
 export const useGetLeaveCategories = (branch_id: number) => {
   return useQuery<ILeaveCategory[]>({
@@ -36,7 +36,7 @@ export const usePatchLeaveCategory = (
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (data: IPatchLeaveCategory) => patchLeaveCategory(branch_id, data),
+    mutationFn: (data: ILeaveCategory) => patchLeaveCategory(branch_id, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.leaveCategories, branch_id] });
     },

@@ -14,7 +14,6 @@ import Title from '@/components/Common/Title';
 import { usePatchLeaveCategory, usePostLeaveCategory } from '@/hooks/apis/useLeaveCategories';
 import { ILeaveCategory } from '@/models/leave-categories.model';
 import { IWorkingSettingPartResponse } from '@/models/workingSetting.model';
-import { adaptLeaveCategory } from '@/utils/adaptLeaveRequest';
 
 interface IDayOffSettingFormProps {
   isEditingMode: boolean;
@@ -52,13 +51,12 @@ export default function DayOffSettingForm({
       return;
     }
 
-    const adaptedData = adaptLeaveCategory(data, parts, isEditingMode);
     if (isEditingMode) {
-      patchLeaveCategory(adaptedData);
+      patchLeaveCategory(data);
       reset();
       onChangeEditMode(false);
     } else {
-      postLeaveCategory(adaptedData);
+      postLeaveCategory(data);
       reset();
     }
   };

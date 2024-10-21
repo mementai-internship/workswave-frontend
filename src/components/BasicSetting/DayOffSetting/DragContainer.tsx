@@ -13,6 +13,7 @@ import { PiArrowDownBold, PiArrowUpBold } from 'react-icons/pi';
 import DragItem from '@/components/BasicSetting/DayOffSetting/DragItem';
 import PolicyDetails from '@/components/BasicSetting/DayOffSetting/PolicyDetails';
 import StrictModeDroppable from '@/components/BasicSetting/DayOffSetting/StrictModeDroppable';
+import { Txt } from '@/components/Common/Txt';
 import { usePatchLeavePolicies } from '@/hooks/apis/useLeavePolicies';
 import { useDayOffDrag } from '@/hooks/useDayOffDrag';
 import { ILeavePolicy } from '@/models/leave-policies.model';
@@ -58,6 +59,13 @@ export default function DragContainer({
   };
 
   const policyData = watch();
+  if (!branchId) {
+    return (
+      <div className="flex justify-center mt-6">
+        <Txt variant="h5">지점을 선택해주세요.</Txt>
+      </div>
+    );
+  }
 
   return (
     <>
