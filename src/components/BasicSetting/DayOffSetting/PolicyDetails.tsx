@@ -107,7 +107,7 @@ export default function PolicyDetails({
               className="w-24"
             />
             <label>
-              {watch('condition_based_policies.condition_based_type') === '월' ? '개월' : '일'}{' '}
+              {watch('condition_based_policies.condition_based_type') === '월' ? '개월' : '일'}
               근무시
             </label>
 
