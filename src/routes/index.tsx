@@ -1,5 +1,6 @@
 import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom';
 
+import DocumentManagementLayout from '@/components/DocumentManagement/DocumentManagementLayout';
 import WorkManagementLayout from '@/components/WorkManagement/WorkManagementLayout';
 import RootLayout from '@/layout/root';
 import BoardPage from '@/pages/basicSetting/BoardPage';
@@ -11,7 +12,7 @@ import WagePage from '@/pages/basicSetting/WagePage';
 import WorkingPage from '@/pages/basicSetting/WorkingPage';
 import DayoffManagementPage from '@/pages/dayoffManagement/DayoffManagement';
 import ContractManagement from '@/pages/documentManagement/ContractManagement';
-import HolidayManagement from '@/pages/documentManagement/HolidayManagement';
+import TimeoffManagement from '@/pages/documentManagement/TimeoffManagement';
 import CertificateManagement from '@/pages/documentManagement/certificationManagement/CertificateManagement';
 import HolidayCalendarPage from '@/pages/holidayCalendar/HolidayCalendarPage';
 import HomePage from '@/pages/home/HomePage';
@@ -129,6 +130,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/document-management',
+        element: <DocumentManagementLayout />,
         children: [
           {
             index: true,
@@ -143,8 +145,8 @@ const router = createBrowserRouter([
             element: <ContractManagement />,
           },
           {
-            path: 'holiday-management',
-            element: <HolidayManagement />,
+            path: 'timeoff-management',
+            element: <TimeoffManagement />,
           },
         ],
       },

@@ -14,7 +14,6 @@ export default function SalarySettlementPage() {
   const [month, setMonth] = useState(dayjs());
   const [paymentDate, setPaymentDate] = useState(calculatePaymentDate(dayjs()));
   const [selectedRegion, setSelectedRegion] = useState<string | undefined>(undefined);
-  const [selectedPart, setSelectedPart] = useState<string>();
   const [selectedJob, setSelectedJob] = useState<string>();
   const [resetTrigger, setResetTrigger] = useState(false);
 
@@ -27,7 +26,6 @@ export default function SalarySettlementPage() {
 
   const resetFilters = () => {
     setSelectedRegion(undefined);
-    setSelectedPart(undefined);
     setSelectedJob(undefined);
     setResetTrigger((prev) => !prev);
   };
@@ -62,14 +60,6 @@ export default function SalarySettlementPage() {
             placeholder="지점 선택"
           />
           <CategorySelect
-            options={DUMMY_PART}
-            value={selectedPart}
-            onChange={(value: string) => {
-              setSelectedPart(value);
-            }}
-            placeholder="직무 선택"
-          />
-          <CategorySelect
             options={DUMMY_JOB}
             value={selectedJob}
             onChange={(value: string) => {
@@ -89,7 +79,6 @@ export default function SalarySettlementPage() {
       <SalaryTable
         salarySettlementData={DUMMY_DATA}
         selectedRegion={selectedRegion}
-        selectedPart={selectedPart}
         selectedJob={selectedJob}
         resetTrigger={resetTrigger}
       />
@@ -100,7 +89,6 @@ export default function SalarySettlementPage() {
 // 더미 데이터
 
 const DUMMY_REGION = ['서울', '경기', '인천'];
-const DUMMY_PART = ['피부과', '내과', '총무'];
 const DUMMY_JOB = ['의사', '간호사', '기타'];
 
 const DUMMY_DATA: IEmployeeSalarySettlement[] = [

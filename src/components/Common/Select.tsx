@@ -8,6 +8,7 @@ interface ISelectProps<T extends FieldValues> {
   options: ISelectOption[];
   size?: '2xSmall' | 'xSmall' | 'small' | 'medium' | 'large';
   border?: boolean;
+  disabled?: boolean;
 }
 
 interface ISelectOption {
@@ -23,6 +24,7 @@ export default function SelectBox<T>({
   options,
   size = 'medium',
   border = true,
+  disabled = false,
 }: ISelectProps<T>) {
   const SelectBoxSize = {
     '2xSmall': 'w-12',
@@ -42,7 +44,11 @@ export default function SelectBox<T>({
   }
 
   return (
-    <Select.Root onValueChange={handleSelectChange} defaultValue={options[0]?.name}>
+    <Select.Root
+      onValueChange={handleSelectChange}
+      defaultValue={options[0]?.name}
+      disabled={disabled}
+    >
       <Select.Trigger
         {...registerOption}
         placeholder={title}
