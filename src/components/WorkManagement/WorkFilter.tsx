@@ -1,5 +1,5 @@
-import ContactSearchInput from '../Common/ContactSearchInput';
-import WorkSelect from './WorkSelect';
+import ContactSearchInput from '@/components/Common/ContactSearchInput';
+import WorkSelect from '@/components/WorkManagement/WorkSelect';
 
 export default function WorkFilter() {
   return (

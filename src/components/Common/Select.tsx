@@ -42,7 +42,7 @@ export default function SelectBox<T>({
   }
 
   return (
-    <Select.Root onValueChange={handleSelectChange}>
+    <Select.Root onValueChange={handleSelectChange} defaultValue={options[0]?.name}>
       <Select.Trigger
         {...registerOption}
         placeholder={title}

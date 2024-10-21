@@ -6,7 +6,7 @@ export interface IEmployeeSalarySettlement {
   department: string;
   isSelected?: boolean;
   job: '의사' | '간호사' | '기타';
-  hireDate: string;
+  hireDate?: string;
   resignDate?: string;
   salary: number;
   basePay: number;

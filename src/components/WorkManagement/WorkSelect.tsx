@@ -1,9 +1,7 @@
-import SelectBox from '@/components/Common/Select';
-import {
-  branchMockData,
-  departmentMockData,
-} from '@/constants/workManagementTable/workSelect.mock';
 import { useForm } from 'react-hook-form';
+
+import SelectBox from '@/components/Common/Select';
+import { branchMockData, departmentMockData } from '@/constants/workManagement/workSelect.mock';
 
 export default function WorkSelect() {
   const { register } = useForm();
