@@ -14,6 +14,7 @@ import Title from '@/components/Common/Title';
 import { usePatchLeaveCategory, usePostLeaveCategory } from '@/hooks/apis/useLeaveCategories';
 import { ILeaveCategory } from '@/models/leave-categories.model';
 import { IWorkingSettingPartResponse } from '@/models/workingSetting.model';
+import { adaptLeaveCategory } from '@/utils/adaptLeaveRequest';
 
 interface IDayOffSettingFormProps {
   isEditingMode: boolean;
@@ -45,38 +46,18 @@ export default function DayOffSettingForm({
   const { mutate: postLeaveCategory } = usePostLeaveCategory(branch_id);
   const { mutate: patchLeaveCategory } = usePatchLeaveCategory(branch_id);
 
-  const onSubmitHolidaySetting = (data: ILeaveCategory) => {
+  const onSubmitDayOffSetting = (data: ILeaveCategory) => {
     if (!branch_id) {
       alert('지점을 선택해주세요.');
       return;
     }
+
+    const adaptedData = adaptLeaveCategory(data, parts, isEditingMode);
     if (isEditingMode) {
-      const adaptedData = {
-        leave_category: {
-          id: data.leave_category.id,
-          name: data.leave_category.name,
-          leave_count: data.leave_category.leave_count,
-          is_paid: data.leave_category.is_paid,
-          is_leave_of_absence: data.leave_category.is_leave_of_absence,
-        },
-        excluded_create_ids: data.excluded_parts.map((part) => part.part_id).filter((id) => id),
-        excluded_delete_ids: parts
-          .filter((part) => !data.excluded_parts.some((p) => p.part_id === part.id))
-          .map((part) => part.id),
-      };
       patchLeaveCategory(adaptedData);
       reset();
       onChangeEditMode(false);
     } else {
-      const adaptedData = {
-        leave_category: {
-          name: data.leave_category.name,
-          leave_count: data.leave_category.leave_count,
-          is_paid: data.leave_category.is_paid,
-          is_leave_of_absence: data.leave_category.is_leave_of_absence,
-        },
-        excluded_create_ids: data.excluded_parts.map((part) => part.part_id),
-      };
       postLeaveCategory(adaptedData);
       reset();
     }
@@ -97,7 +78,7 @@ export default function DayOffSettingForm({
       <div className="px-10 py-5 flex items-center gap-x-4 border-b">
         <Title content={`${isEditingMode ? '연차 수정하기' : '연차 추가하기'}`} />
       </div>
-      <form onSubmit={handleSubmit(onSubmitHolidaySetting)} className="p-8 flex flex-col gap-y-3">
+      <form onSubmit={handleSubmit(onSubmitDayOffSetting)} className="p-8 flex flex-col gap-y-3">
         <div className="flex items-center relative">
           <label htmlFor="name" className="w-40 text-gray-500 whitespace-nowrap">
             카테고리 이름
@@ -159,14 +140,14 @@ export default function DayOffSettingForm({
                 variant="surface"
                 color="purple"
                 className="grid grid-cols-4 justify-start"
-                value={field.value.map((p) => p.part_id.toString())}
+                value={field.value.map((p) => p.id.toString())}
                 onValueChange={(newCheckedValues) => {
                   const newCheckedIds = newCheckedValues.map(Number);
                   const updatedExcludedParts = parts
                     .filter((part) => newCheckedIds.includes(part.id))
                     .map((part) => ({
-                      part_id: part.id,
-                      part_name: part.name,
+                      id: part.id,
+                      name: part.name,
                     }));
                   field.onChange(updatedExcludedParts);
                 }}

@@ -1,47 +1,62 @@
 import { useCallback, useState } from 'react';
 import { DragStart, DragUpdate, DropResult } from 'react-beautiful-dnd';
+import { UseFormSetValue } from 'react-hook-form';
 
-import { IFormValues } from '@/components/BasicSetting/DayOffSetting/DragContainer';
+import { ILeavePolicy } from '@/models/leave-policies.model';
 
-export const useDayOffDrag = (initialItems: IFormValues) => {
-  const [dragItems, setDragItems] = useState<IFormValues>(initialItems);
+export const useDayOffDrag = (
+  initialItems: Omit<ILeavePolicy, 'auto_approval_policies'>,
+  setValue: UseFormSetValue<ILeavePolicy>
+) => {
   const [openCategories, setOpenCategories] = useState<string[]>(Object.keys(initialItems));
 
   const onDragEnd = useCallback(
     (result: DropResult) => {
       const { source, destination } = result;
-      if (!destination) return { items: dragItems, hasChanged: false };
+      if (!destination) return { items: initialItems, hasChanged: false };
 
       if (source.droppableId === destination.droppableId && source.index === destination.index) {
-        return { items: dragItems, hasChanged: false };
+        return { items: initialItems, hasChanged: false };
       }
 
-      const newItems = { ...dragItems };
+      const newItems = { ...initialItems };
 
-      const sourceCategory = source.droppableId as keyof IFormValues;
-      const destCategory = destination.droppableId as keyof IFormValues;
+      const sourceCategory = source.droppableId as keyof ILeavePolicy;
+      const destCategory = destination.droppableId as keyof ILeavePolicy;
 
-      const sourcePartIds = [...(newItems[sourceCategory]?.part_ids || [])];
-      const destPartIds =
-        sourceCategory === destCategory
-          ? sourcePartIds
-          : [...(newItems[destCategory]?.part_ids || [])];
-
-      const [movedItem] = sourcePartIds.splice(source.index, 1);
-      if (movedItem) {
+      if (sourceCategory === destCategory) {
+        // 같은 카테고리 내에서의 이동
+        const partIds = [...newItems[sourceCategory].part_ids];
+        const [movedItem] = partIds.splice(source.index, 1);
         movedItem.isGhosting = false;
+        partIds.splice(destination.index, 0, movedItem);
+        newItems[sourceCategory] = {
+          ...newItems[sourceCategory],
+          part_ids: partIds,
+        };
+        setValue(sourceCategory, newItems[sourceCategory]);
+      } else {
+        // 다른 카테고리 간의 이동
+        const sourcePartIds = [...newItems[sourceCategory].part_ids];
+        const destPartIds = [...newItems[destCategory].part_ids];
+
+        const [movedItem] = sourcePartIds.splice(source.index, 1);
         destPartIds.splice(destination.index, 0, movedItem);
-
-        newItems[sourceCategory].part_ids = sourcePartIds;
-        if (sourceCategory !== destCategory) {
-          newItems[destCategory].part_ids = destPartIds;
-        }
+        movedItem.isGhosting = false;
+        newItems[sourceCategory] = {
+          ...newItems[sourceCategory],
+          part_ids: sourcePartIds,
+        };
+        newItems[destCategory] = {
+          ...newItems[destCategory],
+          part_ids: destPartIds,
+        };
+        Object.keys(newItems).forEach((category) => {
+          setValue(category as keyof ILeavePolicy, newItems[category as keyof ILeavePolicy]);
+        });
       }
-
-      setDragItems(newItems);
-      return { items: newItems, hasChanged: true };
     },
-    [dragItems]
+    [initialItems, setValue]
   );
 
   const onDragUpdate = useCallback(
@@ -49,8 +64,8 @@ export const useDayOffDrag = (initialItems: IFormValues) => {
       const { destination, source, draggableId } = dragUpdate;
       if (!destination) return;
 
-      const newItems = { ...dragItems };
-      const sourceCategory = source.droppableId as keyof IFormValues;
+      const newItems = { ...initialItems };
+      const sourceCategory = source.droppableId as keyof ILeavePolicy;
 
       const draggedItem = newItems[sourceCategory].part_ids.find(
         (item) => item.id.toString() === draggableId
@@ -59,23 +74,21 @@ export const useDayOffDrag = (initialItems: IFormValues) => {
       if (draggedItem) {
         draggedItem.isGhosting = true;
       }
-
-      setDragItems(newItems);
+      setValue(sourceCategory, newItems[sourceCategory]);
     },
-    [dragItems]
+    [initialItems, setValue]
   );
 
   const onDragStart = useCallback(
     (start: DragStart) => {
-      const allCategoryIds = Object.keys(dragItems);
+      const allCategoryIds = Object.keys(initialItems);
       setOpenCategories(allCategoryIds);
       return start;
     },
-    [dragItems]
+    [initialItems]
   );
 
   return {
-    items: dragItems,
     openCategories,
     onDragEnd,
     onDragUpdate,

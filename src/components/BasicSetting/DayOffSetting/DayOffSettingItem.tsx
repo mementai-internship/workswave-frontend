@@ -10,7 +10,7 @@ import { ILeaveCategory } from '@/models/leave-categories.model';
 interface IPropsType {
   leave_category: ILeaveCategory['leave_category'];
   branch_id: number;
-  excluded_parts: { part_id: number; part_name: string }[];
+  excluded_parts: { id: number; name: string }[];
   onChangeEditMode: (boolean: boolean) => void;
   setValue: UseFormSetValue<ILeaveCategory>;
 }
@@ -54,9 +54,7 @@ export default function DayOffSettingItem({
           <BasicSettingSubTitle
             title="제외파트"
             content={
-              excluded_parts.length > 0
-                ? excluded_parts.map((item) => item.part_name).join(', ')
-                : '-'
+              excluded_parts.length > 0 ? excluded_parts.map((item) => item.name).join(', ') : '-'
             }
             gap="gap-x-4"
           />

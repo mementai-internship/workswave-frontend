@@ -1,5 +1,5 @@
 import { Button, Select, Spinner } from '@radix-ui/themes';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { PiEquals, PiGear } from 'react-icons/pi';
 
@@ -11,8 +11,10 @@ import Title from '@/components/Common/Title';
 import { Txt } from '@/components/Common/Txt';
 import { useGetBranches } from '@/hooks/apis/useBranches';
 import { useGetLeaveCategories } from '@/hooks/apis/useLeaveCategories';
+import { useGetLeavePolicies } from '@/hooks/apis/useLeavePolicies';
 import { useGetParts } from '@/hooks/apis/useParts';
 import { ILeaveCategory } from '@/models/leave-categories.model';
+import { ILeavePolicy } from '@/models/leave-policies.model';
 
 export default function DayOffPage() {
   const [isEditingMode, setIsEditingMode] = useState(false);
@@ -22,15 +24,25 @@ export default function DayOffPage() {
   const branches = data?.list;
   const { data: parts } = useGetParts(currentBranch.id);
   const { data: leaveCategories, isFetching } = useGetLeaveCategories(currentBranch.id);
+  const { data: leavePolicies } = useGetLeavePolicies(currentBranch.id);
+
+  const handleClickEditMode = (boolean: boolean) => {
+    setIsEditingMode(boolean);
+  };
+
+  const handleChangeBranch = (branchId: string) => {
+    const selectedBranch = branches?.find((branch) => branch.id.toString() === branchId);
+    setCurrentBranch({ ...selectedBranch, id: selectedBranch.id, name: selectedBranch.name });
+  };
 
   const {
-    formState: holidayFormState,
-    handleSubmit: holidayHandleSubmit,
-    control: holidayFormControl,
-    reset: holidayFormReset,
-    setValue: holidayFormSetValue,
-    register: holidayFormRegister,
-    watch: holidayFormWatch,
+    formState: leaveCategoryFormState,
+    handleSubmit: leaveCategoryHandleSubmit,
+    control: leaveCategoryFormControl,
+    reset: leaveCategoryFormReset,
+    setValue: leaveCategoryFormSetValue,
+    register: leaveCategoryFormRegister,
+    watch: leaveCategoryFormWatch,
   } = useForm<ILeaveCategory>({
     defaultValues: {
       leave_category: {
@@ -44,14 +56,93 @@ export default function DayOffPage() {
     },
   });
 
-  const handleClickEditMode = (boolean: boolean) => {
-    setIsEditingMode(boolean);
-  };
+  const {
+    reset: leavePolicyReset,
+    watch: leavePolicyWatch,
+    handleSubmit: leavePolicyHandleSubmit,
+    register: leavePolicyRegister,
+    setValue: leavePolicySetValue,
+  } = useForm<ILeavePolicy>({
+    defaultValues: {
+      auto_approval_policies: {
+        top_auto_approval: true,
+        total_auto_approval: true,
+        part_auto_approval: true,
+      },
+      account_based_policies: {
+        categoryId: 'account_based_policies',
+        category: '회계 기준',
+        account_based_january_1st: '초기화',
+        account_based_less_than_year: '당해년도 일괄 부여',
+        account_based_decimal_point: '올림',
+        part_ids: [],
+      },
+      entry_date_based_policies: {
+        categoryId: 'entry_date_based_policies',
+        category: '입사일 기준',
+        entry_date_based_remaining_leave: '초기화',
+        part_ids: [],
+      },
+      condition_based_policies: {
+        categoryId: 'condition_based_policies',
+        category: '조건 기준',
+        condition_based_month: 12,
+        condition_based_cnt: 1,
+        condition_based_type: '월',
+        part_ids: [],
+      },
+      manual_based_parts: {
+        categoryId: 'manual_based_parts',
+        category: '수동부여',
+        part_ids: [],
+      },
+    },
+  });
 
-  const handleChangeBranch = (branchId: string) => {
-    const selectedBranch = branches?.find((branch) => branch.id.toString() === branchId);
-    setCurrentBranch({ ...selectedBranch, id: selectedBranch.id, name: selectedBranch.name });
-  };
+  useEffect(() => {
+    if (currentBranch.id && leavePolicies) {
+      // manual_based_parts 처리
+      if (leavePolicies.manual_based_parts) {
+        leavePolicySetValue('manual_based_parts', {
+          categoryId: 'manual_based_parts',
+          category: '수동부여',
+          part_ids: leavePolicies.manual_based_parts.map((item) => ({
+            id: item.id,
+            name: item.name,
+            isGhosting: false,
+          })),
+        });
+      }
+
+      if (leavePolicies.auto_approval_policies) {
+        leavePolicySetValue('auto_approval_policies', leavePolicies.auto_approval_policies);
+      }
+
+      if (leavePolicies.account_based_policies) {
+        leavePolicySetValue('account_based_policies', {
+          ...leavePolicies.account_based_policies,
+          categoryId: 'account_based_policies',
+          category: '회계 기준',
+        });
+      }
+
+      if (leavePolicies.entry_date_based_policies) {
+        leavePolicySetValue('entry_date_based_policies', {
+          ...leavePolicies.entry_date_based_policies,
+          categoryId: 'entry_date_based_policies',
+          category: '입사일 기준',
+        });
+      }
+
+      if (leavePolicies.condition_based_policies) {
+        leavePolicySetValue('condition_based_policies', {
+          ...leavePolicies.condition_based_policies,
+          categoryId: 'condition_based_policies',
+          category: '조건 기준',
+        });
+      }
+    }
+  }, [currentBranch.id, leavePolicies, leavePolicySetValue]);
 
   return (
     <main className="w-full mx-auto flex p-5 gap-x-2 overflow-x-auto">
@@ -99,7 +190,7 @@ export default function DayOffPage() {
                 leave_category={leave_category}
                 excluded_parts={excluded_parts}
                 onChangeEditMode={handleClickEditMode}
-                setValue={holidayFormSetValue}
+                setValue={leaveCategoryFormSetValue}
                 branch_id={currentBranch.id}
               />
             ))
@@ -114,21 +205,21 @@ export default function DayOffPage() {
       <section className="flex flex-col gap-y-4 min-w-[540px] h-[calc(100vh-100px)] overflow-y-scroll">
         <div className="border bg-white">
           <DayOffSettingForm
-            handleSubmit={holidayHandleSubmit}
+            handleSubmit={leaveCategoryHandleSubmit}
             onChangeEditMode={handleClickEditMode}
-            setValue={holidayFormSetValue}
-            register={holidayFormRegister}
-            reset={holidayFormReset}
-            watch={holidayFormWatch}
-            control={holidayFormControl}
-            formState={holidayFormState}
+            setValue={leaveCategoryFormSetValue}
+            register={leaveCategoryFormRegister}
+            reset={leaveCategoryFormReset}
+            watch={leaveCategoryFormWatch}
+            control={leaveCategoryFormControl}
+            formState={leaveCategoryFormState}
             isEditingMode={isEditingMode}
             parts={parts}
             branch_id={currentBranch.id}
           />
         </div>
         <div className="border bg-white grow">
-          <DayOffAutoSetGroups />
+          <DayOffAutoSetGroups setValue={leavePolicySetValue} watch={leavePolicyWatch} />
         </div>
       </section>
 
@@ -146,7 +237,14 @@ export default function DayOffPage() {
             </Button>
           </div>
         </div>
-        <DragContainer />
+        <DragContainer
+          branchId={currentBranch.id}
+          watch={leavePolicyWatch}
+          reset={leavePolicyReset}
+          register={leavePolicyRegister}
+          setValue={leavePolicySetValue}
+          handleSubmit={leavePolicyHandleSubmit}
+        />
       </section>
     </main>
   );

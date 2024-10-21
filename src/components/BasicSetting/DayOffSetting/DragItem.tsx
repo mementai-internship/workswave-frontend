@@ -5,7 +5,7 @@ interface IPropsType {
   id: string;
   index: number;
   name: string;
-  isGhosting: boolean;
+  isGhosting?: boolean;
 }
 
 export default function DragItem({ id, index, name, isGhosting }: IPropsType) {

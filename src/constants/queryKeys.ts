@@ -13,8 +13,9 @@ export const QUERY_KEYS = {
   //parts queryKeys
   parts: 'parts',
 
-  //leaveCategories queryKeys
+  // 연차설정 세팅 페이지 queryKeys
   leaveCategories: 'leaveCategories',
+  leavePolicies: 'leavePolicies',
   // salary-bracket
   salaryBracket: 'salaryBracket',
 };
