@@ -28,7 +28,7 @@ export const closedDaysApi = {
   getClosedDays: async (branchId: number) => {
     try {
       console.log(`getClosedDays [지점 "${branchId}"] [휴무일 - 모든 날짜] 조회`);
-      const response = await axiosInstance.get(`/branches/${branchId}/closed_days`);
+      const response = await axiosInstance.get(`/branches/${branchId}/closed-days`);
       console.log('%c getClosedDays [지점] [휴무일 - 모든 날짜] 응답', 'color: orange;', response);
 
       return response.data;
@@ -67,7 +67,7 @@ export const closedDaysApi = {
   // getDailyClosedDays: async (date: Date) => {
   //   try {
   //     console.log(`getDailyClosedDays [휴무일 - 특정 날짜 ${date}] get 요청`);
-  //     const response = await axiosInstance.get(`/branches/closed_days/${date}`);
+  //     const response = await axiosInstance.get(`/branches/closed-days/${date}`);
   //     console.log(`%cgetDailyClosedDays [휴무일 - 특정 날짜 ${date}] get 응답`, 'color: orange;', response);
   //     return response.data;
   //   } catch (err) {
@@ -85,7 +85,7 @@ export const closedDaysApi = {
       console.log(
         `postOneClosedDay [지점 "${branch_id}"] [휴무일 "${formattedDate}" 등록] post 요청`
       );
-      const response = await axiosInstance.post(`/branches/${branch_id}/closed_days`, {
+      const response = await axiosInstance.post(`/branches/${branch_id}/closed-days`, {
         closed_day_date: formattedDate,
         memo,
       });
@@ -112,7 +112,7 @@ export const closedDaysApi = {
 
       console.log(`postClosedDays [지점 "${branch_id}"] [휴무일 다중 등록] post 요청`);
       const response = await axiosInstance.post(
-        `/branches/${branch_id}/closed_days/arrays`,
+        `/branches/${branch_id}/closed-days/arrays`,
         requestBody
       );
       console.log(
@@ -136,7 +136,7 @@ export const closedDaysApi = {
       console.log(
         `deleteOneClosedDay [지점 "${branch_id}"] [휴무일 "${formattedDate}" 삭제] delete 요청`
       );
-      const response = await axiosInstance.delete(`/branches/${branch_id}/closed_days/${id}`);
+      const response = await axiosInstance.delete(`/branches/${branch_id}/closed-days/${id}`);
       console.log(
         `%c deleteOneClosedDay [지점 "${branch_id}"] [휴무일 "${formattedDate}" 삭제] delete 응답`,
         'color: pink;',
@@ -159,7 +159,7 @@ export const closedDaysApi = {
         `deleteClosedDays [지점 "${branch_id}"] [휴무일 ${reqIdList} 다중 삭제] delete 요청`
       );
       const response = await axiosInstance.delete(
-        `/branches/${branch_id}/closed_days/arrays/delete`,
+        `/branches/${branch_id}/closed-days/arrays/delete`,
         {
           data: reqIdList,
         }

@@ -1,71 +1,77 @@
-import { Button } from '@radix-ui/themes';
 import { Fragment } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import ContactSearchInput from '@/components/Common/ContactSearchInput';
 import SelectBox from '@/components/Common/Select';
 import Title from '@/components/Common/Title';
-import { memberInfoDropdownMenu } from '@/pages/documentManagement/certificationManagement/constants';
+import { useGetBranches } from '@/hooks/apis/useBranches';
+import { useGetParts } from '@/hooks/apis/useParts';
 
-export default function DocumentManagementHeader() {
-  //  함수
-  // const handleCertificateIssuanceButtonClick = () => { };
+interface IDocumentManagementHeaderProps {
+  branchId: number;
+  setBranchId: (branchId: number) => void;
+  setPartId: (partId: number) => void;
+}
+
+export default function DocumentManagementHeader({
+  branchId,
+  setBranchId,
+  setPartId,
+}: IDocumentManagementHeaderProps) {
+  const location = useLocation();
+
+  const { data: branches, isFetching: isBranchesFetching } = useGetBranches('1');
+  const { data: parts, isFetching: isPartsFetching } = useGetParts(branchId);
+
+  const getTitleContent = () => {
+    const path = location.pathname;
+    if (path.includes('certificate-management')) {
+      return '증명서 관리';
+    } else if (path.includes('contract-management')) {
+      return '계약서 관리';
+    } else if (path.includes('timeoff-management')) {
+      return '휴직관리';
+    }
+    return '증명서 관리';
+  };
+
+  const branchSelection = branches?.list?.map((branch) => ({
+    id: branch.id,
+    name: branch.name,
+    action: () => {
+      setBranchId(branch.id);
+    },
+  }));
+
+  const partSelection =
+    !isPartsFetching &&
+    parts?.map((part) => ({
+      id: part.id,
+      name: part.name,
+      action: () => {
+        setPartId(part.id);
+      },
+    }));
 
   return (
     <Fragment>
-      <div className="flex items-center justify-between">
-        <div className="flex items-center justify-center">
-          <Title content="증명서관리" />
-          <span className="text-purple-50 px-4">
-            승인 후 '저장되었습니다'가 뜰때까지 기다려주세요
-          </span>
-        </div>
-        <Button variant="surface" color="gray" className="bg-gray-10 text-black">
-          삭제 리스트 관리
-        </Button>
+      <div className="flex items-center">
+        <Title content={getTitleContent()} />
+        <span className="text-purple-50 px-4">
+          승인 후 '저장되었습니다'가 뜰때까지 기다려주세요
+        </span>
       </div>
       <div>
         <div className="flex items-center justify-between py-5">
           <div className="flex gap-2">
-            <SelectBox
-              title="지점"
-              name="office"
-              options={memberInfoDropdownMenu}
-              size="small"
-              border={false}
-            />
-            <SelectBox
-              title="전체 선택"
-              name="지점"
-              options={memberInfoDropdownMenu}
-              size="small"
-              border={false}
-            />
-            <SelectBox
-              title="상태 선택"
-              name="지점"
-              options={memberInfoDropdownMenu}
-              size="small"
-              border={false}
-            />
+            {!isBranchesFetching && (
+              <SelectBox title="지점 선택" name="지점 선택" options={branchSelection} />
+            )}
+            {!isPartsFetching && (
+              <SelectBox title="파트 선택" name="파트 선택" options={partSelection} />
+            )}
           </div>
-          <div className="flex items-center justify-center gap-1">
-            <div className="flex items-center justify-center gap-3">
-              <span className="text-sm">검색</span>
-              <ContactSearchInput />
-            </div>
-            {
-              // 플로팅 버튼으로 변경
-              /* <Button
-              variant="surface"
-              size="3"
-              radius="none"
-              color="gray"
-              onClick={handleCertificateIssuanceButtonClick}
-            >
-              증명서 발급
-            </Button> */
-            }
-          </div>
+          <ContactSearchInput />
         </div>
       </div>
     </Fragment>
