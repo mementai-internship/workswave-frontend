@@ -1,5 +1,7 @@
 import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom';
 
+import AddModifyDocument from '@/components/Common/AddModifyDocument';
+import ModifyDocument from '@/components/Common/ModifyDocument';
 import DocumentManagementLayout from '@/components/DocumentManagement/DocumentManagementLayout';
 import WorkManagementLayout from '@/components/WorkManagement/WorkManagementLayout';
 import RootLayout from '@/layout/root';
@@ -178,6 +180,14 @@ const router = createBrowserRouter([
       {
         path: '/member-management/supermanager-setting',
         element: <SuperManagerSetting />,
+      },
+      {
+        path: '/ModifyDocument',
+        element: <ModifyDocument />,
+      },
+      {
+        path: '/AddModifyDocument',
+        element: <AddModifyDocument />,
       },
       // {
       //   path: '/board',
