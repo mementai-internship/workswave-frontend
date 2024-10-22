@@ -28,6 +28,7 @@ import EntireHistoryPage from '@/pages/otManagement/EntireHistory/EntireHistoryP
 import OtManagementPage from '@/pages/otManagement/OtManagementPage';
 import SalarySettlementPage from '@/pages/salarySettlement/SalarySettlementPage';
 import SimpleMenuPage from '@/pages/simpleMenu/SimpleMenuPage';
+import TestPage from '@/pages/test/testPage';
 import CommuteManagementPage from '@/pages/workManagement/CommuteManagementPage';
 import PartManagementPage from '@/pages/workManagement/PartManagementPage';
 import WorkManagementPage from '@/pages/workManagement/WorkManagementPage';
@@ -178,6 +179,10 @@ const router = createBrowserRouter([
       {
         path: '/member-management/supermanager-setting',
         element: <SuperManagerSetting />,
+      },
+      {
+        path: '/test',
+        element: <TestPage />,
       },
       // {
       //   path: '/board',
