@@ -22,7 +22,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
-    }
+    },
+    "types": ["./src/models/daumPostcode.d.ts"]
   },
   "include": ["src"]
 }

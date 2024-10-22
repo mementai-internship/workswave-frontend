@@ -2,14 +2,12 @@ import { Button } from '@radix-ui/themes';
 
 import ContactSearchInput from '@/components/Common/ContactSearchInput';
 import SelectBox from '@/components/Common/Select';
-import { useGetUsers } from '@/hooks/apis/useUserManagement';
+import { useBranchList } from '@/hooks/useBranchList';
+import { usePartList } from '@/hooks/usePartList';
 
 export default function MemberManagementFilterBar({ onBranchChange, onPartChange, onResetFilter }) {
-  const { data: allUserList } = useGetUsers(1, 1000, '0', '0', '0', '0', '0');
-  const branchList = Array.from(new Set(allUserList?.data?.map((user) => user.branch)));
-  const partList = Array.from(new Set(allUserList?.data?.map((user) => user.part)));
-
-  console.log(allUserList);
+  const partList = usePartList();
+  const branchList = useBranchList();
 
   return (
     <div className="flex gap-2">
@@ -20,6 +18,7 @@ export default function MemberManagementFilterBar({ onBranchChange, onPartChange
           options={branchList.map((branch, index) => ({
             id: index,
             name: branch,
+            value: (index + 1).toString(),
             action: () => onBranchChange(index + 1),
           }))}
         />
@@ -29,6 +28,7 @@ export default function MemberManagementFilterBar({ onBranchChange, onPartChange
           options={partList.map((branch, index) => ({
             id: index,
             name: branch,
+            value: (index + 1).toString(),
             action: () => onPartChange(index + 1),
           }))}
         />

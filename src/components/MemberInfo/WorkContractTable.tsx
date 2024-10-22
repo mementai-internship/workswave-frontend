@@ -1,4 +1,5 @@
 import { RadioCards, Switch, Table } from '@radix-ui/themes';
+import { useForm } from 'react-hook-form';
 
 import SelectBox from '@/components/Common/Select';
 import ContractInfoCheckbox from '@/components/MemberInfo/MemberInfoCommon/ContractInfoCheckbox';
@@ -8,6 +9,12 @@ import WorkContractTableCell from '@/components/MemberInfo/WorkContractTableCell
 import { WEEK_DAY } from '@/constants/memberInfoTable';
 
 export default function WorkContractTable() {
+  const { register: workContractRegister } = useForm({
+    defaultValues: {
+      start_time: '09:00',
+      end_time: '18:00',
+    },
+  });
   return (
     <>
       <h2 className="px-4 py-2 text-purple-50 font-bold whitespace-nowrap">1) 근로계약</h2>
@@ -95,8 +102,8 @@ export default function WorkContractTable() {
             </Table.ColumnHeaderCell>
             <Table.Cell>
               <div className="flex flex-col gap-2">
-                <MemberInfoInput size="large" defaultValue={'09:00'} />
-                <MemberInfoInput size="large" defaultValue={'18:00'} />
+                <MemberInfoInput size="large" {...workContractRegister('start_time')} />
+                <MemberInfoInput size="large" {...workContractRegister('end_time')} />
               </div>
             </Table.Cell>
           </Table.Row>

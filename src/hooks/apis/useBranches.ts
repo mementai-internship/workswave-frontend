@@ -3,10 +3,15 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { branchesApi } from '@/apis/branches.api';
 import { QUERY_KEYS } from '@/constants/queryKeys';
 
-export const useGetAllBranches = () => {
+interface IUseGetAllBranches {
+  role?: string;
+}
+
+export const useGetAllBranches = ({ role = 'MSO 최고권한' }: IUseGetAllBranches = {}) => {
   return useQuery({
     queryKey: [QUERY_KEYS.branches],
     queryFn: branchesApi.getAllBranches,
+    enabled: role === 'MSO 최고권한',
   });
 };
 
