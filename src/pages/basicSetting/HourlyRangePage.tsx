@@ -12,14 +12,14 @@ import {
   usePostHourWageTemplates,
 } from '@/hooks/apis/useHourWageTemplates';
 import { useGetParts } from '@/hooks/apis/useParts';
-import { useGetCurrentUser } from '@/hooks/apis/useUserManagement';
+import { useGetCurrentUserInfo } from '@/hooks/apis/useUserManagement';
 import { IHourWageTemplatesForm } from '@/models/hour-wage-templates';
 import { convertFormToTemplate, convertTemplateToForm } from '@/utils/convertHourWageTemplates';
 
 export type THourlyRangeEditMode = { editItemId: null | number; isEdit: boolean };
 
 export default function HourlyRangePage() {
-  const { data: currentUser } = useGetCurrentUser();
+  const { data: currentUser } = useGetCurrentUserInfo();
   const { data } = useGetBranches('0');
   const [selectedBranchId, setSelectedBranchId] = useState<number | null>(null);
   const [selectPartId, setSelectPartId] = useState<number | null>(null);
@@ -59,10 +59,10 @@ export default function HourlyRangePage() {
 
   useEffect(() => {
     if (currentUser && data) {
-      if (currentUser.data.role === 'MSO 최고권한') {
+      if (currentUser.role === 'MSO 최고권한') {
         setSelectedBranchId(data.list[0].id);
       } else {
-        setSelectedBranchId(currentUser.data.branch_id);
+        setSelectedBranchId(currentUser.branch_id);
       }
     }
     setIsLoading(false);
