@@ -3,7 +3,8 @@ export const QUERY_KEYS = {
   userManagementList: 'userList',
   userManagementCurrentUser: 'currentUser',
   userManagementDetail: 'userDetail',
-  userManagementResignedUsers: 'resignedUsers',
+  userManagementBranchs: 'branchs',
+  userManagementParts: 'parts',
 
   //branches queryKeys
   branches: 'branches',
@@ -13,4 +14,7 @@ export const QUERY_KEYS = {
   //closedDays queryKeys
   branchMonthlyClose: 'getMonthlyClosedDays',
   branchClose: 'getClosedDays',
+
+  //work queryKeys
+  work: 'work',
 };
