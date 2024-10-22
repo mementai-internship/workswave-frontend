@@ -14,7 +14,6 @@ import {
 import { useGetParts } from '@/hooks/apis/useParts';
 import { useGetCurrentUser } from '@/hooks/apis/useUserManagement';
 import { IHourWageTemplatesForm } from '@/models/hour-wage-templates';
-import { TPart } from '@/models/user.model';
 import { convertFormToTemplate, convertTemplateToForm } from '@/utils/convertHourWageTemplates';
 
 export type THourlyRangeEditMode = { editItemId: null | number; isEdit: boolean };
@@ -72,8 +71,8 @@ export default function HourlyRangePage() {
   const branches: THourlyRangeSelectType =
     data?.list?.map((branch) => ({ id: branch.id, name: branch.name })) || [];
 
-  const parts: THourlyRangeSelectType = dbParts?.reduce(
-    (acc: THourlyRangeSelectType, part: TPart) => [...acc, { id: part.id, name: part.name }],
+  const parts = dbParts?.reduce<THourlyRangeSelectType>(
+    (acc, part) => [...acc, { id: part.id, name: part.name }],
     [{ id: 0, name: '공통' }]
   );
 
