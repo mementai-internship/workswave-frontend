@@ -78,7 +78,7 @@ const SUPREME_AUTH_NAVIGATION = [
         childContent: '시급 설정',
       },
       {
-        childPath: '/basic-setting/holiday',
+        childPath: '/basic-setting/day-off',
         childContent: '연차 설정',
       },
       {

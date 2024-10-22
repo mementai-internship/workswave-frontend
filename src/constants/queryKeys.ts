@@ -8,8 +8,14 @@ export const QUERY_KEYS = {
   //branches queryKeys
   branches: 'branches',
   branch: 'branch',
-  branchDeleted: 'branchesDeleted',
+  branchDeleted: 'branches-deleted',
 
+  //parts queryKeys
+  parts: 'parts',
+
+  // 연차설정 세팅 페이지 queryKeys
+  leaveCategories: 'leaveCategories',
+  leavePolicies: 'leavePolicies',
   // salary-bracket
   salaryBracket: 'salaryBracket',
 };
