@@ -7,7 +7,7 @@ import Pagination from '@/components/Common/Pagination';
 import TitleContainer from '@/components/Common/TitleContainer';
 import MemberManagementFilterBar from '@/components/MemberManagement/MemberManagementFilterBar';
 import MemberManagementTable from '@/components/MemberManagement/MemberManagementTable';
-import { useGetCurrentUser, useGetUsers } from '@/hooks/apis/useUserManagement';
+import { useGetCurrentUserInfo, useGetUsers } from '@/hooks/apis/useUserManagement';
 
 export default function MemberManagementPage() {
   const navigate = useNavigate();
@@ -69,18 +69,19 @@ export default function MemberManagementPage() {
     navigate(`/member-management?${queryParams.toString()}`);
   }
 
-  const { data: userList } = useGetUsers(
+  const { data: userList } = useGetUsers({
     currentPage,
     itemsPerPage,
     selectedTab,
     selectedBranch,
     selectedPart,
     updatedSearchName,
-    updatedSearchPhone
-  );
+    updatedSearchPhone,
+  });
 
   console.log(userList);
-  const { data: currentUser } = useGetCurrentUser();
+
+  const { data: currentUser } = useGetCurrentUserInfo();
 
   const tabList = [
     {
