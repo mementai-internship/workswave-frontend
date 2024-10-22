@@ -1,19 +1,20 @@
 import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-import PartTime from '@/components/WorkManagement/PartTime/PartTime';
+import DocumentManagementLayout from '@/components/DocumentManagement/DocumentManagementLayout';
 import WorkManagementLayout from '@/components/WorkManagement/WorkManagementLayout';
 import RootLayout from '@/layout/root';
 import BoardPage from '@/pages/basicSetting/BoardPage';
 import CalendarPage from '@/pages/basicSetting/CalendarPage';
-import HolidayPage from '@/pages/basicSetting/HolidayPage';
+import DayOffPage from '@/pages/basicSetting/DayOffPage';
 import HourlyRangePage from '@/pages/basicSetting/HourlyRangePage';
 import HrManagementSettingPage from '@/pages/basicSetting/HrManagementPage';
 import SalaryRangePage from '@/pages/basicSetting/SalaryRangePage';
 import WagePage from '@/pages/basicSetting/WagePage';
 import WorkingPage from '@/pages/basicSetting/WorkingPage';
 import DayoffManagementPage from '@/pages/dayoffManagement/DayoffManagement';
+import ApprovalHistory from '@/pages/dayoffManagement/approvalHistory/ApprovalHistory';
 import ContractManagement from '@/pages/documentManagement/ContractManagement';
-import HolidayManagement from '@/pages/documentManagement/HolidayManagement';
+import TimeoffManagement from '@/pages/documentManagement/TimeoffManagement';
 import CertificateManagement from '@/pages/documentManagement/certificationManagement/CertificateManagement';
 import HolidayCalendarPage from '@/pages/holidayCalendar/HolidayCalendarPage';
 import HomePage from '@/pages/home/HomePage';
@@ -23,12 +24,12 @@ import MemberManagementPage from '@/pages/memberManagement/MemberManagementPage'
 import SuperManagerSetting from '@/pages/memberManagement/SuperManagerSetting';
 import ManagementDeleteOfficePage from '@/pages/officeSetting/ManagementDeleteOfficePage';
 import ManagementOfficePage from '@/pages/officeSetting/ManagementOfficePage';
+import EntireHistoryPage from '@/pages/otManagement/EntireHistory/EntireHistoryPage';
 import OtManagementPage from '@/pages/otManagement/OtManagementPage';
 import SalarySettlementPage from '@/pages/salarySettlement/SalarySettlementPage';
 import SimpleMenuPage from '@/pages/simpleMenu/SimpleMenuPage';
-import BoardViewPage from '@/pages/userBoard/view/BoardViewPage';
-import BoardWritePage from '@/pages/userBoard/write/BoardWritePage';
 import CommuteManagementPage from '@/pages/workManagement/CommuteManagementPage';
+import PartManagementPage from '@/pages/workManagement/PartManagementPage';
 import WorkManagementPage from '@/pages/workManagement/WorkManagementPage';
 
 // TODO: lazy load, preload는 나중에 하겠습니둥.
@@ -72,8 +73,8 @@ const router = createBrowserRouter([
             element: <HourlyRangePage />,
           },
           {
-            path: 'holiday',
-            element: <HolidayPage />,
+            path: 'day-off',
+            element: <DayOffPage />,
           },
           {
             path: 'calendar',
@@ -124,7 +125,7 @@ const router = createBrowserRouter([
           },
           {
             path: 'partTime',
-            element: <PartTime />,
+            element: <PartManagementPage />,
           },
           {
             path: 'commute',
@@ -134,6 +135,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/document-management',
+        element: <DocumentManagementLayout />,
         children: [
           {
             index: true,
@@ -148,8 +150,8 @@ const router = createBrowserRouter([
             element: <ContractManagement />,
           },
           {
-            path: 'holiday-management',
-            element: <HolidayManagement />,
+            path: 'timeoff-management',
+            element: <TimeoffManagement />,
           },
         ],
       },
@@ -170,26 +172,30 @@ const router = createBrowserRouter([
         element: <DayoffManagementPage />,
       },
       {
+        path: '/dayoff-management/approval-history',
+        element: <ApprovalHistory />,
+      },
+      {
         path: '/member-management/supermanager-setting',
         element: <SuperManagerSetting />,
       },
-      {
-        path: '/board',
-        children: [
-          {
-            index: true,
-            element: <Navigate to="/board/view" replace />,
-          },
-          {
-            path: '/board/view',
-            element: <BoardViewPage />,
-          },
-          {
-            path: '/board/write',
-            element: <BoardWritePage />,
-          },
-        ],
-      },
+      // {
+      //   path: '/board',
+      //   children: [
+      //     {
+      //       index: true,
+      //       element: <Navigate to="/board/view" replace />,
+      //     },
+      //     {
+      //       path: '/board/view',
+      //       element: <BoardViewPage />,
+      //     },
+      //     {
+      //       path: '/board/write',
+      //       element: <BoardWritePage />,
+      //     },
+      //   ],
+      // },
       {
         path: 'simple-menu',
         element: <SimpleMenuPage />,
@@ -197,6 +203,10 @@ const router = createBrowserRouter([
       {
         path: 'ot-management',
         element: <OtManagementPage />,
+      },
+      {
+        path: 'ot-management/entire-history',
+        element: <EntireHistoryPage />,
       },
     ],
   },

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Pagination from '@/components/Common/Pagination';
 import CommuteTable from '@/components/WorkManagement/Commute/CommuteTable';
 import DetailCommuteRecord from '@/components/WorkManagement/Commute/DetailCommuteRecord';
-import { mockStatistics } from '@/constants/workManagementTable/workSelect.mock';
+import { mockStatistics } from '@/constants/workManagement/workSelect.mock';
 import { ICommuteData } from '@/models/work.model';
 
 export default function CommuteManagementPage() {

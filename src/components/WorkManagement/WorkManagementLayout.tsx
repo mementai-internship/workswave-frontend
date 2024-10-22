@@ -2,42 +2,46 @@ import dayjs from 'dayjs';
 import { useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
+import WorkFilter from '@/components/WorkManagement/WorkFilter';
 import WorkHeader from '@/components/WorkManagement/WorkHeader';
-
-export interface ItabItem {
-  id: number;
-  title: string;
-  path: string;
-}
+import { TOptions } from '@/components/WorkManagement/WorkSelect';
+import { TAB_ITEMS, TabItem } from '@/constants/workManagement/workManagement';
 
 export default function WorkManagementLayout() {
   const navigate = useNavigate();
   const location = useLocation();
   const [currentDate, setCurrentDate] = useState(dayjs());
-
-  const tabItems: ItabItem[] = [
-    { id: 0, title: '근로 관리', path: '/work-management/working' },
-    { id: 1, title: '파트타이머 관리', path: '/work-management/partTime' },
-    { id: 2, title: '출퇴근 관리', path: '/work-management/commute' },
-  ];
-
-  const [selectTab, setSelectTab] = useState<ItabItem>(() => {
-    return tabItems.find((tab) => tab.path === location.pathname) || tabItems[0];
+  const [selectTab, setSelectTab] = useState<TabItem>(() => {
+    return TAB_ITEMS.find((tab) => tab.path === location.pathname) || TAB_ITEMS[0];
   });
 
-  const handleTabChange = (newTab: ItabItem) => {
+  const [selectedBranch, setSelectedBranch] = useState<TOptions | null>(null);
+  const [selectedDepartment, setSelectedDepartment] = useState<TOptions | null>(null);
+
+  const handleTabChange = (newTab: TabItem) => {
     setSelectTab(newTab);
     navigate(newTab.path);
   };
 
+  const handleChangeMonth = (newDate: dayjs.Dayjs) => {
+    setCurrentDate(newDate);
+    // backend API 연결
+  };
   return (
     <div className="w-full">
       <WorkHeader
         selectTab={selectTab}
-        setSelectTab={handleTabChange}
+        onTabChange={handleTabChange}
         currentDate={currentDate}
-        setCurrentDate={setCurrentDate}
+        onChangeMonth={handleChangeMonth}
       />
+      <WorkFilter
+        selectedBranch={selectedBranch}
+        setSelectedBranch={setSelectedBranch}
+        selectedDepartment={selectedDepartment}
+        setSelectedDepartment={setSelectedDepartment}
+      />
+
       <Outlet />
     </div>
   );

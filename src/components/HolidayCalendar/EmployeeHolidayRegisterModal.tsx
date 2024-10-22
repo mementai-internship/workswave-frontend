@@ -16,19 +16,19 @@ interface IHolidayRegisterModalProps {
   currDate: dayjs.Dayjs;
 }
 
-export default function HolidayRegisterModal({
+export default function EmployeeHolidayRegisterModal({
   isOpen,
   onClose,
   employees,
   onRegisterHoliday,
   currDate,
 }: IHolidayRegisterModalProps) {
-  const defaultClassNames = getDefaultClassNames(); // react-day-picker 에서 tailwind 사용을 위한 선언
+  const defaultClassNames = getDefaultClassNames();
   const [selectedDates, setSelectedDates] = useState<{ [employeeId: string]: Date[] }>({});
   const [currentEmployee, setCurrentEmployee] = useState<string | null>(null);
   const [showTooltip, setShowTooltip] = useState<boolean>(false);
 
-  const holidayList = Object.entries(selectedDates)
+  const holidays = Object.entries(selectedDates)
     .map(([employeeId, dates]) => ({
       employee: employeeId,
       dates: dates,
@@ -48,29 +48,17 @@ export default function HolidayRegisterModal({
     }
   };
 
-  const handleRegisterHolidays = () => {
-    if (holidayList.length > 0) {
-      onRegisterHoliday(holidayList);
+  const submitRegisterHoliday = () => {
+    if (holidays.length > 0) {
+      onRegisterHoliday(holidays);
       onClose();
     }
   };
 
-  // 백엔드 연동 시 필요
-  // const handleRegisterHolidays = async () => {
-  //   if (holidayList.length > 0) {
-  //     try {
-  //       const response = await axios.post('/api/holidays', { holidays: holidayList });
-  //       if (response.status === 200) {
-  //         onRegisterHoliday(holidayList);
-  //         onClose();
-  //       } else {
-  //         throw new Error('휴무일 등록에 실패했습니다.');
-  //       }
-  //     } catch (error) {
-  //       console.error('휴무일 등록 중 오류 발생:', error);
-  //       alert('휴무일 등록에 실패했습니다. 다시 시도해 주세요.');
-  //     }
-  //   }
+  // TODO : 백엔드와 CRUD API 연동 필요
+  // TODO : 브랜치(또는 브랜치의 파트) 직원 리스트, 직원 휴무 리스트 받아와야 함.
+
+  // const handleRegisterHolidays = () => {
   // };
 
   const handleClearAllHolidays = () => {
@@ -97,7 +85,7 @@ export default function HolidayRegisterModal({
         <Dialog.Content className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg w-5/6 h-3/4 flex flex-col">
           <Dialog.Title asChild>
             <Txt variant="h4" color="black" className="border-b-2 pb-2 mb-4">
-              다중 휴무 등록
+              직원 휴무 등록
             </Txt>
           </Dialog.Title>
           <Dialog.Description className="sr-only">
@@ -188,7 +176,7 @@ export default function HolidayRegisterModal({
                 </Button>
               </div>
               <div className="overflow-y-auto flex-1">
-                {holidayList.map((holiday, index) => (
+                {holidays.map((holiday, index) => (
                   <section key={index} className="bg-gray-10 px-2 py-1 mb-2 rounded-sm w-full">
                     <Txt variant="h6" color="black">
                       {employees.find((e) => e.id === holiday.employee)?.name}
@@ -224,7 +212,7 @@ export default function HolidayRegisterModal({
             <Button
               variant="surface"
               color="blue"
-              onClick={handleRegisterHolidays}
+              onClick={submitRegisterHoliday}
               className="px-6 py-2 rounded"
             >
               등록

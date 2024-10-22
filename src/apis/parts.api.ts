@@ -5,7 +5,7 @@ import { IPartsForm, IPartsResponse } from '@/models/parts';
 
 export const getParts = async (branchId: number) => {
   try {
-    const response = await axiosInstance.get(`/branches/${branchId}/parts`);
+    const response = await axiosInstance.get<IPartsResponse[]>(`/branches/${branchId}/parts`);
     return response.data;
   } catch (error) {
     if (isAxiosError(error)) {
