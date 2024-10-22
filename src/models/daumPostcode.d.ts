@@ -4,7 +4,7 @@ declare namespace daum {
     open(): void;
   }
 
-  interface PostcodeOptions {
+  interface IPostcodeOptions {
     oncomplete: (data: IPostcodeData) => void;
     left: number;
     top: number;
