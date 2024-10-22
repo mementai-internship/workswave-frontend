@@ -12,7 +12,7 @@ import HolidayRegisterPopover from '@/components/HolidayCalendar/HolidayRegister
 import { useGetBranches } from '@/hooks/apis/useBranches';
 import { useGetClosedDays } from '@/hooks/apis/useClosedDays';
 
-interface IDayoffCalendarHeaderProps {
+interface IHolidayCalendarHeaderProps {
   branchId: number;
   setBranchId: (branchId: number) => void;
   currDate: dayjs.Dayjs;
@@ -23,7 +23,7 @@ interface IDayoffCalendarHeaderProps {
   setIsSundayOff: (isSundayOff: boolean) => void;
 }
 
-export default function DayoffCalendarHeader({
+export default function HolidayCalendarHeader({
   branchId,
   setBranchId,
   currDate,
@@ -32,10 +32,9 @@ export default function DayoffCalendarHeader({
   setView,
   sundayOff,
   setIsSundayOff,
-}: IDayoffCalendarHeaderProps) {
+}: IHolidayCalendarHeaderProps) {
   const [employeeModalOpen, setEmployeeModalOpen] = useState<boolean>(false);
 
-  // const { data: holidays } = useGetMonthlyClosedDays({ branch_id: branchId, date: currDate.toDate() });  // 월별 휴무일 조회
   const { data: holidays, isLoading: isHolidaysLoading } = useGetClosedDays({
     branch_id: branchId,
   });
@@ -55,7 +54,7 @@ export default function DayoffCalendarHeader({
     setView(view === 'dayGridMonth' ? 'dayGridWeek' : 'dayGridMonth');
   };
 
-  // 다중 휴무 등록 Btn 로직
+  // 다중 휴무 등록 Btn
   const handleEmployeeModalOpen = () => {
     setEmployeeModalOpen(true);
   };

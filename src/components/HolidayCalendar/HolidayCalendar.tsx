@@ -10,8 +10,6 @@ import { useGetClosedDays } from '@/hooks/apis/useClosedDays';
 import { TClosedDay } from '@/models/closedDays.model';
 import { adaptTaskToColor } from '@/utils/adaptTaskToColor';
 
-// import { useGetMonthlyClosedDays } from '@/hooks/apis/useClosedDays';
-
 interface IHolidayCalendarProps {
   currDate: dayjs.Dayjs;
   view: 'dayGridMonth' | 'dayGridWeek';
@@ -30,7 +28,6 @@ export default function HolidayCalendar({
   branch_id,
 }: IHolidayCalendarProps) {
   const { data: holidays, isLoading } = useGetClosedDays({ branch_id });
-  // const { data: holidays } = useGetMonthlyClosedDays({ branch_id, date: currDate.toDate() });  // 월별 휴무일 조회
 
   const handleDateClick = (arg: DateClickArg) => {
     onDateAndEventClick(arg.date);

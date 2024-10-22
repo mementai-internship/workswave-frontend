@@ -17,4 +17,7 @@ export const QUERY_KEYS = {
 
   //work queryKeys
   work: 'work',
+
+  //commute queryKeys
+  commute: 'commute',
 };

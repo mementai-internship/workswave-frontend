@@ -1,11 +1,24 @@
 import { Table } from '@radix-ui/themes';
+import { useOutletContext } from 'react-router-dom';
 
 import GenderIcon from '@/components/WorkManagement/GenderIcon';
 import DetailPartTime from '@/components/WorkManagement/PartTime/DetailPartTime';
+import { WorkTableContext } from '@/components/WorkManagement/Work/WorkTable';
 import { PARTTIMEHEADTABLE } from '@/constants/workManagement/workTable';
 import { partTimeMockData } from '@/constants/workManagement/workTable.mock';
 
 export default function PartTime() {
+  const context = useOutletContext<WorkTableContext>();
+  const { selectedBranch, selectedDepartment } = context || {
+    selectedBranch: null,
+    selectedDepartment: null,
+  };
+  const filteredData = partTimeMockData.filter((data) => {
+    const branchMatch = !selectedBranch || data.branch === selectedBranch.name;
+    const departmentMatch = !selectedDepartment || data.department === selectedDepartment.name;
+    return branchMatch && departmentMatch;
+  });
+
   return (
     <Table.Root className="mb-5">
       <Table.Header className="bg-gray-200 text-xs text-gray-700 whitespace-nowrap border-t border-gray-300">
@@ -21,7 +34,7 @@ export default function PartTime() {
       </Table.Header>
 
       <Table.Body>
-        {partTimeMockData.map((row) => (
+        {filteredData.map((row) => (
           <Table.Row key={row.id}>
             <Table.Cell align="center" className="align-middle">
               {row.id}
@@ -36,7 +49,7 @@ export default function PartTime() {
               </div>
             </Table.Cell>
             <Table.Cell align="center" className="align-middle">
-              {row.workPart}
+              {row.department}
             </Table.Cell>
             <Table.Cell align="center" className="align-middle">
               {row.workDate}
