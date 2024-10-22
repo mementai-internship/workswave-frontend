@@ -65,6 +65,8 @@ export default function WorkingSettingPartForm({
       prev.includes(value) ? prev.filter((item) => item !== value) : [...prev, value]
     );
   }, []);
+
+  // 현재 여러 post를 한 번에 보냈을 떄 500 에러 나는 이슈 해결해야 함.
   const handleAddPart = async () => {
     const partList = checkedList.map((value) => adaptPartValue(value));
     console.log(partList);
