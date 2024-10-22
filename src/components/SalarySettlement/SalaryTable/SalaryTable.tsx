@@ -11,7 +11,6 @@ import { IEmployeeSalarySettlement } from '@/models/salarySettlement.model';
 interface ISalaryTableProps {
   salarySettlementData: IEmployeeSalarySettlement[];
   selectedRegion: string | undefined;
-  selectedPart: string | undefined;
   selectedJob: string | undefined;
   resetTrigger: boolean;
 }
@@ -19,7 +18,6 @@ interface ISalaryTableProps {
 export default function SalaryTable({
   salarySettlementData,
   selectedRegion,
-  selectedPart,
   selectedJob,
   resetTrigger,
 }: ISalaryTableProps) {
@@ -30,12 +28,7 @@ export default function SalaryTable({
     resetEmployees();
   }, [resetTrigger, resetEmployees]);
 
-  const filteredEmployees = useFilteredEmployees(
-    employees,
-    selectedRegion,
-    selectedPart,
-    selectedJob
-  );
+  const filteredEmployees = useFilteredEmployees(employees, selectedRegion, selectedJob);
 
   return (
     <div className="justify-center items-start pb-10">

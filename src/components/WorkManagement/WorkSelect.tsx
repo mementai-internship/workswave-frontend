@@ -1,31 +1,38 @@
-import { useForm } from 'react-hook-form';
+import { Select } from '@radix-ui/themes';
 
-import SelectBox from '@/components/Common/Select';
-import {
-  branchMockData,
-  departmentMockData,
-} from '@/constants/workManagementTable/workSelect.mock';
+export type TOptions = {
+  id: number;
+  name: string;
+};
+interface IWorkSelectProps {
+  options: TOptions[];
+  value: string | null;
+  onChange: (value: TOptions) => void;
+  defaultValue: string;
+}
 
-export default function WorkSelect() {
-  const { register } = useForm();
+export default function WorkSelect({ options, value, onChange, defaultValue }: IWorkSelectProps) {
   return (
-    <div className="flex gap-3">
-      <SelectBox
-        title="지점 선택"
-        name="branch"
-        options={branchMockData}
-        size="small"
-        border={true}
-        register={register}
-      />
-      <SelectBox
-        title="파트 선택"
-        name="position"
-        options={departmentMockData}
-        size="small"
-        border={true}
-        register={register}
-      />
-    </div>
+    <Select.Root
+      size="2"
+      onValueChange={(selectedValue) => {
+        const selectedOption = options.find((option) => option.name === selectedValue);
+        if (selectedOption) {
+          onChange(selectedOption);
+        }
+      }}
+      value={value || defaultValue}
+    >
+      <Select.Trigger variant="surface" className="min-w-36">
+        {value || defaultValue}
+      </Select.Trigger>
+      <Select.Content>
+        {options.map((option) => (
+          <Select.Item key={option.id} value={option.name}>
+            {option.name}
+          </Select.Item>
+        ))}
+      </Select.Content>
+    </Select.Root>
   );
 }

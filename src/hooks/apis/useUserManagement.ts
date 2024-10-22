@@ -2,29 +2,49 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 
 import userManagementApi from '@/apis/user-management.api';
 import { QUERY_KEYS } from '@/constants/queryKeys';
-import {
-  TPatchUserRequest,
-  TPatchUserRoleRequest,
-  TPostUserRequest,
-} from '@/models/user-management.model';
+import { TPatchUserRequest, TPatchUserRoleRequest } from '@/models/user-management.model';
 
-export const useGetUsers = (page: number, recordSize: number) => {
+export const useGetUsers = ({
+  currentPage,
+  itemsPerPage,
+  selectedTab,
+  selectedBranch,
+  selectedPart,
+  updatedSearchName,
+  updatedSearchPhone,
+}) => {
   return useQuery({
-    queryKey: [QUERY_KEYS.userManagementList, page, recordSize],
-    queryFn: () => userManagementApi.getUsers(page, recordSize),
+    queryKey: [
+      QUERY_KEYS.userManagementList,
+      currentPage,
+      itemsPerPage,
+      selectedTab,
+      selectedBranch,
+      selectedPart,
+      updatedSearchName,
+      updatedSearchPhone,
+    ],
+    queryFn: () =>
+      userManagementApi.getUsers(
+        currentPage,
+        itemsPerPage,
+        selectedTab,
+        selectedBranch,
+        selectedPart,
+        updatedSearchName,
+        updatedSearchPhone
+      ),
+    staleTime: 1000 * 60 * 5,
+    gcTime: 1000 * 60 * 10,
   });
 };
 
-export const usePostUser = () => {
-  return useMutation({
-    mutationFn: (body: TPostUserRequest) => userManagementApi.postUser(body),
-  });
-};
-
-export const useGetCurrentUser = () => {
+export const useGetCurrentUserInfo = () => {
   return useQuery({
     queryKey: [QUERY_KEYS.userManagementCurrentUser],
-    queryFn: () => userManagementApi.getCurrentUser(),
+    queryFn: () => userManagementApi.getCurrentUserInfo(),
+    staleTime: 1000 * 60 * 5,
+    gcTime: 1000 * 60 * 10,
   });
 };
 
@@ -47,15 +67,22 @@ export const useDeleteUser = () => {
   });
 };
 
-export const useGetResignedUsers = () => {
-  return useQuery({
-    queryKey: [QUERY_KEYS.userManagementResignedUsers],
-    queryFn: () => userManagementApi.getResignedUsers(),
-  });
-};
-
 export const usePatchUserRole = (userId: number) => {
   return useMutation({
     mutationFn: (body: TPatchUserRoleRequest) => userManagementApi.patchUserRole(userId, body),
+  });
+};
+
+export const useGetBranchs = () => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.userManagementBranchs],
+    queryFn: () => userManagementApi.getBranchs(),
+  });
+};
+
+export const useGetParts = () => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.userManagementParts],
+    queryFn: () => userManagementApi.getParts(),
   });
 };

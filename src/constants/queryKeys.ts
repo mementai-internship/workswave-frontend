@@ -3,13 +3,29 @@ export const QUERY_KEYS = {
   userManagementList: 'userList',
   userManagementCurrentUser: 'currentUser',
   userManagementDetail: 'userDetail',
-  userManagementResignedUsers: 'resignedUsers',
+  userManagementBranchs: 'branchs',
+  userManagementParts: 'parts',
 
   //branches queryKeys
   branches: 'branches',
   branch: 'branch',
-  branchDeleted: 'branchesDeleted',
+  branchDeleted: 'branches-deleted',
 
+  //parts queryKeys
+  parts: 'parts',
+
+  // 연차설정 세팅 페이지 queryKeys
+  leaveCategories: 'leaveCategories',
+  leavePolicies: 'leavePolicies',
   // salary-bracket
   salaryBracket: 'salaryBracket',
+
+  // hour-wage-templates
+  hourWageTemplates: 'hourWageTemplates',
+  //closedDays queryKeys
+  branchMonthlyClose: 'getMonthlyClosedDays',
+  branchClose: 'getClosedDays',
+
+  //work queryKeys
+  work: 'work',
 };
