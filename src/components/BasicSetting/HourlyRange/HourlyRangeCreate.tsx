@@ -38,6 +38,7 @@ export default function HourlyRangeCreate({
     min: { value: 0, message: '유효한 시간을 입력해주세요. (0 이상)' },
     max: { value: 59, message: '유효한 시간을 입력해주세요. (59 이하)' },
   };
+
   return (
     <HourlyRangeContainer title="시급입력" width="w-[30%]">
       <form onSubmit={onSubmit} className="px-4 py-6 w-full">
@@ -67,13 +68,14 @@ export default function HourlyRangeCreate({
             <Controller
               name="part_id"
               control={control}
-              render={({ field: { value } }) => (
+              render={({ field: { value, onChange } }) => (
                 <HourlyRangeSelect
                   isWidthFull
                   value={value}
                   content={parts}
                   isBorder
-                  defaultValue="0"
+                  onChange={onChange}
+                  defaultValue={value}
                   name="part_id"
                 />
               )}

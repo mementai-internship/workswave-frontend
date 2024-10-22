@@ -11,7 +11,7 @@ export const useGetHourWageTemplates = (branchId: number) => {
   return useQuery({
     queryKey: [QUERY_KEYS.hourWageTemplates, branchId],
     queryFn: () => hourWageTemplatesAPI.getHourWageTemplateList(branchId),
-    enabled: false,
+    enabled: !!branchId,
   });
 };
 

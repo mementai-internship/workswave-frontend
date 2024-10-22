@@ -6,8 +6,10 @@ import HourlyRangeInputContainer from '@/components/BasicSetting/HourlyRange/Hou
 import { THourlyRangeSelectType } from '@/components/BasicSetting/HourlyRange/HourlyRangeSelect';
 import { Txt } from '@/components/Common/Txt';
 import { IHourWageTemplatesForm } from '@/models/hour-wage-templates';
+import { THourlyRangeEditMode } from '@/pages/basicSetting/HourlyRangePage';
 
 interface IProps {
+  editMode: THourlyRangeEditMode;
   item: IHourWageTemplatesForm;
   parts: THourlyRangeSelectType;
   activateEditMode: (id: number) => void;
@@ -19,6 +21,7 @@ export default function HourlyRangeItem({
   handleDeleteItem,
   activateEditMode,
   item,
+  editMode,
 }: IProps) {
   const partName = parts.find((part) => part.id === item.part_id)?.name;
   return (
@@ -30,17 +33,19 @@ export default function HourlyRangeItem({
         </Box>
 
         <Flex gap="1">
-          <Button
-            variant="outline"
-            color="gray"
-            radius="none"
-            size="1"
-            className="cursor-pointer"
-            onClick={() => activateEditMode(item.id)}
-          >
-            <PiPencilLine />
-            수정
-          </Button>
+          {editMode.editItemId !== item.id && (
+            <Button
+              variant="outline"
+              color="gray"
+              radius="none"
+              size="1"
+              className="cursor-pointer"
+              onClick={() => activateEditMode(item.id)}
+            >
+              <PiPencilLine />
+              수정
+            </Button>
+          )}
 
           <Button
             variant="outline"

@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import HourlyRangeCreate from '@/components/BasicSetting/HourlyRange/HourlyRangeCreate';
 import HourlyRangeList from '@/components/BasicSetting/HourlyRange/HourlyRangeList';
 import { THourlyRangeSelectType } from '@/components/BasicSetting/HourlyRange/HourlyRangeSelect';
-import { useGetAllBranches } from '@/hooks/apis/useBranches';
+import { useGetBranches } from '@/hooks/apis/useBranches';
 import {
   useDeleteHourWageTemplates,
   useGetHourWageTemplates,
@@ -14,14 +14,13 @@ import {
 import { useGetParts } from '@/hooks/apis/useParts';
 import { useGetCurrentUser } from '@/hooks/apis/useUserManagement';
 import { IHourWageTemplatesForm } from '@/models/hour-wage-templates';
-import { TPart } from '@/models/user.model';
 import { convertFormToTemplate, convertTemplateToForm } from '@/utils/convertHourWageTemplates';
 
 export type THourlyRangeEditMode = { editItemId: null | number; isEdit: boolean };
 
 export default function HourlyRangePage() {
   const { data: currentUser } = useGetCurrentUser();
-  const { data: allBranches } = useGetAllBranches();
+  const { data } = useGetBranches('0');
   const [selectedBranchId, setSelectedBranchId] = useState<number | null>(null);
   const [selectPartId, setSelectPartId] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -29,6 +28,7 @@ export default function HourlyRangePage() {
     isEdit: false,
     editItemId: null,
   });
+
   const {
     reset,
     setValue,
@@ -38,6 +38,7 @@ export default function HourlyRangePage() {
   } = useForm<IHourWageTemplatesForm>({
     mode: 'onChange',
     defaultValues: {
+      id: null,
       part_id: 0,
       name: '',
       start_time_hour: 0,
@@ -54,33 +55,24 @@ export default function HourlyRangePage() {
   const { mutate: postHourWageTemplates } = usePostHourWageTemplates(selectedBranchId);
   const { mutate: patchHourWageTemplates } = usePatchHourWageTemplates(selectedBranchId);
   const { mutate: deleteHourWageTemplates } = useDeleteHourWageTemplates(selectedBranchId);
-  const { data: dbParts, refetch: refetchGetParts } = useGetParts(selectedBranchId);
+  const { data: dbParts } = useGetParts(selectedBranchId);
 
   useEffect(() => {
-    if (currentUser && allBranches) {
+    if (currentUser && data) {
       if (currentUser.data.role === 'MSO 최고권한') {
-        if (allBranches) {
-          setSelectedBranchId(allBranches[0].id);
-        }
+        setSelectedBranchId(data.list[0].id);
       } else {
         setSelectedBranchId(currentUser.data.branch_id);
       }
     }
-  }, [currentUser, allBranches]);
-
-  useEffect(() => {
-    if (selectedBranchId) {
-      refetchGetHourWageTemplates();
-      refetchGetParts();
-      setIsLoading(false);
-    }
-  }, [selectedBranchId]);
+    setIsLoading(false);
+  }, [currentUser, data]);
 
   const branches: THourlyRangeSelectType =
-    allBranches?.map((branch) => ({ id: branch.id, name: branch.name })) || [];
+    data?.list?.map((branch) => ({ id: branch.id, name: branch.name })) || [];
 
-  const parts: THourlyRangeSelectType = dbParts?.reduce(
-    (acc: THourlyRangeSelectType, part: TPart) => [...acc, { id: part.id, name: part.name }],
+  const parts = dbParts?.reduce<THourlyRangeSelectType>(
+    (acc, part) => [...acc, { id: part.id, name: part.name }],
     [{ id: 0, name: '공통' }]
   );
 
@@ -111,7 +103,11 @@ export default function HourlyRangePage() {
   };
 
   const handleDeleteItem = (id: number) => {
-    deleteHourWageTemplates(id);
+    deleteHourWageTemplates(id, {
+      onSuccess: () => {
+        refetchGetHourWageTemplates();
+      },
+    });
   };
 
   const onSubmit = handleSubmit((data: IHourWageTemplatesForm) => {
@@ -129,6 +125,7 @@ export default function HourlyRangePage() {
           onSuccess: () => {
             refetchGetHourWageTemplates();
             reset();
+            setEditMode({ editItemId: null, isEdit: false });
           },
         }
       );
@@ -137,6 +134,7 @@ export default function HourlyRangePage() {
         onSuccess: () => {
           refetchGetHourWageTemplates();
           reset();
+          setEditMode({ editItemId: null, isEdit: false });
         },
       });
     }
@@ -148,6 +146,7 @@ export default function HourlyRangePage() {
         {!isLoading && (
           <>
             <HourlyRangeList
+              editMode={editMode}
               branches={branches}
               parts={parts}
               list={list}
