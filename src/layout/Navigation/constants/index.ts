@@ -162,14 +162,13 @@ const PART_MANAGER_AUTH_NAVIGATION = [
         childContent: '연차 설정',
       },
       {
-        childPath: '/basic-setting/calendar',
-        childContent: '캘린더 설정',
+        childPath: '/basic-setting/hr',
+        childContent: '인사기록 설정',
       },
-      // {
-      //   childPath: '/basic-setting/hr',
-      //   childContent: '인사기록 설정',
-      // },
-
+      {
+        childPath: '/basic-setting/board',
+        childContent: '게시판 설정',
+      },
       {
         childPath: '/basic-setting/salary-range',
         childContent: '급여구간표 설정',
