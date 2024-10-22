@@ -1,5 +1,4 @@
 import { Dialog } from '@radix-ui/themes';
-import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import Input from '@/components/Common/Input';
@@ -12,7 +11,7 @@ interface ICertificationManagementDialogProps {
   applyUse: string;
 }
 
-interface FormData {
+interface IFormData {
   name: string;
   position: string;
   email: string;
@@ -28,9 +27,9 @@ export default function CertificationManagementDialog({
   applyUse,
 }: ICertificationManagementDialogProps) {
   // TODO : 내부에 증명서 파일과, 양식에 맞는 데이터 입력을 받고 승인 버튼을 통해 출력
-  const methods = useForm<FormData>();
+  const methods = useForm<IFormData>();
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = (data: IFormData) => {
     console.log(data);
   };
 
