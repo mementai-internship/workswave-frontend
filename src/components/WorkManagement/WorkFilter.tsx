@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 
 import ContactSearchInput from '@/components/Common/ContactSearchInput';
 import WorkSelect, { TOptions } from '@/components/WorkManagement/WorkSelect';
-import { useGetAllBranches } from '@/hooks/apis/useBranches';
+import { useGetBranches } from '@/hooks/apis/useBranches';
 import { useGetParts } from '@/hooks/apis/useParts';
 
 interface IWorkFilterProps {
@@ -19,7 +19,7 @@ export default function WorkFilter({
   selectedDepartment,
   setSelectedDepartment,
 }: IWorkFilterProps) {
-  const { data: branches } = useGetAllBranches();
+  const { data: branches } = useGetBranches('0');
   const { data: parts } = useGetParts(selectedBranch?.id || null);
   const location = useLocation();
 
@@ -41,7 +41,7 @@ export default function WorkFilter({
     <div className="flex justify-between py-5 border-t border-gray-200">
       <div className="flex gap-3">
         <WorkSelect
-          options={mapToOptions(branches)}
+          options={mapToOptions(branches?.list)}
           value={selectedBranch?.name}
           onChange={(value: TOptions) => {
             setSelectedBranch(value);
