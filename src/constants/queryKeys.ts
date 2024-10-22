@@ -18,4 +18,7 @@ export const QUERY_KEYS = {
   leavePolicies: 'leavePolicies',
   // salary-bracket
   salaryBracket: 'salaryBracket',
+
+  // hour-wage-templates
+  hourWageTemplates: 'hourWageTemplates',
 };
