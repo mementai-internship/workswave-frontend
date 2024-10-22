@@ -11,6 +11,17 @@ export const QUERY_KEYS = {
   branch: 'branch',
   branchDeleted: 'branches-deleted',
 
+  //parts queryKeys
+  parts: 'parts',
+
+  // 연차설정 세팅 페이지 queryKeys
+  leaveCategories: 'leaveCategories',
+  leavePolicies: 'leavePolicies',
+  // salary-bracket
+  salaryBracket: 'salaryBracket',
+
+  // hour-wage-templates
+  hourWageTemplates: 'hourWageTemplates',
   //closedDays queryKeys
   branchMonthlyClose: 'getMonthlyClosedDays',
   branchClose: 'getClosedDays',

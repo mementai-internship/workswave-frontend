@@ -1,38 +1,53 @@
 import WageContainer from '@/components/BasicSetting/Wage/WageContainer';
 import WageItem from '@/components/BasicSetting/Wage/WageItem';
-import WageSelect from '@/components/BasicSetting/Wage/WageSelect';
-import { Txt } from '@/components/Common/Txt';
-import { IWageSettingEditMode } from '@/hooks/useWageSetting';
+import WageSelect, { IWageSelectType } from '@/components/BasicSetting/Wage/WageSelect';
 import { IWageSetting } from '@/models/wageSetting.model';
+import { TWageEditMode } from '@/pages/basicSetting/WagePage';
 
 interface IProps {
-  positionOptions: {
-    id: number;
-    name: string;
-  }[];
+  branches: IWageSelectType[];
+  parts: IWageSelectType[];
   list: IWageSetting[];
-  handleOpenEditMode: (id?: string) => void;
-  handleDeleteItem: (id: string) => void;
-  editMode: IWageSettingEditMode;
+  selectedBranchId: number | null;
+  selectedPartId: number | null;
+  activeEditMode: (id: number) => void;
+  handleDeleteItem: (id: number) => void;
+  handleSelectBranch: (id: string) => void;
+  handleSelectPart: (id: string) => void;
+  editMode: TWageEditMode;
 }
 
 export default function WageList({
   handleDeleteItem,
+  activeEditMode,
+  handleSelectPart,
+  handleSelectBranch,
+  selectedBranchId,
+  selectedPartId,
   editMode,
-  handleOpenEditMode,
-  positionOptions,
+  parts,
   list,
+  branches,
 }: IProps) {
   return (
     <WageContainer
       title="임금 템플릿"
       titleChildren={
-        <>
-          <Txt variant="h4" color="black">
-            뮤즈의원(다산점)
-          </Txt>
-          <WageSelect placeholder="직책선택" content={positionOptions} />
-        </>
+        <div className="flex gap-2">
+          <WageSelect
+            onClick={handleSelectBranch}
+            content={branches}
+            defaultValue={selectedBranchId}
+            isTitle
+          />
+          <WageSelect
+            onClick={handleSelectPart}
+            placeholder="직책선택"
+            content={parts}
+            defaultValue={selectedPartId}
+            isTitle
+          />
+        </div>
       }
       width="w-[60%]"
       position="left"
@@ -42,7 +57,7 @@ export default function WageList({
           <WageItem
             key={item.templateId}
             item={item}
-            handleOpenEditMode={handleOpenEditMode}
+            activeEditMode={activeEditMode}
             handleDeleteItem={handleDeleteItem}
             editMode={editMode}
           />

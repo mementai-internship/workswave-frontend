@@ -16,8 +16,6 @@ export default function ManagementOfficePage() {
   const { mutate: postBranchMutate } = usePostBranch();
   const { mutate: deleteBranchMutate } = useDeleteBranch();
 
-  console.log(data);
-
   const { control, handleSubmit, setValue, reset } = useForm<IBranchesRequest>({
     defaultValues: {
       code: '',
@@ -31,7 +29,6 @@ export default function ManagementOfficePage() {
       mail_address: '',
     },
   });
-
   const onSubmit = handleSubmit((data: IBranchesRequest) => {
     postBranchMutate(data, {
       onSuccess: refetch,

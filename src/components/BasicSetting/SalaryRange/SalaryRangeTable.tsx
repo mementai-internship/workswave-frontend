@@ -1,11 +1,11 @@
 import SalaryRangeCalcRange from '@/components/BasicSetting/SalaryRange/SalaryRangeCalcRange';
 import SalaryRangeCalcResult from '@/components/BasicSetting/SalaryRange/SalaryRangeCalcResult';
 import { SALARY_RANGE_BORDER_COLOR } from '@/constants/salaryRange';
-import { ISalaryRangeValue } from '@/models/salaryRange.model';
+import { ICalculatedSalaryOutput } from '@/models/salary-range.model';
 
 interface IProps {
-  calcResult: ISalaryRangeValue;
-  calcRange: ISalaryRangeValue[];
+  calcResult: ICalculatedSalaryOutput;
+  calcRange: ICalculatedSalaryOutput[];
   tableHeaderTitle: string;
   direction: 'left' | 'right';
 }
@@ -18,7 +18,7 @@ export default function SalaryRangeSection({
 }: IProps) {
   return (
     <table
-      className={`w-50 flex-1 border-separate border-spacing-0 ${direction === 'right' ? `border-l-8 ${SALARY_RANGE_BORDER_COLOR}` : ''}`}
+      className={`w-50 flex-1 border-separate border-spacing-0 overflow-y-scroll ${direction === 'right' ? `border-l-8 ${SALARY_RANGE_BORDER_COLOR}` : ''}`}
     >
       <thead>
         <tr className={`p-2 bg-gray-10 text-center font-bold text-lg`}>

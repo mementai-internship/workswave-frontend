@@ -1,15 +1,16 @@
 import SalaryRangeTableTd from '@/components/BasicSetting/SalaryRange/SalaryRangeTableTd';
 import { SALARY_RANGE_BORDER_COLOR } from '@/constants/salaryRange';
-import { ISalaryRangeValue } from '@/models/salaryRange.model';
+import { ICalculatedSalaryOutput } from '@/models/salary-range.model';
 
 interface IProps {
-  calcResult: ISalaryRangeValue;
+  calcResult: ICalculatedSalaryOutput;
 }
 
 export default function SalaryRangeCalcResult({ calcResult }: IProps) {
   const {
     annualSalary,
-    totalMonthlySalary,
+    salary,
+    salaryWithoutMealAllowance,
     mealAllowance,
     netPay,
     totalDeductions,
@@ -22,7 +23,7 @@ export default function SalaryRangeCalcResult({ calcResult }: IProps) {
   } = calcResult;
 
   return (
-    <tbody>
+    <tbody className="sticky t-0">
       <tr>
         <SalaryRangeTableTd
           bgColor="lightGray"
@@ -59,13 +60,13 @@ export default function SalaryRangeCalcResult({ calcResult }: IProps) {
         <SalaryRangeTableTd
           bgColor="white"
           aria-label="월급"
-          text={totalMonthlySalary}
+          text={salary}
           borderStyle={`border-r ${SALARY_RANGE_BORDER_COLOR} border-b border-b-[#333333]`}
         />
         <SalaryRangeTableTd
           bgColor="white"
           aria-label="월급에서 식대가 빠진 금액"
-          text={totalMonthlySalary - mealAllowance}
+          text={salaryWithoutMealAllowance - mealAllowance}
           borderStyle={`border-r ${SALARY_RANGE_BORDER_COLOR} border-b border-b-[#333333]`}
         />
         <SalaryRangeTableTd
