@@ -40,7 +40,12 @@ export default function WageCalculate({
   const [isCustomOvertimeHoursChecked, setIsCustomOvertimeHoursChecked] = useState<boolean>(false); // 연차시간 체크여부
 
   return (
-    <WageContainer title="연봉 계산기" width="w-[40%]" position="right">
+    <WageContainer
+      title="연봉 계산기"
+      width="w-[40%]"
+      position="right"
+      rightChild={<p>최저임금: 9,860원</p>}
+    >
       <form onSubmit={onSubmit}>
         <div className="flex ">
           {/* left */}

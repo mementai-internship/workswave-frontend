@@ -163,6 +163,7 @@ export default function WagePage() {
     console.log(data);
   });
 
+  // 년도 옵션 (현재 년도 기준 앞뒤 10년)
   const yearsArrayOptions = Array.from({ length: 21 }, (_, index) => index - 10).reduce(
     (acc, yearOffset) => {
       const year = currentYear + yearOffset;
@@ -172,6 +173,7 @@ export default function WagePage() {
     []
   );
 
+  // 근무일
   const workingDaysOptions = Array.from({ length: 7 }).map((_, i) => ({
     id: i + 1,
     name: `${i + 1}일`,
@@ -202,7 +204,7 @@ export default function WagePage() {
   };
 
   return (
-    <div className="w-full bg-white flex">
+    <div className="w-full bg-white flex min-h-[600px] max-h-[calc(100vh-200px)] overflow-y-scroll">
       <WageList
         editMode={editMode}
         activeEditMode={activeEditMode}

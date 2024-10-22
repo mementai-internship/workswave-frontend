@@ -1,5 +1,7 @@
 import WageContainer from '@/components/BasicSetting/Wage/WageContainer';
 import WageItem from '@/components/BasicSetting/Wage/WageItem';
+import WageMinimumSettingDialog from '@/components/BasicSetting/Wage/WageMinimumSettingDialog';
+import WagePayStatementDialog from '@/components/BasicSetting/Wage/WagePayStatementDialog';
 import WageSelect, { IWageSelectType } from '@/components/BasicSetting/Wage/WageSelect';
 import { IWageSetting } from '@/models/wageSetting.model';
 import { TWageEditMode } from '@/pages/basicSetting/WagePage';
@@ -31,26 +33,36 @@ export default function WageList({
 }: IProps) {
   return (
     <WageContainer
-      title="임금 템플릿"
-      titleChildren={
-        <div className="flex gap-2">
-          <WageSelect
-            onClick={handleSelectBranch}
-            content={branches}
-            defaultValue={selectedBranchId}
-            isTitle
-          />
-          <WageSelect
-            onClick={handleSelectPart}
-            placeholder="직책선택"
-            content={parts}
-            defaultValue={selectedPartId}
-            isTitle
-          />
-        </div>
-      }
       width="w-[60%]"
       position="left"
+      title="임금 템플릿"
+      leftChild={
+        <>
+          <div className="w-32">
+            <WageSelect
+              onClick={handleSelectBranch}
+              content={branches}
+              defaultValue={selectedBranchId}
+              isTitle
+            />
+          </div>
+          <div className="w-32">
+            <WageSelect
+              onClick={handleSelectPart}
+              placeholder="직책선택"
+              content={parts}
+              defaultValue={selectedPartId}
+              isTitle
+            />
+          </div>
+        </>
+      }
+      rightChild={
+        <>
+          <WagePayStatementDialog />
+          <WageMinimumSettingDialog />
+        </>
+      }
     >
       <ul className="flex flex-col gap-2 p-4">
         {list.map((item) => (
