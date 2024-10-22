@@ -46,10 +46,10 @@ export interface IWorkPolicies {
     do_holiday_work: false;
   };
   default_allowance_policies: {
-    comprehensive_overtime: false;
-    annual_leave: false;
-    holiday_work: false;
-    job_duty: false;
-    meal: false;
+    comprehensive_overtime: boolean;
+    annual_leave: boolean;
+    holiday_work: boolean;
+    job_duty: boolean;
+    meal: boolean;
   };
 }

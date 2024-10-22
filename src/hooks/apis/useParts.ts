@@ -1,8 +1,14 @@
-import { UseQueryResult, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import {
+  UseMutationResult,
+  UseQueryResult,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
 
 import { deleteParts, getParts, patchParts, postParts } from '@/apis/parts.api';
 import { QUERY_KEYS } from '@/constants/queryKeys';
-import { IPartsForm } from '@/models/parts';
+import { IPartsForm, IPartsResponse } from '@/models/parts';
 import { IWorkingSettingPartResponse } from '@/models/workingSetting.model';
 
 export const useGetParts = (
@@ -15,7 +21,7 @@ export const useGetParts = (
   });
 };
 
-export const usePostParts = (branchId: number) => {
+export const usePostParts = (branchId: number): UseMutationResult<IPartsResponse> => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (data: IPartsForm) => postParts(branchId, data),
