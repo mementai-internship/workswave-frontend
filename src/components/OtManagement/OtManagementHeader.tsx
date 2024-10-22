@@ -1,6 +1,7 @@
 import { Button } from '@radix-ui/themes';
 import React from 'react';
 import { PiGear } from 'react-icons/pi';
+import { Link } from 'react-router-dom';
 
 import TitleContainer from '@/components/Common/TitleContainer';
 
@@ -12,7 +13,7 @@ export default function OtManagementHeader() {
           <div className="flex flex-row gap-2 items-center">
             <Button color="gray" variant="soft" radius="full" onClick={() => {}}>
               <PiGear />
-              전체O.T내역
+              <Link to="/ot-management/entire-history">전체O.T내역</Link>
             </Button>
           </div>
         </TitleContainer>

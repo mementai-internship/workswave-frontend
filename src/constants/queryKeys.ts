@@ -21,4 +21,10 @@ export const QUERY_KEYS = {
 
   // hour-wage-templates
   hourWageTemplates: 'hourWageTemplates',
+  //closedDays queryKeys
+  branchMonthlyClose: 'getMonthlyClosedDays',
+  branchClose: 'getClosedDays',
+
+  //work queryKeys
+  work: 'work',
 };
