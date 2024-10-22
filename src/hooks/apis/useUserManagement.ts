@@ -4,7 +4,6 @@ import userManagementApi from '@/apis/user-management.api';
 import { QUERY_KEYS } from '@/constants/queryKeys';
 import { TPatchUserRequest, TPatchUserRoleRequest } from '@/models/user-management.model';
 
-
 export const useGetUsers = ({
   currentPage,
   itemsPerPage,
