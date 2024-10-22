@@ -1,16 +1,26 @@
-import SalaryRangeTableTd from '@/components/BasicSetting/SalaryRange/SalaryRangeTableTd';
-import { SALARY_RANGE_BORDER_COLOR } from '@/constants/salaryRange';
-import { ICalculatedSalary, IInputSalary } from '@/models/salaryRange.model';
 import React from 'react';
 import { UseFormRegister } from 'react-hook-form';
 
+import SalaryRangeTableTd from '@/components/BasicSetting/SalaryRange/SalaryRangeTableTd';
+import { SALARY_RANGE_BORDER_COLOR } from '@/constants/salaryRange';
+import { ISalaryBracketResponse } from '@/models/salary-bracket.model';
+import { ICalculatedSalary, ICalculatedSalaryForm } from '@/models/salary-range.model';
+
 interface IProps {
-  register: UseFormRegister<IInputSalary>;
+  register: UseFormRegister<ICalculatedSalaryForm>;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   salaryDetails: ICalculatedSalary['salaryDetails'];
+  currentYear: number;
+  data: ISalaryBracketResponse;
 }
 
-export default function SalaryRangeHeader({ register, onSubmit, salaryDetails }: IProps) {
+export default function SalaryRangeHeader({
+  currentYear,
+  register,
+  onSubmit,
+  salaryDetails,
+  data,
+}: IProps) {
   const borderStyleDotted = `border-b border-dotted ${SALARY_RANGE_BORDER_COLOR}`;
 
   return (
@@ -18,16 +28,20 @@ export default function SalaryRangeHeader({ register, onSubmit, salaryDetails }:
       <table className={`border-t border-b ${SALARY_RANGE_BORDER_COLOR} border-l-0`}>
         <tbody>
           <tr>
-            <SalaryRangeTableTd bgColor="white" text="2024년 최저시급" styles="text-start px-2" />
-            <SalaryRangeTableTd bgColor="white" text={9680} />
+            <SalaryRangeTableTd
+              bgColor="white"
+              text={`${currentYear}년 최저시급`}
+              styles="text-start px-2"
+            />
+            <SalaryRangeTableTd bgColor="white" text={data.minimum_hourly_rate} />
           </tr>
           <tr>
             <SalaryRangeTableTd
               bgColor="white"
-              text="2024년 1개월 최저임금(기본급만)"
+              text={`${currentYear}년 1개월 최저임금(기본급만)`}
               styles="px-2 text-start"
             />
-            <SalaryRangeTableTd bgColor="white" text={2060740} />
+            <SalaryRangeTableTd bgColor="white" text={data.minimum_monthly_rate} />
           </tr>
         </tbody>
       </table>
@@ -43,10 +57,10 @@ export default function SalaryRangeHeader({ register, onSubmit, salaryDetails }:
           </tr>
           <tr>
             <SalaryRangeTableTd bgColor="white" text="근로자" />
-            <SalaryRangeTableTd bgColor="white" text="4.5%" />
-            <SalaryRangeTableTd bgColor="white" text="0.9%" />
-            <SalaryRangeTableTd bgColor="white" text="3.545%" />
-            <SalaryRangeTableTd bgColor="white" text="12.95%" />
+            <SalaryRangeTableTd bgColor="white" text={`${data.national_pension}%`} />
+            <SalaryRangeTableTd bgColor="white" text={`${data.employment_insurance}%`} />
+            <SalaryRangeTableTd bgColor="white" text={`${data.health_insurance}%`} />
+            <SalaryRangeTableTd bgColor="white" text={`${data.long_term_care_insurance}%`} />
           </tr>
         </tbody>
       </table>
@@ -63,21 +77,21 @@ export default function SalaryRangeHeader({ register, onSubmit, salaryDetails }:
           </tr>
           <tr>
             <SalaryRangeTableTd bgColor="white" text="금액" />
-            <SalaryRangeTableTd bgColor="white" text={370000} />
-            <SalaryRangeTableTd bgColor="white" text={5900000} />
-            <SalaryRangeTableTd bgColor="white" text={265500} />
-            <SalaryRangeTableTd bgColor="white" text={9890} />
-            <SalaryRangeTableTd bgColor="white" text={4240710} />
+            <SalaryRangeTableTd bgColor="white" text={data.minimum_pension_income} />
+            <SalaryRangeTableTd bgColor="white" text={data.maximum_pension_income} />
+            <SalaryRangeTableTd bgColor="white" text={data.maximum_national_pension} />
+            <SalaryRangeTableTd bgColor="white" text={data.minimum_health_insurance} />
+            <SalaryRangeTableTd bgColor="white" text={data.maximum_health_insurance} />
           </tr>
         </tbody>
       </table>
 
       <form className="relative flex-1" onSubmit={onSubmit}>
         <div
-          className={`caption absolute top-[-50px] left-[112px] inline-block bg-[#ffffff] rounded-md border ${SALARY_RANGE_BORDER_COLOR} px-4 py-2 shadow`}
+          className={`caption absolute top-[-50px] left-[112px] inline-block bg-white rounded-md border ${SALARY_RANGE_BORDER_COLOR} px-4 py-2 shadow`}
         >
           <p>Enter Key 입력시 값이 계산됩니다.</p>
-          <div className="absolute right-[10px] bottom-[5px] -mb-4 ml-4 w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-t-[10px] border-t-[#dddddd]"></div>
+          <div className="absolute right-[10px] bottom-[5px] -mb-4 ml-4 w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-t-[10px] border-t-zinc-300"></div>
         </div>
 
         <table className={`border-4 ${SALARY_RANGE_BORDER_COLOR} `}>
@@ -119,8 +133,8 @@ export default function SalaryRangeHeader({ register, onSubmit, salaryDetails }:
               />
               <td className="h-full bg-[#FFF7EC]">
                 <input
-                  {...register('inputSalary')}
-                  type="number"
+                  {...register('salaryInput')}
+                  type="text"
                   placeholder="입력해주세요"
                   className="text-right bg-transparent focus:outline-none"
                 />

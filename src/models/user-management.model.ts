@@ -76,7 +76,6 @@ export type TCurrentUserInfo = {
   role: string;
   updated_at: string;
 };
-
 export type TGetUserDetailResponse = {
   id: number;
 };

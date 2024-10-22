@@ -6,26 +6,20 @@ import { PiCaretDown, PiCaretUp, PiDeviceRotate } from 'react-icons/pi';
 import WageAutoSettingRow from '@/components/BasicSetting/Wage/WageAutoSettingRow';
 import WageContainer from '@/components/BasicSetting/Wage/WageContainer';
 import WageFieldset from '@/components/BasicSetting/Wage/WageFieldset';
-import WageSelect from '@/components/BasicSetting/Wage/WageSelect';
+import WageSelect, { IWageSelectType } from '@/components/BasicSetting/Wage/WageSelect';
 import { Txt } from '@/components/Common/Txt';
-import { IWageSettingEditMode } from '@/hooks/useWageSetting';
 import { IWageSetting } from '@/models/wageSetting.model';
-import { validateOnBlurForInputNumber } from '@/utils/validateOnBlurForInputNumber';
-
-type TOptionType = {
-  id: number;
-  name: string;
-}[];
+import { TWageEditMode } from '@/pages/basicSetting/WagePage';
 
 interface IProps {
-  positionOptions: TOptionType;
-  yearsArrayOptions: TOptionType;
-  workingDaysOptions: TOptionType;
+  positionOptions: IWageSelectType[];
+  yearsArrayOptions: IWageSelectType[];
+  workingDaysOptions: IWageSelectType[];
   control: Control<IWageSetting>;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   reset: UseFormReset<IWageSetting>;
   currentYear: number;
-  editMode: IWageSettingEditMode;
+  editMode: TWageEditMode;
   handleCloseEditMode: () => void;
 }
 
@@ -39,9 +33,6 @@ export default function WageCalculate({
   editMode,
   handleCloseEditMode,
 }: IProps) {
-  // 휴일수당 포함여부, 직무수당이 체크되었을 때 어떤 기능이 나오는지 알 수 없어서 사용하지는 않았음
-  // const [includeHolidayAllowanceChecked, setIncludeHolidayAllowanceChecked] =  useState<boolean>(false); // 휴일수당 포함여부
-  // const [includeDutyAllowanceChecked, setIncludeDutyAllowanceChecked] = useState<boolean>(false); // 직무수당 체크여부
   const [isOpen, setIsOpen] = useState<boolean>(true);
   const [isHolidayWorkingHourChecked, setIsHolidayWorkingHourChecked] = useState<boolean>(false); // 주휴일(시간) 체크여부
   const [isCustomOvertimeAllowanceDaysChecked, setIsCustomOvertimeAllowanceDaysChecked] =
@@ -52,6 +43,7 @@ export default function WageCalculate({
     <WageContainer title="연봉 계산기" width="w-[40%]" position="right">
       <form onSubmit={onSubmit}>
         <div className="flex ">
+          {/* left */}
           <div className="flex flex-col flex-1 p-6 gap-2">
             <Controller
               control={control}
@@ -64,17 +56,33 @@ export default function WageCalculate({
             />
 
             <WageFieldset label="직책명">
-              <WageSelect
-                placeholder="직책 선택"
-                name="positionId"
-                content={positionOptions}
+              <Controller
                 control={control}
+                name="positionId"
+                render={({ field: { value, onChange } }) => (
+                  <WageSelect
+                    placeholder="직책 선택"
+                    content={positionOptions}
+                    defaultValue={value}
+                    onChange={onChange}
+                  />
+                )}
               />
             </WageFieldset>
 
             <WageFieldset label="입사년도">
               <div>
-                <WageSelect name="hireYear" content={yearsArrayOptions} control={control} />
+                <Controller
+                  name="hireYear"
+                  control={control}
+                  render={({ field: { value, onChange } }) => (
+                    <WageSelect
+                      defaultValue={value}
+                      content={yearsArrayOptions}
+                      onChange={onChange}
+                    />
+                  )}
+                />
                 <div className="flex gap-2 items-center mt-1">
                   <Controller
                     control={control}
@@ -97,7 +105,18 @@ export default function WageCalculate({
             </WageFieldset>
 
             <WageFieldset label="근무일 수">
-              <WageSelect name="workingDays" content={workingDaysOptions} control={control} />
+              <Controller
+                name="workingDays"
+                control={control}
+                render={({ field: { value, onChange } }) => (
+                  <WageSelect
+                    name="workingDays"
+                    defaultValue={value}
+                    content={workingDaysOptions}
+                    onChange={onChange}
+                  />
+                )}
+              />
             </WageFieldset>
 
             <WageFieldset
@@ -108,10 +127,9 @@ export default function WageCalculate({
                     <Controller
                       name="includesHolidayAllowance"
                       control={control}
-                      render={({ field: { onChange, onBlur, value, ref } }) => (
+                      render={({ field: { onChange, value, ref } }) => (
                         <Checkbox
                           size="1"
-                          onBlur={onBlur}
                           ref={ref}
                           checked={value}
                           onClick={() => onChange(!value)}
@@ -125,10 +143,9 @@ export default function WageCalculate({
                     <Controller
                       control={control}
                       name="checksDutyAllowance"
-                      render={({ field: { onChange, onBlur, value, ref } }) => (
+                      render={({ field: { onChange, value, ref } }) => (
                         <Checkbox
                           size="1"
-                          onBlur={onBlur}
                           ref={ref}
                           checked={value}
                           onClick={() => {
@@ -146,16 +163,11 @@ export default function WageCalculate({
               <Controller
                 name="monthlySalary"
                 control={control}
-                render={({ field: { onChange, onBlur, value } }) => (
+                render={({ field: { onChange, value } }) => (
                   <TextField.Root
                     type="text"
                     onChange={onChange}
                     value={value}
-                    onBlur={() => {
-                      const finalValue = validateOnBlurForInputNumber(value, '원');
-                      onChange(finalValue);
-                      onBlur();
-                    }}
                     placeholder="월 급여"
                   />
                 )}
@@ -203,7 +215,7 @@ export default function WageCalculate({
                     <Controller
                       name="weeklyRestHours"
                       control={control}
-                      render={({ field: { value, onChange, onBlur } }) => (
+                      render={({ field: { value, onChange } }) => (
                         <TextField.Root
                           size="1"
                           placeholder="0"
@@ -211,11 +223,6 @@ export default function WageCalculate({
                           value={value}
                           type="text"
                           onChange={onChange}
-                          onBlur={() => {
-                            const finalValue = validateOnBlurForInputNumber(value, '시');
-                            onChange(Number(finalValue));
-                            onBlur();
-                          }}
                           readOnly={!isHolidayWorkingHourChecked}
                           disabled={!isHolidayWorkingHourChecked}
                           style={{
@@ -253,6 +260,7 @@ export default function WageCalculate({
             </WageFieldset>
           </div>
 
+          {/* right */}
           <div className="flex-1 p-3 pl-0">
             <Txt
               variant="caption"
@@ -304,7 +312,6 @@ export default function WageCalculate({
                   readonly={!isCustomOvertimeAllowanceDaysChecked}
                   name="annualAllowanceDays"
                   caption="일"
-                  control={control}
                   maxCount={31}
                 />
                 <WageAutoSettingRow
@@ -324,7 +331,6 @@ export default function WageCalculate({
                   readonly={!isCustomOvertimeHoursChecked}
                   name="annualLeaveHours"
                   caption="시간"
-                  control={control}
                   maxCount={23}
                 />
                 <WageAutoSettingRow
@@ -335,7 +341,6 @@ export default function WageCalculate({
                   }
                   value="0"
                   caption="원"
-                  control={control}
                   name="annualAllowance"
                 />
               </div>

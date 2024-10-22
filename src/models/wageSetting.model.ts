@@ -1,6 +1,6 @@
 export interface IWageSetting {
   templateName: string; // 템플릿명
-  templateId?: string; // 템플릿 ID
+  templateId?: number; // 템플릿 ID
   positionName?: string; // 직책명
   positionId?: number; // 직책 ID
   hireYear: number; // 입사년도
