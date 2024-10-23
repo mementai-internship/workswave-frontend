@@ -6,6 +6,7 @@ import WorkManagementLayout from '@/components/WorkManagement/WorkManagementLayo
 import RootLayout from '@/layout/root';
 import BoardPage from '@/pages/basicSetting/BoardPage';
 import CalendarPage from '@/pages/basicSetting/CalendarPage';
+import CertificatePage from '@/pages/basicSetting/CertificatePage';
 import ContractPage from '@/pages/basicSetting/ContractPage';
 import DayOffPage from '@/pages/basicSetting/DayOffPage';
 import DocumentPage from '@/pages/basicSetting/DocumentPage';
@@ -115,6 +116,10 @@ const router = createBrowserRouter([
           {
             path: 'document',
             element: <DocumentPage />,
+          },
+          {
+            path: 'certificate',
+            element: <CertificatePage />,
           },
         ],
       },
