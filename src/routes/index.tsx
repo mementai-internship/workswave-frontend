@@ -6,8 +6,10 @@ import WorkManagementLayout from '@/components/WorkManagement/WorkManagementLayo
 import RootLayout from '@/layout/root';
 import BoardPage from '@/pages/basicSetting/BoardPage';
 import CalendarPage from '@/pages/basicSetting/CalendarPage';
+import CertificatePage from '@/pages/basicSetting/CertificatePage';
 import ContractPage from '@/pages/basicSetting/ContractPage';
 import DayOffPage from '@/pages/basicSetting/DayOffPage';
+import DocumentPage from '@/pages/basicSetting/DocumentPage';
 import HourlyRangePage from '@/pages/basicSetting/HourlyRangePage';
 import HrManagementSettingPage from '@/pages/basicSetting/HrManagementPage';
 import SalaryRangePage from '@/pages/basicSetting/SalaryRangePage';
@@ -59,7 +61,131 @@ const router = createBrowserRouter([
         element: <NotFound />,
       },
       {
-        path: 'login',
+        path: '/salary-settlement',
+        element: <SalarySettlementPage />,
+      },
+      {
+        path: '/holiday-calander',
+        element: <HolidayCalendarPage />,
+      },
+      {
+        path: '/basic-setting',
+        children: [
+          {
+            index: true,
+            element: <Navigate to="/basic-setting/working" replace />,
+          },
+          {
+            path: 'working',
+
+            element: <WorkingPage />,
+          },
+          {
+            path: 'wage',
+            index: true,
+            element: <WagePage />,
+          },
+          {
+            path: 'hourly-range',
+            element: <HourlyRangePage />,
+          },
+          {
+            path: 'day-off',
+            element: <DayOffPage />,
+          },
+          {
+            path: 'calendar',
+            element: <CalendarPage />,
+          },
+          {
+            path: 'board',
+            element: <BoardPage />,
+          },
+          {
+            path: 'salary-range',
+            element: <SalaryRangePage />,
+          },
+          {
+            path: 'hr',
+            element: <HrManagementSettingPage />,
+          },
+          {
+            path: 'contract',
+            element: <ContractPage />,
+          },
+          {
+            path: 'document',
+            element: <DocumentPage />,
+          },
+          {
+            path: 'certificate',
+            element: <CertificatePage />,
+          },
+        ],
+      },
+      {
+        path: '/office-setting',
+        children: [
+          {
+            index: true,
+            element: <Navigate to="/office-setting/office" replace />,
+          },
+          {
+            path: 'office',
+            element: <ManagementOfficePage />,
+          },
+          {
+            path: 'delete-office',
+            element: <ManagementDeleteOfficePage />,
+          },
+        ],
+      },
+      {
+        path: '/work-management',
+        element: <WorkManagementLayout />,
+        children: [
+          {
+            index: true,
+            element: <Navigate to="/work-management/working" replace />,
+          },
+          {
+            path: 'working',
+            element: <WorkManagementPage />,
+          },
+          {
+            path: 'partTime',
+            element: <PartManagementPage />,
+          },
+          {
+            path: 'commute',
+            element: <CommuteManagementPage />,
+          },
+        ],
+      },
+      {
+        path: '/document-management',
+        element: <DocumentManagementLayout />,
+        children: [
+          {
+            index: true,
+            element: <Navigate to="/document-management/certificate-management" replace />,
+          },
+          {
+            path: 'certificate-management',
+            element: <CertificateManagement />,
+          },
+          {
+            path: 'contract-management',
+            element: <ContractManagement />,
+          },
+          {
+            path: 'timeoff-management',
+            element: <TimeoffManagement />,
+          },
+        ],
+      },
+      {
+        path: '/login',
         element: <Login />,
       },
       {

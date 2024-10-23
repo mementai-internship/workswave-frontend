@@ -17,7 +17,6 @@ import Underline from '@tiptap/extension-underline';
 import { EditorContent, useEditor } from '@tiptap/react';
 import { useEffect } from 'react';
 
-
 import ToolBar from '@/components/BasicSetting/Contract/Editor/ToolBar';
 import { FontSize } from '@/components/BasicSetting/Contract/Editor/lib/font-size';
 

@@ -1,5 +1,3 @@
-import { DocumentMapData } from '@/components/BasicSetting/Contract/DocumentHeader';
-
 interface IContractText_mock_type {
   memberName: string;
   branchName: string;
@@ -42,15 +40,11 @@ const ContractTextData: IContractText_mock_type = {
   contractEndDay: '계약종료일',
 };
 
-interface IContractTextListProps {
-  documentType: 'contract' | 'document' | 'certificate';
-}
-
-export default function ContractTextList({ documentType }: IContractTextListProps) {
+export default function ContractTextList({ documentName }) {
   return (
     <div className="flex flex-col w-1/5 gap-4 p-4 truncate bg-white border border-b-0 border-l-0 ">
       <div className="flex flex-col text-xs">
-        <div>※ {DocumentMapData[documentType]} 작성 시,</div>
+        <div>※ {documentName} 작성 시,</div>
         <div className="truncate"> 복사하여 사용해주세요.</div>
       </div>
       <div className="flex flex-col gap-2">

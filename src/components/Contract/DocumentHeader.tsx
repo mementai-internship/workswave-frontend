@@ -5,10 +5,10 @@ import { PiPlusBold } from 'react-icons/pi';
 
 import SelectBox from '@/components/Common/Select';
 
-export const DocumentMapData = {
+const DocumentMapData = {
   contract: '계약서',
   document: '문서',
-  certificate: '증명서',
+  certificat: '증명서',
 };
 
 interface IDocumentHeaderProps {

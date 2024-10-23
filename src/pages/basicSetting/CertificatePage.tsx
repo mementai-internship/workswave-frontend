@@ -6,16 +6,16 @@ import EditorComponent from '@/components/BasicSetting/Contract/Editor/Editor';
 import ModifyDocument from '@/components/BasicSetting/Contract/ModifyDocument';
 import { TemplateSetting } from '@/components/BasicSetting/Contract/TemplateSetting';
 
-export default function ContractPage() {
+export default function CertificatePage() {
   const [editor, setEditor] = useState(null);
 
   return (
     <div className="flex w-full gap-2">
       <div className="flex flex-col w-full border bg-light-gray">
-        <DocumentHeader title="contract" />
+        <DocumentHeader title="certificate" />
         <div className="flex h-full gap-4">
-          <ContractTextList documentType="contract" />
-          <div className="flex items-center justify-center w-2/3 bg-white border">
+          <ContractTextList documentType="certificate" />
+          <div className="flex items-center justify-center w-2/3 mb-2 bg-white border">
             <EditorComponent setEditor={setEditor} />
           </div>
           <div className="flex items-start justify-center w-1/3 mr-4 bg-white border">
@@ -23,7 +23,7 @@ export default function ContractPage() {
           </div>
         </div>
       </div>
-      <TemplateSetting title="contract" />
+      <TemplateSetting title="certificate" />
     </div>
   );
 }
