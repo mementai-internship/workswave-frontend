@@ -4,6 +4,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { PiGear } from 'react-icons/pi';
 
 import { Txt } from '@/components/Common/Txt';
+import { useGetMinimumWagePolices } from '@/hooks/apis/useMinimumWagePolices';
 
 // 디비 스키마에 맞춰서 변경되어야합니다.
 interface IWageMinimumSettingForm {
@@ -19,6 +20,9 @@ export default function WageMinimumSettingDialog() {
     last_save: '2024-06-28T00:00:00',
     charger: '김동원',
   };
+
+  const { data } = useGetMinimumWagePolices();
+  console.log(data); // 서버 오류 조회 api
 
   // 기본값 설정
   const { control, handleSubmit } = useForm<IWageMinimumSettingForm>({

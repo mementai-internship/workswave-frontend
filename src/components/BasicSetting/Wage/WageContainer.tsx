@@ -20,7 +20,7 @@ export default function WageContainer({
   children,
 }: IProps) {
   return (
-    <div className={`border border-zinc-300 ${width} ${position === 'left' ? 'border-r-0' : ''} `}>
+    <div className={`border border-zinc-300 ${width} ${position === 'left' ? 'border-r-0' : ''}`}>
       <div className="flex justify-between items-center gap-2 px-6 py-2 border-b border-zinc-300">
         <div className="flex gap-4 items-center">
           <Title content={title} />

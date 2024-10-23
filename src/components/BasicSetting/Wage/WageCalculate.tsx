@@ -8,43 +8,67 @@ import WageContainer from '@/components/BasicSetting/Wage/WageContainer';
 import WageFieldset from '@/components/BasicSetting/Wage/WageFieldset';
 import WageSelect, { IWageSelectType } from '@/components/BasicSetting/Wage/WageSelect';
 import { Txt } from '@/components/Common/Txt';
-import { IWageSetting } from '@/models/wageSetting.model';
+import useGetSalaryBracket from '@/hooks/apis/useSalaryBracket';
+import { ISalaryTemplatesItem } from '@/models/salary-templates.model';
 import { TWageEditMode } from '@/pages/basicSetting/WagePage';
 
 interface IProps {
   positionOptions: IWageSelectType[];
-  yearsArrayOptions: IWageSelectType[];
-  workingDaysOptions: IWageSelectType[];
-  control: Control<IWageSetting>;
+  control: Control<ISalaryTemplatesItem>;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  reset: UseFormReset<IWageSetting>;
+  reset: UseFormReset<ISalaryTemplatesItem>;
   currentYear: number;
   editMode: TWageEditMode;
   handleCloseEditMode: () => void;
 }
 
 export default function WageCalculate({
-  yearsArrayOptions,
-  workingDaysOptions,
   positionOptions,
   control,
   reset,
   onSubmit,
   editMode,
   handleCloseEditMode,
+  currentYear,
 }: IProps) {
+  const { data: salaryBracket } = useGetSalaryBracket(currentYear.toString());
   const [isOpen, setIsOpen] = useState<boolean>(true);
-  const [isHolidayWorkingHourChecked, setIsHolidayWorkingHourChecked] = useState<boolean>(false); // 주휴일(시간) 체크여부
-  const [isCustomOvertimeAllowanceDaysChecked, setIsCustomOvertimeAllowanceDaysChecked] =
-    useState<boolean>(false); // 연차수당 일수 체크여부
-  const [isCustomOvertimeHoursChecked, setIsCustomOvertimeHoursChecked] = useState<boolean>(false); // 연차시간 체크여부
+
+  // 연차수당 일수 체크
+  const [isAnnualLeaveAllowanceDayChecked, setIsAnnualLeaveAllowanceDayChecked] =
+    useState<boolean>(false);
+  // 연차시간 체크
+  const [isAnnualLeaveAllowanceHourChecked, setIsAnnualLeaveAllowanceHourChecked] =
+    useState<boolean>(false);
+  // 주휴일
+  const [isWeeklyRestHoursChecked, setIsWeeklyRestHoursChecked] = useState<boolean>(false);
+
+  // 년도 옵션 (현재 년도 기준 앞뒤 10년)
+  // const yearsArrayOptions = Array.from({ length: 21 }, (_, index) => index - 10).reduce(
+  //   (acc, yearOffset) => {
+  //     const year = currentYear + yearOffset;
+  //     acc.push({ id: year, name: year + '년', action: () => {} });
+  //     return acc;
+  //   },
+  //   []
+  // );
+
+  // 월급여를 입력하면 시급, 기본급, 연봉 계산...하기
+  // 월급 * 12
+  //
+
+  // 근무일
+  const workingDaysOptions = Array.from({ length: 7 }).map((_, i) => ({
+    id: i + 1,
+    name: `${i + 1}일`,
+  }));
 
   return (
     <WageContainer
       title="연봉 계산기"
-      width="w-[40%]"
+      width="w-[38%]"
       position="right"
-      rightChild={<p>최저임금: 9,860원</p>}
+      rightChild={<p>최저임금: {salaryBracket?.minimum_hourly_rate.toLocaleString()}원</p>}
     >
       <form onSubmit={onSubmit}>
         <div className="flex ">
@@ -52,7 +76,7 @@ export default function WageCalculate({
           <div className="flex flex-col flex-1 p-6 gap-2">
             <Controller
               control={control}
-              name="templateName"
+              name="name"
               render={({ field: { onChange, value } }) => (
                 <WageFieldset label="템플릿명">
                   <TextField.Root placeholder="템플릿명" value={value} onChange={onChange} />
@@ -63,7 +87,7 @@ export default function WageCalculate({
             <WageFieldset label="직책명">
               <Controller
                 control={control}
-                name="positionId"
+                name="part_id"
                 render={({ field: { value, onChange } }) => (
                   <WageSelect
                     placeholder="직책 선택"
@@ -77,7 +101,7 @@ export default function WageCalculate({
 
             <WageFieldset label="입사년도">
               <div>
-                <Controller
+                {/* <Controller
                   name="hireYear"
                   control={control}
                   render={({ field: { value, onChange } }) => (
@@ -87,11 +111,11 @@ export default function WageCalculate({
                       onChange={onChange}
                     />
                   )}
-                />
+                /> */}
                 <div className="flex gap-2 items-center mt-1">
                   <Controller
                     control={control}
-                    name="isJanuaryHire"
+                    name="is_january_entry"
                     render={({ field: { onChange, onBlur, value, ref } }) => (
                       <Checkbox
                         size="1"
@@ -111,11 +135,10 @@ export default function WageCalculate({
 
             <WageFieldset label="근무일 수">
               <Controller
-                name="workingDays"
+                name="weekly_work_days"
                 control={control}
                 render={({ field: { value, onChange } }) => (
                   <WageSelect
-                    name="workingDays"
                     defaultValue={value}
                     content={workingDaysOptions}
                     onChange={onChange}
@@ -130,7 +153,7 @@ export default function WageCalculate({
                 <>
                   <div className="flex items-center gap-1">
                     <Controller
-                      name="includesHolidayAllowance"
+                      name="included_holiday_allowance"
                       control={control}
                       render={({ field: { onChange, value, ref } }) => (
                         <Checkbox
@@ -147,7 +170,7 @@ export default function WageCalculate({
                   <div className="flex items-center gap-1">
                     <Controller
                       control={control}
-                      name="checksDutyAllowance"
+                      name="included_job_allowance"
                       render={({ field: { onChange, value, ref } }) => (
                         <Checkbox
                           size="1"
@@ -166,7 +189,7 @@ export default function WageCalculate({
               }
             >
               <Controller
-                name="monthlySalary"
+                name="month_salary"
                 control={control}
                 render={({ field: { onChange, value } }) => (
                   <TextField.Root
@@ -181,7 +204,7 @@ export default function WageCalculate({
 
             <WageFieldset label="시급">
               <Controller
-                name="hourlyWage"
+                name="hour_wage"
                 control={control}
                 render={({ field: { value } }) => (
                   <TextField.Root placeholder="0" value={value} className="bg-gray" disabled>
@@ -213,12 +236,12 @@ export default function WageCalculate({
                       <Txt variant="caption">주휴일 (시간)</Txt>
                       <Checkbox
                         size="1"
-                        onClick={() => setIsHolidayWorkingHourChecked(!isHolidayWorkingHourChecked)}
+                        onClick={() => setIsWeeklyRestHoursChecked(!isWeeklyRestHoursChecked)}
                       />
                       <Txt variant="caption">직접입력</Txt>
                     </div>
                     <Controller
-                      name="weeklyRestHours"
+                      name="weekly_rest_hours"
                       control={control}
                       render={({ field: { value, onChange } }) => (
                         <TextField.Root
@@ -228,8 +251,7 @@ export default function WageCalculate({
                           value={value}
                           type="text"
                           onChange={onChange}
-                          readOnly={!isHolidayWorkingHourChecked}
-                          disabled={!isHolidayWorkingHourChecked}
+                          disabled={!isWeeklyRestHoursChecked}
                           style={{
                             width: '32px',
                             textAlign: 'center',
@@ -242,7 +264,7 @@ export default function WageCalculate({
               }
             >
               <Controller
-                name="baseSalary"
+                name="basic_salary"
                 control={control}
                 render={({ field: { value } }) => (
                   <TextField.Root placeholder="0" value={value} className="bg-gray" disabled>
@@ -254,7 +276,7 @@ export default function WageCalculate({
 
             <WageFieldset label="연봉">
               <Controller
-                name="annualSalary"
+                name="annual_salary"
                 control={control}
                 render={({ field: { value } }) => (
                   <TextField.Root placeholder="0" value={value} className="bg-gray" disabled>
@@ -279,75 +301,118 @@ export default function WageCalculate({
             {isOpen && (
               <div className="bg-gray-10 p-3 h-[95%]">
                 <div className="mb-4">
-                  <WageAutoSettingRow
-                    leftChild={
-                      <Txt color="gray-50" variant="caption">
-                        포괄산정 연장근로시간
-                      </Txt>
-                    }
-                    caption="시간"
-                    value="0"
-                  />
-                  <WageAutoSettingRow
-                    leftChild={
-                      <Txt color="gray-50" variant="caption">
-                        포괄산정 연장근로수당
-                      </Txt>
-                    }
-                    value="0"
-                    caption="원"
-                  />
-                </div>
-                <WageAutoSettingRow
-                  leftChild={
-                    <div className="flex gap-1 items-center">
-                      <Txt color="gray-50" variant="caption">
-                        연차수당 일수
-                      </Txt>
-                      <Checkbox
-                        onClick={() =>
-                          setIsCustomOvertimeAllowanceDaysChecked(
-                            !isCustomOvertimeAllowanceDaysChecked
-                          )
-                        }
-                      />
-                      <Txt variant="caption">직접입력</Txt>
-                    </div>
-                  }
-                  readonly={!isCustomOvertimeAllowanceDaysChecked}
-                  name="annualAllowanceDays"
-                  caption="일"
-                  maxCount={31}
-                />
-                <WageAutoSettingRow
-                  leftChild={
-                    <div className="flex gap-1 items-center">
-                      <Txt color="gray-50" variant="caption">
-                        연차시간
-                      </Txt>
-                      <Checkbox
-                        onClick={() =>
-                          setIsCustomOvertimeHoursChecked(!isCustomOvertimeHoursChecked)
-                        }
-                      />
-                      <Txt variant="caption">직접입력</Txt>
-                    </div>
-                  }
-                  readonly={!isCustomOvertimeHoursChecked}
-                  name="annualLeaveHours"
-                  caption="시간"
-                  maxCount={23}
-                />
-                <WageAutoSettingRow
-                  leftChild={
+                  <WageAutoSettingRow>
                     <Txt color="gray-50" variant="caption">
-                      연차수당
+                      포괄산정 연장근로시간
                     </Txt>
-                  }
-                  value="0"
-                  caption="원"
-                  name="annualAllowance"
-                />
+                    <div className="flex items-center">
+                      <div className="w-8">
+                        <Controller
+                          name="annual_leave_allowance_day"
+                          control={control}
+                          render={({ field: { value } }) => (
+                            <TextField.Root value={value} readOnly disabled />
+                          )}
+                        />
+                      </div>
+                      <Txt variant="caption">시간</Txt>
+                    </div>
+                  </WageAutoSettingRow>
+
+                  <WageAutoSettingRow>
+                    <Txt color="gray-50" variant="caption">
+                      포괄산정 연장근로수당
+                    </Txt>
+                    <div className="flex items-center">
+                      <div className="w-20">
+                        <Controller
+                          name="annual_leave_allowance_day"
+                          control={control}
+                          render={({ field: { value } }) => (
+                            <TextField.Root value={value} readOnly disabled />
+                          )}
+                        />
+                      </div>
+                      <Txt variant="caption">원</Txt>
+                    </div>
+                  </WageAutoSettingRow>
+                </div>
+
+                <WageAutoSettingRow>
+                  <div className="flex gap-1 items-center">
+                    <Txt color="gray-50" variant="caption">
+                      연차수당 일수
+                    </Txt>
+
+                    <Checkbox
+                      onClick={() =>
+                        setIsAnnualLeaveAllowanceDayChecked(!isAnnualLeaveAllowanceDayChecked)
+                      }
+                    />
+                    <Txt variant="caption">직접입력</Txt>
+                  </div>
+                  <div className="w-12">
+                    <Controller
+                      name="annual_leave_allowance_day"
+                      control={control}
+                      render={({ field: { value, onChange } }) => (
+                        <TextField.Root
+                          value={value}
+                          onChange={onChange}
+                          disabled={!isAnnualLeaveAllowanceDayChecked}
+                        />
+                      )}
+                    />
+                  </div>
+                </WageAutoSettingRow>
+
+                <WageAutoSettingRow>
+                  <div className="flex gap-1 items-center">
+                    <Txt color="gray-50" variant="caption">
+                      연차시간
+                    </Txt>
+                    <Checkbox
+                      onClick={() =>
+                        setIsAnnualLeaveAllowanceHourChecked(!isAnnualLeaveAllowanceHourChecked)
+                      }
+                    />
+                    <Txt variant="caption">직접입력</Txt>
+                  </div>
+                  <div className="w-8">
+                    <Controller
+                      name="annual_leave_allowance_hour"
+                      control={control}
+                      render={({ field: { value, onChange } }) => (
+                        <TextField.Root
+                          value={value}
+                          onChange={onChange}
+                          disabled={!isAnnualLeaveAllowanceHourChecked}
+                        />
+                      )}
+                    />
+                  </div>
+                </WageAutoSettingRow>
+
+                <WageAutoSettingRow>
+                  <Txt color="gray-50" variant="caption">
+                    연차수당
+                  </Txt>
+                  <div className="w-24">
+                    <Controller
+                      name="annual_leave_allowance"
+                      control={control}
+                      render={() => (
+                        <Controller
+                          name="annual_leave_allowance_hour"
+                          control={control}
+                          render={({ field: { value } }) => (
+                            <TextField.Root readOnly disabled value={value} />
+                          )}
+                        />
+                      )}
+                    />
+                  </div>
+                </WageAutoSettingRow>
               </div>
             )}
             <div
