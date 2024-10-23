@@ -27,7 +27,7 @@ interface ITemplateSettingProps {
 export function TemplateSetting({ title }: ITemplateSettingProps) {
   const [activeIndex, setActiveIndex] = useState(null);
   const handleClick = (index) => {
-    setActiveIndex(index === activeIndex ? null : index); // 같은 요소를 클릭하면 비활성화
+    setActiveIndex(index === activeIndex ? null : index);
   };
   return (
     <div className="flex flex-col w-1/5 p-4 bg-white border">
