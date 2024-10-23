@@ -8,6 +8,7 @@ const authAxiosInstance = axios.create({
   withCredentials: true,
 });
 
+// TODO : alert은 Toast 등으로 변경 가능
 authAxiosInstance.interceptors.response.use(
   (response) => {
     return response;
