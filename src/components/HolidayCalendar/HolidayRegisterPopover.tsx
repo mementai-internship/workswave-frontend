@@ -88,11 +88,13 @@ export default function HolidayRegisterPopover({
               formatCaption: (date: Date) => dayjs(date).format('YYYY년 MM월'),
             }}
             classNames={{
-              day: 'p-1 text-lg',
+              root: `${defaultClassNames.root} w-full h-full gap-2`,
+              chevron: `${defaultClassNames.chevron} w-7 h-7 fill-purple-30`,
+              month_caption: 'flex justify-center text-xl font-bold h-10',
+              day_button: 'w-12 h-12 text-lg',
               today: `font-bold text-xl text-amber-500`,
               selected: `bg-purple-10 rounded-full`,
-              root: `${defaultClassNames.root}`,
-              chevron: `${defaultClassNames.chevron} fill-purple-30`,
+              disabled: 'bg-gray-10 text-gray-50 rounded-full',
             }}
             disabled={holidays.data.map((holiday) => new Date(holiday.closed_day_date))}
           />

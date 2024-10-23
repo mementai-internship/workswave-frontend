@@ -10,7 +10,7 @@ export const theme = {
       'light-gray': '#f5f5f5',
     },
     colors: {
-      red: '#D6173A',
+      // red: '#D6173A',
       gray: {
         10: '#F3F4F6',
         50: '#6B7280',

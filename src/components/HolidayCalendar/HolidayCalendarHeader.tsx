@@ -40,9 +40,9 @@ export default function HolidayCalendarHeader({
   });
 
   // 현재 - MSO 기준이라 모든 브랜치 목록 받아옴 -> 분기처리 필요
-  const { data: branches, isFetching } = useGetBranches('0');
+  const { data: branches, isFetching: isBranchesLoading } = useGetBranches('0');
 
-  const branchSelection = isFetching
+  const branchSelection = isBranchesLoading
     ? []
     : branches?.list.map((branch) => ({
         id: branch.id,
