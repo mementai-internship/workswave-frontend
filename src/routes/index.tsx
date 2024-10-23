@@ -25,6 +25,7 @@ import Loading from '@/routes/loading';
 const NotFound = lazy(() => import('@/routes/Notfound'));
 const PrivateRoute = lazy(() => import('@/routes/PrivateRoute'));
 
+const ContractPage = lazy(() => import('@/pages/basicSetting/ContractPage'));
 const BoardPage = lazy(() => import('@/pages/basicSetting/BoardPage'));
 const CalendarPage = lazy(() => import('@/pages/basicSetting/CalendarPage'));
 const DayOffPage = lazy(() => import('@/pages/basicSetting/DayOffPage'));
@@ -157,6 +158,14 @@ const router = createBrowserRouter([
                 element: (
                   <Suspense fallback={<Loading />}>
                     <HrManagementSettingPage />
+                  </Suspense>
+                ),
+              },
+              {
+                path: 'contract',
+                element: (
+                  <Suspense fallback={<Loading />}>
+                    <ContractPage />
                   </Suspense>
                 ),
               },
