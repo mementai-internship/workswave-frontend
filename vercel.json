@@ -1,12 +1,3 @@
 {
-  "rewrites": [
-    {
-      "source": "/:path*",
-      "destination": "http://52.78.246.46/:path*"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/"
-    }
-  ]
+  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
 }
