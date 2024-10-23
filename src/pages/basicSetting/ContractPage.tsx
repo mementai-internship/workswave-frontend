@@ -1,6 +1,6 @@
-import ContractTextList from '@/components/Common/ContractTextList';
-import { DocumentHeader } from '@/components/Common/DocumentHeader';
-import { TemplateSetting } from '@/components/Common/TemplateSetting';
+import ContractTextList from '@/components/Contract/ContractTextList';
+import { DocumentHeader } from '@/components/Contract/DocumentHeader';
+import { TemplateSetting } from '@/components/Contract/TemplateSetting';
 
 export default function ContractPage() {
   return (
