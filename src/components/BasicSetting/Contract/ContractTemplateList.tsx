@@ -32,8 +32,8 @@ export default function ContractTemplate() {
           ${activeIndex === index ? 'border-blue-500' : 'border-gray-300'}`}
       onClick={() => handleClick(index)}
     >
-      <HiOutlineDocumentText size="20" />
-      <div className="truncate">{data}</div>
+      <HiOutlineDocumentText size="15" />
+      <div className="text-xs truncate">{data}</div>
     </div>
   ));
 }
