@@ -9,22 +9,99 @@ import { MdTitle } from 'react-icons/md';
 
 import DocsAddButton from '@/components/BasicSetting/Contract/DocsAddButton';
 
-function AddModifyDocument() {
+function AddModifyDocument({ editor }) {
   const buttons = [
-    { icon: MdTitle, label: '타이틀 생성' },
-    { icon: IoDocumentTextOutline, label: '문구 추가 +' },
-    { icon: IoMdRadioButtonOn, label: '라디오 버튼 추가 +' },
-    { icon: LuTable, label: '표 추가 +' },
-    { icon: FaFileSignature, label: '서명버튼 추가 +' },
-    { icon: BsArrowReturnRight, label: '공백 추가 +' },
+    {
+      icon: MdTitle,
+      label: '타이틀 생성',
+      action: () => {
+        if (editor) {
+          editor.chain().focus().insertContent('<h1>타이틀 입력</h1>').run();
+        }
+      },
+    },
+    {
+      icon: IoDocumentTextOutline,
+      label: '문구 추가 +',
+      action: () => {
+        if (editor) {
+          editor.chain().focus().insertContent('<p>문구를 입력하세요...</p>').run();
+        }
+      },
+    },
+    {
+      icon: IoMdRadioButtonOn,
+      label: '라디오 버튼 추가 +',
+      action: () => {
+        if (editor) {
+          editor
+            .chain()
+            .focus()
+            .insertContent(
+              `
+              <label>
+                <input type="radio" name="option" /> 옵션 1
+              </label>
+            `
+            )
+            .run();
+        }
+      },
+    },
+    {
+      icon: LuTable,
+      label: '표 추가 +',
+      action: () => {
+        if (editor) {
+          editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run();
+        }
+      },
+    },
+    {
+      icon: FaFileSignature,
+      label: '서명칸 추가 +',
+      action: () => {
+        if (editor) {
+          editor
+            .chain()
+            .focus()
+            .insertContent(
+              `
+              <table>
+                <tbody>
+                  <tr>
+                    <td>서명란</td>
+                  </tr>
+                </tbody>
+              </table>
+            `
+            )
+            .run();
+        }
+      },
+    },
+    {
+      icon: BsArrowReturnRight,
+      label: '공백 추가 +',
+      action: () => {
+        if (editor) {
+          editor.chain().focus().insertContent('<p> </p>').run();
+        }
+      },
+    },
   ];
 
   return (
-    <div className="border-[1px] border-gray-300 flex flex-col">
+    <div className="flex flex-col h-full">
       <p className="px-6 py-4 text-lg font-semibold border-b-[1px]">추가/수정하기</p>
       <div className="flex flex-col gap-1 px-5 py-5">
         {buttons.map((button, index) => (
-          <DocsAddButton key={index} icon={button.icon} label={button.label} />
+          <DocsAddButton
+            key={index}
+            icon={button.icon}
+            label={button.label}
+            onClick={button.action}
+          />
         ))}
       </div>
       <div className="flex w-full mt-auto">
