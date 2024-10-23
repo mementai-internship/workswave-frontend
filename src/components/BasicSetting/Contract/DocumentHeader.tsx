@@ -5,7 +5,7 @@ import { PiPlusBold } from 'react-icons/pi';
 
 import SelectBox from '@/components/Common/Select';
 
-const DocumentMapData = {
+export const DocumentMapData = {
   contract: '계약서',
   document: '문서',
   certificat: '증명서',
