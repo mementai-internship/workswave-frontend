@@ -8,7 +8,7 @@ import { PiPlus } from 'react-icons/pi';
 
 import AddModifyDocument from '@/components/BasicSetting/Contract/AddModifyDocument';
 
-function ModifyDocument() {
+function ModifyDocument({ editor }) {
   const [showAddModify, setShowAddModify] = useState(false);
 
   const handleAddClick = () => {
@@ -18,7 +18,7 @@ function ModifyDocument() {
   return (
     <div className="flex flex-col h-full">
       {showAddModify ? (
-        <AddModifyDocument />
+        <AddModifyDocument editor={editor} />
       ) : (
         <>
           <p className="px-6 py-4 text-lg font-semibold">수정하기</p>
