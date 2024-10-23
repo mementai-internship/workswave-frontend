@@ -1,10 +1,10 @@
 import { Select } from '@radix-ui/themes';
 import { forwardRef } from 'react';
 
-import { IWageSetting } from '@/models/wageSetting.model';
+import { ISalaryTemplatesItem } from '@/models/salary-templates.model';
 
 interface IProps {
-  name?: keyof IWageSetting;
+  name?: keyof ISalaryTemplatesItem;
   content: IWageSelectType[];
   placeholder?: string;
   defaultValue?: number;
@@ -24,6 +24,7 @@ const WageSelect = forwardRef<HTMLButtonElement, IProps>(
     { isTitle, placeholder, content, onClick, defaultValue, onChange, isWidthFull = false },
     ref
   ) => {
+    if (!content) return null;
     return (
       <Select.Root value={defaultValue?.toString()} onValueChange={onClick ? onClick : onChange}>
         <Select.Trigger

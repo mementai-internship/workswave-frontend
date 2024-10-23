@@ -31,4 +31,10 @@ export const QUERY_KEYS = {
 
   //commute queryKeys
   commute: 'commute',
+
+  // minimum-wage-policies
+  minimumWagePolicies: 'minimumWagePolicies',
+
+  // salary-templates
+  salaryTemplates: 'salaryTemplates',
 };
