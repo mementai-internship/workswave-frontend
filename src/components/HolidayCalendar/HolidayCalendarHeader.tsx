@@ -38,7 +38,9 @@ export default function HolidayCalendarHeader({
   const { data: holidays, isLoading: isHolidaysLoading } = useGetClosedDays({
     branch_id: branchId,
   });
-  const { data: branches, isFetching } = useGetBranches('1');
+
+  // 현재 - MSO 기준이라 모든 브랜치 목록 받아옴 -> 분기처리 필요
+  const { data: branches, isFetching } = useGetBranches('0');
 
   const branchSelection = isFetching
     ? []
@@ -69,7 +71,11 @@ export default function HolidayCalendarHeader({
 
   return (
     <header className="relative flex justify-between items-center">
-      {!isFetching && <SelectBox title="지점 선택" name="지점 선택" options={branchSelection} />}
+      {branches ? (
+        <SelectBox title="지점 선택" name="지점 선택" options={branchSelection} />
+      ) : (
+        <SelectBox title="지점 정보가 없습니다." options={[]} disabled={true} />
+      )}
       <div className="absolute left-1/2 transform -translate-x-1/2">
         {view === 'dayGridMonth' ? (
           <ChangeMonthNone

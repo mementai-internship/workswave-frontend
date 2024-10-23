@@ -54,16 +54,21 @@ export default function DayoffManagementFilterbar({ currentUser }: { currentUser
   return (
     <div className="flex gap-4 justify-between">
       <div>
-        {currentUser.role && currentUser.role === 'MSO 최고권한' && (
-          <SelectBox
-            size="small"
-            title="지점 선택"
-            options={branchData?.list.map((branch) => ({
-              id: branch.id,
-              name: branch.name,
-              action: () => handleBranchSelect(branch.id),
-            }))}
-          />
+        {branchData ? (
+          currentUser.role &&
+          currentUser.role === 'MSO 최고권한' && (
+            <SelectBox
+              size="small"
+              title="지점 선택"
+              options={branchData?.list.map((branch) => ({
+                id: branch.id,
+                name: branch.name,
+                action: () => handleBranchSelect(branch.id),
+              }))}
+            />
+          )
+        ) : (
+          <SelectBox title="지점 정보가 없습니다." options={[]} disabled={true} />
         )}
 
         <SelectBox size="small" title="파트선택" options={dummyPart} />

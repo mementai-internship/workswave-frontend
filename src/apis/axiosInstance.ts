@@ -1,32 +1,43 @@
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 import { getAccessToken, removeTokens } from '@/utils/tokenUtils';
 
+const baseURL = `${import.meta.env.VITE_BASE_URL}`;
+
 const axiosInstance = axios.create({
-  baseURL: '/api',
+  baseURL,
   headers: {
     'Content-Type': 'application/json',
   },
   withCredentials: true,
 });
 
-axiosInstance.interceptors.request.use(
-  (config) => {
-    const accessToken = JSON.parse(getAccessToken());
-    if (accessToken) {
-      config.headers.Authorization = `Bearer ${accessToken}`;
-    }
+axiosInstance.interceptors.request.use((config) => {
+  const accessToken = JSON.parse(getAccessToken());
+  if (accessToken) {
+    config.headers.Authorization = `Bearer ${accessToken}`;
+  }
 
-    return config;
+  return config;
+});
+
+axiosInstance.interceptors.response.use(
+  (response) => {
+    console.log('%c 응답 성공', 'color: green; font-size: 1.2rem', response);
+    return response;
   },
-  // TODO : 아래 로직 response 로 분리 필요
   (error) => {
-    switch (error.response.status) {
+    const navigate = useNavigate();
+    console.log('%c 에러 발생', 'color: red; font-size: 1.2rem', error);
+
+    switch (error.status) {
       case 400:
         break;
       case 401:
-        console.log('error', '로그인이 필요합니다.');
         removeTokens();
+        console.log('error', '로그인이 필요합니다.');
+        navigate('/login');
         break;
       case 404:
         console.log('error', '페이지를 찾을 수 없습니다.');
