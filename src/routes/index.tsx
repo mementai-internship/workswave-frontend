@@ -8,6 +8,7 @@ import BoardPage from '@/pages/basicSetting/BoardPage';
 import CalendarPage from '@/pages/basicSetting/CalendarPage';
 import ContractPage from '@/pages/basicSetting/ContractPage';
 import DayOffPage from '@/pages/basicSetting/DayOffPage';
+import DocumentPage from '@/pages/basicSetting/DocumentPage';
 import HourlyRangePage from '@/pages/basicSetting/HourlyRangePage';
 import HrManagementSettingPage from '@/pages/basicSetting/HrManagementPage';
 import SalaryRangePage from '@/pages/basicSetting/SalaryRangePage';
@@ -110,6 +111,10 @@ const router = createBrowserRouter([
           {
             path: 'contract',
             element: <ContractPage />,
+          },
+          {
+            path: 'document',
+            element: <DocumentPage />,
           },
         ],
       },
