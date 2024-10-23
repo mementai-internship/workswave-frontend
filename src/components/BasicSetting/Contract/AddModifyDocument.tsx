@@ -7,7 +7,7 @@ import { IoDocumentTextOutline } from 'react-icons/io5';
 import { LuTable } from 'react-icons/lu';
 import { MdTitle } from 'react-icons/md';
 
-import DocsAddButton from '@/components/Common/DocsAddButton';
+import DocsAddButton from '@/components/BasicSetting/Contract/DocsAddButton';
 
 function AddModifyDocument() {
   const buttons = [

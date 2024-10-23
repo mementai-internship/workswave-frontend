@@ -13,8 +13,8 @@ import Underline from '@tiptap/extension-underline';
 import { EditorContent, useEditor } from '@tiptap/react';
 import { useCallback, useState } from 'react';
 
-import EditorDropdownMenu from '@/components/Common/EditorDropdownMenu';
-import { FontSize } from '@/components/Common/font-size';
+import EditorDropdownMenu from '@/components/BasicSetting/Contract/Editor/EditorDropdownMenu';
+import { FontSize } from '@/components/BasicSetting/Contract/Editor/lib/font-size';
 
 const sizes = ['14', '16', '18', '24', '28', '30', '34', '38'];
 export default function Editor() {

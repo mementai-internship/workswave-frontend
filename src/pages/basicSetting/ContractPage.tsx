@@ -1,6 +1,8 @@
-import ContractTextList from '@/components/Contract/ContractTextList';
-import { DocumentHeader } from '@/components/Contract/DocumentHeader';
-import { TemplateSetting } from '@/components/Contract/TemplateSetting';
+import ContractTextList from '@/components/BasicSetting/Contract/ContractTextList';
+import { DocumentHeader } from '@/components/BasicSetting/Contract/DocumentHeader';
+import Editor from '@/components/BasicSetting/Contract/Editor/Editor';
+import ModifyDocument from '@/components/BasicSetting/Contract/ModifyDocument';
+import { TemplateSetting } from '@/components/BasicSetting/Contract/TemplateSetting';
 
 export default function ContractPage() {
   return (
@@ -9,9 +11,11 @@ export default function ContractPage() {
         <DocumentHeader title="contract" />
         <div className="flex h-full gap-4">
           <ContractTextList documentName={'계약서'} />
-          <div className="flex items-center justify-center w-2/3 mb-2 bg-white border">에디터</div>
+          <div className="flex items-center justify-center w-2/3 mb-2 bg-white border">
+            <Editor />
+          </div>
           <div className="flex items-center justify-center w-1/3 mb-2 mr-4 bg-white border">
-            추가/수정하기
+            <ModifyDocument />
           </div>
         </div>
       </div>

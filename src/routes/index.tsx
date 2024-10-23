@@ -1,7 +1,7 @@
 import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-import AddModifyDocument from '@/components/Common/AddModifyDocument';
-import ModifyDocument from '@/components/Common/ModifyDocument';
+import AddModifyDocument from '@/components/BasicSetting/Contract/AddModifyDocument';
+import ModifyDocument from '@/components/BasicSetting/Contract/ModifyDocument';
 import DocumentManagementLayout from '@/components/DocumentManagement/DocumentManagementLayout';
 import WorkManagementLayout from '@/components/WorkManagement/WorkManagementLayout';
 import RootLayout from '@/layout/root';
