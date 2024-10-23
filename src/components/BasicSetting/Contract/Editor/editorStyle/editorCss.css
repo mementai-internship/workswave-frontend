@@ -9,7 +9,7 @@
 .editor-content {
   width: 100%;
   border-collapse: collapse;
-  margin: 20px 0;
+  padding: 8px;
   font-size: 18px;
   text-align: left;
   overflow-y: auto;
@@ -38,7 +38,6 @@
 }
 .PopoverContent {
   border-radius: 4px;
-  width: 100%;
   background-color: white;
   box-shadow:
     hsl(206 22% 7% / 35%) 0px 10px 38px -10px,
@@ -67,6 +66,7 @@
 }
 .PopoverArrow {
   fill: white;
+  margin-left: 160px;
 }
 
 .PopoverClose {

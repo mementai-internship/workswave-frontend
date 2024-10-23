@@ -11,6 +11,7 @@ import { PiTextAUnderlineBold } from 'react-icons/pi';
 
 import EditorDropdownMenu from '@/components/BasicSetting/Contract/Editor/EditorDropdownMenu';
 import EditorPopover from '@/components/BasicSetting/Contract/Editor/EditorPopover';
+import { ToolBarButton } from '@/components/BasicSetting/Contract/Editor/ToolBarButton';
 
 function ToolBar({ editor }) {
   const SIZES = ['14', '16', '18', '24', '28', '30', '34', '38'];
@@ -26,27 +27,58 @@ function ToolBar({ editor }) {
     },
     [editor]
   );
+
+  const handleUndo = () => {
+    editor.chain().focus().undo().run();
+  };
+  const handleRedo = () => {
+    editor.chain().focus().redo().run();
+  };
+  const handleToggleUnderline = () => {
+    editor.chain().focus().toggleUnderline().run();
+  };
+  const handleToggleItalic = () => {
+    editor.chain().focus().toggleItalic().run();
+  };
+  const handleToggleBold = () => {
+    editor.chain().focus().toggleBold().run();
+  };
+  const handleToggleStrike = () => {
+    editor.chain().focus().toggleStrike().run();
+  };
+  const handleAlignLeft = () => {
+    editor.chain().focus().setTextAlign('left').run();
+  };
+  const handleAlignCenter = () => {
+    editor.chain().focus().setTextAlign('center').run();
+  };
+  const handleAlignRight = () => {
+    editor.chain().focus().setTextAlign('right').run();
+  };
   if (!editor) {
     return null;
   }
 
   return (
     <>
-      <div className="bg-[#5b5b5b] control-group sticky text-white w-full p-2">
-        <div className="flex items-center justify-around button-group gap-x-2">
+      <div className="bg-[#5b5b5b] control-group text-white w-full h-12 p-2">
+        <div className="flex items-center justify-around h-full button-group gap-x-2">
           <EditorPopover editor={editor} />
-          <button
-            onClick={() => editor.chain().focus().undo().run()}
+
+          <ToolBarButton
+            onClick={handleUndo}
+            icon={MdOutlineUndo}
+            size={16}
             disabled={!editor.can().undo()}
-          >
-            <MdOutlineUndo size={16} />
-          </button>
-          <button
-            onClick={() => editor.chain().focus().redo().run()}
+          />
+          <ToolBarButton
+            onClick={handleRedo}
+            icon={MdOutlineRedo}
+            size={16}
             disabled={!editor.can().redo()}
-          >
-            <MdOutlineRedo size={16} />
-          </button>
+          />
+          <ToolBarButton onClick={handleToggleUnderline} icon={PiTextAUnderlineBold} size={16} />
+
           <EditorDropdownMenu sizes={SIZES} handleFontSizeChange={handleFontSizeChange} />
           <input
             type="color"
@@ -58,48 +90,12 @@ function ToolBar({ editor }) {
             data-id="setColor"
             className="w-6 h-7 color-picker"
           />
-          <button
-            onClick={() => editor.chain().focus().toggleUnderline().run()}
-            className={editor.isActive('underline') ? 'is-active' : ''}
-          >
-            <PiTextAUnderlineBold size={16} />
-          </button>
-          <button
-            onClick={() => editor.chain().focus().toggleItalic().run()}
-            className={editor.isActive('italic') ? 'is-active' : ''}
-          >
-            <MdOutlineFormatItalic size={20} />
-          </button>
-          <button
-            onClick={() => editor.chain().focus().toggleBold().run()}
-            className={editor.isActive('italic') ? 'is-active' : ''}
-          >
-            <MdOutlineFormatBold size={20} />
-          </button>
-          <button
-            onClick={() => editor.chain().focus().toggleStrike().run()}
-            className={editor.isActive('strike') ? 'is-active' : ''}
-          >
-            <MdFormatStrikethrough size={20} />
-          </button>
-          <button
-            onClick={() => editor.chain().focus().setTextAlign('left').run()}
-            className={editor.isActive({ textAlign: 'left' }) ? 'is-active' : ''}
-          >
-            <BiAlignLeft size={16} />
-          </button>
-          <button
-            onClick={() => editor.chain().focus().setTextAlign('center').run()}
-            className={editor.isActive({ textAlign: 'center' }) ? 'is-active' : ''}
-          >
-            <BiAlignMiddle size={16} />
-          </button>
-          <button
-            onClick={() => editor.chain().focus().setTextAlign('right').run()}
-            className={editor.isActive({ textAlign: 'right' }) ? 'is-active' : ''}
-          >
-            <BiAlignRight size={16} />
-          </button>
+          <ToolBarButton onClick={handleToggleItalic} icon={MdOutlineFormatItalic} size={20} />
+          <ToolBarButton onClick={handleToggleBold} icon={MdOutlineFormatBold} size={20} />
+          <ToolBarButton onClick={handleToggleStrike} icon={MdFormatStrikethrough} size={20} />
+          <ToolBarButton onClick={handleAlignLeft} icon={BiAlignLeft} size={16} />
+          <ToolBarButton onClick={handleAlignCenter} icon={BiAlignMiddle} size={16} />
+          <ToolBarButton onClick={handleAlignRight} icon={BiAlignRight} size={16} />
         </div>
       </div>
     </>

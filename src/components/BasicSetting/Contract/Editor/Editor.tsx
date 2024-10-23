@@ -26,11 +26,6 @@ import './editorStyle/editorCss.css';
 // TODO Dropdown관련 함수 . 및 사이즈 위치 고려 . 후수정
 export default function Editor() {
   const editor = useEditor({
-    editorProps: {
-      attributes: {
-        class: 'prose prose-sm sm:prose lg:prose-lg xl:prose-2xl m-5 focus:outline-none',
-      },
-    },
     extensions: [
       Document,
       Paragraph,
@@ -57,41 +52,16 @@ export default function Editor() {
       }),
     ],
     content: `
-        <h3 style="text-align:center">
-          Devs Just Want to Have Fun by Cyndi Lauper
-        </h3>
-        <p style="text-align:center">
-          I come home in the morning light<br>
-          My mother says, <mark>“When you gonna live your life right?”</mark><br>
-          Oh mother dear we’re not the fortunate ones<br>
-          And devs, they wanna have fun<br>
-          Oh devs just want to have fun</p>
-        <p style="text-align:center">
-          The phone rings in the middle of the night<br>
-          My father yells, "What you gonna do with your life?"<br>
-          Oh daddy dear, you know you’re still number one<br>
-          But <s>girls</s>devs, they wanna have fun<br>
-          Oh devs just want to have
-        </p>
-        <p style="text-align:center">
-          That’s all they really want<br>
-          Some fun<br>
-          When the working day is done<br>
-          Oh devs, they wanna have fun<br>
-          Oh devs just wanna have fun<br>
-          (devs, they wanna, wanna have fun, devs wanna have)
-        </p>
-         <p style="text-align:center">
-          That’s all they really want<br>
-          Some fun<br>
-          When the working day is done<br>
-          Oh devs, they wanna have fun<br>
-          Oh devs just wanna have fun<br>
-          (devs, they wanna, wanna have fun, devs wanna have)
-        </p>
+        <h3 style="text-align: center">근로 계약서</h3>
+        <p><span style="font-size: 16px">지점명 와 근로자성명 은 아래와 같이 근로계약을 쳬결하고 상호 성실히 이행할 것을 약정한다.</span></p><p><span style="font-size: 16px">
+        <strong>제 1조 [근로계약기간]</strong></span></p>
+        <p><span style="font-size: 16px">1. "근로자"의 근로계약기간은 계약시작일 부터 계약종료일 로 한다.</span></p>
+        <p><span style="font-size: 16px">2. 종사업무는 근로자업무 및 그와 관련된 업무로 한다.</span></p>
+        <p><span style="font-size: 16px">3. 제1항 및 제2항에도 불구하고, "사용자"는 업무상 필요가 있는 경우, "근로자"의 근무장소 및 업무내용을 변경 할 수 있으며, 이 경우 "근로자"는 특별한 사정이 없는 한 이에 따라야 한다.</span></p>
       `,
   });
-
+  // 해당 메서드로 html 값 얻을 수 있음
+  // console.log(editor.getHTML());
   return (
     <div className="relative w-full h-full max-h-[610px]  ">
       <div className="flex flex-col items-center w-full h-full ">

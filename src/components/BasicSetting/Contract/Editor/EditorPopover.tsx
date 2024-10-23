@@ -12,7 +12,39 @@ import {
 } from 'react-icons/ri';
 import { TbTableOff, TbTableOptions, TbTablePlus } from 'react-icons/tb';
 
+import { ToolBarButton } from '@/components/BasicSetting/Contract/Editor/ToolBarButton';
+
 function EditorPopover({ editor }) {
+  const handleInsertTable = () => {
+    editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run();
+  };
+  const handleDeleteTable = () => {
+    editor.chain().focus().deleteTable().run();
+  };
+  const handleAddColumnBefore = () => {
+    editor.chain().focus().addColumnBefore().run();
+  };
+  const handleAddColumnAfter = () => {
+    editor.chain().focus().addColumnAfter().run();
+  };
+  const handleDeleteColumn = () => {
+    editor.chain().focus().deleteColumn().run();
+  };
+  const handleAddRowBefore = () => {
+    editor.chain().focus().addRowBefore().run();
+  };
+  const handleAddRowAfter = () => {
+    editor.chain().focus().addRowAfter().run();
+  };
+  const handleDeleteRow = () => {
+    editor.chain().focus().deleteRow().run();
+  };
+  const handleMergeCells = () => {
+    editor.chain().focus().mergeCells().run();
+  };
+  const handleSplitCell = () => {
+    editor.chain().focus().splitCell().run();
+  };
   return (
     <Popover.Root>
       <Popover.Trigger asChild>
@@ -21,43 +53,18 @@ function EditorPopover({ editor }) {
         </button>
       </Popover.Trigger>
       <Popover.Portal>
-        <Popover.Content className="PopoverContent">
+        <Popover.Content className="px-2 ml-40 PopoverContent">
           <div className="flex p-5 gap-x-4">
-            <button
-              onClick={() =>
-                editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run()
-              }
-              className=""
-            >
-              <TbTablePlus size={30} />
-            </button>
-            <button onClick={() => editor.chain().focus().deleteTable().run()}>
-              <TbTableOff size={30} />
-            </button>
-            <button onClick={() => editor.chain().focus().addColumnBefore().run()}>
-              <RiInsertColumnLeft size={30} />
-            </button>
-            <button onClick={() => editor.chain().focus().addColumnAfter().run()}>
-              <RiInsertColumnRight size={30} />
-            </button>
-            <button onClick={() => editor.chain().focus().deleteColumn().run()}>
-              <RiDeleteColumn size={30} />
-            </button>
-            <button onClick={() => editor.chain().focus().addRowBefore().run()}>
-              <RiInsertRowTop size={30} />
-            </button>
-            <button onClick={() => editor.chain().focus().addRowAfter().run()}>
-              <RiInsertRowBottom size={30} />
-            </button>
-            <button onClick={() => editor.chain().focus().deleteRow().run()}>
-              <RiDeleteRow size={30} />
-            </button>
-            <button onClick={() => editor.chain().focus().mergeCells().run()}>
-              <AiOutlineMergeCells size={30} />
-            </button>
-            <button onClick={() => editor.chain().focus().splitCell().run()}>
-              <AiOutlineSplitCells size={30} />
-            </button>
+            <ToolBarButton onClick={handleInsertTable} icon={TbTablePlus} size={20} />
+            <ToolBarButton onClick={handleDeleteTable} icon={TbTableOff} size={20} />
+            <ToolBarButton onClick={handleAddColumnBefore} icon={RiInsertColumnLeft} size={20} />
+            <ToolBarButton onClick={handleAddColumnAfter} icon={RiInsertColumnRight} size={20} />
+            <ToolBarButton onClick={handleDeleteColumn} icon={RiDeleteColumn} size={20} />
+            <ToolBarButton onClick={handleAddRowBefore} icon={RiInsertRowTop} size={20} />
+            <ToolBarButton onClick={handleAddRowAfter} icon={RiInsertRowBottom} size={20} />
+            <ToolBarButton onClick={handleDeleteRow} icon={RiDeleteRow} size={20} />
+            <ToolBarButton onClick={handleMergeCells} icon={AiOutlineMergeCells} size={20} />
+            <ToolBarButton onClick={handleSplitCell} icon={AiOutlineSplitCells} size={20} />
           </div>
           <Popover.Close className="PopoverClose" aria-label="Close">
             <IoCloseSharp />
