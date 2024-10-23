@@ -66,15 +66,7 @@ function AddModifyDocument({ editor }) {
             .chain()
             .focus()
             .insertContent(
-              `
-              <table>
-                <tbody>
-                  <tr>
-                    <td>서명란</td>
-                  </tr>
-                </tbody>
-              </table>
-            `
+              "<div style={border: '1px solid gray' width: '20px' height: '20px'}>(인)</div>"
             )
             .run();
         }
