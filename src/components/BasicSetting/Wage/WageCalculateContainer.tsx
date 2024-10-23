@@ -22,7 +22,7 @@ interface IProps {
   handleCloseEditMode: () => void;
 }
 
-export default function WageCalculate({
+export default function WageCalculateContainer({
   positionOptions,
   control,
   reset,

@@ -20,7 +20,7 @@ interface IProps {
   editMode: TWageEditMode;
 }
 
-export default function WageList({
+export default function WageListContainer({
   handleDeleteItem,
   activeEditMode,
   handleSelectPart,

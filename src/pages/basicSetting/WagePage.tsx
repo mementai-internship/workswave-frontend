@@ -2,8 +2,8 @@ import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import WageCalculate from '@/components/BasicSetting/Wage/WageCalculate';
-import WageList from '@/components/BasicSetting/Wage/WageList';
+import WageCalculateContainer from '@/components/BasicSetting/Wage/WageCalculateContainer';
+import WageListContainer from '@/components/BasicSetting/Wage/WageListContainer';
 import { useGetBranches } from '@/hooks/apis/useBranches';
 import { useGetParts } from '@/hooks/apis/useParts';
 import {
@@ -116,7 +116,7 @@ export default function WagePage() {
 
   return (
     <div className="w-full bg-white flex min-w-[1500px] min-h-[600px] max-h-[calc(100vh-200px)] overflow-y-scroll">
-      <WageList
+      <WageListContainer
         editMode={editMode}
         activeEditMode={activeEditMode}
         handleDeleteItem={handleDeleteItem}
@@ -128,7 +128,7 @@ export default function WagePage() {
         parts={parts}
         list={salaryTemplates}
       />
-      <WageCalculate
+      <WageCalculateContainer
         editMode={editMode}
         currentYear={currentYear}
         onSubmit={onSubmit}
