@@ -1,7 +1,15 @@
 import { useState } from 'react';
 import { IoIosStar, IoIosStarOutline } from 'react-icons/io';
 
-const CertificateTemplateData = [
+interface ICertificateTemplateData {
+  id: number;
+  title: string;
+  isBookmark: boolean;
+  type: string;
+  isForm: boolean;
+}
+
+const CertificateTemplateData: ICertificateTemplateData[] = [
   {
     id: 1,
     title: '퇴직증명서',
@@ -21,6 +29,7 @@ const CertificateTemplateData = [
     title: '경력증명서',
     isBookmark: true,
     type: 'base',
+    isForm: true,
   },
   {
     id: 4,

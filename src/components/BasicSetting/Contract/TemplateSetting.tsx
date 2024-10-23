@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { CiSettings } from 'react-icons/ci';
 
 import CertificateTemplateList from '@/components/BasicSetting/Contract/CertificateTemplateList';
@@ -6,11 +7,51 @@ import { DocumentMapData } from '@/components/BasicSetting/Contract/DocumentHead
 import DocumentTemplateList from '@/components/BasicSetting/Contract/DocumentTemplateList';
 import SelectBox from '@/components/Common/Select';
 
+const DocumentTemplateData: IDocumentTemplate[] = [
+  {
+    id: 1,
+    title: '시말서',
+    validityPeriod: '유효기간 없음',
+    type: '서명문서',
+    documentState: 'send',
+  },
+  { id: 2, title: 'text', validityPeriod: '유효기간 없음', type: '서명문서', documentState: 'end' },
+  {
+    id: 3,
+    title: '사유서',
+    validityPeriod: '유효기간 없음',
+    type: '서명문서',
+    documentState: null,
+  },
+];
+
+export interface IDocumentTemplate {
+  id: number;
+  title: string;
+  validityPeriod: string;
+  type: string;
+  documentState: 'send' | 'end' | null;
+}
+
 interface ITemplateSettingProps {
   title: 'contract' | 'document' | 'certificate';
 }
 
 export function TemplateSetting({ title }: ITemplateSettingProps) {
+  const [templateData, setTemplateData] = useState<IDocumentTemplate[]>();
+
+  useEffect(() => {
+    setTemplateData(DocumentTemplateData);
+  }, []);
+
+  const onSelectFilter = (filter?) => {
+    if (filter) {
+      return DocumentTemplateData.filter((item) => item.documentState === filter);
+    } else {
+      return DocumentTemplateData;
+    }
+  };
+
   return (
     <div className="flex flex-col w-1/5 p-4 bg-white border">
       <div className="flex flex-col gap-1">
@@ -32,17 +73,23 @@ export function TemplateSetting({ title }: ITemplateSettingProps) {
               {
                 id: 1,
                 name: '전체 문서',
-                action: () => {},
+                action: () => {
+                  setTemplateData(onSelectFilter(''));
+                },
               },
               {
                 id: 2,
                 name: '발송된 문서',
-                action: () => {},
+                action: () => {
+                  setTemplateData(onSelectFilter('send'));
+                },
               },
               {
                 id: 3,
                 name: '마감된 문서',
-                action: () => {},
+                action: () => {
+                  setTemplateData(onSelectFilter('end'));
+                },
               },
             ]}
           />
@@ -51,7 +98,7 @@ export function TemplateSetting({ title }: ITemplateSettingProps) {
         {title === 'contract' ? (
           <ContractTemplateList />
         ) : title === 'document' ? (
-          <DocumentTemplateList />
+          <DocumentTemplateList templateData={templateData} />
         ) : (
           <CertificateTemplateList />
         )}

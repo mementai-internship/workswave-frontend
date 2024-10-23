@@ -4,25 +4,13 @@ import { IoMdStopwatch } from 'react-icons/io';
 import { RxCross2 } from 'react-icons/rx';
 import { TbMailDown, TbMailUp } from 'react-icons/tb';
 
-const DocumentTemplateData = [
-  {
-    id: 1,
-    title: '시말서',
-    validityPeriod: '유효기간 없음',
-    type: '서명문서',
-    documentState: 'send',
-  },
-  { id: 2, title: 'text', validityPeriod: '유효기간 없음', type: '서명문서', documentState: 'end' },
-  {
-    id: 3,
-    title: '사유서',
-    validityPeriod: '유효기간 없음',
-    type: '서명문서',
-    documentState: null,
-  },
-];
+import { IDocumentTemplate } from '@/components/BasicSetting/Contract/TemplateSetting';
 
-export default function DocumentTemplateList() {
+interface IDocumentTemplateListProps {
+  templateData: IDocumentTemplate[];
+}
+
+export default function DocumentTemplateList({ templateData }: IDocumentTemplateListProps) {
   const [activeIndex, setActiveIndex] = useState(null);
   const handleClick = (index) => {
     setActiveIndex(index === activeIndex ? null : index);
@@ -30,10 +18,9 @@ export default function DocumentTemplateList() {
 
   return (
     <div className="border-2">
-      {DocumentTemplateData.map((data) => (
-        <div className="relative">
+      {templateData?.map((data) => (
+        <div className="relative" key={data.id}>
           <div
-            key={data.id}
             className={`mb-1 first:border-t-0 flex text-sm border border-x-0  text-[12px] items-center gap-2 p-2 cursor-pointer 
             ${activeIndex === data.id ? 'border-blue-500' : 'border-gray-300'}`}
             onClick={() => handleClick(data.id)}
