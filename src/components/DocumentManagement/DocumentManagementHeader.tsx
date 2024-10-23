@@ -21,7 +21,7 @@ export default function DocumentManagementHeader({
 
   const location = useLocation();
 
-  const { data: branches, isFetching: isBranchesFetching } = useGetBranches('1');
+  const { data: branches, isFetching: isBranchesFetching } = useGetBranches('0');
   const { data: parts, isFetching: isPartsFetching } = useGetParts(branchId);
 
   const getTitleContent = () => {
@@ -36,13 +36,15 @@ export default function DocumentManagementHeader({
     return '증명서 관리';
   };
 
-  const branchSelection = branches?.list?.map((branch) => ({
-    id: branch.id,
-    name: branch.name,
-    action: () => {
-      setBranchId(branch.id);
-    },
-  }));
+  const branchSelection =
+    !isBranchesFetching &&
+    branches?.list?.map((branch) => ({
+      id: branch.id,
+      name: branch.name,
+      action: () => {
+        setBranchId(branch.id);
+      },
+    }));
 
   const partSelection =
     !isPartsFetching &&
@@ -65,11 +67,15 @@ export default function DocumentManagementHeader({
       <div>
         <div className="flex items-center justify-between py-5">
           <div className="flex gap-2">
-            {!isBranchesFetching && (
+            {branches ? (
               <SelectBox title="지점 선택" name="지점 선택" options={branchSelection} />
+            ) : (
+              <SelectBox title="지점 정보가 없습니다." options={[]} disabled={true} />
             )}
-            {!isPartsFetching && (
+            {parts ? (
               <SelectBox title="파트 선택" name="파트 선택" options={partSelection} />
+            ) : (
+              <SelectBox title="파트 정보가 없습니다." options={[]} disabled={true} />
             )}
           </div>
           <ContactSearchInput />
