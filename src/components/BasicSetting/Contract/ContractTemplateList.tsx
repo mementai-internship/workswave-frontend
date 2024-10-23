@@ -18,10 +18,14 @@ const contractTemplateData: string[] = [
   '외국인 고용보험 가입 동의서',
   '외국인 고용보험 가입 동의서',
 ];
+interface IContractTemplateListProps {
+  handleSetContent: (document: string) => void;
+}
 
-export default function ContractTemplateList() {
+export default function ContractTemplateList({ handleSetContent }: IContractTemplateListProps) {
   const [activeIndex, setActiveIndex] = useState(null);
   const handleClick = (index) => {
+    handleSetContent('contract');
     setActiveIndex(index === activeIndex ? null : index);
   };
 

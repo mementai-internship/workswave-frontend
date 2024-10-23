@@ -23,7 +23,7 @@ export default function CertificatePage() {
           </div>
         </div>
       </div>
-      <TemplateSetting title="certificate" />
+      <TemplateSetting editor={editor} title="certificate" />
     </div>
   );
 }

@@ -8,7 +8,6 @@ import { TemplateSetting } from '@/components/BasicSetting/Contract/TemplateSett
 
 export default function ContractPage() {
   const [editor, setEditor] = useState(null);
-
   return (
     <div className="flex w-full gap-2">
       <div className="flex flex-col w-full border bg-light-gray">
@@ -23,7 +22,7 @@ export default function ContractPage() {
           </div>
         </div>
       </div>
-      <TemplateSetting title="contract" />
+      <TemplateSetting title="contract" editor={editor} />
     </div>
   );
 }

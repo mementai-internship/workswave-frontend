@@ -1,3 +1,4 @@
+import { Editor } from '@tiptap/react';
 import { useEffect, useState } from 'react';
 import { CiSettings } from 'react-icons/ci';
 
@@ -5,6 +6,10 @@ import CertificateTemplateList from '@/components/BasicSetting/Contract/Certific
 import ContractTemplateList from '@/components/BasicSetting/Contract/ContractTemplateList';
 import { DocumentMapData } from '@/components/BasicSetting/Contract/DocumentHeader';
 import DocumentTemplateList from '@/components/BasicSetting/Contract/DocumentTemplateList';
+import {
+  MOCK_DOCUMENT,
+  getDocument,
+} from '@/components/BasicSetting/Contract/Editor/lib/getDocument';
 import SelectBox from '@/components/Common/Select';
 
 const DocumentTemplateData: IDocumentTemplate[] = [
@@ -35,15 +40,21 @@ export interface IDocumentTemplate {
 
 interface ITemplateSettingProps {
   title: 'contract' | 'document' | 'certificate';
+  editor: Editor;
 }
 
-export function TemplateSetting({ title }: ITemplateSettingProps) {
+export function TemplateSetting({ title, editor }: ITemplateSettingProps) {
   const [templateData, setTemplateData] = useState<IDocumentTemplate[]>();
-
   useEffect(() => {
     setTemplateData(DocumentTemplateData);
   }, []);
 
+  const handleSetContent = (document: string) => {
+    const contentStr = getDocument(MOCK_DOCUMENT, document);
+    if (!contentStr) return console.error('문서 호출 실패');
+    console.log(editor);
+    editor.commands.setContent(contentStr);
+  };
   const onSelectFilter = (filter?) => {
     if (filter) {
       return DocumentTemplateData.filter((item) => item.documentState === filter);
@@ -96,11 +107,11 @@ export function TemplateSetting({ title }: ITemplateSettingProps) {
         )}
 
         {title === 'contract' ? (
-          <ContractTemplateList />
+          <ContractTemplateList handleSetContent={handleSetContent} />
         ) : title === 'document' ? (
-          <DocumentTemplateList templateData={templateData} />
+          <DocumentTemplateList templateData={templateData} handleSetContent={handleSetContent} />
         ) : (
-          <CertificateTemplateList />
+          <CertificateTemplateList handleSetContent={handleSetContent} />
         )}
       </div>
     </div>

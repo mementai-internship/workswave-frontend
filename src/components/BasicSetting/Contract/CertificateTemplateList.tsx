@@ -47,7 +47,13 @@ const CertificateTemplateData: ICertificateTemplateData[] = [
   },
 ];
 
-export default function CertificateTemplateList() {
+interface ICertificateTemplateListProps {
+  handleSetContent: (document: string) => void;
+}
+
+export default function CertificateTemplateList({
+  handleSetContent,
+}: ICertificateTemplateListProps) {
   const [activeIndex, setActiveIndex] = useState(null);
   const handleClick = (index) => {
     setActiveIndex(index === activeIndex ? null : index);
@@ -56,7 +62,12 @@ export default function CertificateTemplateList() {
   return (
     <div className="flex flex-col gap-1">
       {CertificateTemplateData.map((data) => (
-        <div className="relative">
+        <div
+          onClick={() => {
+            handleSetContent('certificate');
+          }}
+          className="relative"
+        >
           <div
             key={data.id}
             className={`flex text-sm border text-[12px] items-center p-2 cursor-pointer 
