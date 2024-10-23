@@ -20,22 +20,24 @@
     border-radius: 2px;
     background: #ccc;
   }
+  table {
+    width: 100%;
+
+    th,
+    td {
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+    }
+    th {
+      background-color: #f4f4f4;
+      font-weight: bold;
+    }
+    tr {
+      background-color: #fff;
+    }
+  }
 }
 
-.editor-content th,
-.editor-content td {
-  padding: 12px 15px;
-  border: 1px solid #ddd;
-}
-
-.editor-content th {
-  background-color: #f4f4f4;
-  font-weight: bold;
-}
-
-.editor-content tr {
-  background-color: #fff;
-}
 .PopoverContent {
   border-radius: 4px;
   background-color: white;

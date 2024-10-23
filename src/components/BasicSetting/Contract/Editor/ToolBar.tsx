@@ -14,14 +14,12 @@ import EditorPopover from '@/components/BasicSetting/Contract/Editor/EditorPopov
 import { ToolBarButton } from '@/components/BasicSetting/Contract/Editor/ToolBarButton';
 
 function ToolBar({ editor }) {
-  const SIZES = ['14', '16', '18', '24', '28', '30', '34', '38'];
-  const [, setFontSize] = useState('24px');
+  const [fontSize, setFontSize] = useState('14');
 
   const handleFontSizeChange = useCallback(
     (fontSize: string) => {
       if (!editor) return null;
       if (fontSize) {
-        setFontSize(`${fontSize}px`);
         editor.chain().focus().setFontSize(`${fontSize}px`).run();
       }
     },
@@ -77,9 +75,6 @@ function ToolBar({ editor }) {
             size={16}
             disabled={!editor.can().redo()}
           />
-          <ToolBarButton onClick={handleToggleUnderline} icon={PiTextAUnderlineBold} size={16} />
-
-          <EditorDropdownMenu sizes={SIZES} handleFontSizeChange={handleFontSizeChange} />
           <input
             type="color"
             onChange={(event) => {
@@ -90,6 +85,12 @@ function ToolBar({ editor }) {
             data-id="setColor"
             className="w-6 h-7 color-picker"
           />
+          <EditorDropdownMenu
+            handleFontSizeChange={handleFontSizeChange}
+            setFontSize={setFontSize}
+            fontSize={fontSize}
+          />
+          <ToolBarButton onClick={handleToggleUnderline} icon={PiTextAUnderlineBold} size={16} />
           <ToolBarButton onClick={handleToggleItalic} icon={MdOutlineFormatItalic} size={20} />
           <ToolBarButton onClick={handleToggleBold} icon={MdOutlineFormatBold} size={20} />
           <ToolBarButton onClick={handleToggleStrike} icon={MdFormatStrikethrough} size={20} />
