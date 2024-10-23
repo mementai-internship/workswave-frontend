@@ -6,6 +6,7 @@ import WorkManagementLayout from '@/components/WorkManagement/WorkManagementLayo
 import RootLayout from '@/layout/root';
 import BoardPage from '@/pages/basicSetting/BoardPage';
 import CalendarPage from '@/pages/basicSetting/CalendarPage';
+import ContractPage from '@/pages/basicSetting/ContractPage';
 import DayOffPage from '@/pages/basicSetting/DayOffPage';
 import HourlyRangePage from '@/pages/basicSetting/HourlyRangePage';
 import HrManagementSettingPage from '@/pages/basicSetting/HrManagementPage';
@@ -131,6 +132,10 @@ const router = createBrowserRouter([
               {
                 path: 'hr',
                 element: <HrManagementSettingPage />,
+              },
+              {
+                path: 'contract',
+                element: <ContractPage />,
               },
             ],
           },
