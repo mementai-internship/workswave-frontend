@@ -11,14 +11,7 @@ import {
 } from '@/constants/memberManagementTableTitle';
 import { TCurrentUserInfo } from '@/models/user-management.model';
 
-interface IMemberManagementTableProps {
-  data: IMemberManagementTableData[];
-  allUserList?: IMemberManagementTableData[];
-  tab: string;
-  currentUser: TCurrentUserInfo;
-}
-
-interface IMemberManagementTableData {
+export interface IMemberManagementTableData {
   id: number;
   name: string;
   birth_date: string | null;
@@ -29,6 +22,13 @@ interface IMemberManagementTableData {
   annual_salary: number;
   part: string;
   branch: string;
+}
+
+interface IMemberManagementTableProps {
+  data: IMemberManagementTableData[];
+  allUserList?: IMemberManagementTableData[];
+  tab: string;
+  currentUser: TCurrentUserInfo;
 }
 
 export default function MemberManagementTable({
