@@ -8,7 +8,7 @@ import SelectBox from '@/components/Common/Select';
 export const DocumentMapData = {
   contract: '계약서',
   document: '문서',
-  certificat: '증명서',
+  certificate: '증명서',
 };
 
 interface IDocumentHeaderProps {
