@@ -9,28 +9,37 @@
 .editor-content {
   width: 100%;
   border-collapse: collapse;
-  margin: 20px 0;
+  padding: 8px;
   font-size: 18px;
   text-align: left;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background: #ccc;
+  }
+  table {
+    width: 100%;
+
+    th,
+    td {
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+    }
+    th {
+      background-color: #f4f4f4;
+      font-weight: bold;
+    }
+    tr {
+      background-color: #fff;
+    }
+  }
 }
 
-.editor-content th,
-.editor-content td {
-  padding: 12px 15px;
-  border: 1px solid #ddd;
-}
-
-.editor-content th {
-  background-color: #f4f4f4;
-  font-weight: bold;
-}
-
-.editor-content tr {
-  background-color: #fff;
-}
 .PopoverContent {
   border-radius: 4px;
-  width: 100%;
   background-color: white;
   box-shadow:
     hsl(206 22% 7% / 35%) 0px 10px 38px -10px,
@@ -59,6 +68,7 @@
 }
 .PopoverArrow {
   fill: white;
+  margin-left: 160px;
 }
 
 .PopoverClose {

@@ -27,7 +27,7 @@ export default function CommuteTableRows({ data }: { data: IWorkData }) {
     {
       key: 'name',
       render: (value: number | string) => (
-        <div className="flex gap-2 items-center">
+        <div className="flex items-center gap-2">
           <GenderIcon gender={data.gender} />
           <div>{value}</div>
         </div>

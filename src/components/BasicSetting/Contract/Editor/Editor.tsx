@@ -6,20 +6,24 @@ import History from '@tiptap/extension-history';
 import Italic from '@tiptap/extension-italic';
 import Paragraph from '@tiptap/extension-paragraph';
 import Strike from '@tiptap/extension-strike';
+import Table from '@tiptap/extension-table';
+import TableCell from '@tiptap/extension-table-cell';
+import TableHeader from '@tiptap/extension-table-header';
+import TableRow from '@tiptap/extension-table-row';
 import Text from '@tiptap/extension-text';
 import TextAlign from '@tiptap/extension-text-align';
 import TextStyle from '@tiptap/extension-text-style';
 import Underline from '@tiptap/extension-underline';
 import { EditorContent, useEditor } from '@tiptap/react';
-import { useCallback, useState } from 'react';
+import { useEffect } from 'react';
 
-import EditorDropdownMenu from '@/components/BasicSetting/Contract/Editor/EditorDropdownMenu';
+import ToolBar from '@/components/BasicSetting/Contract/Editor/ToolBar';
 import { FontSize } from '@/components/BasicSetting/Contract/Editor/lib/font-size';
 
-const sizes = ['14', '16', '18', '24', '28', '30', '34', '38'];
-export default function Editor() {
-  const [, setFontSize] = useState('24px');
-  const editor = useEditor({
+import './editorStyle/editorCss.css';
+
+export default function EditorComponent({ setEditor }) {
+  const localEditor = useEditor({
     editorProps: {
       attributes: {
         class: 'prose prose-sm sm:prose lg:prose-lg xl:prose-2xl m-5 focus:outline-none',
@@ -35,8 +39,17 @@ export default function Editor() {
       Strike,
       Color,
       TextStyle,
+      TableRow,
+      TableCell,
+      TableHeader,
       FontSize,
       History,
+      Table.configure({
+        resizable: true,
+      }),
+      TableRow,
+      TableHeader,
+      TableCell,
       Heading.configure({
         levels: [1, 2, 3],
       }),
@@ -45,118 +58,33 @@ export default function Editor() {
       }),
     ],
     content: `
-        <h3 style="text-align:center">
-          Devs Just Want to Have Fun by Cyndi Lauper
-        </h3>
-        <p style="text-align:center">
-          I come home in the morning light<br>
-          My mother says, <mark>“When you gonna live your life right?”</mark><br>
-          Oh mother dear we’re not the fortunate ones<br>
-          And devs, they wanna have fun<br>
-          Oh devs just want to have fun</p>
-        <p style="text-align:center">
-          The phone rings in the middle of the night<br>
-          My father yells, "What you gonna do with your life?"<br>
-          Oh daddy dear, you know you’re still number one<br>
-          But <s>girls</s>devs, they wanna have fun<br>
-          Oh devs just want to have
-        </p>
-        <p style="text-align:center">
-          That’s all they really want<br>
-          Some fun<br>
-          When the working day is done<br>
-          Oh devs, they wanna have fun<br>
-          Oh devs just wanna have fun<br>
-          (devs, they wanna, wanna have fun, devs wanna have)
-        </p>
+        <h3 style="text-align: center">근로 계약서</h3>
+        <p><span style="font-size: 16px">지점명 와 근로자성명 은 아래와 같이 근로계약을 쳬결하고 상호 성실히 이행할 것을 약정한다.</span></p><p><span style="font-size: 16px">
+        <strong>제 1조 [근로계약기간]</strong></span></p>
+        <p><span style="font-size: 16px">1. "근로자"의 근로계약기간은 계약시작일 부터 계약종료일 로 한다.</span></p>
+        <p><span style="font-size: 16px">2. 종사업무는 근로자업무 및 그와 관련된 업무로 한다.</span></p>
+        <p><span style="font-size: 16px">3. 제1항 및 제2항에도 불구하고, "사용자"는 업무상 필요가 있는 경우, "근로자"의 근무장소 및 업무내용을 변경 할 수 있으며, 이 경우 "근로자"는 특별한 사정이 없는 한 이에 따라야 한다.</span></p>
       `,
-  });
-  const handleFontSizeChange = useCallback(
-    (fontSize: string) => {
-      if (!editor) return null;
-      if (fontSize) {
-        setFontSize(`${fontSize}px`);
-        editor.chain().focus().setFontSize(`${fontSize}px`).run();
-      }
+    onCreate({ editor }) {
+      editor.chain().focus().setFontSize('16px').run();
     },
-    [editor]
-  );
-  if (!editor) {
-    return null;
-  }
+  });
+  // 해당 메서드로 html 값 얻을 수 있음
+
+  // console.log(localEditor.getHTML());
+
+  useEffect(() => {
+    if (localEditor) {
+      setEditor(localEditor);
+    }
+  }, [localEditor, setEditor]);
+
   return (
-    <div className="flex flex-col items-center w-full max-h-[500px] overflow-scroll ">
-      <div className="bg-[#5b5b5b] control-group text-white w-full">
-        <div className="flex items-center justify-around button-group gap-x-2">
-          <button
-            onClick={() => editor.chain().focus().undo().run()}
-            disabled={!editor.can().undo()}
-          >
-            Undo
-          </button>
-          <button
-            onClick={() => editor.chain().focus().redo().run()}
-            disabled={!editor.can().redo()}
-          >
-            Redo
-          </button>
-          <EditorDropdownMenu sizes={sizes} handleFontSizeChange={handleFontSizeChange} />
-          {/* //TODO 컬러 설정 후 바로 닫히지 않고 화면을 클릭해야 닫힘 */}
-          <input
-            type="color"
-            onChange={(event) => {
-              const color = (event.target as HTMLInputElement).value;
-              editor.chain().focus().setColor(color).run();
-            }}
-            value={editor.getAttributes('textStyle').color || '#000000'}
-            data-id="setColor"
-            className="w-6 h-7 colorPicker"
-          />
-          <button
-            onClick={() => editor.chain().focus().toggleUnderline().run()}
-            className={editor.isActive('underline') ? 'is-active' : ''}
-          >
-            underline
-          </button>
-          <button
-            onClick={() => editor.chain().focus().toggleItalic().run()}
-            className={editor.isActive('italic') ? 'is-active' : ''}
-          >
-            italic
-          </button>
-          <button
-            onClick={() => editor.chain().focus().toggleBold().run()}
-            className={editor.isActive('italic') ? 'is-active' : ''}
-          >
-            bold
-          </button>
-          <button
-            onClick={() => editor.chain().focus().toggleStrike().run()}
-            className={editor.isActive('strike') ? 'is-active' : ''}
-          >
-            strike
-          </button>
-          <button
-            onClick={() => editor.chain().focus().setTextAlign('left').run()}
-            className={editor.isActive({ textAlign: 'left' }) ? 'is-active' : ''}
-          >
-            Left
-          </button>
-          <button
-            onClick={() => editor.chain().focus().setTextAlign('center').run()}
-            className={editor.isActive({ textAlign: 'center' }) ? 'is-active' : ''}
-          >
-            Center
-          </button>
-          <button
-            onClick={() => editor.chain().focus().setTextAlign('right').run()}
-            className={editor.isActive({ textAlign: 'right' }) ? 'is-active' : ''}
-          >
-            Right
-          </button>
-        </div>
+    <div className="relative w-full h-full max-h-[610px]  ">
+      <div className="flex flex-col items-center w-full h-full ">
+        <ToolBar editor={localEditor} />
+        <EditorContent editor={localEditor} className="editor-content" />
       </div>
-      <EditorContent editor={editor} />
     </div>
   );
 }

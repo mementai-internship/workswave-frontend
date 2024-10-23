@@ -16,11 +16,3 @@
   padding: 10px;
   background-color: #760dde;
 }
-.colorPicker {
-  background-color: transparent;
-  border: none;
-}
-.colorPicker::-webkit-color-swatch {
-  border-radius: 50%;
-  border: none;
-}
