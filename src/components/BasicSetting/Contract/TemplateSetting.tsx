@@ -1,9 +1,9 @@
 import { CiSettings } from 'react-icons/ci';
 
-import CertificateTemplate from '@/components/BasicSetting/Contract/CertificateTemplate';
-import ContractTemplate from '@/components/BasicSetting/Contract/ContractTemplateList';
+import CertificateTemplateList from '@/components/BasicSetting/Contract/CertificateTemplateList';
+import ContractTemplateList from '@/components/BasicSetting/Contract/ContractTemplateList';
 import { DocumentMapData } from '@/components/BasicSetting/Contract/DocumentHeader';
-import DocumentTemplate from '@/components/BasicSetting/Contract/DocumentTemplateList';
+import DocumentTemplateList from '@/components/BasicSetting/Contract/DocumentTemplateList';
 
 interface ITemplateSettingProps {
   title: 'contract' | 'document' | 'certificate';
@@ -22,12 +22,13 @@ export function TemplateSetting({ title }: ITemplateSettingProps) {
             onClick={() => {}}
           />
         </div>
+
         {title === 'contract' ? (
-          <ContractTemplate />
+          <ContractTemplateList />
         ) : title === 'document' ? (
-          <DocumentTemplate />
+          <DocumentTemplateList />
         ) : (
-          <CertificateTemplate />
+          <CertificateTemplateList />
         )}
       </div>
     </div>

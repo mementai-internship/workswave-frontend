@@ -22,7 +22,7 @@ const DocumentTemplateData = [
   },
 ];
 
-export default function DocumentTemplate() {
+export default function DocumentTemplateList() {
   const [activeIndex, setActiveIndex] = useState(null);
   const handleClick = (index) => {
     setActiveIndex(index === activeIndex ? null : index);

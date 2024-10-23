@@ -38,7 +38,7 @@ const CertificateTemplateData = [
   },
 ];
 
-export default function CertificateTemplate() {
+export default function CertificateTemplateList() {
   const [activeIndex, setActiveIndex] = useState(null);
   const handleClick = (index) => {
     setActiveIndex(index === activeIndex ? null : index);

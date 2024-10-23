@@ -19,7 +19,7 @@ const contractTemplateData: string[] = [
   '외국인 고용보험 가입 동의서',
 ];
 
-export default function ContractTemplate() {
+export default function ContractTemplateList() {
   const [activeIndex, setActiveIndex] = useState(null);
   const handleClick = (index) => {
     setActiveIndex(index === activeIndex ? null : index);
