@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { GrDocumentMissing } from 'react-icons/gr';
 import { IoMdStopwatch } from 'react-icons/io';
 import { RxCross2 } from 'react-icons/rx';
@@ -11,20 +10,11 @@ interface IDocumentTemplateListProps {
 }
 
 export default function DocumentTemplateList({ templateData }: IDocumentTemplateListProps) {
-  const [activeIndex, setActiveIndex] = useState(null);
-  const handleClick = (index) => {
-    setActiveIndex(index === activeIndex ? null : index);
-  };
-
   return (
-    <div className="border-2">
+    <div className="flex flex-col gap-1 border">
       {templateData?.map((data) => (
-        <div className="relative" key={data.id}>
-          <div
-            className={`mb-1 first:border-t-0 flex text-sm border border-x-0  text-[12px] items-center gap-2 p-2 cursor-pointer 
-            ${activeIndex === data.id ? 'border-blue-500' : 'border-gray-300'}`}
-            onClick={() => handleClick(data.id)}
-          >
+        <div className="relative flex flex-col gap-2 border border-b-0 border-x-0" key={data.id}>
+          <div className="first:border-t-0 flex text-sm border  border-x-0 text-[12px] items-center p-2 cursor-pointer">
             <div className="flex flex-col">
               <div className="flex gap-2">
                 <div className="flex items-center justify-center h-full px-1 text-xs text-white bg-orange-600 rounded-sm">
@@ -41,7 +31,7 @@ export default function DocumentTemplateList({ templateData }: IDocumentTemplate
             </div>
           </div>
           {data.documentState && (
-            <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-60 ">
+            <div className="absolute top-0 left-0 w-full h-full bg-black cursor-pointer bg-opacity-60">
               <div className="absolute text-xs text-white top-2 right-2">
                 {data.documentState === 'send' ? '발송된 문서' : '마감된 문서'}
               </div>
