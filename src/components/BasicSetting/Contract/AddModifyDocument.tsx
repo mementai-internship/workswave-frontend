@@ -20,7 +20,7 @@ function AddModifyDocument() {
   ];
 
   return (
-    <div className="border-[1px] border-gray-300 flex flex-col">
+    <div className="flex flex-col h-full">
       <p className="px-6 py-4 text-lg font-semibold border-b-[1px]">추가/수정하기</p>
       <div className="flex flex-col gap-1 px-5 py-5">
         {buttons.map((button, index) => (
