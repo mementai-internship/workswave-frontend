@@ -38,6 +38,8 @@ export default function HolidayCalendarHeader({
   const { data: holidays, isLoading: isHolidaysLoading } = useGetClosedDays({
     branch_id: branchId,
   });
+
+  // 현재 - MSO 기준이라 모든 브랜치 목록 받아옴 -> 분기처리 필요
   const { data: branches, isFetching } = useGetBranches('0');
 
   const branchSelection = isFetching
