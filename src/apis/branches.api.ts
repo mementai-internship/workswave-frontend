@@ -6,7 +6,7 @@ import { IBranchResponse, IBranchesRequest, IBranchesResponse } from '@/models/b
 export const branchesApi = {
   getBranches: async (page: string) => {
     try {
-      const response = await axiosInstance.get<IBranchesResponse>('/branches/list', {
+      const response = await axiosInstance.get<IBranchesResponse>('/branches/get', {
         params: { page },
       });
       return response.data;

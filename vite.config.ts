@@ -20,5 +20,8 @@ export default defineConfig(({ mode }) => {
         },
       },
     },
+    define: {
+      'process.env.VITE_BASE_URL': JSON.stringify(env.VITE_BASE_URL),
+    },
   };
 });

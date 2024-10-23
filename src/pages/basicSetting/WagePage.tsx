@@ -1,187 +1,100 @@
 import dayjs from 'dayjs';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import WageCalculate from '@/components/BasicSetting/Wage/WageCalculate';
-import WageList from '@/components/BasicSetting/Wage/WageList';
-import { IWageSetting } from '@/models/wageSetting.model';
+import WageCalculateContainer from '@/components/BasicSetting/Wage/WageCalculateContainer';
+import WageListContainer from '@/components/BasicSetting/Wage/WageListContainer';
+import { useGetBranches } from '@/hooks/apis/useBranches';
+import { useGetParts } from '@/hooks/apis/useParts';
+import {
+  useDeleteSalaryTemplates,
+  useGetSalaryTemplates,
+  usePatchSalaryTemplates,
+  usePostSalaryTemplates,
+} from '@/hooks/apis/useSalaryTemplates';
+import { ISalaryTemplatesItem } from '@/models/salary-templates.model';
 
 export type TWageEditMode = { isEdit: boolean; editItemId: number | null };
 
-const POSITION_OPTIONS = [
-  { id: 1, name: '사원' },
-  { id: 2, name: '매니저' },
-  { id: 3, name: '임원' },
-  { id: 4, name: '파트타이머' },
-];
-
-const branches = [
-  { name: 'mementoAI', id: 1 },
-  { name: '수원 뮤즈의원', id: 2 },
-];
-
-const DUMMY_DATA_WAGE = [
-  {
-    templateName: '기본 템플릿',
-    templateId: 1,
-    positionName: '사원',
-    positionId: 1,
-    hireYear: 2020,
-    isJanuaryHire: true,
-    workingDays: 5,
-    monthlySalary: 3000000,
-    hourlyWage: 187.5, // 시급 (3000000 / (20 days * 8 hours))
-    baseSalary: 3000000, // 기본급
-    annualSalary: 36000000, // 연봉 (3000000 * 12)
-    includesHolidayAllowance: false,
-    checksDutyAllowance: true,
-    weeklyRestHours: 8,
-    annualAllowanceDays: 15,
-    annualLeaveHours: 120,
-    inclusiveOvertimeAllowance: 200000,
-    overtimeHDays: 10,
-    annualAllowance: 150000,
-    holidayAllowance: 50000,
-    holidayHours: 5,
-    dutyAllowance: 100000,
-    mealAllowance: 200000,
-  },
-  {
-    templateName: '매니저 템플릿',
-    templateId: 2,
-    positionName: '매니저',
-    positionId: 2,
-    hireYear: 2018,
-    isJanuaryHire: false,
-    workingDays: 5,
-    monthlySalary: 4000000,
-    hourlyWage: 250, // 시급 (4000000 / (20 days * 8 hours))
-    baseSalary: 4000000, // 기본급
-    annualSalary: 48000000, // 연봉 (4000000 * 12)
-    includesHolidayAllowance: true,
-    checksDutyAllowance: false,
-    weeklyRestHours: 10,
-    annualAllowanceDays: 12,
-    annualLeaveHours: 100,
-    inclusiveOvertimeAllowance: 300000,
-    overtimeHDays: 15,
-    annualAllowance: 200000,
-    holidayAllowance: 60000,
-    holidayHours: 8,
-    dutyAllowance: 200000,
-    mealAllowance: 250000,
-  },
-  {
-    templateName: '임원 템플릿',
-    templateId: 3,
-    positionName: '임원',
-    positionId: 3,
-    hireYear: 2015,
-    isJanuaryHire: true,
-    workingDays: 5,
-    monthlySalary: 6000000,
-    hourlyWage: 375, // 시급 (6000000 / (20 days * 8 hours))
-    baseSalary: 6000000, // 기본급
-    annualSalary: 72000000, // 연봉 (6000000 * 12)
-    includesHolidayAllowance: true,
-    checksDutyAllowance: true,
-    weeklyRestHours: 6,
-    annualAllowanceDays: 20,
-    annualLeaveHours: 150,
-    inclusiveOvertimeAllowance: 400000,
-    overtimeHDays: 20,
-    annualAllowance: 300000,
-    holidayAllowance: 80000,
-    holidayHours: 10,
-    dutyAllowance: 300000,
-    mealAllowance: 300000,
-  },
-  {
-    templateName: '파트타임 템플릿',
-    templateId: 4,
-    positionName: '파트타이머',
-    positionId: 4,
-    hireYear: 2021,
-    isJanuaryHire: false,
-    workingDays: 5,
-    monthlySalary: 1500000,
-    hourlyWage: 93.75, // 시급 (1500000 / (20 days * 8 hours))
-    baseSalary: 1500000, // 기본급
-    annualSalary: 18000000, // 연봉 (1500000 * 12)
-    includesHolidayAllowance: false,
-    checksDutyAllowance: false,
-    weeklyRestHours: 4,
-    annualAllowanceDays: 5,
-    annualLeaveHours: 40,
-    inclusiveOvertimeAllowance: 100000,
-    overtimeHDays: 5,
-    annualAllowance: 50000,
-    holidayAllowance: 30000,
-    holidayHours: 3,
-    dutyAllowance: 50000,
-    mealAllowance: 100000,
-  },
-];
-
 export default function WagePage() {
-  const list = DUMMY_DATA_WAGE;
-  const parts = POSITION_OPTIONS;
-
   const currentYear = dayjs().year();
+  const { data: branchesDB } = useGetBranches('0');
+
   const [editMode, setEditMode] = useState<TWageEditMode>({ isEdit: false, editItemId: null });
-  const [selectedBranchId, setSelectedBranchId] = useState<number>(null);
+  const [selectedBranchId, setSelectedBranchId] = useState<number>(1);
   const [selectedPartId, setSelectedPartId] = useState<number>(null);
-  const { control, handleSubmit, reset, setValue } = useForm<IWageSetting>({
+
+  const { data: salaryTemplates } = useGetSalaryTemplates(selectedBranchId);
+  const { data: parts } = useGetParts(selectedBranchId);
+
+  const { mutate: postSalaryTemplate } = usePostSalaryTemplates(selectedBranchId);
+  const { mutate: patchSalaryTemplate } = usePatchSalaryTemplates(selectedBranchId);
+  const { mutate: deleteSalaryTemplate } = useDeleteSalaryTemplates(selectedBranchId);
+
+  const { watch, control, handleSubmit, reset, setValue } = useForm<ISalaryTemplatesItem>({
     defaultValues: {
-      templateId: undefined,
-      templateName: '',
-      positionName: undefined,
-      positionId: undefined,
-      hireYear: currentYear,
-      isJanuaryHire: false,
-      workingDays: 5,
-      monthlySalary: 0,
-      hourlyWage: 0,
-      baseSalary: 0,
-      annualSalary: 0,
-      includesHolidayAllowance: false,
-      checksDutyAllowance: false,
-      weeklyRestHours: 0,
-      annualAllowanceDays: 0,
-      annualLeaveHours: 0,
-      inclusiveOvertimeAllowance: 0,
-      overtimeHDays: 0,
-      annualAllowance: 0,
-      holidayAllowance: 0,
-      holidayHours: 0,
-      dutyAllowance: 0,
-      mealAllowance: 0,
+      id: null,
+      part_id: null,
+      part_name: null,
+      name: '',
+      is_january_entry: false,
+      weekly_work_days: 5,
+      month_salary: 0,
+      included_holiday_allowance: false,
+      included_job_allowance: false,
+      hour_wage: 0,
+      basic_salary: 0,
+      contractual_working_hours: 0,
+      weekly_rest_hours: 0,
+      annual_salary: 0,
+      comprehensive_overtime_allowance: 0,
+      comprehensive_overtime_hour: 0,
+      annual_leave_allowance: 0,
+      annual_leave_allowance_hour: 0,
+      annual_leave_allowance_day: 0,
     },
   });
+
+  const monthSalaryInput = watch('month_salary');
+  const workingDays = watch('weekly_work_days');
+
+  // 월급입력하면 계산해서 폼 데이터 수정하기
+  useEffect(() => {
+    const annualSalary = monthSalaryInput * 12;
+    const workingHour = (workingDays * 8 + 8) * 4.35;
+    const hourWage = Math.ceil(monthSalaryInput / workingHour);
+    setValue('annual_salary', annualSalary);
+    setValue('basic_salary', monthSalaryInput);
+    setValue('hour_wage', hourWage);
+  }, [monthSalaryInput, workingDays, setValue]);
+
+  const branches = branchesDB?.list?.map((branch) => ({ id: branch.id, name: branch.name })) ?? [];
 
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
+    const newItem = {
+      ...data,
+      part_name: parts.find((part) => part.id === Number(data.part_id)).name,
+    };
+
+    if (editMode.isEdit) {
+      // 수정하기
+      patchSalaryTemplate(
+        { salaryTemplateId: data.id, body: newItem },
+        { onSuccess: () => reset() }
+      );
+    } else {
+      // 새로운 아이템 추가하기
+      postSalaryTemplate(newItem, { onSuccess: () => reset() });
+    }
   });
-
-  const yearsArrayOptions = Array.from({ length: 21 }, (_, index) => index - 10).reduce(
-    (acc, yearOffset) => {
-      const year = currentYear + yearOffset;
-      acc.push({ id: year, name: year + '년', action: () => {} });
-      return acc;
-    },
-    []
-  );
-
-  const workingDaysOptions = Array.from({ length: 7 }).map((_, i) => ({
-    id: i + 1,
-    name: `${i + 1}일`,
-  }));
 
   const activeEditMode = (id: number) => {
     setEditMode({ editItemId: id, isEdit: true });
 
-    const item = list.find((item) => item.templateId === id);
-    Object.entries(item).forEach(([key, value]) => setValue(key as keyof IWageSetting, value));
+    const item: ISalaryTemplatesItem = salaryTemplates.find((item) => item.id === id);
+    Object.entries(item).forEach(([key, value]) =>
+      setValue(key as keyof ISalaryTemplatesItem, value)
+    );
   };
 
   const handleCloseEditMode = () => {
@@ -198,12 +111,12 @@ export default function WagePage() {
   };
 
   const handleDeleteItem = (id: number) => {
-    console.log('아이템 삭제', id);
+    deleteSalaryTemplate(id);
   };
 
   return (
-    <div className="w-full bg-white flex">
-      <WageList
+    <div className="w-full bg-white flex min-w-[1500px] min-h-[600px] max-h-[calc(100vh-200px)] overflow-y-scroll">
+      <WageListContainer
         editMode={editMode}
         activeEditMode={activeEditMode}
         handleDeleteItem={handleDeleteItem}
@@ -213,13 +126,11 @@ export default function WagePage() {
         selectedPartId={selectedPartId}
         branches={branches}
         parts={parts}
-        list={list}
+        list={salaryTemplates}
       />
-      <WageCalculate
+      <WageCalculateContainer
         editMode={editMode}
         currentYear={currentYear}
-        yearsArrayOptions={yearsArrayOptions}
-        workingDaysOptions={workingDaysOptions}
         onSubmit={onSubmit}
         control={control}
         positionOptions={parts}

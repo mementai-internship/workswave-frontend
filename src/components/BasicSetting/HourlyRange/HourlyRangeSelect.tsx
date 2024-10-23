@@ -39,7 +39,7 @@ const HourlyRangeSelect = forwardRef<HTMLButtonElement, IProps>(
         <Select.Trigger
           variant={!isBorder ? 'ghost' : 'surface'}
           radius="none"
-          className={`bg-transparent text-black px-4 py-4 ${isTitle ? 'text-lg' : 'text-md'} ${isWidthFull ? 'grow' : 'w-36'}`}
+          className={`bg-transparent text-black px-4 py-4 ${isTitle ? 'text-lg' : 'text-md'} ${isWidthFull ? 'grow' : 'w-24'}`}
           placeholder={placeholder || undefined}
           ref={ref}
           type="submit"
