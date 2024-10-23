@@ -8,9 +8,9 @@ export default function ContractPage() {
   return (
     <div className="flex w-full gap-2">
       <div className="flex flex-col w-full border bg-light-gray">
-        <DocumentHeader title="contract" />
+        <DocumentHeader title="certificate" />
         <div className="flex h-full gap-4">
-          <ContractTextList documentName={'계약서'} />
+          <ContractTextList documentType="certificate" />
           <div className="flex items-center justify-center w-2/3 mb-2 bg-white border">
             <Editor />
           </div>
@@ -19,7 +19,7 @@ export default function ContractPage() {
           </div>
         </div>
       </div>
-      <TemplateSetting title={'계약서'} />
+      <TemplateSetting title="certificate" />
     </div>
   );
 }
