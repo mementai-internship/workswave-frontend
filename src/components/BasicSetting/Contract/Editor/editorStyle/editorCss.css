@@ -12,6 +12,14 @@
   margin: 20px 0;
   font-size: 18px;
   text-align: left;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background: #ccc;
+  }
 }
 
 .editor-content th,
