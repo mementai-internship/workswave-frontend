@@ -21,6 +21,7 @@ const userManagementApi = {
       );
       return response.data;
     } catch (error) {
+      console.log('error', error);
       isAxiosError(error);
       throw new Error('사용자 목록을 가져오는 데 실패했습니다.');
     }
