@@ -1,19 +1,28 @@
+import { Editor } from '@tiptap/react';
 import { GrDocumentMissing } from 'react-icons/gr';
 import { IoMdStopwatch } from 'react-icons/io';
 import { RxCross2 } from 'react-icons/rx';
 import { TbMailDown, TbMailUp } from 'react-icons/tb';
 
+import { setDocumentToEditor } from '@/components/BasicSetting/Contract/Editor/lib/getDocument';
 import { IDocumentTemplate } from '@/components/BasicSetting/Contract/TemplateSetting';
 
 interface IDocumentTemplateListProps {
   templateData: IDocumentTemplate[];
+  editor: Editor;
 }
 
-export default function DocumentTemplateList({ templateData }: IDocumentTemplateListProps) {
+export default function DocumentTemplateList({ templateData, editor }: IDocumentTemplateListProps) {
   return (
     <div className="flex flex-col gap-1 border">
       {templateData?.map((data) => (
-        <div className="relative flex flex-col gap-2 border border-b-0 border-x-0" key={data.id}>
+        <div
+          onClick={() => {
+            setDocumentToEditor('document', editor);
+          }}
+          className="relative flex flex-col gap-2 border border-b-0 border-x-0"
+          key={data.id}
+        >
           <div className="first:border-t-0 flex text-sm border  border-x-0 text-[12px] items-center p-2 cursor-pointer">
             <div className="flex flex-col">
               <div className="flex gap-2">

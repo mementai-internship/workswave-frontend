@@ -1,3 +1,4 @@
+import { Editor } from '@tiptap/react';
 import { useEffect, useState } from 'react';
 import { CiSettings } from 'react-icons/ci';
 
@@ -35,11 +36,11 @@ export interface IDocumentTemplate {
 
 interface ITemplateSettingProps {
   title: 'contract' | 'document' | 'certificate';
+  editor: Editor;
 }
 
-export function TemplateSetting({ title }: ITemplateSettingProps) {
+export function TemplateSetting({ title, editor }: ITemplateSettingProps) {
   const [templateData, setTemplateData] = useState<IDocumentTemplate[]>();
-
   useEffect(() => {
     setTemplateData(DocumentTemplateData);
   }, []);
@@ -96,11 +97,11 @@ export function TemplateSetting({ title }: ITemplateSettingProps) {
         )}
 
         {title === 'contract' ? (
-          <ContractTemplateList />
+          <ContractTemplateList editor={editor} />
         ) : title === 'document' ? (
-          <DocumentTemplateList templateData={templateData} />
+          <DocumentTemplateList templateData={templateData} editor={editor} />
         ) : (
-          <CertificateTemplateList />
+          <CertificateTemplateList editor={editor} />
         )}
       </div>
     </div>

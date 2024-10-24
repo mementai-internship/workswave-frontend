@@ -8,6 +8,7 @@
 }
 .editor-content {
   width: 100%;
+  height: 100%;
   border-collapse: collapse;
   padding: 8px;
   font-size: 18px;
@@ -22,19 +23,15 @@
   }
   table {
     width: 100%;
-
     th,
     td {
       padding: 12px 15px;
       border: 1px solid #ddd;
+      min-width: 100px;
     }
-    th {
-      background-color: #f4f4f4;
-      font-weight: bold;
-    }
-    tr {
-      background-color: #fff;
-    }
+  }
+  p {
+    margin: 12px 0px;
   }
 }
 
