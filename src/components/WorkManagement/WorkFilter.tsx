@@ -32,7 +32,7 @@ export default function WorkFilter() {
     items ? items.map((item) => ({ id: item.id, name: item.name })) : [];
 
   return (
-    <div className="flex justify-between py-5 border-t border-gray-200">
+    <div className="flex justify-between pt-5 pb-2 border-t border-gray-200">
       <div className="flex gap-3">
         <WorkSelect
           options={mapToOptions(branches?.list)}
@@ -51,6 +51,7 @@ export default function WorkFilter() {
           defaultValue="파트 선택"
         />
       </div>
+      {/* 검색 안되면 기존 검색 컴포넌트 써보기 */}
       <WorkSearchInput />
     </div>
   );

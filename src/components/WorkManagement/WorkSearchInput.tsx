@@ -56,13 +56,11 @@ function WorkSearchInput() {
     });
 
     if (isNameValid && isPhoneValid) {
-      console.log(data);
       // TODO: API call when ready
       if (data.name.length > 0) setName(data.name);
       if (data.phoneNumber.length > 0) setPhoneNumber(data.phoneNumber);
     }
   };
-  console.log(isSearchValid);
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Flex direction="row" gap="2">

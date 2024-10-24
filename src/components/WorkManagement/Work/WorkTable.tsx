@@ -1,14 +1,15 @@
 import { Table } from '@radix-ui/themes';
 import { useAtom } from 'jotai';
+import { useLocation } from 'react-router-dom';
 
 import WorkTableRows from '@/components/WorkManagement/Work/WorkTableRows';
 import { TOptions } from '@/components/WorkManagement/WorkSelect';
 import { WORKTABLE } from '@/constants/workManagement/workTable';
-import { IWorkData } from '@/models/work.model';
+// import { IWorkData } from '@/models/work.model';
 // import { workMockData } from '@/constants/workManagement/workTable.mock';
 import { selectedBranchAtom, selectedDepartmentAtom } from '@/store/atoms';
 
-const MOCK_Users: IWorkData[] = [
+const MOCK_Users = [
   {
     annualLeaveUsed: 2,
     branch: '뮤즈 (서초점)',
@@ -29,6 +30,7 @@ const MOCK_Users: IWorkData[] = [
     weekendWorkPay: 0,
     workDate: 1,
     workFromHome: 1,
+    pageNum: 1,
   },
   {
     annualLeaveUsed: 2,
@@ -50,6 +52,7 @@ const MOCK_Users: IWorkData[] = [
     weekendWorkPay: 0,
     workDate: 1,
     workFromHome: 1,
+    pageNum: 1,
   },
   {
     annualLeaveUsed: 2,
@@ -71,6 +74,7 @@ const MOCK_Users: IWorkData[] = [
     weekendWorkPay: 0,
     workDate: 1,
     workFromHome: 1,
+    pageNum: 1,
   },
   {
     annualLeaveUsed: 2,
@@ -92,6 +96,95 @@ const MOCK_Users: IWorkData[] = [
     weekendWorkPay: 0,
     workDate: 1,
     workFromHome: 1,
+    pageNum: 1,
+  },
+  {
+    annualLeaveUsed: 2,
+    branch: '뮤즈 (서초점)',
+    days: 4,
+    department: '간호사',
+    gender: 0,
+    holidayWork: 0,
+    id: 0,
+    leaveDate: 0,
+    name: '김영희',
+    overtimeCount30min: 3,
+    overtimeCount60min: 1,
+    overtimeCount90min: 0,
+    regularDaysOff: 1,
+    totalOvertime: 5000,
+    unpaidLeaveUsed: 0,
+    weekendWorkHours: 0,
+    weekendWorkPay: 0,
+    workDate: 1,
+    workFromHome: 1,
+    pageNum: 2,
+  },
+  {
+    annualLeaveUsed: 2,
+    branch: '뮤즈 (인천점)',
+    days: 4,
+    department: '의사',
+    gender: 0,
+    holidayWork: 0,
+    id: 0,
+    leaveDate: 0,
+    name: '박철수',
+    overtimeCount30min: 3,
+    overtimeCount60min: 1,
+    overtimeCount90min: 0,
+    regularDaysOff: 1,
+    totalOvertime: 5000,
+    unpaidLeaveUsed: 0,
+    weekendWorkHours: 0,
+    weekendWorkPay: 0,
+    workDate: 1,
+    workFromHome: 1,
+    pageNum: 2,
+  },
+  {
+    annualLeaveUsed: 2,
+    branch: '뮤즈 (대구점)',
+    days: 4,
+    department: '간호사',
+    gender: 0,
+    holidayWork: 0,
+    id: 0,
+    leaveDate: 0,
+    name: '이성령',
+    overtimeCount30min: 3,
+    overtimeCount60min: 1,
+    overtimeCount90min: 0,
+    regularDaysOff: 1,
+    totalOvertime: 5000,
+    unpaidLeaveUsed: 0,
+    weekendWorkHours: 0,
+    weekendWorkPay: 0,
+    workDate: 1,
+    workFromHome: 1,
+    pageNum: 2,
+  },
+  {
+    annualLeaveUsed: 2,
+    branch: '평양점',
+    days: 4,
+    department: '의사',
+    gender: 0,
+    holidayWork: 0,
+    id: 0,
+    leaveDate: 0,
+    name: '박지인',
+    overtimeCount30min: 3,
+    overtimeCount60min: 1,
+    overtimeCount90min: 0,
+    regularDaysOff: 1,
+    totalOvertime: 5000,
+    unpaidLeaveUsed: 0,
+    weekendWorkHours: 0,
+    weekendWorkPay: 0,
+    workDate: 1,
+    workFromHome: 1,
+    pageNum: 2,
   },
 ];
 
@@ -104,6 +197,10 @@ export interface WorkTableContext {
 export default function WorkTable() {
   const [selectedBranch] = useAtom(selectedBranchAtom);
   const [selectedDepartment] = useAtom(selectedDepartmentAtom);
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  //useQuery에 page, 지점, 파트, 이름, 전화번호를 전달해주는 함수가 필요함
+  console.log(queryParams.get('page'));
 
   // 모든 정보 data로 받아옴
   // branch만 있을 때, 둘 다 있을 때 분기처리로 데이터 가공
@@ -134,9 +231,11 @@ export default function WorkTable() {
       </Table.Header>
 
       <Table.Body>
-        {filteredData.map((data) => {
-          return <WorkTableRows key={data.id} data={data} />;
-        })}
+        {filteredData
+          .filter((data) => data.pageNum === Number(queryParams.get('page')))
+          .map((data) => {
+            return <WorkTableRows key={data.id} data={data} />;
+          })}
       </Table.Body>
     </Table.Root>
   );
