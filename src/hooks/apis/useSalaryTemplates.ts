@@ -6,7 +6,7 @@ import { ISalaryTemplatesItem } from '@/models/salary-templates.model';
 
 export const useGetSalaryTemplates = (branchId: number) => {
   return useQuery({
-    queryKey: [QUERY_KEYS.salaryTemplates],
+    queryKey: [QUERY_KEYS.salaryTemplates, branchId],
     queryFn: () => salaryTemplatesApi.getSalaryTemplates(branchId),
     enabled: !!branchId,
   });
