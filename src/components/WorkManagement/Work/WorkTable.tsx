@@ -4,10 +4,11 @@ import { useAtom } from 'jotai';
 import WorkTableRows from '@/components/WorkManagement/Work/WorkTableRows';
 import { TOptions } from '@/components/WorkManagement/WorkSelect';
 import { WORKTABLE } from '@/constants/workManagement/workTable';
+import { IWorkData } from '@/models/work.model';
 // import { workMockData } from '@/constants/workManagement/workTable.mock';
 import { selectedBranchAtom, selectedDepartmentAtom } from '@/store/atoms';
 
-const MOCK_Users = [
+const MOCK_Users: IWorkData[] = [
   {
     annualLeaveUsed: 2,
     branch: '뮤즈 (서초점)',
@@ -98,6 +99,8 @@ export interface WorkTableContext {
   selectedBranch: TOptions | null;
   selectedDepartment: TOptions | null;
 }
+
+// TODO 후에 백단에 브런치와 파트의 정보만 쏴주면 필터링된 데이터가 돌아올 것
 export default function WorkTable() {
   const [selectedBranch] = useAtom(selectedBranchAtom);
   const [selectedDepartment] = useAtom(selectedDepartmentAtom);
@@ -115,7 +118,7 @@ export default function WorkTable() {
     if (!selectedDepartment) return branchMatch;
     return branchMatch && departmentMatch;
   });
-  console.log(filteredData);
+
   return (
     <Table.Root className="mb-5">
       <Table.Header className="text-xs text-gray-700 bg-gray-200 border-t border-gray-300 whitespace-nowrap">

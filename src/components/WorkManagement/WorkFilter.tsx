@@ -2,7 +2,8 @@ import { useAtom } from 'jotai';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import ContactSearchInput from '@/components/Common/ContactSearchInput';
+// import ContactSearchInput from '@/components/Common/ContactSearchInput';
+import WorkSearchInput from '@/components/WorkManagement/WorkSearchInput';
 import WorkSelect, { TOptions } from '@/components/WorkManagement/WorkSelect';
 import { useGetBranches } from '@/hooks/apis/useBranches';
 import { useGetParts } from '@/hooks/apis/useParts';
@@ -50,8 +51,7 @@ export default function WorkFilter() {
           defaultValue="파트 선택"
         />
       </div>
-
-      <ContactSearchInput />
+      <WorkSearchInput />
     </div>
   );
 }
