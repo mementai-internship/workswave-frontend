@@ -15,7 +15,7 @@ export default function CertificatePage() {
         <DocumentHeader title="certificate" />
         <div className="flex h-full gap-4">
           <ContractTextList documentType="certificate" />
-          <div className="flex items-center justify-center w-2/3 mb-2 bg-white border">
+          <div className="flex justify-center w-2/3 bg-white border">
             <EditorComponent setEditor={setEditor} />
           </div>
           <div className="flex items-start justify-center w-1/3 mr-4 bg-white border">
@@ -23,7 +23,7 @@ export default function CertificatePage() {
           </div>
         </div>
       </div>
-      <TemplateSetting title="certificate" />
+      <TemplateSetting editor={editor} title="certificate" />
     </div>
   );
 }

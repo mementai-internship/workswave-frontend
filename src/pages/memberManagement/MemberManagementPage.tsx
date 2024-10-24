@@ -79,8 +79,6 @@ export default function MemberManagementPage() {
     updatedSearchPhone,
   });
 
-  console.log(userList);
-
   const { data: currentUser } = useGetCurrentUserInfo();
 
   const tabList = [

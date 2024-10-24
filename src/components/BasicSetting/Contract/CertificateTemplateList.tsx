@@ -1,5 +1,8 @@
+import { Editor } from '@tiptap/react';
 import { useState } from 'react';
 import { IoIosStar, IoIosStarOutline } from 'react-icons/io';
+
+import { setDocumentToEditor } from '@/components/BasicSetting/Contract/Editor/lib/getDocument';
 
 interface ICertificateTemplateData {
   id: number;
@@ -47,7 +50,11 @@ const CertificateTemplateData: ICertificateTemplateData[] = [
   },
 ];
 
-export default function CertificateTemplateList() {
+interface ICertificateTemplateListProps {
+  editor: Editor;
+}
+
+export default function CertificateTemplateList({ editor }: ICertificateTemplateListProps) {
   const [activeIndex, setActiveIndex] = useState(null);
   const handleClick = (index) => {
     setActiveIndex(index === activeIndex ? null : index);
@@ -56,7 +63,12 @@ export default function CertificateTemplateList() {
   return (
     <div className="flex flex-col gap-1">
       {CertificateTemplateData.map((data) => (
-        <div className="relative">
+        <div
+          onClick={() => {
+            setDocumentToEditor('certificate', editor);
+          }}
+          className="relative"
+        >
           <div
             key={data.id}
             className={`flex text-sm border text-[12px] items-center p-2 cursor-pointer 

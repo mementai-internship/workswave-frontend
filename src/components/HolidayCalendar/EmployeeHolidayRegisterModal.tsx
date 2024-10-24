@@ -140,11 +140,13 @@ export default function EmployeeHolidayRegisterModal({
                             formatCaption: (date: Date) => dayjs(date).format('YYYY년 MM월'),
                           }}
                           classNames={{
-                            day: 'p-1 text-lg',
-                            today: `font-bold text-xl text-amber-500`,
+                            root: `${defaultClassNames.root} w-full h-full gap-2`,
+                            chevron: `${defaultClassNames.chevron} w-8 h-8 fill-purple-30`,
+                            month_caption: 'flex justify-center text-2xl font-bold h-12',
+                            weekday: 'text-lg',
+                            day_button: 'w-12 h-12 text-xl',
+                            today: `font-bold text-amber-500`,
                             selected: `bg-purple-10 rounded-full`,
-                            root: `${defaultClassNames.root}`,
-                            chevron: `${defaultClassNames.chevron} fill-purple-30`,
                           }}
                           disabled={!currentEmployee}
                         />

@@ -57,20 +57,12 @@ export default function EditorComponent({ setEditor }) {
         types: ['heading', 'paragraph'],
       }),
     ],
-    content: `
-        <h3 style="text-align: center">근로 계약서</h3>
-        <p><span style="font-size: 16px">지점명 와 근로자성명 은 아래와 같이 근로계약을 쳬결하고 상호 성실히 이행할 것을 약정한다.</span></p><p><span style="font-size: 16px">
-        <strong>제 1조 [근로계약기간]</strong></span></p>
-        <p><span style="font-size: 16px">1. "근로자"의 근로계약기간은 계약시작일 부터 계약종료일 로 한다.</span></p>
-        <p><span style="font-size: 16px">2. 종사업무는 근로자업무 및 그와 관련된 업무로 한다.</span></p>
-        <p><span style="font-size: 16px">3. 제1항 및 제2항에도 불구하고, "사용자"는 업무상 필요가 있는 경우, "근로자"의 근무장소 및 업무내용을 변경 할 수 있으며, 이 경우 "근로자"는 특별한 사정이 없는 한 이에 따라야 한다.</span></p>
-      `,
+    content: ``,
     onCreate({ editor }) {
       editor.chain().focus().setFontSize('16px').run();
     },
   });
   // 해당 메서드로 html 값 얻을 수 있음
-
   // console.log(localEditor.getHTML());
 
   useEffect(() => {
@@ -80,8 +72,16 @@ export default function EditorComponent({ setEditor }) {
   }, [localEditor, setEditor]);
 
   return (
-    <div className="relative w-full h-full max-h-[610px]  ">
-      <div className="flex flex-col items-center w-full h-full ">
+    <div className="relative w-full h-full max-h-[780px]">
+      <div
+        onClick={(e) => {
+          const targetElement = e.target as HTMLElement;
+          if (targetElement.className.includes('editor-content')) {
+            localEditor.chain().focus().insertContent('<p></p>').run();
+          }
+        }}
+        className="flex flex-col items-center w-full h-full "
+      >
         <ToolBar editor={localEditor} />
         <EditorContent editor={localEditor} className="editor-content" />
       </div>

@@ -22,7 +22,7 @@ export default function DocumentPage() {
           </div>
         </div>
       </div>
-      <TemplateSetting title="document" />
+      <TemplateSetting editor={editor} title="document" />
     </div>
   );
 }
