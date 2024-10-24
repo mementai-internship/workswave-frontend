@@ -6,10 +6,6 @@ import CertificateTemplateList from '@/components/BasicSetting/Contract/Certific
 import ContractTemplateList from '@/components/BasicSetting/Contract/ContractTemplateList';
 import { DocumentMapData } from '@/components/BasicSetting/Contract/DocumentHeader';
 import DocumentTemplateList from '@/components/BasicSetting/Contract/DocumentTemplateList';
-import {
-  MOCK_DOCUMENT,
-  getDocument,
-} from '@/components/BasicSetting/Contract/Editor/lib/getDocument';
 import SelectBox from '@/components/Common/Select';
 
 const DocumentTemplateData: IDocumentTemplate[] = [
@@ -49,12 +45,6 @@ export function TemplateSetting({ title, editor }: ITemplateSettingProps) {
     setTemplateData(DocumentTemplateData);
   }, []);
 
-  const handleSetContent = (document: string) => {
-    const contentStr = getDocument(MOCK_DOCUMENT, document);
-    if (!contentStr) return console.error('문서 호출 실패');
-    console.log(editor);
-    editor.commands.setContent(contentStr);
-  };
   const onSelectFilter = (filter?) => {
     if (filter) {
       return DocumentTemplateData.filter((item) => item.documentState === filter);
@@ -107,11 +97,11 @@ export function TemplateSetting({ title, editor }: ITemplateSettingProps) {
         )}
 
         {title === 'contract' ? (
-          <ContractTemplateList handleSetContent={handleSetContent} />
+          <ContractTemplateList editor={editor} />
         ) : title === 'document' ? (
-          <DocumentTemplateList templateData={templateData} handleSetContent={handleSetContent} />
+          <DocumentTemplateList templateData={templateData} editor={editor} />
         ) : (
-          <CertificateTemplateList handleSetContent={handleSetContent} />
+          <CertificateTemplateList editor={editor} />
         )}
       </div>
     </div>

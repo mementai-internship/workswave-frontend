@@ -1,5 +1,8 @@
+import { Editor } from '@tiptap/react';
 import { useState } from 'react';
 import { HiOutlineDocumentText } from 'react-icons/hi2';
+
+import { setDocumentToEditor } from '@/components/BasicSetting/Contract/Editor/lib/getDocument';
 
 const contractTemplateData: string[] = [
   '개인정보 제공 동의서(기본문서)',
@@ -19,13 +22,13 @@ const contractTemplateData: string[] = [
   '외국인 고용보험 가입 동의서',
 ];
 interface IContractTemplateListProps {
-  handleSetContent: (document: string) => void;
+  editor: Editor;
 }
 
-export default function ContractTemplateList({ handleSetContent }: IContractTemplateListProps) {
+export default function ContractTemplateList({ editor }: IContractTemplateListProps) {
   const [activeIndex, setActiveIndex] = useState(null);
   const handleClick = (index) => {
-    handleSetContent('contract');
+    setDocumentToEditor('contract', editor);
     setActiveIndex(index === activeIndex ? null : index);
   };
 

@@ -22,18 +22,11 @@
   }
   table {
     width: 100%;
-
     th,
     td {
       padding: 12px 15px;
       border: 1px solid #ddd;
-    }
-    th {
-      background-color: #f4f4f4;
-      font-weight: bold;
-    }
-    tr {
-      background-color: #fff;
+      min-width: 100px;
     }
   }
 }

@@ -14,7 +14,7 @@ export default function ContractPage() {
         <DocumentHeader title="contract" />
         <div className="flex h-full gap-4">
           <ContractTextList documentType="contract" />
-          <div className="flex items-center justify-center w-2/3 bg-white border">
+          <div className="flex justify-center w-2/3 bg-white border">
             <EditorComponent setEditor={setEditor} />
           </div>
           <div className="flex items-start justify-center w-1/3 mr-4 bg-white border">
