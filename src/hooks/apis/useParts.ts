@@ -34,8 +34,8 @@ export const usePostParts = (branchId: number): UseMutationResult<IPartsResponse
       });
     },
     onError: () => {
-      toast.error('파트 추가에 실패했습니다.', {
-        timer: 500000,
+      toast.notice('파트 추가에 실패했습니다.', {
+        timer: 2000,
       });
     },
   });
@@ -69,13 +69,12 @@ export const useDeleteParts = (branchId: number) => {
       console.log('scucess');
       queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.parts, branchId] });
       toast.success('파트가 성공적으로 삭제됐습니다.', {
-        timer: 500000,
+        timer: 2000,
       });
     },
-    onError: (error) => {
-      console.log('inner', error);
+    onError: () => {
       toast.error('파트 삭제에 실패했습니다.', {
-        timer: 50000,
+        timer: 2000,
       });
     },
   });
