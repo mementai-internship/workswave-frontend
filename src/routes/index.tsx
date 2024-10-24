@@ -4,185 +4,57 @@ import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom'
 import DocumentManagementLayout from '@/components/DocumentManagement/DocumentManagementLayout';
 import WorkManagementLayout from '@/components/WorkManagement/WorkManagementLayout';
 import RootLayout from '@/layout/root';
-import BoardPage from '@/pages/basicSetting/BoardPage';
-import CalendarPage from '@/pages/basicSetting/CalendarPage';
-import CertificatePage from '@/pages/basicSetting/CertificatePage';
-import ContractPage from '@/pages/basicSetting/ContractPage';
-import DayOffPage from '@/pages/basicSetting/DayOffPage';
-import DocumentPage from '@/pages/basicSetting/DocumentPage';
-import HourlyRangePage from '@/pages/basicSetting/HourlyRangePage';
-import HrManagementSettingPage from '@/pages/basicSetting/HrManagementPage';
-import SalaryRangePage from '@/pages/basicSetting/SalaryRangePage';
-import WagePage from '@/pages/basicSetting/WagePage';
-import ContractManagement from '@/pages/documentManagement/ContractManagement';
-import TimeoffManagement from '@/pages/documentManagement/TimeoffManagement';
-import ManagementDeleteOfficePage from '@/pages/officeSetting/ManagementDeleteOfficePage';
-import CommuteManagementPage from '@/pages/workManagement/CommuteManagementPage';
-import PartManagementPage from '@/pages/workManagement/PartManagementPage';
+import WorkingPage from '@/pages/basicSetting/WorkingPage';
+import DayoffManagementPage from '@/pages/dayoffManagement/DayoffManagement';
+import CertificateManagement from '@/pages/documentManagement/certificationManagement/CertificateManagement';
+import HolidayCalendarPage from '@/pages/holidayCalendar/HolidayCalendarPage';
+import HomePage from '@/pages/home/HomePage';
+import Login from '@/pages/login/Login';
+import MemberManagementPage from '@/pages/memberManagement/MemberManagementPage';
+import SuperManagerSetting from '@/pages/memberManagement/SuperManagerSetting';
+import ManagementOfficePage from '@/pages/officeSetting/ManagementOfficePage';
+import OtManagementPage from '@/pages/otManagement/OtManagementPage';
+import SalarySettlementPage from '@/pages/salarySettlement/SalarySettlementPage';
+import SimpleMenuPage from '@/pages/simpleMenu/SimpleMenuPage';
+import WorkManagementPage from '@/pages/workManagement/WorkManagementPage';
+import Loading from '@/routes/loading';
 
-const HomePage = lazy(() => import('@/pages/home/HomePage'));
-const Login = lazy(() => import('@/pages/login/Login'));
 const NotFound = lazy(() => import('@/routes/Notfound'));
 const PrivateRoute = lazy(() => import('@/routes/PrivateRoute'));
 
-const SalarySettlementPage = lazy(() => import('@/pages/salarySettlement/SalarySettlementPage'));
-const HolidayCalendarPage = lazy(() => import('@/pages/holidayCalendar/HolidayCalendarPage'));
-const DayoffManagementPage = lazy(() => import('@/pages/dayoffManagement/DayoffManagement'));
-const WorkManagementPage = lazy(() => import('@/pages/workManagement/WorkManagementPage'));
-const WorkingPage = lazy(() => import('@/pages/basicSetting/WorkingPage'));
-const ManagementOfficePage = lazy(() => import('@/pages/officeSetting/ManagementOfficePage'));
-const CertificateManagement = lazy(
-  () => import('@/pages/documentManagement/certificationManagement/CertificateManagement')
-);
 const EntireHistoryPage = lazy(
   () => import('@/pages/otManagement/EntireHistory/EntireHistoryPage')
 );
-const OtManagementPage = lazy(() => import('@/pages/otManagement/OtManagementPage'));
-const SimpleMenuPage = lazy(() => import('@/pages/simpleMenu/SimpleMenuPage'));
-const SuperManagerSetting = lazy(() => import('@/pages/memberManagement/SuperManagerSetting'));
 const ApprovalHistory = lazy(
   () => import('@/pages/dayoffManagement/approvalHistory/ApprovalHistory')
 );
 const MemberInfoPage = lazy(() => import('@/pages/memberManagement/MemberInfoPage'));
-const MemberManagementPage = lazy(() => import('@/pages/memberManagement/MemberManagementPage'));
+const CertificatePage = lazy(() => import('@/pages/basicSetting/CertificatePage'));
+const DocumentPage = lazy(() => import('@/pages/basicSetting/DocumentPage'));
+const ContractPage = lazy(() => import('@/pages/basicSetting/ContractPage'));
+const BoardPage = lazy(() => import('@/pages/basicSetting/BoardPage'));
+const CalendarPage = lazy(() => import('@/pages/basicSetting/CalendarPage'));
+const DayOffPage = lazy(() => import('@/pages/basicSetting/DayOffPage'));
+const HourlyRangePage = lazy(() => import('@/pages/basicSetting/HourlyRangePage'));
+const HrManagementSettingPage = lazy(() => import('@/pages/basicSetting/HrManagementPage'));
+const SalaryRangePage = lazy(() => import('@/pages/basicSetting/SalaryRangePage'));
+const WagePage = lazy(() => import('@/pages/basicSetting/WagePage'));
+const ContractManagement = lazy(() => import('@/pages/documentManagement/ContractManagement'));
+const TimeoffManagement = lazy(() => import('@/pages/documentManagement/TimeoffManagement'));
+const ManagementDeleteOfficePage = lazy(
+  () => import('@/pages/officeSetting/ManagementDeleteOfficePage')
+);
+const CommuteManagementPage = lazy(() => import('@/pages/workManagement/CommuteManagementPage'));
+const PartManagementPage = lazy(() => import('@/pages/workManagement/PartManagementPage'));
 
-// TODO: lazy load, preload는 나중에 하겠습니둥.
 const router = createBrowserRouter([
   {
     path: '/',
-    element: (
-      <Suspense fallback={<div>Loading...</div>}>
-        <RootLayout />
-      </Suspense>
-    ),
+    element: <RootLayout />,
     children: [
       {
         path: '*',
         element: <NotFound />,
-      },
-      {
-        path: '/salary-settlement',
-        element: <SalarySettlementPage />,
-      },
-      {
-        path: '/holiday-calander',
-        element: <HolidayCalendarPage />,
-      },
-      {
-        path: '/basic-setting',
-        children: [
-          {
-            index: true,
-            element: <Navigate to="/basic-setting/working" replace />,
-          },
-          {
-            path: 'working',
-
-            element: <WorkingPage />,
-          },
-          {
-            path: 'wage',
-            index: true,
-            element: <WagePage />,
-          },
-          {
-            path: 'hourly-range',
-            element: <HourlyRangePage />,
-          },
-          {
-            path: 'day-off',
-            element: <DayOffPage />,
-          },
-          {
-            path: 'calendar',
-            element: <CalendarPage />,
-          },
-          {
-            path: 'board',
-            element: <BoardPage />,
-          },
-          {
-            path: 'salary-range',
-            element: <SalaryRangePage />,
-          },
-          {
-            path: 'hr',
-            element: <HrManagementSettingPage />,
-          },
-          {
-            path: 'contract',
-            element: <ContractPage />,
-          },
-          {
-            path: 'document',
-            element: <DocumentPage />,
-          },
-          {
-            path: 'certificate',
-            element: <CertificatePage />,
-          },
-        ],
-      },
-      {
-        path: '/office-setting',
-        children: [
-          {
-            index: true,
-            element: <Navigate to="/office-setting/office" replace />,
-          },
-          {
-            path: 'office',
-            element: <ManagementOfficePage />,
-          },
-          {
-            path: 'delete-office',
-            element: <ManagementDeleteOfficePage />,
-          },
-        ],
-      },
-      {
-        path: '/work-management',
-        element: <WorkManagementLayout />,
-        children: [
-          {
-            index: true,
-            element: <Navigate to="/work-management/working" replace />,
-          },
-          {
-            path: 'working',
-            element: <WorkManagementPage />,
-          },
-          {
-            path: 'partTime',
-            element: <PartManagementPage />,
-          },
-          {
-            path: 'commute',
-            element: <CommuteManagementPage />,
-          },
-        ],
-      },
-      {
-        path: '/document-management',
-        element: <DocumentManagementLayout />,
-        children: [
-          {
-            index: true,
-            element: <Navigate to="/document-management/certificate-management" replace />,
-          },
-          {
-            path: 'certificate-management',
-            element: <CertificateManagement />,
-          },
-          {
-            path: 'contract-management',
-            element: <ContractManagement />,
-          },
-          {
-            path: 'timeoff-management',
-            element: <TimeoffManagement />,
-          },
-        ],
       },
       {
         path: '/login',
@@ -193,30 +65,18 @@ const router = createBrowserRouter([
         children: [
           {
             path: '/',
-            element: (
-              <Suspense fallback={<div>Loading...</div>}>
-                <HomePage />
-              </Suspense>
-            ),
+            element: <HomePage />,
           },
           {
             path: 'salary-settlement',
-            element: (
-              <Suspense fallback={<div>Loading...</div>}>
-                <SalarySettlementPage />
-              </Suspense>
-            ),
+            element: <SalarySettlementPage />,
           },
           {
-            path: '/holiday-calander',
-            element: (
-              <Suspense fallback={<div>Loading...</div>}>
-                <HolidayCalendarPage />
-              </Suspense>
-            ),
+            path: 'holiday-calander',
+            element: <HolidayCalendarPage />,
           },
           {
-            path: '/basic-setting',
+            path: 'basic-setting',
             children: [
               {
                 index: true,
@@ -224,44 +84,87 @@ const router = createBrowserRouter([
               },
               {
                 path: 'working',
+                element: <WorkingPage />,
+              },
+              {
+                path: 'wage',
                 element: (
-                  <Suspense fallback={<div>Loading...</div>}>
-                    <WorkingPage />
+                  <Suspense fallback={<Loading />}>
+                    <WagePage />
                   </Suspense>
                 ),
               },
               {
-                path: 'wage',
-                index: true,
-                element: <WagePage />,
-              },
-              {
                 path: 'hourly-range',
-                element: <HourlyRangePage />,
+                element: (
+                  <Suspense fallback={<Loading />}>
+                    <HourlyRangePage />
+                  </Suspense>
+                ),
               },
               {
                 path: 'day-off',
-                element: <DayOffPage />,
+                element: (
+                  <Suspense fallback={<Loading />}>
+                    <DayOffPage />
+                  </Suspense>
+                ),
               },
               {
                 path: 'calendar',
-                element: <CalendarPage />,
+                element: (
+                  <Suspense fallback={<Loading />}>
+                    <CalendarPage />
+                  </Suspense>
+                ),
               },
               {
                 path: 'board',
-                element: <BoardPage />,
+                element: (
+                  <Suspense fallback={<Loading />}>
+                    <BoardPage />
+                  </Suspense>
+                ),
               },
               {
                 path: 'salary-range',
-                element: <SalaryRangePage />,
+                element: (
+                  <Suspense fallback={<Loading />}>
+                    <SalaryRangePage />
+                  </Suspense>
+                ),
               },
               {
                 path: 'hr',
-                element: <HrManagementSettingPage />,
+                element: (
+                  <Suspense fallback={<Loading />}>
+                    <HrManagementSettingPage />
+                  </Suspense>
+                ),
               },
               {
                 path: 'contract',
-                element: <ContractPage />,
+                element: (
+                  <Suspense fallback={<Loading />}>
+                    <ContractPage />
+                  </Suspense>
+                ),
+              },
+              {
+                path: 'document',
+                element: (
+                  <Suspense fallback={<Loading />}>
+                    <DocumentPage />
+                  </Suspense>
+                ),
+              },
+              {
+                path: 'certificate',
+                element: (
+                  <Suspense fallback={<Loading />}>
+                    <CertificatePage />
+                  </Suspense>
+                ),
               },
             ],
           },
@@ -274,15 +177,15 @@ const router = createBrowserRouter([
               },
               {
                 path: 'office',
-                element: (
-                  <Suspense fallback={<div>Loading...</div>}>
-                    <ManagementOfficePage />
-                  </Suspense>
-                ),
+                element: <ManagementOfficePage />,
               },
               {
                 path: 'delete-office',
-                element: <ManagementDeleteOfficePage />,
+                element: (
+                  <Suspense fallback={<Loading />}>
+                    <ManagementDeleteOfficePage />
+                  </Suspense>
+                ),
               },
             ],
           },
@@ -296,19 +199,23 @@ const router = createBrowserRouter([
               },
               {
                 path: 'working',
+                element: <WorkManagementPage />,
+              },
+              {
+                path: 'partTime',
                 element: (
-                  <Suspense fallback={<div>Loading...</div>}>
-                    <WorkManagementPage />
+                  <Suspense fallback={<Loading />}>
+                    <PartManagementPage />
                   </Suspense>
                 ),
               },
               {
-                path: 'partTime',
-                element: <PartManagementPage />,
-              },
-              {
                 path: 'commute',
-                element: <CommuteManagementPage />,
+                element: (
+                  <Suspense fallback={<Loading />}>
+                    <CommuteManagementPage />
+                  </Suspense>
+                ),
               },
             ],
           },
@@ -322,59 +229,55 @@ const router = createBrowserRouter([
               },
               {
                 path: 'certificate-management',
+                element: <CertificateManagement />,
+              },
+              {
+                path: 'contract-management',
                 element: (
-                  <Suspense fallback={<div>Loading...</div>}>
-                    <CertificateManagement />
+                  <Suspense fallback={<Loading />}>
+                    <ContractManagement />
                   </Suspense>
                 ),
               },
               {
-                path: 'contract-management',
-                element: <ContractManagement />,
-              },
-              {
                 path: 'timeoff-management',
-                element: <TimeoffManagement />,
+                element: (
+                  <Suspense fallback={<Loading />}>
+                    <TimeoffManagement />
+                  </Suspense>
+                ),
               },
             ],
           },
           {
             path: '/member-management',
-            element: (
-              <Suspense fallback={<div>Loading...</div>}>
-                <MemberManagementPage />
-              </Suspense>
-            ),
+            element: <MemberManagementPage />,
           },
           {
             path: '/member-management/member-info',
             element: (
-              <Suspense fallback={<div>Loading...</div>}>
+              <Suspense fallback={<Loading />}>
                 <MemberInfoPage />
-              </Suspense>
-            ),
-          },
-          {
-            path: '/dayoff-management',
-            element: (
-              <Suspense fallback={<div>Loading...</div>}>
-                <DayoffManagementPage />
-              </Suspense>
-            ),
-          },
-          {
-            path: '/dayoff-management/approval-history',
-            element: (
-              <Suspense fallback={<div>Loading...</div>}>
-                <ApprovalHistory />
               </Suspense>
             ),
           },
           {
             path: '/member-management/supermanager-setting',
             element: (
-              <Suspense fallback={<div>Loading...</div>}>
+              <Suspense fallback={<Loading />}>
                 <SuperManagerSetting />
+              </Suspense>
+            ),
+          },
+          {
+            path: '/dayoff-management',
+            element: <DayoffManagementPage />,
+          },
+          {
+            path: '/dayoff-management/approval-history',
+            element: (
+              <Suspense fallback={<Loading />}>
+                <ApprovalHistory />
               </Suspense>
             ),
           },
@@ -397,23 +300,19 @@ const router = createBrowserRouter([
           // },
           {
             path: 'simple-menu',
-            element: (
-              <Suspense fallback={<div>Loading...</div>}>
-                <SimpleMenuPage />
-              </Suspense>
-            ),
+            element: <SimpleMenuPage />,
           },
           {
             path: 'ot-management',
-            element: (
-              <Suspense fallback={<div>Loading...</div>}>
-                <OtManagementPage />
-              </Suspense>
-            ),
+            element: <OtManagementPage />,
           },
           {
             path: 'ot-management/entire-history',
-            element: <EntireHistoryPage />,
+            element: (
+              <Suspense fallback={<Loading />}>
+                <EntireHistoryPage />
+              </Suspense>
+            ),
           },
         ],
       },

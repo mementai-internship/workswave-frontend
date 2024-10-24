@@ -85,11 +85,13 @@ export default function DayoffManagementHeader({ currentUser }: DayoffManagement
                           locale={ko}
                           defaultMonth={startDate}
                           classNames={{
-                            day: 'p-1 text-lg',
+                            root: `${defaultClassNames.root} w-full h-full gap-2`,
+                            chevron: `${defaultClassNames.chevron} w-7 h-7 fill-purple-30`,
+                            month_caption: 'flex justify-center text-xl font-bold h-10',
+                            day_button: 'w-12 h-12 text-lg',
                             today: `font-bold text-xl text-amber-500`,
                             selected: `bg-purple-10 rounded-full`,
-                            root: `${defaultClassNames.root}`,
-                            chevron: `${defaultClassNames.chevron} fill-purple-30`,
+                            disabled: 'bg-gray-10 text-gray-50 rounded-full',
                           }}
                         />
                       </Popover.Content>

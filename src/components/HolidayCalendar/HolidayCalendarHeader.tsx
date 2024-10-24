@@ -1,11 +1,10 @@
-import { Button, Popover, Switch } from '@radix-ui/themes';
+import { Button, Popover, Select, Switch } from '@radix-ui/themes';
 import dayjs from 'dayjs';
 import { useState } from 'react';
 import { PiGear } from 'react-icons/pi';
 
 import { ChangeMonthNone } from '@/components/Common/ChangeMonth';
 import { ChangeWeekNone } from '@/components/Common/ChangeWeek';
-import SelectBox from '@/components/Common/Select';
 import EmployeeHolidayRegisterModal from '@/components/HolidayCalendar/EmployeeHolidayRegisterModal';
 import HolidayDeletionPopover from '@/components/HolidayCalendar/HolidayDeletionPopover';
 import HolidayRegisterPopover from '@/components/HolidayCalendar/HolidayRegisterPopover';
@@ -13,7 +12,7 @@ import { useGetBranches } from '@/hooks/apis/useBranches';
 import { useGetClosedDays } from '@/hooks/apis/useClosedDays';
 
 interface IHolidayCalendarHeaderProps {
-  branchId: number;
+  branchId: number | undefined;
   setBranchId: (branchId: number) => void;
   currDate: dayjs.Dayjs;
   setCurrentDate: (date: dayjs.Dayjs) => void;
@@ -35,22 +34,12 @@ export default function HolidayCalendarHeader({
 }: IHolidayCalendarHeaderProps) {
   const [employeeModalOpen, setEmployeeModalOpen] = useState<boolean>(false);
 
-  const { data: holidays, isLoading: isHolidaysLoading } = useGetClosedDays({
+  const { data: holidays } = useGetClosedDays({
     branch_id: branchId,
   });
 
   // 현재 - MSO 기준이라 모든 브랜치 목록 받아옴 -> 분기처리 필요
-  const { data: branches, isFetching } = useGetBranches('0');
-
-  const branchSelection = isFetching
-    ? []
-    : branches?.list.map((branch) => ({
-        id: branch.id,
-        name: branch.name,
-        action: () => {
-          setBranchId(branch.id);
-        },
-      }));
+  const { data: branches } = useGetBranches('0');
 
   const handleCalendarView = () => {
     setView(view === 'dayGridMonth' ? 'dayGridWeek' : 'dayGridMonth');
@@ -71,10 +60,20 @@ export default function HolidayCalendarHeader({
 
   return (
     <header className="relative flex justify-between items-center">
-      {branches ? (
-        <SelectBox title="지점 선택" name="지점 선택" options={branchSelection} />
-      ) : (
-        <SelectBox title="지점 정보가 없습니다." options={[]} disabled={true} />
+      {branches?.list && branches.list.length > 0 && (
+        <Select.Root
+          defaultValue={String(branches.list[0].id)}
+          onValueChange={(value) => setBranchId(Number(value))}
+        >
+          <Select.Trigger />
+          <Select.Content>
+            {branches.list.map((branch) => (
+              <Select.Item key={branch.id} value={String(branch.id)}>
+                {branch.name}
+              </Select.Item>
+            ))}
+          </Select.Content>
+        </Select.Root>
       )}
       <div className="absolute left-1/2 transform -translate-x-1/2">
         {view === 'dayGridMonth' ? (
@@ -95,32 +94,45 @@ export default function HolidayCalendarHeader({
       </div>
 
       <div className="flex gap-2">
-        <Popover.Root>
-          <Popover.Trigger>
-            <Button variant="surface" color="gray" size="2">
-              <PiGear className="w-4 h-4" />
-            </Button>
-          </Popover.Trigger>
-          <Popover.Content>
-            <div className="w-48 p-1">
-              <div className="flex items-center justify-between">
-                <span>일요일 지점 휴무</span>
-                <Switch checked={sundayOff} onCheckedChange={setIsSundayOff} />
-              </div>
-            </div>
-          </Popover.Content>
-        </Popover.Root>
-
-        {!isHolidaysLoading && holidays && (
+        {branches?.list && branches.list.length > 0 && (
           <>
-            <HolidayRegisterPopover currDate={currDate} holidays={holidays} branchId={branchId} />
-            <HolidayDeletionPopover currDate={currDate} holidays={holidays} branchId={branchId} />
+            <Popover.Root>
+              <Popover.Trigger>
+                <Button variant="surface" color="gray" size="2">
+                  <PiGear className="w-4 h-4" />
+                </Button>
+              </Popover.Trigger>
+              <Popover.Content>
+                <div className="w-48 p-1">
+                  <div className="flex items-center justify-between">
+                    <span>일요일 지점 휴무</span>
+                    <Switch checked={sundayOff} onCheckedChange={setIsSundayOff} />
+                  </div>
+                </div>
+              </Popover.Content>
+            </Popover.Root>
+
+            {/* holidays가 존재할 때만 컴포넌트 렌더링 */}
+            {holidays && (
+              <>
+                <HolidayRegisterPopover
+                  currDate={currDate}
+                  holidays={holidays}
+                  branchId={branchId}
+                />
+                <HolidayDeletionPopover
+                  currDate={currDate}
+                  holidays={holidays}
+                  branchId={branchId}
+                />
+              </>
+            )}
+            <Button variant="surface" color="gray" size="2" onClick={handleEmployeeModalOpen}>
+              직원 휴무 등록
+            </Button>
           </>
         )}
 
-        <Button variant="surface" color="gray" size="2" onClick={handleEmployeeModalOpen}>
-          직원 휴무 등록
-        </Button>
         <EmployeeHolidayRegisterModal
           isOpen={employeeModalOpen}
           onClose={handleEmployeeModalClose}

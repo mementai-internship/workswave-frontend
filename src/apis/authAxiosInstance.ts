@@ -8,4 +8,29 @@ const authAxiosInstance = axios.create({
   withCredentials: true,
 });
 
+// TODO : alert은 Toast 등으로 변경 가능
+authAxiosInstance.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    const errStatus = error.response.status;
+    console.log('에러 발생', errStatus);
+
+    switch (errStatus) {
+      case 400:
+        alert(error.response.data);
+        break;
+
+      case 404:
+        alert(error.response.data);
+        break;
+
+      default:
+        break;
+    }
+    return Promise.reject(error);
+  }
+);
+
 export default authAxiosInstance;
