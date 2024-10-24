@@ -36,7 +36,7 @@ export default function WorkingSettingSetPartItem({
   return (
     <div className="flex justify-between items-center border-2 p-6 bg-gray-10 min-w-[800px]">
       <span
-        className={`w-10 h-6 rounded-full text-black text-center`}
+        className={`w-10 h-6 pt-[1px] rounded-full text-black text-center`}
         style={{ backgroundColor: color }}
       >
         {name.slice(0, 2)}

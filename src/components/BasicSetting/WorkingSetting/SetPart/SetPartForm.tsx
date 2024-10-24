@@ -97,46 +97,38 @@ export default function WorkingSettingPartForm({
             </Dialog.Description>
 
             <Flex direction="column" gap="3">
-              {parts && parts.some((part) => part.name === '의사') && (
-                <div className="flex items-center gap-x-2">
-                  <label className="w-24">의사</label>
-                  <Checkbox
-                    checked={checkedList.includes('의사')}
-                    disabled={parts.some((part) => part.name === '의사')}
-                    onClick={() => handleCheckboxToggle('의사')}
-                  />
-                </div>
-              )}
-              {parts && parts.some((part) => part.name === '간호사') && (
-                <div className="flex items-center gap-x-2">
-                  <label className="w-24">간호사</label>
-                  <Checkbox
-                    checked={checkedList.includes('간호사')}
-                    disabled={parts.some((part) => part.name === '간호사')}
-                    onClick={() => handleCheckboxToggle('간호사')}
-                  />
-                </div>
-              )}
-              {parts && parts.some((part) => part.name === '간호조무사') && (
-                <div className="flex items-center gap-x-2">
-                  <label className="w-24">간호조무사</label>
-                  <Checkbox
-                    checked={checkedList.includes('간호조무사')}
-                    disabled={parts.some((part) => part.name === '간호조무사')}
-                    onClick={() => handleCheckboxToggle('간호조무사')}
-                  />
-                </div>
-              )}
-              {parts && parts.some((part) => part.name === '상담') && (
-                <div className="flex items-center gap-x-2">
-                  <label className="w-24">상담</label>
-                  <Checkbox
-                    checked={checkedList.includes('상담')}
-                    disabled={parts.some((part) => part.name === '상담')}
-                    onClick={() => handleCheckboxToggle('상담')}
-                  />
-                </div>
-              )}
+              <div className="flex items-center gap-x-2">
+                <label className="w-24">의사</label>
+                <Checkbox
+                  checked={checkedList.includes('의사')}
+                  disabled={parts && parts.some((part) => part.name === '의사')}
+                  onClick={() => handleCheckboxToggle('의사')}
+                />
+              </div>
+              <div className="flex items-center gap-x-2">
+                <label className="w-24">간호사</label>
+                <Checkbox
+                  checked={checkedList.includes('간호사')}
+                  disabled={parts && parts.some((part) => part.name === '간호사')}
+                  onClick={() => handleCheckboxToggle('간호사')}
+                />
+              </div>
+              <div className="flex items-center gap-x-2">
+                <label className="w-24">간호조무사</label>
+                <Checkbox
+                  checked={checkedList.includes('간호조무사')}
+                  disabled={parts && parts.some((part) => part.name === '간호조무사')}
+                  onClick={() => handleCheckboxToggle('간호조무사')}
+                />
+              </div>
+              <div className="flex items-center gap-x-2">
+                <label className="w-24">상담</label>
+                <Checkbox
+                  checked={checkedList.includes('상담')}
+                  disabled={parts && parts.some((part) => part.name === '상담')}
+                  onClick={() => handleCheckboxToggle('상담')}
+                />
+              </div>
             </Flex>
 
             <Flex gap="3" mt="4" justify="end">
