@@ -66,7 +66,6 @@ export const useDeleteParts = (branchId: number) => {
   return useMutation({
     mutationFn: (partId: number) => deleteParts(branchId, partId),
     onSuccess: () => {
-      console.log('scucess');
       queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.parts, branchId] });
       toast.success('파트가 성공적으로 삭제됐습니다.', {
         timer: 2000,
