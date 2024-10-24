@@ -24,7 +24,7 @@ export default function WorkManagementLayout() {
     // backend API 연결
   };
   return (
-    <div className="w-full">
+    <div className="w-full min-w-[1380px]">
       <WorkHeader
         selectTab={selectTab}
         onTabChange={handleTabChange}

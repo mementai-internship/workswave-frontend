@@ -378,7 +378,6 @@ export default function WorkTable() {
   // branch만 있을 때, 둘 다 있을 때 분기처리로 데이터 가공
   //기존 로직
   // const filteredData = workMockData.filter((data) => {
-  console.log(filteredData);
   useEffect(() => {
     const filteredData = MOCK_Users_Page.filter((data) => {
       if (selectedBranch === null) return data;
@@ -409,8 +408,8 @@ export default function WorkTable() {
           <Table.Body>
             {filteredData
               .filter((data) => data.pageNum === currentPage)
-              .map((data) => {
-                return <WorkTableRows key={data.id} data={data} />;
+              .map((data, idx) => {
+                return <WorkTableRows key={data.id + idx} data={data} />;
               })}
           </Table.Body>
         )}

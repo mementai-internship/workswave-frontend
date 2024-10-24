@@ -19,8 +19,8 @@ interface IIsSearchValid {
 function WorkSearchInput() {
   const { register, handleSubmit } = useForm<ISearch>();
   const [isSearchValid, setIsSearchValid] = useState<IIsSearchValid>({
-    name: false,
-    phoneNumber: false,
+    name: true,
+    phoneNumber: true,
   });
   const [, setName] = useAtom(searchNameAtom);
   const [, setPhoneNumber] = useAtom(searchPhoneNumberAtom);
@@ -67,7 +67,7 @@ function WorkSearchInput() {
         <div>
           <TextField.Root radius="none" placeholder="이름" size="2" {...register('name')} />
           <div
-            className={`mt-1 text-xs text-red-500 ${isSearchValid.name ? 'invisible' : 'visible'}`}
+            className={`mt-1 text-xs text-red-500 ${isSearchValid?.name ? 'invisible' : 'visible'}`}
           >
             * 한글(영어)만 입력 가능합니다.
           </div>
@@ -82,7 +82,7 @@ function WorkSearchInput() {
           />
 
           <div
-            className={`mt-1 text-xs text-red-500 ${isSearchValid.phoneNumber ? 'invisible' : 'visible'}`}
+            className={`mt-1 text-xs text-red-500 ${isSearchValid?.phoneNumber ? 'invisible' : 'visible'}`}
           >
             * 숫자만 입력 가능합니다.
           </div>

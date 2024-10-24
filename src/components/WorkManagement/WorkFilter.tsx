@@ -14,7 +14,6 @@ export default function WorkFilter() {
   const [selectedDepartment, setSelectedDepartment] = useAtom<TOptions>(selectedDepartmentAtom);
   const { data: branches } = useGetBranches('0');
   const { data: parts } = useGetParts(selectedBranch?.id || null);
-
   const location = useLocation();
   useEffect(() => {
     if (selectedBranch) {
