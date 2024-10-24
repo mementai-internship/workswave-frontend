@@ -115,28 +115,30 @@ export default function WagePage() {
   };
 
   return (
-    <div className="w-full bg-white flex min-w-[1500px] min-h-[600px] max-h-[calc(100vh-200px)] overflow-y-scroll">
-      <WageListContainer
-        editMode={editMode}
-        activeEditMode={activeEditMode}
-        handleDeleteItem={handleDeleteItem}
-        handleSelectPart={handleSelectPart}
-        handleSelectBranch={handleSelectBranch}
-        selectedBranchId={selectedBranchId}
-        selectedPartId={selectedPartId}
-        branches={branches}
-        parts={parts}
-        list={salaryTemplates}
-      />
-      <WageCalculateContainer
-        editMode={editMode}
-        currentYear={currentYear}
-        onSubmit={onSubmit}
-        control={control}
-        positionOptions={parts}
-        reset={reset}
-        handleCloseEditMode={handleCloseEditMode}
-      />
+    <div className="w-full mx-auto overflow-x-auto">
+      <div className="bg-white flex min-w-[1500px] min-h-[600px]">
+        <WageListContainer
+          editMode={editMode}
+          activeEditMode={activeEditMode}
+          handleDeleteItem={handleDeleteItem}
+          handleSelectPart={handleSelectPart}
+          handleSelectBranch={handleSelectBranch}
+          selectedBranchId={selectedBranchId}
+          selectedPartId={selectedPartId}
+          branches={branches}
+          parts={parts}
+          list={salaryTemplates}
+        />
+        <WageCalculateContainer
+          editMode={editMode}
+          currentYear={currentYear}
+          onSubmit={onSubmit}
+          control={control}
+          positionOptions={parts}
+          reset={reset}
+          handleCloseEditMode={handleCloseEditMode}
+        />
+      </div>
     </div>
   );
 }

@@ -47,14 +47,14 @@ export default function WageMinimumSettingDialog() {
         </Button>
       </Dialog.Trigger>
       <Dialog.Content size="3" maxWidth="400px">
-        <Dialog.Title className="absolute t-0 l-0 text-transparent">최저임금설정</Dialog.Title>
-        <div className="flex gap-1 pb-4 border-b border-b-zinc-300 items-center">
+        <Dialog.Title className="absolute text-transparent t-0 l-0">최저임금설정</Dialog.Title>
+        <div className="flex items-center gap-1 pb-4 border-b border-b-zinc-300">
           <Txt variant="h4">상세설정</Txt>
           <Txt color="gray-50">전지점 공통입니다.</Txt>
         </div>
 
         <form onSubmit={onSubmit} className="flex flex-col items-center py-6">
-          <div className="flex gap-3 items-center">
+          <div className="flex items-center gap-3">
             <Txt variant="h6">최저임금설정</Txt>
             <Controller
               name="minimum_wage"

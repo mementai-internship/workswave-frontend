@@ -11,13 +11,13 @@ interface IProps {
 
 export default function HourlyRangeContainer({ title, subTitleElement, children, width }: IProps) {
   return (
-    <div className={`border border-zinc-300	bg-white h-full overflow-y-scroll ${width}`}>
-      <div className="flex items-center gap-6 title px-8 py-2 border-b border-zinc-300">
+    <div className={`border border-zinc-300	bg-white h-full ${width}`}>
+      <div className="flex items-center gap-6 px-8 py-2 border-b title border-zinc-300">
         <Title content={title} />
         {subTitleElement}
       </div>
 
-      {children}
+      <div className="h-[calc(100%-80px)] overflow-y-scroll">{children}</div>
     </div>
   );
 }
