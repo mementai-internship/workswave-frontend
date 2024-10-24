@@ -387,10 +387,10 @@ export default function WorkTable() {
       return branchMatch && departmentMatch;
     });
     setFilteredData(filteredData);
-  }, [queryParams.get('page'), selectedBranch, selectedDepartment]);
+  }, [currentPage, selectedBranch, selectedDepartment]);
   return (
     <>
-      <ExportExcelButton data={MOCK_Users} />
+      <ExportExcelButton data={MOCK_Users} fileName="work_table" />
       <Table.Root className="mb-5">
         <Table.Header className="text-xs text-gray-700 bg-gray-200 border-t border-gray-300 whitespace-nowrap">
           <Table.Row>

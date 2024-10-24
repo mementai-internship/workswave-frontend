@@ -1,11 +1,16 @@
 import { Table } from '@radix-ui/themes';
-import React, { useMemo } from 'react';
-import { useOutletContext } from 'react-router-dom';
+import { useAtom } from 'jotai';
+import React, { useEffect, useMemo, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
+import ExportExcelButton from '@/components/WorkManagement/ExportExcelButton';
 import GenderIcon from '@/components/WorkManagement/GenderIcon';
-import { WorkTableContext } from '@/components/WorkManagement/Work/WorkTable';
-import { commuteMockData } from '@/constants/workManagement/workTable.mock';
+import {
+  commuteMockData,
+  commuteMockDataWithPageNum,
+} from '@/constants/workManagement/workTable.mock';
 import { ICommuteData } from '@/models/work.model';
+import { selectedBranchAtom, selectedDepartmentAtom } from '@/store/atoms';
 
 interface ICommuteTableProps {
   handleShowAllStatus: (employee: ICommuteData) => void;
@@ -22,7 +27,7 @@ interface IEmployeeRowProps {
 }
 
 const TableHeader = React.memo(({ dayHeaders }: ITableHeaderProps) => (
-  <Table.Header className="bg-gray-200 text-xs text-gray-700 whitespace-nowrap border-gray-10">
+  <Table.Header className="text-xs text-gray-700 bg-gray-200 whitespace-nowrap border-gray-10">
     <Table.Row>
       {['번호', '지점', '이름', '근무파트'].map((header) => (
         <Table.ColumnHeaderCell
@@ -61,7 +66,7 @@ const EmployeeRow = React.memo(({ employee, dayHeaders, onClick }: IEmployeeRowP
     <Table.Cell>{employee.id}</Table.Cell>
     <Table.Cell>{employee.branch}</Table.Cell>
     <Table.Cell>
-      <div className="flex gap-2 items-center">
+      <div className="flex items-center gap-2">
         <GenderIcon gender={employee.gender} />
         {employee.name}
       </div>
@@ -90,36 +95,50 @@ const EmployeeRow = React.memo(({ employee, dayHeaders, onClick }: IEmployeeRowP
 ));
 
 export default function CommuteTable({ handleShowAllStatus }: ICommuteTableProps) {
-  const context = useOutletContext<WorkTableContext>();
-  const { selectedBranch, selectedDepartment } = context || {
-    selectedBranch: null,
-    selectedDepartment: null,
-  };
-  const filteredData = commuteMockData.filter((data) => {
-    const branchMatch = !selectedBranch || data.branch === selectedBranch.name;
-    const departmentMatch = !selectedDepartment || data.department === selectedDepartment.name;
-    return branchMatch && departmentMatch;
-  });
+  const [selectedBranch] = useAtom(selectedBranchAtom);
+  const [selectedDepartment] = useAtom(selectedDepartmentAtom);
+  const [filteredData, setFilteredData] = useState([]);
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const currentPage = Number(queryParams.get('page')) || 1;
+  useEffect(() => {
+    const filteredData = commuteMockDataWithPageNum.filter((data) => {
+      if (selectedBranch === null) return data;
+      const branchMatch = !selectedBranch || data.branch === selectedBranch.name;
+      const departmentMatch = !selectedDepartment || data.department === selectedDepartment.name;
+      if (!selectedDepartment) return branchMatch;
+      return branchMatch && departmentMatch;
+    });
+    setFilteredData(filteredData);
+  }, [currentPage, selectedBranch, selectedDepartment]);
+
   const { dayHeaders } = useMemo(() => {
     const lastDay = Math.max(
-      ...commuteMockData.flatMap((employee) => Object.keys(employee.schedule).map(Number))
+      ...commuteMockDataWithPageNum.flatMap((employee) =>
+        Object.keys(employee.schedule).map(Number)
+      )
     );
     return { dayHeaders: Array.from({ length: lastDay }, (_, i) => `${i + 1}일`) };
   }, []);
 
   return (
-    <Table.Root className="mb-5 table-fixed w-full">
-      <TableHeader dayHeaders={dayHeaders} />
-      <Table.Body>
-        {filteredData.map((employee) => (
-          <EmployeeRow
-            key={employee.id}
-            employee={employee}
-            dayHeaders={dayHeaders}
-            onClick={() => handleShowAllStatus(employee)}
-          />
-        ))}
-      </Table.Body>
-    </Table.Root>
+    <>
+      <ExportExcelButton data={commuteMockData} fileName="commute_table" />
+      <Table.Root className="w-full mb-5 table-fixed">
+        <TableHeader dayHeaders={dayHeaders} />
+        <Table.Body>
+          {filteredData
+            .filter((data) => data.pageNum === currentPage)
+            .map((employee) => (
+              <EmployeeRow
+                key={employee.id}
+                employee={employee}
+                dayHeaders={dayHeaders}
+                onClick={() => handleShowAllStatus(employee)}
+              />
+            ))}
+        </Table.Body>
+      </Table.Root>
+    </>
   );
 }
