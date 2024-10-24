@@ -1,17 +1,27 @@
 import { EventInput } from '@fullcalendar/core';
 import dayjs from 'dayjs';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import HolidayCalendar from '@/components/HolidayCalendar/HolidayCalendar';
 import HolidayCalendarHeader from '@/components/HolidayCalendar/HolidayCalendarHeader';
+import { useGetBranches } from '@/hooks/apis/useBranches';
 
 // import { useGetMonthlyClosedDays } from '@/hooks/apis/useClosedDays';
 
 export default function HolidayCalendarPage() {
   const [currentDate, setCurrentDate] = useState<dayjs.Dayjs>(dayjs()); // 오늘 날짜 (디폴트값)
-  const [branchId, setBranchId] = useState<number>(1); // 지점 선택
+  const [branchId, setBranchId] = useState<number | undefined>(undefined);
   const [isSundayOff, setIsSundayOff] = useState<boolean>(false); // 설정버튼 : 일요일 휴무 여부 (추후 백엔드 연동 필요)
   const [view, setView] = useState<'dayGridMonth' | 'dayGridWeek'>('dayGridMonth'); // 월간/주간 뷰 토글
+
+  // branches 데이터를 가져오기
+  const { data: branches } = useGetBranches('0');
+
+  useEffect(() => {
+    if (branches?.list && branches.list.length > 0 && !branchId) {
+      setBranchId(branches.list[0].id);
+    }
+  }, [branches, branchId]);
 
   const handleDateAndEventClick = (date: Date) => {
     setCurrentDate(dayjs(date));

@@ -1,6 +1,7 @@
 import { Table } from '@radix-ui/themes';
 import React from 'react';
 
+import { Txt } from '@/components/Common/Txt';
 import MemberManagementTableCell from '@/components/MemberManagement/MemberManagementTableCell';
 import {
   MEMBER_MANAGEMENT_TABLE_TITLE,
@@ -9,13 +10,6 @@ import {
   MEMBER_MANAGEMENT_TABLE_TITLE_REST,
 } from '@/constants/memberManagementTableTitle';
 import { TCurrentUserInfo } from '@/models/user-management.model';
-
-export interface IMemberManagementTableProps {
-  data: IMemberManagementTableData[];
-  allUserList?: IMemberManagementTableData[];
-  tab: string;
-  currentUser: TCurrentUserInfo;
-}
 
 export interface IMemberManagementTableData {
   id: number;
@@ -30,7 +24,12 @@ export interface IMemberManagementTableData {
   branch: string;
 }
 
-export const infoTestData: IMemberManagementTableProps[] = [];
+interface IMemberManagementTableProps {
+  data: IMemberManagementTableData[];
+  allUserList?: IMemberManagementTableData[];
+  tab: string;
+  currentUser: TCurrentUserInfo;
+}
 
 export default function MemberManagementTable({
   data,
@@ -38,11 +37,16 @@ export default function MemberManagementTable({
   currentUser,
 }: IMemberManagementTableProps) {
   if (!data || currentUser.id === 0) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex justify-center items-center h-full">
+        <Txt variant="h3">데이터가 없습니다.</Txt>
+      </div>
+    );
   }
 
   const userId = currentUser.id;
-  console.log(currentUser.id);
+  console.log('currentUser.id', currentUser.id);
+
   return (
     <Table.Root>
       <Table.Header>

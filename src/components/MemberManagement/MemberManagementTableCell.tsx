@@ -75,15 +75,15 @@ export default function MemberManagementTableCell({
             <div className="bg-gray-200 rounded-md px-1 h-4 text-[10px] whitespace-nowrap flex items-center justify-center">
               -30
             </div>
-            <div className="bg-gray-200 rounded-md px-1 h-4 text-[10px] whitespace-nowrap bg-gray-500 text-white flex items-center justify-center">
+            <div className="bg-gray-200 rounded-md px-1 h-4 text-[10px] whitespace-nowrap text-white flex items-center justify-center">
               근로
             </div>
           </div>
           <div className="flex flex-col gap-0.5">
-            <div className="bg-gray-200 rounded-md px-1 h-4 text-[10px] whitespace-nowrap bg-gray-500 text-white flex items-center justify-center">
+            <div className="bg-gray-200 rounded-md px-1 h-4 text-[10px] whitespace-nowrap  text-white flex items-center justify-center">
               임금
             </div>
-            <div className="bg-gray-200 rounded-md px-1 h-4 text-[10px] whitespace-nowrap bg-gray-500 text-white flex items-center justify-center">
+            <div className="bg-gray-200 rounded-md px-1 h-4 text-[10px] whitespace-nowrap  text-white flex items-center justify-center">
               기본
             </div>
           </div>
