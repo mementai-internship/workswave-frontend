@@ -1,3 +1,4 @@
+import { useAtom } from 'jotai';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
@@ -5,24 +6,15 @@ import ContactSearchInput from '@/components/Common/ContactSearchInput';
 import WorkSelect, { TOptions } from '@/components/WorkManagement/WorkSelect';
 import { useGetBranches } from '@/hooks/apis/useBranches';
 import { useGetParts } from '@/hooks/apis/useParts';
+import { selectedBranchAtom, selectedDepartmentAtom } from '@/store/atoms';
 
-interface IWorkFilterProps {
-  selectedBranch: TOptions | null;
-  setSelectedBranch: (branch: TOptions | null) => void;
-  selectedDepartment: TOptions | null;
-  setSelectedDepartment: (department: TOptions | null) => void;
-}
-
-export default function WorkFilter({
-  selectedBranch,
-  setSelectedBranch,
-  selectedDepartment,
-  setSelectedDepartment,
-}: IWorkFilterProps) {
+export default function WorkFilter() {
+  const [selectedBranch, setSelectedBranch] = useAtom<TOptions>(selectedBranchAtom);
+  const [selectedDepartment, setSelectedDepartment] = useAtom<TOptions>(selectedDepartmentAtom);
   const { data: branches } = useGetBranches('0');
   const { data: parts } = useGetParts(selectedBranch?.id || null);
-  const location = useLocation();
 
+  const location = useLocation();
   useEffect(() => {
     if (selectedBranch) {
       setSelectedDepartment(null);
@@ -32,6 +24,7 @@ export default function WorkFilter({
   useEffect(() => {
     setSelectedBranch(null);
     setSelectedDepartment(null);
+    // 다른 관리로 넘어갈 때 초기화가 되어야 하나?
   }, [location.pathname, setSelectedBranch, setSelectedDepartment]);
 
   const mapToOptions = (items: { id: number; name: string }[] | undefined) =>
