@@ -3,8 +3,12 @@ import { PiGear } from 'react-icons/pi';
 import { Link } from 'react-router-dom';
 
 import ContactSearchInput from '@/components/Common/ContactSearchInput';
+import Badge from '@/components/Common/LabelBadge';
+import Pagination from '@/components/Common/Pagination';
 import SelectBox from '@/components/Common/Select';
 import TitleContainer from '@/components/Common/TitleContainer';
+import SuperManagerSettingModalPartVer from '@/components/MemberManagement/SuperManagerSettingModal/SuperManagerSettingModalPartVer';
+import SuperManagerSettingModalSuperVer from '@/components/MemberManagement/SuperManagerSettingModal/SuperManagerSettingModalSuperVer';
 
 export default function SuperManagerSetting() {
   // 회원관리 버튼 클릭 시
@@ -82,6 +86,7 @@ export default function SuperManagerSetting() {
             </Table.ColumnHeaderCell>
           </Table.Row>
         </Table.Header>
+
         <Table.Body>
           {Object.values(SUPERMANAGERSETTING_TABLE_TITLE).map((data, dataIndex) => (
             <Table.Row key={dataIndex} align="center">
@@ -90,9 +95,7 @@ export default function SuperManagerSetting() {
                   <Table.Cell justify="center" align="center" key={entryIndex}>
                     <div className="flex gap-2">
                       {data[key].map((part, index) => (
-                        <div key={index} className="bg-gray-200 rounded-md px-1.5">
-                          {part}
-                        </div>
+                        <Badge size={1} text={part} color="purple" key={index} radius="small" />
                       ))}
                     </div>
                   </Table.Cell>
@@ -103,21 +106,18 @@ export default function SuperManagerSetting() {
                 );
               })}
               <Table.Cell justify="center" align="center">
-                <Button
-                  variant="surface"
-                  radius="none"
-                  color="gray"
-                  size="3"
-                  className="font-semibold text-black text-sm py-4 px-8 bg-gray-200 border-gray-10"
-                  onClick={() => {}}
-                >
-                  권한변경
-                </Button>
+                {data.권한 === '통합관리자' ? (
+                  <SuperManagerSettingModalSuperVer />
+                ) : (
+                  <SuperManagerSettingModalPartVer />
+                )}
               </Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>
       </Table.Root>
+
+      <Pagination totalItems={7} itemsPerPage={10} />
     </div>
   );
 }
@@ -149,7 +149,7 @@ const SUPERMANAGERSETTING_TABLE_TITLE: TSUPERMANAGERSETTING_TABLE_TITLE = [
     근무파트: '의사',
     연락처: '010-1234-5678',
     이메일: 'email@mement.ai',
-    권한: '통합관리자',
+    권한: '파트관리자',
     파트: ['전체'],
   },
   {
