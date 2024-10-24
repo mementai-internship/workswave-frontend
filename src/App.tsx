@@ -1,7 +1,9 @@
-import Router from '@/routes';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Provider } from 'jotai';
+
+import ToastList from '@/components/Common/Toast/ToastList';
+import Router from '@/routes';
 
 import './index.css';
 
@@ -17,6 +19,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Provider>
+        <ToastList />
         <Router />
       </Provider>
       <ReactQueryDevtools initialIsOpen={false} />
