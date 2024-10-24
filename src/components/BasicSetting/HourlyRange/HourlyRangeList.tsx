@@ -64,7 +64,7 @@ export default function HourlyRangeList({
     >
       <ul className="flex flex-col gap-2 py-3">
         {filteredTemplates(list).length === 0 ? (
-          <Txt className="text-center pt-6">시급 설정 템플릿이 없습니다.</Txt>
+          <Txt className="pt-6 text-center">시급 설정 템플릿이 없습니다.</Txt>
         ) : (
           filteredTemplates(list).map((item) => (
             <HourlyRangeItem

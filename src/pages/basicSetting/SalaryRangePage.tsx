@@ -70,9 +70,9 @@ export default function SalaryRangePage() {
   });
 
   return (
-    <div className="w-full overflow-x-scroll">
+    <div className={`w-full overflow-x-auto border ${SALARY_RANGE_BORDER_COLOR}`}>
       {!isLoading && (
-        <div className={`min-w-[1700px] mx-auto w-full border ${SALARY_RANGE_BORDER_COLOR}`}>
+        <div className={`min-w-[1700px] mx-auto w-full`}>
           <div className="bg-white max-h-[calc(100vh-300px)]">
             <div className="flex items-center gap-6 title px-10 py-2">
               <Title content="급여구간표" />
