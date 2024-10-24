@@ -34,7 +34,7 @@ export const usePostParts = (branchId: number): UseMutationResult<IPartsResponse
       });
     },
     onError: () => {
-      toast.notice('파트 추가에 실패했습니다.', {
+      toast.error('파트 추가에 실패했습니다.', {
         timer: 2000,
       });
     },
