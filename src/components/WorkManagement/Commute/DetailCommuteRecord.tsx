@@ -8,11 +8,11 @@ interface IProps {
   showAllStatus?: boolean;
 }
 const StatisticItem = ({ label, value, selectedEmployee, showAllStatus }: IProps) => (
-  <div className="flex flex-col items-center ">
-    <span className="text-sm mb-2">
+  <div className="flex flex-col items-center justify-center ">
+    <span className="mb-2 text-xl">
       {showAllStatus || !selectedEmployee?.name ? label : selectedEmployee.name}
     </span>
-    <span className="text-xl text-gray-400 font-semibold">
+    <span className="text-xl font-semibold text-gray-400">
       {showAllStatus || !selectedEmployee?.name ? value : null}
     </span>
   </div>
@@ -29,15 +29,15 @@ export default function DetailCommuteRecord({
   };
   return (
     <div>
-      <div className="flex justify-between items-center mb-5">
-        <div className="text-s font-semibold">출퇴근 기록 관리 상세현황</div>
+      <div className="flex items-center justify-between mb-5">
+        <div className="font-semibold text-s">출퇴근 기록 관리 상세현황</div>
         <div className="text-sm text-gray-500 cursor-pointer" onClick={handleShowAllStatus}>
           전체보기
         </div>
       </div>
-      <div className="border border-gray-300 rounded-lg mb-5 bg-white">
+      <div className="mb-5 bg-white border border-gray-300 rounded-lg">
         <div className="p-6">
-          <div className="flex justify-between items-center px-5">
+          <div className="flex items-center justify-between px-5">
             <StatisticItem
               showAllStatus={showAllStatus}
               selectedEmployee={selectedEmployee}

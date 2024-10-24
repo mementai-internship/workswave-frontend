@@ -1,23 +1,22 @@
 import dayjs from 'dayjs';
+import { useAtom } from 'jotai';
 import { useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 import WorkFilter from '@/components/WorkManagement/WorkFilter';
 import WorkHeader from '@/components/WorkManagement/WorkHeader';
-import { TOptions } from '@/components/WorkManagement/WorkSelect';
 import { TAB_ITEMS, TabItem } from '@/constants/workManagement/workManagement';
+import { curDateAtom } from '@/store/atoms';
 
 export default function WorkManagementLayout() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [currentDate, setCurrentDate] = useState(dayjs());
+  const [currentDate, setCurrentDate] = useAtom<dayjs.Dayjs>(curDateAtom);
   const [selectTab, setSelectTab] = useState<TabItem>(() => {
     return TAB_ITEMS.find((tab) => tab.path === location.pathname) || TAB_ITEMS[0];
   });
 
-  const [selectedBranch, setSelectedBranch] = useState<TOptions | null>(null);
-  const [selectedDepartment, setSelectedDepartment] = useState<TOptions | null>(null);
-
+  // 최 상단에서
   const handleTabChange = (newTab: TabItem) => {
     setSelectTab(newTab);
     navigate(newTab.path);
@@ -28,19 +27,14 @@ export default function WorkManagementLayout() {
     // backend API 연결
   };
   return (
-    <div className="w-full">
+    <div className="w-full min-w-[1380px]">
       <WorkHeader
         selectTab={selectTab}
         onTabChange={handleTabChange}
         currentDate={currentDate}
         onChangeMonth={handleChangeMonth}
       />
-      <WorkFilter
-        selectedBranch={selectedBranch}
-        setSelectedBranch={setSelectedBranch}
-        selectedDepartment={selectedDepartment}
-        setSelectedDepartment={setSelectedDepartment}
-      />
+      <WorkFilter />
 
       <Outlet />
     </div>

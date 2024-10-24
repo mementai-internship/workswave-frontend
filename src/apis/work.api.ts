@@ -6,4 +6,9 @@ export const worksApi = {
     const result = await axiosInstance.get('/branches/attendance');
     return result.data;
   },
+  getWorkByMonth: async (date: string): Promise<IAttendance[]> => {
+    const result = await axiosInstance.get('/branches/attendance/날짜', { params: { date } });
+
+    return result.data;
+  },
 };

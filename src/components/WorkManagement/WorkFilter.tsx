@@ -1,28 +1,20 @@
+import { useAtom } from 'jotai';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import ContactSearchInput from '@/components/Common/ContactSearchInput';
+// import ContactSearchInput from '@/components/Common/ContactSearchInput';
+import WorkSearchInput from '@/components/WorkManagement/WorkSearchInput';
 import WorkSelect, { TOptions } from '@/components/WorkManagement/WorkSelect';
 import { useGetBranches } from '@/hooks/apis/useBranches';
 import { useGetParts } from '@/hooks/apis/useParts';
+import { selectedBranchAtom, selectedDepartmentAtom } from '@/store/atoms';
 
-interface IWorkFilterProps {
-  selectedBranch: TOptions | null;
-  setSelectedBranch: (branch: TOptions | null) => void;
-  selectedDepartment: TOptions | null;
-  setSelectedDepartment: (department: TOptions | null) => void;
-}
-
-export default function WorkFilter({
-  selectedBranch,
-  setSelectedBranch,
-  selectedDepartment,
-  setSelectedDepartment,
-}: IWorkFilterProps) {
+export default function WorkFilter() {
+  const [selectedBranch, setSelectedBranch] = useAtom<TOptions>(selectedBranchAtom);
+  const [selectedDepartment, setSelectedDepartment] = useAtom<TOptions>(selectedDepartmentAtom);
   const { data: branches } = useGetBranches('0');
   const { data: parts } = useGetParts(selectedBranch?.id || null);
   const location = useLocation();
-
   useEffect(() => {
     if (selectedBranch) {
       setSelectedDepartment(null);
@@ -32,13 +24,14 @@ export default function WorkFilter({
   useEffect(() => {
     setSelectedBranch(null);
     setSelectedDepartment(null);
+    // 다른 관리로 넘어갈 때 초기화가 되어야 하나?
   }, [location.pathname, setSelectedBranch, setSelectedDepartment]);
 
   const mapToOptions = (items: { id: number; name: string }[] | undefined) =>
     items ? items.map((item) => ({ id: item.id, name: item.name })) : [];
 
   return (
-    <div className="flex justify-between py-5 border-t border-gray-200">
+    <div className="flex justify-between pt-5 pb-2 border-t border-gray-200">
       <div className="flex gap-3">
         <WorkSelect
           options={mapToOptions(branches?.list)}
@@ -57,8 +50,8 @@ export default function WorkFilter({
           defaultValue="파트 선택"
         />
       </div>
-
-      <ContactSearchInput />
+      {/* 검색 안되면 기존 검색 컴포넌트 써보기 */}
+      <WorkSearchInput />
     </div>
   );
 }

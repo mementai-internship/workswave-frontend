@@ -41,8 +41,8 @@ export default function WorkHeader({ selectTab, currentDate, onTabChange, onChan
   }, [currentDate]);
 
   return (
-    <div className="flex justify-between content-center py-4">
-      <div className="text-2xl font-medium flex gap-3">
+    <div className="flex content-center justify-between py-4">
+      <div className="flex gap-3 text-2xl font-medium">
         {selectTab.title}
         <div className="flex gap-3">
           {TAB_ITEMS.filter((item) => item.id !== selectTab.id).map((item) => (
@@ -54,12 +54,12 @@ export default function WorkHeader({ selectTab, currentDate, onTabChange, onChan
               onClick={() => onTabChange(item)}
             >
               <PiGear />
-              <span className="-mb-px mr-1">{item.title}</span>
+              <span className="mr-1 -mb-px">{item.title}</span>
             </Button>
           ))}
         </div>
       </div>
-      <div className="flex items-center	gap-2">
+      <div className="flex items-center gap-2">
         <p className="text-sm text-gray-50">
           {date.day} 기준 총 근무가능 일수
           <span className="font-bold text-black">{date.workingDays}</span>일 (데이터기준

@@ -31,6 +31,7 @@ export const QUERY_KEYS = {
 
   //commute queryKeys
   commute: 'commute',
+  commutStatus: 'commuteStatus',
 
   // minimum-wage-policies
   minimumWagePolicies: 'minimumWagePolicies',

@@ -13,18 +13,19 @@ export function ChangeMonth({ currMonth, onChangeMonth }: IChangeSalarySettlemen
   const handleMonthChange = (direction: TMonthChange) => {
     const newDate =
       direction === 'prev' ? currMonth.subtract(1, 'month') : currMonth.add(1, 'month');
+    console.log(currMonth);
+
     onChangeMonth(newDate);
   };
-
   return (
-    <div className="flex w-48 items-center justify-between h-10 bg-white border rounded-md">
-      <button onClick={() => handleMonthChange('prev')} className="w-8 pt-1 h-10 border-r text-xl">
+    <div className="flex items-center justify-between w-48 h-10 bg-white border rounded-md">
+      <button onClick={() => handleMonthChange('prev')} className="w-8 h-10 pt-1 text-xl border-r">
         &lt;
       </button>
       <Txt variant="subtitle1" className="pt-1">
         {currMonth.format('YYYY년 M월')}
       </Txt>
-      <button onClick={() => handleMonthChange('next')} className="w-8 pt-1 h-10 border-l text-xl">
+      <button onClick={() => handleMonthChange('next')} className="w-8 h-10 pt-1 text-xl border-l">
         &gt;
       </button>
     </div>
@@ -39,7 +40,7 @@ export function ChangeMonthNone({ currMonth, onChangeMonth }: IChangeSalarySettl
   };
 
   return (
-    <div className="flex w-60 items-center justify-center h-10 gap-5">
+    <div className="flex items-center justify-center h-10 gap-5 w-60">
       <button onClick={() => handleMonthChange('prev')} className="px-1 pt-1 text-3xl text-gray-50">
         &lt;
       </button>

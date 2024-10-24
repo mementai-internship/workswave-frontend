@@ -60,7 +60,9 @@ export interface ICommuteData {
     };
   };
 }
-
+export interface ICommuteDataWithPageNum extends ICommuteData {
+  pageNum: number;
+}
 export interface IWorkStatistics {
   totalWorkers: number;
   overtimeWorkers: number;
