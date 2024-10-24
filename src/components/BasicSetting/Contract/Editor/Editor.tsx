@@ -63,8 +63,7 @@ export default function EditorComponent({ setEditor }) {
     },
   });
   // 해당 메서드로 html 값 얻을 수 있음
-
-  console.log(localEditor.getHTML());
+  // console.log(localEditor.getHTML());
 
   useEffect(() => {
     if (localEditor) {
@@ -74,7 +73,15 @@ export default function EditorComponent({ setEditor }) {
 
   return (
     <div className="relative w-full h-full max-h-[780px]">
-      <div className="flex flex-col items-center w-full h-full ">
+      <div
+        onClick={(e) => {
+          const targetElement = e.target as HTMLElement;
+          if (targetElement.className.includes('editor-content')) {
+            localEditor.chain().focus().insertContent('<p></p>').run();
+          }
+        }}
+        className="flex flex-col items-center w-full h-full "
+      >
         <ToolBar editor={localEditor} />
         <EditorContent editor={localEditor} className="editor-content" />
       </div>

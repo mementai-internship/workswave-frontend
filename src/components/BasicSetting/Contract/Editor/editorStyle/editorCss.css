@@ -8,6 +8,7 @@
 }
 .editor-content {
   width: 100%;
+  height: 100%;
   border-collapse: collapse;
   padding: 8px;
   font-size: 18px;
@@ -28,6 +29,9 @@
       border: 1px solid #ddd;
       min-width: 100px;
     }
+  }
+  p {
+    margin: 12px 0px;
   }
 }
 
