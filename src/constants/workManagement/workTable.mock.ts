@@ -5,6 +5,7 @@ import {
   ICommuteDataWithPageNum,
   IDetailPartTimeData,
   IPartTimeData,
+  IPartTimeDataWithPageNum,
   IWorkData,
 } from '@/models/work.model';
 
@@ -203,6 +204,38 @@ export const partTimeMockData: IPartTimeData[] = [
     totalSalary: '150,000원',
     workDetails: '정상근무',
     gender: '남자',
+  },
+];
+export const partTimeMockDataWithPageNum: IPartTimeDataWithPageNum[] = [
+  {
+    id: 1,
+    branch: '서울지점',
+    name: '김철수',
+    department: '간호사',
+    workDate: '2023-10-18',
+    hospitalWork: '8시간',
+    remoteWork: '0시간',
+    holidayWork: '0시간',
+    totalWorkHours: '8시간',
+    totalSalary: '150,000원',
+    workDetails: '정상근무',
+    gender: '남자',
+    pageNum: 1,
+  },
+  {
+    id: 2,
+    branch: '서울지점',
+    name: ' 김영희',
+    department: '간호사',
+    workDate: '2023-10-18',
+    hospitalWork: '8시간',
+    remoteWork: '0시간',
+    holidayWork: '0시간',
+    totalWorkHours: '8시간',
+    totalSalary: '150,000원',
+    workDetails: '정상근무',
+    gender: '남자',
+    pageNum: 2,
   },
 ];
 

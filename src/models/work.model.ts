@@ -88,6 +88,9 @@ export interface IPartTimeData {
   gender: string;
 }
 
+export interface IPartTimeDataWithPageNum extends IPartTimeData {
+  pageNum: number;
+}
 // 파트 관리 상세
 
 export interface IDetailPartTimeData {

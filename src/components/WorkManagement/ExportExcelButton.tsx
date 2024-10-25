@@ -1,10 +1,10 @@
 import { CSVLink } from 'react-csv';
 import { SiMicrosoftexcel } from 'react-icons/si';
 
-import { ICommuteData, IWorkData } from '@/models/work.model';
+import { ICommuteData, IPartTimeData, IWorkData } from '@/models/work.model';
 
 interface IExportExcelButtonProps {
-  data: IWorkData[] | ICommuteData[];
+  data: IWorkData[] | ICommuteData[] | IPartTimeData[];
   fileName: string;
 }
 
