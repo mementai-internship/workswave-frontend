@@ -307,7 +307,6 @@ export default function MemberBasicInfoTable() {
                               render={({ field }) => (
                                 <MemberBasicInfoDatePicker
                                   defaultValue={currentUserInfo?.resignation_date || '근무 중'}
-                                  style="top"
                                   {...field}
                                 />
                               )}

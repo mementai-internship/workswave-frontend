@@ -14,6 +14,8 @@ interface IPropsType {
   initialStartTime: string;
   initialEndTime: string;
   onTimeRangeChange: (startTime: string, endTime: string) => void;
+  disabled?: boolean;
+  size?: '1' | '2' | '3';
 }
 
 const combineTimeValues = (hour: string, minute: string): Dayjs => {
@@ -26,6 +28,8 @@ export default function TimeRangeSelector({
   initialStartTime,
   initialEndTime,
   onTimeRangeChange,
+  disabled = false,
+  size = '3',
 }: IPropsType) {
   const [initStartHour, initStartMinute] = initialStartTime.split(':');
   const [initEndHour, initEndMinute] = initialEndTime.split(':');
@@ -81,13 +85,18 @@ export default function TimeRangeSelector({
   return (
     <div className={`flex items-center gap-x-4`}>
       <label>
-        <Txt variant="subtitle2" color="gray-50">
+        <Txt variant={size === '1' || size === '2' ? 'body1' : 'subtitle2'} color="gray-50">
           {startLabel}
         </Txt>
       </label>
 
-      <Select.Root value={startHour} onValueChange={setStartHour} size="3">
-        <Select.Trigger variant="surface" radius="medium" className="w-32" placeholder="0 시" />
+      <Select.Root value={startHour} onValueChange={setStartHour} size={size} disabled={disabled}>
+        <Select.Trigger
+          variant="surface"
+          radius="medium"
+          className={size === '1' || size === '2' ? 'w-24' : 'w-32'}
+          placeholder="0 시"
+        />
         <Select.Content>
           <Select.Group>
             {getHours().map((hour) => (
@@ -99,8 +108,18 @@ export default function TimeRangeSelector({
         </Select.Content>
       </Select.Root>
 
-      <Select.Root value={startMinute} onValueChange={setStartMinute} size="3">
-        <Select.Trigger variant="surface" radius="medium" className="w-32" placeholder="0 분" />
+      <Select.Root
+        value={startMinute}
+        onValueChange={setStartMinute}
+        size={size}
+        disabled={disabled}
+      >
+        <Select.Trigger
+          variant="surface"
+          radius="medium"
+          className={`${size === '1' || size === '2' ? 'w-24' : 'w-32'}`}
+          placeholder="0 분"
+        />
         <Select.Content>
           <Select.Group>
             {getMinutes().map((minute) => (
@@ -114,13 +133,18 @@ export default function TimeRangeSelector({
 
       <div className="flex items-center gap-x-4">
         <label>
-          <Txt variant="subtitle2" color="gray-50">
+          <Txt variant={size === '1' || size === '2' ? 'body1' : 'subtitle2'} color="gray-50">
             {endLabel}
           </Txt>
         </label>
 
-        <Select.Root value={endHour} onValueChange={setEndHour} size="3">
-          <Select.Trigger variant="surface" radius="medium" className="w-32" placeholder="0 시" />
+        <Select.Root value={endHour} onValueChange={setEndHour} size={size} disabled={disabled}>
+          <Select.Trigger
+            variant="surface"
+            radius="medium"
+            className={size === '1' || size === '2' ? 'w-24' : 'w-32'}
+            placeholder="0 시"
+          />
           <Select.Content>
             <Select.Group>
               {getHours().map((hour) => (
@@ -132,8 +156,13 @@ export default function TimeRangeSelector({
           </Select.Content>
         </Select.Root>
 
-        <Select.Root value={endMinute} onValueChange={setEndMinute} size="3">
-          <Select.Trigger variant="surface" radius="medium" className="w-32" placeholder="0 분" />
+        <Select.Root value={endMinute} onValueChange={setEndMinute} size={size} disabled={disabled}>
+          <Select.Trigger
+            variant="surface"
+            radius="medium"
+            className={size === '1' || size === '2' ? 'w-24' : 'w-32'}
+            placeholder="0 분"
+          />
           <Select.Content>
             <Select.Group>
               {getMinutes().map((minute) => (

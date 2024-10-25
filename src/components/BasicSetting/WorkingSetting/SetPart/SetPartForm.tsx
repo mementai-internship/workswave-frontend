@@ -97,46 +97,38 @@ export default function WorkingSettingPartForm({
             </Dialog.Description>
 
             <Flex direction="column" gap="3">
-              {parts && parts.some((part) => part.name === '의사') && (
-                <div className="flex items-center gap-x-2">
-                  <label className="w-24">의사</label>
-                  <Checkbox
-                    checked={checkedList.includes('의사')}
-                    disabled={parts.some((part) => part.name === '의사')}
-                    onClick={() => handleCheckboxToggle('의사')}
-                  />
-                </div>
-              )}
-              {parts && parts.some((part) => part.name === '간호사') && (
-                <div className="flex items-center gap-x-2">
-                  <label className="w-24">간호사</label>
-                  <Checkbox
-                    checked={checkedList.includes('간호사')}
-                    disabled={parts.some((part) => part.name === '간호사')}
-                    onClick={() => handleCheckboxToggle('간호사')}
-                  />
-                </div>
-              )}
-              {parts && parts.some((part) => part.name === '간호조무사') && (
-                <div className="flex items-center gap-x-2">
-                  <label className="w-24">간호조무사</label>
-                  <Checkbox
-                    checked={checkedList.includes('간호조무사')}
-                    disabled={parts.some((part) => part.name === '간호조무사')}
-                    onClick={() => handleCheckboxToggle('간호조무사')}
-                  />
-                </div>
-              )}
-              {parts && parts.some((part) => part.name === '상담') && (
-                <div className="flex items-center gap-x-2">
-                  <label className="w-24">상담</label>
-                  <Checkbox
-                    checked={checkedList.includes('상담')}
-                    disabled={parts.some((part) => part.name === '상담')}
-                    onClick={() => handleCheckboxToggle('상담')}
-                  />
-                </div>
-              )}
+              <div className="flex items-center gap-x-2">
+                <label className="w-24">의사</label>
+                <Checkbox
+                  checked={checkedList.includes('의사')}
+                  disabled={parts && parts.some((part) => part.name === '의사')}
+                  onClick={() => handleCheckboxToggle('의사')}
+                />
+              </div>
+              <div className="flex items-center gap-x-2">
+                <label className="w-24">간호사</label>
+                <Checkbox
+                  checked={checkedList.includes('간호사')}
+                  disabled={parts && parts.some((part) => part.name === '간호사')}
+                  onClick={() => handleCheckboxToggle('간호사')}
+                />
+              </div>
+              <div className="flex items-center gap-x-2">
+                <label className="w-24">간호조무사</label>
+                <Checkbox
+                  checked={checkedList.includes('간호조무사')}
+                  disabled={parts && parts.some((part) => part.name === '간호조무사')}
+                  onClick={() => handleCheckboxToggle('간호조무사')}
+                />
+              </div>
+              <div className="flex items-center gap-x-2">
+                <label className="w-24">상담</label>
+                <Checkbox
+                  checked={checkedList.includes('상담')}
+                  disabled={parts && parts.some((part) => part.name === '상담')}
+                  onClick={() => handleCheckboxToggle('상담')}
+                />
+              </div>
             </Flex>
 
             <Flex gap="3" mt="4" justify="end">
@@ -178,7 +170,7 @@ export default function WorkingSettingPartForm({
             <div className="absolute right-2 top-[50%] translate-y-[-40%]"></div>
           </TextField.Root>
           <div className="absolute right-2 top-[50%] translate-y-[-40%]">
-            <input id="part_color" type="color" {...register('color')} />
+            <input id="part_color" type="color" {...register('color')} defaultValue="#dddddd" />
           </div>
         </div>
         <div className="flex items-center">
@@ -226,31 +218,31 @@ export default function WorkingSettingPartForm({
             </div>
           </RadioGroup.Root>
         </div>
-      </form>
-      <div className="flex justify-center gap-x-8 w-full">
-        {isEditingMode && (
+        <div className="flex justify-center gap-x-8 w-full">
+          {isEditingMode && (
+            <Button
+              type="button"
+              onClick={handleClickCancel}
+              variant="solid"
+              size="3"
+              radius="small"
+              className="flex w-[40%] h-10 justify-items-center mt-40 mb-10 bg-gray-500 cursor-pointer hover:bg-opacity-90 disabled:bg-gray-200 disabled:text-gray-30 disabled:cursor-default"
+            >
+              취소
+            </Button>
+          )}
           <Button
-            type="button"
-            onClick={handleClickCancel}
+            type="submit"
             variant="solid"
             size="3"
             radius="small"
-            className="flex w-[40%] h-10 justify-items-center mt-40 mb-10 bg-gray-500 cursor-pointer hover:bg-opacity-90 disabled:bg-gray-200 disabled:text-gray-30 disabled:cursor-default"
+            disabled={!isEditingMode && !isFormValid()}
+            className="flex w-[40%] h-10 justify-items-center mt-40 mb-10 bg-indigo-950 cursor-pointer hover:bg-opacity-90 disabled:bg-gray-200 disabled:text-gray-30 disabled:cursor-default"
           >
-            취소
+            {isEditingMode ? '수정하기' : '추가하기'}
           </Button>
-        )}
-        <Button
-          type="submit"
-          variant="solid"
-          size="3"
-          radius="small"
-          disabled={!isEditingMode && !isFormValid()}
-          className="flex w-[40%] h-10 justify-items-center mt-40 mb-10 bg-indigo-950 cursor-pointer hover:bg-opacity-90 disabled:bg-gray-200 disabled:text-gray-30 disabled:cursor-default"
-        >
-          {isEditingMode ? '수정하기' : '추가하기'}
-        </Button>
-      </div>
+        </div>
+      </form>
     </div>
   );
 }

@@ -16,3 +16,23 @@
   padding: 10px;
   background-color: #760dde;
 }
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 0px;
+  background: transparent;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 10px;
+  border: 8px solid transparent;
+  opacity: 1;
+}
+*:hover > *::-webkit-scrollbar-thumb {
+  opacity: 1;
+  --tw-bg-opacity: 1;
+  background-color: #cccccc;
+}
