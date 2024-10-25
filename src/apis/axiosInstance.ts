@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 import { getAccessToken, removeTokens } from '@/utils/tokenUtils';
 
@@ -28,7 +27,6 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   (error) => {
-    const navigate = useNavigate();
     console.log('%c 에러 발생', 'color: red; font-size: 1.2rem', error);
 
     switch (error.status) {
@@ -37,7 +35,7 @@ axiosInstance.interceptors.response.use(
       case 401:
         removeTokens();
         console.log('error', '로그인이 필요합니다.');
-        navigate('/login');
+        window.location.href = '/login';
         break;
       case 404:
         console.log('error', '페이지를 찾을 수 없습니다.');

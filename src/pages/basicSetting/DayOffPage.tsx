@@ -46,7 +46,7 @@ export default function DayOffPage() {
   } = useForm<ILeaveCategory>({
     defaultValues: {
       leave_category: {
-        id: undefined,
+        id: 0,
         name: '',
         leave_count: 0,
         is_paid: true,

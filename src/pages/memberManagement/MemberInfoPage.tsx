@@ -8,11 +8,9 @@ import DocsDraftTable from '@/components/MemberInfo/DocsDraftTable';
 import DocsRegisterTable from '@/components/MemberInfo/DocsRegisterTable';
 import DocsTable from '@/components/MemberInfo/DocsTable';
 import MemberInfoBasicTable from '@/components/MemberInfo/MemberBasicInfoTable';
-import ContractInfoBar from '@/components/MemberInfo/MemberInfoCommon/ContractInfoBar';
 import MemberInfoButtonBar from '@/components/MemberInfo/MemberInfoCommon/MemberInfoButtonBar';
-import SalaryContractTable from '@/components/MemberInfo/SalaryContractTable';
-import WorkContractTable from '@/components/MemberInfo/WorkContractTable';
 import WrittenContract from '@/components/MemberInfo/WrittenContractTable';
+import ContractMemberPage from '@/pages/memberManagement/memberContract/ContractMemberPage';
 
 export default function MemberInfoPage() {
   const [selectedTab, setSelectedTab] = useState<'info' | 'contract' | 'document'>('info');
@@ -61,15 +59,7 @@ export default function MemberInfoPage() {
           <MemberInfoBasicTable />
         </>
       ) : selectedTab === 'contract' ? (
-        <>
-          <MemberInfoButtonBar
-            leftButton={{ text: '휴직신청' }}
-            rightButton={{ text: '신청 리스트' }}
-          />
-          <ContractInfoBar />
-          <WorkContractTable />
-          <SalaryContractTable />
-        </>
+        <ContractMemberPage />
       ) : (
         <>
           <DocsRegisterTable />

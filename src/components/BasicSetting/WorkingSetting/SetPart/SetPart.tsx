@@ -20,7 +20,7 @@ export default function WorkingSettingSetPart({ branchId }: { branchId: number }
       id: 0,
       name: '',
       task: '',
-      color: '',
+      color: '#dddddd',
       is_doctor: false,
       required_certification: false,
       leave_granting_authority: false,

@@ -1,12 +1,20 @@
-import { Checkbox, Flex, Text } from '@radix-ui/themes';
+import { Checkbox, Flex } from '@radix-ui/themes';
 
-export default function ContractInfoCheckbox({ text }: { text: string }) {
+import { Txt } from '@/components/Common/Txt';
+
+export default function ContractInfoCheckbox({
+  text,
+  onChange,
+}: {
+  text: string;
+  onChange: (checked: boolean) => void;
+}) {
   return (
-    <Text as="label" size="1" className="font-bold text-xs whitespace-nowrap">
-      <Flex align="center" gap="1px">
-        <Checkbox size="2" color="purple" variant="surface" />
+    <Txt variant="caption">
+      <Flex align="center" className="gap-1">
+        <Checkbox size="2" color="purple" variant="surface" onCheckedChange={onChange} />
         {text}
       </Flex>
-    </Text>
+    </Txt>
   );
 }

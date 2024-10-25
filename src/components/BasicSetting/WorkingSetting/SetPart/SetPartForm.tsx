@@ -170,7 +170,7 @@ export default function WorkingSettingPartForm({
             <div className="absolute right-2 top-[50%] translate-y-[-40%]"></div>
           </TextField.Root>
           <div className="absolute right-2 top-[50%] translate-y-[-40%]">
-            <input id="part_color" type="color" {...register('color')} />
+            <input id="part_color" type="color" {...register('color')} defaultValue="#dddddd" />
           </div>
         </div>
         <div className="flex items-center">
@@ -218,31 +218,31 @@ export default function WorkingSettingPartForm({
             </div>
           </RadioGroup.Root>
         </div>
-      </form>
-      <div className="flex justify-center gap-x-8 w-full">
-        {isEditingMode && (
+        <div className="flex justify-center gap-x-8 w-full">
+          {isEditingMode && (
+            <Button
+              type="button"
+              onClick={handleClickCancel}
+              variant="solid"
+              size="3"
+              radius="small"
+              className="flex w-[40%] h-10 justify-items-center mt-40 mb-10 bg-gray-500 cursor-pointer hover:bg-opacity-90 disabled:bg-gray-200 disabled:text-gray-30 disabled:cursor-default"
+            >
+              취소
+            </Button>
+          )}
           <Button
-            type="button"
-            onClick={handleClickCancel}
+            type="submit"
             variant="solid"
             size="3"
             radius="small"
-            className="flex w-[40%] h-10 justify-items-center mt-40 mb-10 bg-gray-500 cursor-pointer hover:bg-opacity-90 disabled:bg-gray-200 disabled:text-gray-30 disabled:cursor-default"
+            disabled={!isEditingMode && !isFormValid()}
+            className="flex w-[40%] h-10 justify-items-center mt-40 mb-10 bg-indigo-950 cursor-pointer hover:bg-opacity-90 disabled:bg-gray-200 disabled:text-gray-30 disabled:cursor-default"
           >
-            취소
+            {isEditingMode ? '수정하기' : '추가하기'}
           </Button>
-        )}
-        <Button
-          type="submit"
-          variant="solid"
-          size="3"
-          radius="small"
-          disabled={!isEditingMode && !isFormValid()}
-          className="flex w-[40%] h-10 justify-items-center mt-40 mb-10 bg-indigo-950 cursor-pointer hover:bg-opacity-90 disabled:bg-gray-200 disabled:text-gray-30 disabled:cursor-default"
-        >
-          {isEditingMode ? '수정하기' : '추가하기'}
-        </Button>
-      </div>
+        </div>
+      </form>
     </div>
   );
 }

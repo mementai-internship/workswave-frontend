@@ -1,61 +1,83 @@
-import { Button, Table } from '@radix-ui/themes';
-import { Link } from 'react-router-dom';
+import { Select, Table } from '@radix-ui/themes';
 
-import SelectBox from '@/components/Common/Select';
 import ContractInfoCheckbox from '@/components/MemberInfo/MemberInfoCommon/ContractInfoCheckbox';
 import MemberBasicInfoDatePicker from '@/components/MemberInfo/MemberInfoCommon/MemberBasicInfoDatePicker';
 import MemberInfoInput from '@/components/MemberInfo/MemberInfoCommon/MemberInfoInput';
 import { SALARY_CONTRACT_TITLE1, SALARY_CONTRACT_TITLE2 } from '@/constants/memberInfoTable';
 
-export default function SalaryContractTable() {
+interface ISalaryContractTableProps {
+  isEditMode: boolean;
+}
+
+export default function SalaryContractTable({ isEditMode }: ISalaryContractTableProps) {
+  console.log(isEditMode);
+
   return (
-    <>
-      <h2 className="px-4 py-2 text-purple-50 font-bold">2) 임금계약</h2>
-      <hr className="border-gray-200 w-full border-2" />
-      <Table.Root>
+    <div className="flex flex-col h-1/3 justify-evenly">
+      <h2 className="px-4 py-2 text-purple-50 font-bold whitespace-nowrap">{`2) 임금계약`}</h2>
+
+      <Table.Root className="border-t-2 border-gray-300 table-fixed w-full">
         <Table.Header>
-          <Table.Row>
-            <Table.ColumnHeaderCell
-              colSpan={4}
-              className="bg-gray-200 flex items-center gap-1 h-24 py-8"
-            >
+          <Table.Row className="border-b-4 border-gray-300">
+            <Table.ColumnHeaderCell className="bg-gray-200 flex items-center justify-between h-full">
               연봉계약일
             </Table.ColumnHeaderCell>
-            <Table.Cell className="align-middle w-[37.5%]">
-              <div className="flex items-center gap-1">
-                <MemberBasicInfoDatePicker style="bottom" />
-                <MemberBasicInfoDatePicker style="bottom" />
-                <SelectBox title="필터" options={[]} border={false} size="2xSmall" />
+
+            <Table.Cell className="bg-white h-14">
+              <div className="flex items-center gap-3">
+                <MemberBasicInfoDatePicker />
+                <MemberBasicInfoDatePicker />
+                <Select.Root size="1">
+                  <Select.Trigger
+                    placeholder="필터"
+                    variant="ghost"
+                    className="w-12 text-base font-bold"
+                  />
+                  <Select.Content>
+                    <Select.Item value="1">1</Select.Item>
+                    <Select.Item value="2">2</Select.Item>
+                    <Select.Item value="3">3</Select.Item>
+                  </Select.Content>
+                </Select.Root>
               </div>
             </Table.Cell>
-            <Table.Cell className="w-[12.5%]"></Table.Cell>
-            <Table.Cell className="w-[37.5%]"></Table.Cell>
+
+            <Table.ColumnHeaderCell className="bg-white"></Table.ColumnHeaderCell>
+            <Table.Cell className="bg-white h-14"></Table.Cell>
           </Table.Row>
         </Table.Header>
 
         <Table.Body>
           {SALARY_CONTRACT_TITLE1.map((title, index) => (
-            <Table.Row className="h-12">
+            <Table.Row>
               {index === 0 ? (
-                <Table.ColumnHeaderCell className="align-middle bg-gray-200 font-bold h-12">
-                  <div className="flex flex-row items-center justify-start gap-4 whitespace-nowrap">
-                    <p>{title}</p>
-                    <SelectBox title="템플릿 선택" options={[]} border={false} size="xSmall" />
-                  </div>
+                <Table.ColumnHeaderCell className="flex flex-row items-center justify-between bg-gray-200 font-bold h-full">
+                  {title}
+                  <Select.Root size="2">
+                    <Select.Trigger
+                      variant="surface"
+                      className="bg-gray-200 border-2 border-gray-50 text-purple-600 font-bold"
+                      placeholder="탬플릿 선택"
+                    />
+                    <Select.Content>
+                      <Select.Item value="1">1</Select.Item>
+                      <Select.Item value="2">2</Select.Item>
+                      <Select.Item value="3">3</Select.Item>
+                    </Select.Content>
+                  </Select.Root>
                 </Table.ColumnHeaderCell>
               ) : index === 4 || index === 5 ? (
-                <Table.ColumnHeaderCell className="align-middle bg-gray-200 font-bold h-12 w-[12.5%]">
-                  <div className="flex flex-row items-center justify-between gap-4">
-                    <p>{title}</p>
-                    <ContractInfoCheckbox text="사용" />
-                  </div>
+                <Table.ColumnHeaderCell className="flex flex-row items-center justify-between bg-gray-200 font-bold h-full">
+                  {title}
+                  <ContractInfoCheckbox text="사용" onChange={() => {}} />
                 </Table.ColumnHeaderCell>
               ) : (
-                <Table.ColumnHeaderCell className="align-middle bg-gray-200 font-bold h-12 w-[12.5%]">
+                <Table.ColumnHeaderCell className="flex flex-row items-center justify-between bg-gray-200 font-bold h-full">
                   {title}
                 </Table.ColumnHeaderCell>
               )}
-              <Table.Cell key={title} className="flex items-center py-8 gap-2 h-12">
+
+              <Table.Cell key={title} className="bg-white h-14">
                 {(() => {
                   switch (index) {
                     case 0:
@@ -63,7 +85,7 @@ export default function SalaryContractTable() {
                     case 1:
                       return <MemberInfoInput defaultValue={'1'} />;
                     case 2:
-                      return <MemberInfoInput defaultValue="0" />;
+                      return <MemberInfoInput defaultValue={'0'} />;
                     case 3:
                       return <MemberInfoInput defaultValue={'1'} />;
                     case 4:
@@ -75,56 +97,45 @@ export default function SalaryContractTable() {
                   }
                 })()}
               </Table.Cell>
+
               {index !== 5 ? (
                 <>
                   {index === 0 ? (
                     <Table.ColumnHeaderCell
                       key={SALARY_CONTRACT_TITLE2[index]}
-                      className="align-middle bg-gray-200 font-bold h-12 w-[12.5%]"
+                      className="flex flex-row items-center justify-between bg-gray-200 font-bold align-middle h-full"
                     >
-                      <div className="flex flex-row items-center justify-start gap-4">
-                        <p>{SALARY_CONTRACT_TITLE2[index]}</p>
-                        <Button variant="surface" size="1" color="gray">
-                          <Link to="/basic-setting/salary-range">급여구간표</Link>
-                        </Button>
-                      </div>
+                      {SALARY_CONTRACT_TITLE2[index]}
                     </Table.ColumnHeaderCell>
                   ) : (
                     <Table.ColumnHeaderCell
                       key={SALARY_CONTRACT_TITLE2[index]}
-                      className="align-middle bg-gray-200 font-bold h-12 whitespace-nowrap"
+                      className="flex flex-row items-center justify-between bg-gray-200 font-bold align-middle h-full"
                     >
                       {SALARY_CONTRACT_TITLE2[index]}
                     </Table.ColumnHeaderCell>
                   )}
-                  <Table.Cell
-                    key={SALARY_CONTRACT_TITLE2[index]}
-                    className="flex items-center py-8 gap-2 h-12 w-3/8"
-                  >
+
+                  <Table.Cell key={SALARY_CONTRACT_TITLE2[index]} className="bg-white h-14">
                     {(() => {
                       switch (index) {
                         case 0:
-                          return (
-                            <>
-                              <MemberInfoInput defaultValue={'1'} />
-                              <ContractInfoCheckbox text="직접입력" />
-                            </>
-                          );
+                          return <MemberInfoInput defaultValue={'1'} />;
                         case 1:
                           return (
-                            <>
+                            <div className="flex flex-row items-center gap-2">
                               <MemberInfoInput defaultValue={'1'} />
                               <MemberInfoInput defaultValue={'1'} directInputButton />
-                            </>
+                            </div>
                           );
                         case 2:
-                          return <MemberInfoInput defaultValue="0" filterButton />;
+                          return <MemberInfoInput defaultValue="0" />;
                         case 3:
                           return (
-                            <>
+                            <div className="flex flex-row items-center gap-2">
                               <MemberInfoInput defaultValue={'1'} directInputButton />
                               <MemberInfoInput defaultValue={'1'} directInputButton />
-                            </>
+                            </div>
                           );
                         case 4:
                           return <MemberInfoInput defaultValue={'1'} />;
@@ -136,14 +147,14 @@ export default function SalaryContractTable() {
                 </>
               ) : (
                 <>
-                  <Table.RowHeaderCell></Table.RowHeaderCell>
-                  <Table.Cell></Table.Cell>
+                  <Table.RowHeaderCell className="bg-gray-200 h-full"></Table.RowHeaderCell>
+                  <Table.Cell className="bg-white h-14"></Table.Cell>
                 </>
               )}
             </Table.Row>
           ))}
         </Table.Body>
       </Table.Root>
-    </>
+    </div>
   );
 }
