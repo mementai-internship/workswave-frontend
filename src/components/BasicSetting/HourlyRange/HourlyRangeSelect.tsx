@@ -39,7 +39,7 @@ const HourlyRangeSelect = forwardRef<HTMLButtonElement, IProps>(
         <Select.Trigger
           variant={!isBorder ? 'ghost' : 'surface'}
           radius="none"
-          className={`bg-transparent text-black px-4 py-4 ${isTitle ? 'text-lg' : 'text-md'} ${isWidthFull ? 'grow' : 'w-24'}`}
+          className={`bg-transparent text-black px-4 py-4 ${isTitle ? 'text-lg' : 'text-md'} ${isWidthFull ? 'grow' : 'w-auto'}`}
           placeholder={placeholder || undefined}
           ref={ref}
           type="submit"
@@ -47,7 +47,7 @@ const HourlyRangeSelect = forwardRef<HTMLButtonElement, IProps>(
         <Select.Content>
           <Select.Group>
             {content?.map(({ id, name }) => (
-              <Select.Item key={id} value={id.toString()}>
+              <Select.Item key={id} value={id.toString()} className="px-4">
                 {name}
               </Select.Item>
             ))}

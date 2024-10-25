@@ -40,6 +40,20 @@ export const theme = {
         50: '#f8b9f2',
       },
     },
+    keyframes: {
+      toast: {
+        '0%': { transform: 'translateY(100%)' },
+        '100%': { transform: 'translateY(0%)' },
+      },
+      drop: {
+        '0%': { transform: 'translateY(-100%)' },
+        '100%': { transform: 'translateY(0%)' },
+      },
+    },
+    animation: {
+      toast: 'toast .6s ease-in-out',
+      drop: 'drop .6s ease-in-out',
+    },
   },
 };
 

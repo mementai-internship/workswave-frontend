@@ -9,9 +9,9 @@ interface IProps {
 
 export default function HourlyRangeInputContainer({ width = '', title, children }: IProps) {
   return (
-    <Box className="w-full flex gap-1 items-center">
+    <Box className="flex items-center w-full gap-1">
       <label className={`shrink-0 text-gray-50 text-xs ${width}`}>{title}</label>
-      <Box className="w-full flex gap-1 ">{children}</Box>
+      <Box className="flex w-full gap-1 ">{children}</Box>
     </Box>
   );
 }

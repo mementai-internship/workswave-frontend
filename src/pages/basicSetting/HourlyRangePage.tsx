@@ -12,18 +12,15 @@ import {
   usePostHourWageTemplates,
 } from '@/hooks/apis/useHourWageTemplates';
 import { useGetParts } from '@/hooks/apis/useParts';
-import { useGetCurrentUserInfo } from '@/hooks/apis/useUserManagement';
 import { IHourWageTemplatesForm } from '@/models/hour-wage-templates';
 import { convertFormToTemplate, convertTemplateToForm } from '@/utils/convertHourWageTemplates';
 
 export type THourlyRangeEditMode = { editItemId: null | number; isEdit: boolean };
 
 export default function HourlyRangePage() {
-  const { data: currentUser } = useGetCurrentUserInfo();
-  const { data } = useGetBranches('0');
+  const { data: branchesDB, isLoading } = useGetBranches('0');
   const [selectedBranchId, setSelectedBranchId] = useState<number | null>(null);
   const [selectPartId, setSelectPartId] = useState<number | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [editMode, setEditMode] = useState<THourlyRangeEditMode>({
     isEdit: false,
     editItemId: null,
@@ -58,18 +55,13 @@ export default function HourlyRangePage() {
   const { data: dbParts } = useGetParts(selectedBranchId);
 
   useEffect(() => {
-    if (currentUser && data) {
-      if (currentUser.role === 'MSO 최고권한') {
-        setSelectedBranchId(data.list[0].id);
-      } else {
-        setSelectedBranchId(currentUser.branch_id);
-      }
+    if (branchesDB) {
+      setSelectedBranchId(branchesDB.list[0].id);
     }
-    setIsLoading(false);
-  }, [currentUser, data]);
+  }, [branchesDB]);
 
   const branches: THourlyRangeSelectType =
-    data?.list?.map((branch) => ({ id: branch.id, name: branch.name })) || [];
+    branchesDB?.list?.map((branch) => ({ id: branch.id, name: branch.name })) || [];
 
   const parts = dbParts?.reduce<THourlyRangeSelectType>(
     (acc, part) => [...acc, { id: part.id, name: part.name }],
