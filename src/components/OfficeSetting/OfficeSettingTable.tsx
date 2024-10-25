@@ -1,6 +1,7 @@
 import { Table } from '@radix-ui/themes';
 import React from 'react';
 
+import { Txt } from '@/components/Common/Txt';
 import OfficeSettingTableCell from '@/components/OfficeSetting/OfficeSettingTableCell';
 import { OFFICE_SETTING_TABLE_TITLE } from '@/constants/officeSettingTableTitle';
 import { IBranchResponse } from '@/models/branches.model';
@@ -25,11 +26,20 @@ export default function OfficeSettingTable({ list, action, buttonText }: IProps)
       </Table.Header>
 
       <Table.Body>
-        {list.map((data, idx) => (
-          <React.Fragment key={data.id}>
-            <OfficeSettingTableCell buttonText={buttonText} action={action} data={data} idx={idx} />
-          </React.Fragment>
-        ))}
+        {list?.length === 0 ? (
+          <Txt>지점이 없습니다.</Txt>
+        ) : (
+          list.map((data, idx) => (
+            <React.Fragment key={data.id}>
+              <OfficeSettingTableCell
+                buttonText={buttonText}
+                action={action}
+                data={data}
+                idx={idx}
+              />
+            </React.Fragment>
+          ))
+        )}
       </Table.Body>
     </Table.Root>
   );

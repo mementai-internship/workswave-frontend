@@ -30,7 +30,6 @@ export default function WorkingSettingSetPartItem({
   };
   const handleClickDeleteItem = (id: number) => {
     deleteParts(id);
-    return id;
   };
 
   return (

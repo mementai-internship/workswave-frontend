@@ -41,9 +41,9 @@ export default function HourlyRangeCreate({
 
   return (
     <HourlyRangeContainer title="시급입력" width="w-[30%]">
-      <form onSubmit={onSubmit} className="px-4 py-6 w-full">
-        <div className="flex flex-col gap-2 w-full mb-4">
-          <fieldset className="flex gap-2 items-center">
+      <form onSubmit={onSubmit} className="flex flex-col w-full h-full px-4 py-6">
+        <div className="flex flex-col w-full gap-2 mb-4">
+          <fieldset className="flex items-center gap-2">
             <label className="w-24 text-sm font-bold">템플릿명</label>
             <Controller
               name="name"
@@ -63,7 +63,7 @@ export default function HourlyRangeCreate({
           </fieldset>
           {formErrors?.name && <HourlyRangeErrorMessage message={formErrors.name.message} />}
 
-          <fieldset className="flex gap-2 items-center">
+          <fieldset className="flex items-center gap-2">
             <label className="w-24 text-sm font-bold">직책</label>
             <Controller
               name="part_id"
@@ -83,7 +83,7 @@ export default function HourlyRangeCreate({
           </fieldset>
         </div>
 
-        <Box className="flex flex-col h-4/6 gap-2 bg-gray-10 p-5 mb-4">
+        <Box className="flex flex-col flex-grow h-full gap-2 p-5 mb-4 bg-gray-10">
           <HourlyRangeInputContainer title="시업시간" width="w-20">
             <Controller
               name="start_time_hour"

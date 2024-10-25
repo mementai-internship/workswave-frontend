@@ -25,8 +25,11 @@ export default function HourlyRangeItem({
 }: IProps) {
   const partName = parts.find((part) => part.id === item.part_id)?.name;
   return (
-    <li key={item.id} className="list-none px-6 py-2">
-      <Box className="flex items-center justify-between mb-2">
+    <li
+      key={item.id}
+      className="px-6 py-2 list-none border-[1px] rounded-sm mx-4 hover:bg-gray-100"
+    >
+      <Box className="flex items-center justify-between mb-3">
         <Box className="flex gap-2">
           <Txt>{partName}</Txt>
           <Txt className="font-semibold">{item.name}</Txt>
@@ -39,7 +42,7 @@ export default function HourlyRangeItem({
               color="gray"
               radius="none"
               size="1"
-              className="cursor-pointer"
+              className="cursor-pointer hover:bg-slate-200"
               onClick={() => activateEditMode(item.id)}
             >
               <PiPencilLine />
@@ -52,7 +55,7 @@ export default function HourlyRangeItem({
             color="gray"
             radius="none"
             size="1"
-            className="cursor-pointer"
+            className="cursor-pointer hover:bg-slate-200"
             onClick={() => handleDeleteItem(item.id)}
           >
             <PiX />
@@ -61,7 +64,7 @@ export default function HourlyRangeItem({
         </Flex>
       </Box>
 
-      <Box className="flex gap-3">
+      <Box className="flex gap-5">
         <HourlyRangeInputContainer title="시업시간">
           <HourlyRangeInput
             label="시"
