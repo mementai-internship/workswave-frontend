@@ -54,11 +54,12 @@ export default function Login() {
               {...register('email', {
                 required: '이메일을 입력해주세요',
                 validate: (value) => {
-                  if (value.trim() === '') {
+                  const trimmedValue = value.trim();
+                  if (trimmedValue === '') {
                     setValue('email', '');
                     return '공백만 입력할 수 없습니다';
                   }
-                  return true;
+                  setValue('email', trimmedValue);
                 },
               })}
             >
@@ -79,10 +80,12 @@ export default function Login() {
               {...register('password', {
                 required: '비밀번호를 입력해주세요',
                 validate: (value) => {
-                  if (value.trim() === '') {
+                  const trimmedValue = value.trim();
+                  if (trimmedValue === '') {
                     setValue('password', '');
                     return '공백만 입력할 수 없습니다';
                   }
+                  setValue('password', trimmedValue); // 공백이 제거된 값으로 업데이트
                   return true;
                 },
               })}
