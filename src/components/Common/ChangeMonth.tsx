@@ -13,7 +13,6 @@ export function ChangeMonth({ currMonth, onChangeMonth }: IChangeSalarySettlemen
   const handleMonthChange = (direction: TMonthChange) => {
     const newDate =
       direction === 'prev' ? currMonth.subtract(1, 'month') : currMonth.add(1, 'month');
-    console.log(currMonth);
 
     onChangeMonth(newDate);
   };

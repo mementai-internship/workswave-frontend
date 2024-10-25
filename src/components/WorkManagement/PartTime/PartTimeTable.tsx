@@ -32,7 +32,6 @@ export default function PartTime() {
     });
     setFilteredData(filteredData);
   }, [currentPage, selectedBranch, selectedDepartment]);
-
   return (
     <>
       <ExportExcelButton data={partTimeMockData} fileName="partTime_table" />
@@ -88,7 +87,7 @@ export default function PartTime() {
                   {row.totalSalary}
                 </Table.Cell>
                 <Table.Cell align="center" className="align-middle">
-                  <DetailPartTime />
+                  <DetailPartTime userId={row.userId} />
                 </Table.Cell>
               </Table.Row>
             ))}

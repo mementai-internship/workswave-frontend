@@ -8,9 +8,14 @@ import CalculationStandard from '@/components/WorkManagement/PartTime/Calculatio
 import DetailPartTimeList from '@/components/WorkManagement/PartTime/DetailPartTimeDetail';
 import { detailPartTimeData } from '@/constants/workManagement/workTable.mock';
 
-export default function DetailPartTime() {
-  const [month, setMonth] = useState(dayjs());
+interface DetailPartTime {
+  userId: number;
+}
 
+//props로 클릭된 유저의 id를 받아와야함 -> 후에 id를 백으로 보내고 받은 데이터를 아래 추가
+export default function DetailPartTime({ userId }: DetailPartTime) {
+  const [month, setMonth] = useState(dayjs());
+  const data = detailPartTimeData.filter((user) => user.userId === userId);
   const handleChangeMonth = (newDate: dayjs.Dayjs) => {
     setMonth(newDate);
     // TODO:backend API 연결
@@ -27,23 +32,24 @@ export default function DetailPartTime() {
 
         <Dialog.Content className="w-[90vw] max-w-[1200px]">
           <div className="flex justify-between mb-5">
-            <Dialog.Title className="mb-5 flex">
+            <Dialog.Title className="flex mb-5">
               <div className="flex items-center">
                 근무내역
-                <span className="text-gray-500 text-base ml-3">{detailPartTimeData[0].name}</span>
-                <span className="bg-gray-300 text-white text-xs ml-1 px-1 rounded-sm">P.T</span>
+                <span className="ml-3 text-base text-gray-500">{data[0].name}</span>
+                <span className="px-1 ml-1 text-xs text-white bg-gray-300 rounded-sm">P.T</span>
               </div>
             </Dialog.Title>
-            <Dialog.Close className="bg-white">
+            <Dialog.Close className="bg-white hover:cursor-pointer">
               <PiXBold />
             </Dialog.Close>
           </div>
           <div className="flex justify-between mb-5">
+            {/* 바뀔 시에 달에 맞는 유저의 데이터를 호출해서 보여줘야함. */}
             <ChangeMonth currMonth={month} onChangeMonth={handleChangeMonth} />
             <CalculationStandard />
           </div>
 
-          <DetailPartTimeList detailPartTimeData={detailPartTimeData} />
+          <DetailPartTimeList detailPartTimeData={data} />
         </Dialog.Content>
       </Dialog.Root>
     </div>

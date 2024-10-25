@@ -90,11 +90,13 @@ export interface IPartTimeData {
 
 export interface IPartTimeDataWithPageNum extends IPartTimeData {
   pageNum: number;
+  userId: number;
 }
 // 파트 관리 상세
 
 export interface IDetailPartTimeData {
   id: number;
+  userId: number;
   name: string;
   date: string;
   department: string;
